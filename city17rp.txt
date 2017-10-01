@@ -1,0 +1,6 @@
+"city17rp"
+{
+	"base"		"base"
+	"title"		"City 17 RP"
+	"maps"		"^rp_"
+}
