@@ -23,12 +23,16 @@ function core.group.addGroup(name, desc, teamName, access)
   end
 end
 
+function core.group.addRole(roleIndex, roleName, groupIndex)
+  core.group.store[groupIndex].roles[roleIndex] = roleName
+end
+
 function core.group.addGang(playerId, playerName, groupIndex)
   core.group.store[groupIndex].gangs[playerId] = playerName
 end
 
-function core.group.addRole(roleIndex, roleName, groupIndex)
-  core.group.store[groupIndex].roles[roleIndex] = roleName
+function core.group.getGroup(groupName)
+  
 end
 
 function core.group.init(groups)
