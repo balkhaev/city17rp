@@ -38,6 +38,7 @@ function core.group.getGroup(groupName)
       break
     end
   end
+  return nil
 end
 
 function core.group.init(groups)
