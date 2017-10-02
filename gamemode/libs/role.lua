@@ -31,7 +31,12 @@ function core.role.addGang(playerId, playerName, roleIndex)
 end
 
 function core.role.getRole(roleName)
-  
+  for roleIndex, role in pairs(core.role.store) do
+    if role.name == roleName then
+      return role
+      break
+    end
+  end
 end
 
 function core.role.setRole(ply, roleName)
