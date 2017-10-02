@@ -54,6 +54,6 @@ end
 
 function core.role.init(roles)
   for roleKey, role in pairs(roles) do
-    core.role.addRole(role.name, role.desc, role.group)
+    core.role.addRole(role.name, role.desc, role.group, role.access)
   end
 end
