@@ -37,6 +37,7 @@ function core.role.getRole(roleName)
       break
     end
   end
+  return nil
 end
 
 function core.role.setRole(ply, roleName)
