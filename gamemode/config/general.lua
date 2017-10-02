@@ -7,81 +7,85 @@ core.config.defaults = {
 
 core.config.teams = {
   civilians = {
-    title = "Мирные жители"
+    name = "Мирные жители",
+    color = Color(125, 125, 125, 255)
   },
   rebels = {
-    title = "Повстанцы"
+    name = "Повстанцы",
+    color = Color(225, 225, 0, 225)
   },
   alliance = {
-    title = "Альянс"
+    name = "Альянс",
+    color = Color(225, 0, 225, 225)
   },
   zombie = {
-    title = "Зомби"
+    name = "Зомби",
+    color = Color(0, 225, 255, 225)
   }
 }
 
 core.config.groups = {
   administration = {
-    title = "Администрация города",
+    name = "Администрация города",
     team = "civilians"
   },
   traders = {
-    title = "Торговцы",
+    name = "Торговцы",
     team = "civilians"
   },
   citizens = {
-    title = "Жители",
+    name = "Жители",
     team = "civilians"
   },
   civilianDefence = {
-    title = "Гражданская оборона",
+    name = "Гражданская оборона",
     team = "alliance"
   },
   allianceArmy = {
-    title = "Армия Альянса",
+    name = "Армия Альянса",
     team = "alliance"
   },
   implementationDepartment = {
-    title = "Отдел внедрения",
+    name = "Отдел внедрения",
     team = "rebels"
   },
   rebelsArmy = {
-    title = "Армия Повстанцев",
+    name = "Армия Повстанцев",
     team = "rebels"
   }
 }
 
 core.config.roles = {
   citizen = {
-    title = "Мирный житель",
+    name = "Мирный житель",
     group = "citizens"
   },
   rebelsCitizen = {
-    title = "Доверенное лицо Повстанцев",
+    name = "Доверенное лицо Повстанцев",
     group = "citizens"
   },
   allianceCitizen = {
-    title = "Доверенное лицо Альянса",
+    name = "Доверенное лицо Альянса",
     group = "citizens"
   },
   weaponTrader = {
-    title = "Продавец оружия",
+    name = "Продавец оружия",
     group = "traders"
   },
   armorTrader = {
-    title = "Продавец брони",
+    name = "Продавец брони",
     group = "traders"
   },
   representativeMayor = {
-    title = "Представитель мера",
+    name = "Представитель мера",
     group = "administration"
   },
   deputyMayor = {
-    title = "Заместитель мера",
+    name = "Заместитель мера",
     group = "administration"
   },
   mayor = {
-    title = "Мер",
+    name = "Мер",
     group = "administration"
   }
 }
