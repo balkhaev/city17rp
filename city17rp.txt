@@ -1,6 +1,8 @@
 "city17rp"
 {
-	"base"		"base"
-	"title"		"City 17 RP"
-	"maps"		"^rp_"
+  "base"		"base"
+  "title"		"City 17 RP"
+  "maps"		"^rp_"
+  "hide"		"0"
+  "info"		"Pwn everyone!"
 }
