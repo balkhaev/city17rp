@@ -21,6 +21,10 @@ function core.team.addRole(role, team)
   core.team.store[team.index].roles[role.name] = role
 end
 
+function core.team.addGroup(group, team)
+  core.team.store[team.index].group[group.name] = group
+end
+
 function core.team.init(teams)
   for teamKey, team in pairs(teams) do
     core.team.addTeam(team.title, team.desc)
