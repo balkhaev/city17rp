@@ -33,7 +33,6 @@ function core.team.getTeam(teamName)
   for teamIndex, team in pairs(core.team.store) do
     if team.name == teamName then
       return team
-      break
     end
   end
   return nil
