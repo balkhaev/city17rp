@@ -1,11 +1,13 @@
 core = {}
 
-AddCSLuaFile("cl_init.lua")
+AddCSLuaFile("config/general.lua")
 AddCSLuaFile("libs/team.lua")
 AddCSLuaFile("libs/group.lua")
 AddCSLuaFile("libs/role.lua")
+AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 
+include("config/general.lua")
 include("libs/team.lua")
 include("libs/group.lua")
 include("libs/role.lua")
