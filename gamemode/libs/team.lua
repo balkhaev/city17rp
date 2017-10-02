@@ -29,6 +29,10 @@ function core.team.addGang(playerId, playerName, teamIndex)
   core.team.store[teamIndex].gangs[playerId] = playerName
 end
 
+function core.team.getTeam(teamName)
+  
+end
+
 function core.team.init(teams)
   for teamKey, team in pairs(teams) do
     core.team.addTeam(team.title, team.desc)
