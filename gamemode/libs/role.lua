@@ -20,6 +20,10 @@ function core.role.getRole(roleName)
   
 end
 
+function core.role.addGang(ply, role)
+  role.gangs[ply:SteamID()] = 1
+end
+
 function core.role.setRole(ply, roleName)
   local role = core.role.getRole(roleName)
   
@@ -30,6 +34,10 @@ function core.role.setRole(ply, roleName)
       local team = core.team.getTeam(group.team)
 
       if team then
+        core.role.addGang(ply, role)
+        core.group.addGang(ply, group)
+        core.team.addGang(ply, team)
+
         ply:SetTeam(team.index)
       else
         Msg("Team undefined")
