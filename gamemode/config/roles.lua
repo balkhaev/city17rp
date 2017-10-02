@@ -1,8 +1,8 @@
 core.config = {}
 
 core.config.defaults = {
-  job = "Citizen",
-  spawnTime = 20
+  role = "citizen",
+  spawnTime = 300
 }
 
 core.config.teams = {
@@ -52,10 +52,10 @@ core.config.groups = {
 }
 
 core.config.roles = {
-	citizen = {
+  citizen = {
     title = "Мирный житель",
     group = "citizens"
-	},
+  },
   rebelsCitizen = {
     title = "Доверенное лицо Повстанцев",
     group = "citizens"
