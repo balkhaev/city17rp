@@ -32,7 +32,12 @@ function core.group.addGang(playerId, playerName, groupIndex)
 end
 
 function core.group.getGroup(groupName)
-  
+  for groupIndex, group in pairs(core.group.store) do
+    if group.name == groupName then
+      return group
+      break
+    end
+  end
 end
 
 function core.group.init(groups)
