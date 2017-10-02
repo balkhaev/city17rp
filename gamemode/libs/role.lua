@@ -24,15 +24,14 @@ function core.role.addRole(name, desc, groupName, access)
 
     return core.role.uniqIndex
   end
-
-end
-
-function core.role.getRole(roleName)
-  
 end
 
 function core.role.addGang(playerId, playerName, roleIndex)
   core.role.store[roleIndex].gangs[playerId] = playerName
+end
+
+function core.role.getRole(roleName)
+  
 end
 
 function core.role.setRole(ply, roleName)
