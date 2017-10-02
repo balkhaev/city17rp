@@ -36,6 +36,7 @@ function core.team.getTeam(teamName)
       break
     end
   end
+  return nil
 end
 
 function core.team.init(teams)
