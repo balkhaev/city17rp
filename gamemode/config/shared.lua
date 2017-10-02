@@ -1,8 +1,8 @@
 core.config = {}
 
 core.config.defaults = {
-	job = "Citizen",
-	spawnTime = 20
+  job = "Citizen",
+  spawnTime = 20
 }
 
 core.config.teams = {
@@ -63,5 +63,25 @@ core.config.roles = {
   allianceCitizen = {
     title = "Доверенное лицо Альянса",
     group = "citizens"
+  },
+  weaponTrader = {
+    title = "Продавец оружия",
+    group = "traders"
+  },
+  armorTrader = {
+    title = "Продавец брони",
+    group = "traders"
+  },
+  representativeMayor = {
+    title = "Представитель мера",
+    group = "administration"
+  },
+  deputyMayor = {
+    title = "Заместитель мера",
+    group = "administration"
+  },
+  mayor = {
+    title = "Мер",
+    group = "administration"
   }
 }
