@@ -35,7 +35,6 @@ function core.group.getGroup(groupName)
   for groupIndex, group in pairs(core.group.store) do
     if group.name == groupName then
       return group
-      break
     end
   end
   return nil
