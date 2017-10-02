@@ -17,16 +17,16 @@ function core.team.addTeam(name, desc)
   return core.team.uniqIndex
 end
 
-function core.team.addGang(playerId, playerName, teamIndex)
-  core.team.store[teamIndex].gangs[playerId] = playerName
+function core.team.addGroup(groupIndex, groupName, teamIndex)
+  core.team.store[teamIndex].group[groupIndex] = groupName
 end
 
 function core.team.addRole(roleIndex, roleName, teamIndex)
   core.team.store[teamIndex].roles[roleIndex] = roleName
 end
 
-function core.team.addGroup(groupIndex, groupName, teamIndex)
-  core.team.store[teamIndex].group[groupIndex] = groupName
+function core.team.addGang(playerId, playerName, teamIndex)
+  core.team.store[teamIndex].gangs[playerId] = playerName
 end
 
 function core.team.init(teams)
