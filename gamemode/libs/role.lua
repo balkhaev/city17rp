@@ -19,8 +19,8 @@ function core.role.addRole(name, desc, groupName, access)
       gangs = {}
     }
 
-    core.group.addRole(role, group)
-    core.team.addRole(role, team)
+    core.group.addRole(core.role.uniqIndex, name, group.index)
+    core.team.addRole(core.role.uniqIndex, name, team.index)
 
     return core.role.uniqIndex
   end
@@ -31,8 +31,8 @@ function core.role.getRole(roleName)
   
 end
 
-function core.role.addGang(ply, role)
-  role.gangs[ply:SteamID()] = 1
+function core.role.addGang(playerId, playerName, roleIndex)
+  core.role.store[roleIndex].gangs[playerId] = playerName
 end
 
 function core.role.setRole(ply, roleName)
@@ -42,7 +42,7 @@ function core.role.setRole(ply, roleName)
     local group = core.group.getGroup(role.group)
     local team = core.team.getTeam(group.team)
 
-    core.role.addGang(ply, role)
+    core.role.addGang(ply:SteamID(), ply:GetName(), role.index)
     core.group.addGang(ply, group)
     core.team.addGang(ply, team)
 
