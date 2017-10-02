@@ -47,8 +47,8 @@ function core.role.setRole(ply, roleName)
     local team = core.team.getTeam(group.team)
 
     core.role.addGang(ply:SteamID(), ply:GetName(), role.index)
-    core.group.addGang(ply, group)
-    core.team.addGang(ply, team)
+    core.group.addGang(ply:SteamID(), ply:GetName(), group.index)
+    core.team.addGang(ply:SteamID(), ply:GetName(), team.index)
 
     ply:SetTeam(team.index)
   else
