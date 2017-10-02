@@ -2,12 +2,12 @@ core.role = {}
 core.role.store = {}
 core.role.uniqIndex = 0
 
-function core.role.addRole(title, desc, group)
+function core.role.addRole(name, desc, group)
   core.role.uniqIndex = core.role.uniqIndex + 1
 
   core.role.store[core.role.uniqIndex] = {
     index = core.role.uniqIndex,
-    title = title,
+    name = name,
     description = desc or "N/A",
     group = group,
     gangs = {}
@@ -55,6 +55,6 @@ end
 
 function core.role.init(roles)
   for roleKey, role in pairs(roles) do
-    core.role.addRole(role.title, role.desc, role.group)
+    core.role.addRole(role.name, role.desc, role.group)
   end
 end
