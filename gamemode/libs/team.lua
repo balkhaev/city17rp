@@ -10,6 +10,7 @@ function core.team.addTeam(name, desc, access)
 		name = name or "Unknown Group",
 		description = desc or "N/A",
 		access = access or "",
+		groups = {},
 		roles = {},
 		gangs = {}
 	}
