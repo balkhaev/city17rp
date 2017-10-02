@@ -38,8 +38,8 @@ function core.role.setRole(ply, roleName)
         core.group.addGang(ply, group)
         core.team.addGang(ply, team)
         
-        core.group.addRole(role)
-        core.team.addRole(role)
+        core.group.addRole(role, group)
+        core.team.addRole(role, team)
 
         ply:SetTeam(team.index)
       else
