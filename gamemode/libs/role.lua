@@ -42,8 +42,8 @@ function core.role.setRole(ply, roleName)
   end
 end
 
-function core.role.init()
-  for roleKey, role in pairs(core.config.roles) do
+function core.role.init(roles)
+  for roleKey, role in pairs(roles) do
     core.role.addRole(role.title, role.desc, role.group)
   end
 end
