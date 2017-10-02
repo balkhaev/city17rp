@@ -17,6 +17,10 @@ function core.team.addTeam(name, desc)
   return core.team.uniqIndex
 end
 
+function core.team.addRole(role, team)
+  core.team.store[team.index].roles[role.name] = role
+end
+
 function core.team.init(teams)
   for teamKey, team in pairs(teams) do
     core.team.addTeam(team.title, team.desc)
