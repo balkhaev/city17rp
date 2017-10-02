@@ -94,3 +94,6 @@
 - [Rp_City17](https://steamcommunity.com/sharedfiles/filedetails/?l=russian&id=150899249)
 - https://github.com/Metastruct/EPOE
 - https://github.com/Chessnut/NutScript
+- https://github.com/Chessnut/NutScript/wiki
+- https://github.com/TeamUlysses/ulx
+- https://github.com/Thadah/NSPlugins
