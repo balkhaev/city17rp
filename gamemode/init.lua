@@ -15,21 +15,28 @@ core.team.init(core.config.teams)
 core.role.init(core.config.roles)
 
 function GM:PlayerInitialSpawn( ply )
- 
-    RunConsoleCommand( "team_menu" )
- 
+  ply:ConCommand( "team_menu" )
+end
+
+function GM:PlayerLoadout(ply)
+  ply:StripWeapons()
+
+  if ply:Team() == 1 then
+    ply:Give("weapon_physcannon")
+  elseif ply:Team() == 2 then
+    ply:Give("weapon_physgun")
+  end
 end
  
-function GM:PlayerLoadout(ply) 
+function team_1( ply ) 
+  ply:SetTeam( 1 )
+  ply:Spawn()
+end 
  
-	ply:StripWeapons()
+function team_2( ply ) 
+  ply:SetTeam( 2 )
+  ply:Spawn()
+end 
  
-	if ply:Team() == 1 then
-		ply:Give("weapon_physcannon")
- 
-	elseif ply:Team() == 2 then
-		ply:Give("weapon_physgun")
- 
-	end
- 
-end
+concommand.Add( "team_1", team_1 )
+concommand.Add( "team_2", team_2 )
