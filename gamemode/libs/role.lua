@@ -2,7 +2,7 @@ core.role = {}
 core.role.store = {}
 core.role.uniqIndex = 0
 
-function core.role.addRole(name, desc, groupName)
+function core.role.addRole(name, desc, groupName, access)
   local group = core.group.getGroup(groupName)
   
   if group then
@@ -14,6 +14,7 @@ function core.role.addRole(name, desc, groupName)
       index = core.role.uniqIndex,
       name = name,
       description = desc or "N/A",
+      access = access or "",
       group = group,
       gangs = {}
     }
