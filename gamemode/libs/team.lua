@@ -25,6 +25,10 @@ function core.team.addGroup(group, team)
   core.team.store[team.index].group[group.name] = group
 end
 
+function core.team.addGang(ply, teamIndex)
+  core.team.store[teamIndex].gangs[ply:SteamID()] = 1
+end
+
 function core.team.init(teams)
   for teamKey, team in pairs(teams) do
     core.team.addTeam(team.title, team.desc)
