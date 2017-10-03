@@ -3,7 +3,6 @@ core.role.store = {}
 core.role.uniqIndex = 0
 
 function core.role.addRole(name, role)
-  Msg("Adding role ", role.title, "\n")
   local group = core.group.getGroup(role.group)
   
   if group then
@@ -120,6 +119,7 @@ function core.role.init(roles)
   Msg("======Init roles=======\n")
 
   for roleKey, role in pairs(core.config.roles) do
+    Msg("Adding role "..role.title.."\n")
     core.role.addRole(roleKey, role)
   end
 end
