@@ -3,7 +3,7 @@ core.role.store = {}
 core.role.uniqIndex = 0
 
 function core.role.addRole(name, title, desc, groupName, access)
-  Msg("Adding role ", name, " ", title)
+  Msg("Adding role ", name, " ", title, "\n")
   local group = core.group.getGroup(groupName)
   
   if group then
@@ -37,8 +37,11 @@ function core.role.removeGang(playerId, roleIndex)
 end
 
 function core.role.getRole(roleName)
-  for roleIndex, role in pairs(core.role.store) do
+  Msg("Search roleName ", roleName)
+  for _, role in pairs(core.role.store) do
+    PrintTable(role)
     if role.name == roleName then
+      Msg("========= Found ======== ", roleName, " ============\n")
       return role
     end
   end
