@@ -5,6 +5,8 @@ AddCSLuaFile("libs/role.lua")
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 
+core = {}
+
 include("config/general.lua")
 include("libs/core.lua")
 include("libs/team.lua")
