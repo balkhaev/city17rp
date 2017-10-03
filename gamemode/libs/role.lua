@@ -39,6 +39,7 @@ end
 function core.role.getRole(roleName)
   Msg("Search roleName ", roleName, "\n")
   for _, role in pairs(core.role.store) do
+    Msg(_, " ", role)
     PrintTable(role)
     if role.name == roleName then
       Msg("========= Found ======== ", roleName, " ============\n")
