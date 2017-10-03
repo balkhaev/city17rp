@@ -51,8 +51,11 @@ function core.role.setRole(ply, roleName)
     core.team.addGang(ply:SteamID(), ply:GetName(), team.index)
 
     ply:SetTeam(team.index)
+
+    return role
   else
     Msg("Role undefined")
+    return nil
   end
 end
 
