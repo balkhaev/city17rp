@@ -17,9 +17,7 @@ include("libs/role.lua")
 include("libs/player.lua")
 include("shared.lua")
 
-core.team.init(core.config.teams)
-core.group.init(core.config.groups)
-core.role.init(core.config.roles)
+core.init(core.config)
 
 PrintTable(core.team.store)
 PrintTable(core.group.store)
