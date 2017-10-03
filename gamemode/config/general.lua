@@ -142,6 +142,12 @@ core.config.roles = {
     weapons = {},
     access = {}
   },
+  chiefCivilDefence = {
+    tile = "Начальник Гражданской обороны",
+    group = "civilianDefence",
+    weapons = {},
+    access = {"managment"}
+  }
   -- Повстанцы
   scout = {
     title = "Разведчик",
@@ -160,5 +166,11 @@ core.config.roles = {
     group = "implementationDepartment",
     weapons = {},
     access = {}
+  },
+  chiefImplementationDepartament = {
+    title = "Глава Отдела внедрения",
+    group = "implementationDeprtament",
+    weapons = {},
+    access = {"managment"}
   }
 }
