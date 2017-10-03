@@ -14,6 +14,7 @@ function core.group.addGroup(name, title, desc, teamName, access)
       title = title or "Unknown Group",
       description = desc or "N/A",
       access = access or "",
+      team = teamName,
       roles = {},
       gangs = {}
     }
