@@ -38,6 +38,7 @@ end
 
 function core.role.getRole(roleName)
   Msg("Search roleName ", roleName, "\n")
+  PrintTable(core.role.store)
   for _, role in pairs(core.role.store) do
     Msg(_, " ", role)
     PrintTable(role)
