@@ -19,7 +19,7 @@ function core.team.addTeam(name, title, desc)
 end
 
 function core.team.addGroup(groupIndex, groupName, teamIndex)
-  core.team.store[teamIndex].group[groupIndex] = groupName
+  core.team.store[teamIndex].groups[groupIndex] = groupName
 end
 
 function core.team.removeGroup(groupIndex, teamIndex)
