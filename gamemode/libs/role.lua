@@ -119,7 +119,6 @@ end
 
 function core.role.init(roles)
   Msg("======Init roles=======\n")
-  PrintTable(roles)
 
   for roleKey, role in pairs(core.config.roles) do
     core.role.addRole(roleKey, role.name, role.desc, role.group, role.access)
