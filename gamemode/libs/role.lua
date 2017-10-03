@@ -56,6 +56,15 @@ function core.role.setRole(ply, roleName)
   end
 end
 
+function core.role.getPlayerRole(ply)
+  for roleIndex, role in pairs(core.role.store) do
+    if role.gangs[ply:SteamID()] then
+      return role
+    end
+  end
+  return nil
+end
+
 function core.role.init(roles)
   for roleKey, role in pairs(roles) do
     core.role.addRole(role.name, role.desc, role.group, role.access)
