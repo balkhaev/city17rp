@@ -2,7 +2,7 @@ core.role = {}
 core.role.store = {}
 core.role.uniqIndex = 0
 
-function core.role.addRole(name, desc, groupName, access)
+function core.role.addRole(name, title, desc, groupName, access)
   local group = core.group.getGroup(groupName)
   
   if group then
@@ -13,6 +13,7 @@ function core.role.addRole(name, desc, groupName, access)
     core.role.store[core.role.uniqIndex] = {
       index = core.role.uniqIndex,
       name = name,
+      title = title,
       description = desc or "N/A",
       access = access or "",
       group = group,
@@ -111,6 +112,6 @@ end
 
 function core.role.init(roles)
   for roleKey, role in pairs(roles) do
-    core.role.addRole(role.name, role.desc, role.group, role.access)
+    core.role.addRole(roleKey, role.name, role.desc, role.group, role.access)
   end
 end
