@@ -27,8 +27,16 @@ function core.group.addRole(roleIndex, roleName, groupIndex)
   core.group.store[groupIndex].roles[roleIndex] = roleName
 end
 
+function core.group.removeRole(roleIndex, groupIndex)
+  table.remove(core.group.store[groupIndex].roles, roleIndex)
+end
+
 function core.group.addGang(playerId, playerName, groupIndex)
   core.group.store[groupIndex].gangs[playerId] = playerName
+end
+
+function core.group.removeGang(playerId, groupIndex)
+  table.remove(core.group.store[groupIndex].gangs, playerId)
 end
 
 function core.group.getGroup(groupName)

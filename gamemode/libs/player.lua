@@ -16,6 +16,6 @@ function GM:PlayerInitialSpawn(ply)
   ply.SID = ply:UserID()
 
   if not core.role.existsPlayerRole(ply) then
-    core.role.setRole(ply, core.config.defaults.role)
+    core.role.setPlayerRole(ply, core.config.defaults.role)
   end
 end

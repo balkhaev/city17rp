@@ -21,12 +21,24 @@ function core.team.addGroup(groupIndex, groupName, teamIndex)
   core.team.store[teamIndex].group[groupIndex] = groupName
 end
 
+function core.team.removeGroup(groupIndex, teamIndex)
+  table.remove(core.team.store[teamIndex].groups, groupIndex)
+end
+
 function core.team.addRole(roleIndex, roleName, teamIndex)
   core.team.store[teamIndex].roles[roleIndex] = roleName
 end
 
+function core.team.removeRole(roleIndex, teamIndex)
+  table.remove(core.team.store[teamIndex].roles, roleIndex)
+end
+
 function core.team.addGang(playerId, playerName, teamIndex)
   core.team.store[teamIndex].gangs[playerId] = playerName
+end
+
+function core.team.removeGang(playerId, teamIndex)
+  table.remove(core.team.store[teamIndex].gangs, playerId)
 end
 
 function core.team.getTeam(teamName)

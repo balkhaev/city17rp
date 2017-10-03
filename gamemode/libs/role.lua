@@ -30,6 +30,11 @@ function core.role.addGang(playerId, playerName, roleIndex)
   core.role.store[roleIndex].gangs[playerId] = playerName
 end
 
+function core.role.removeGang(playerId, roleIndex)
+  -- core.role.store[roleIndex].gangs[playerId] = nil
+  table.remove(core.role.store[roleIndex].gangs, playerId)
+end
+
 function core.role.getRole(roleName)
   for roleIndex, role in pairs(core.role.store) do
     if role.name == roleName then
@@ -47,26 +52,6 @@ function core.role.getRoleGangs(roleName)
   end
 
   return nil
-end
-
-function core.role.setRole(ply, roleName)
-  local role = core.role.getRole(roleName)
-  
-  if role then
-    local group = core.group.getGroup(role.group)
-    local team = core.team.getTeam(group.team)
-
-    core.role.addGang(ply:SteamID(), ply:GetName(), role.index)
-    core.group.addGang(ply:SteamID(), ply:GetName(), group.index)
-    core.team.addGang(ply:SteamID(), ply:GetName(), team.index)
-
-    ply:SetTeam(team.index)
-
-    return role
-  else
-    Msg("Role undefined")
-    return nil
-  end
 end
 
 function core.role.indexPlayerRole(ply)
@@ -90,6 +75,35 @@ end
 
 function core.role.existsPlayerRole(ply)
   return core.role.indexPlayerRole(ply) > -1
+end
+
+function core.role.setPlayerRole(ply, roleName)
+  local role = core.role.getRole(roleName)
+
+  if role then
+    core.role.deletePlayerRole(ply)
+    local group = core.group.getGroup(role.group)
+    local team = core.team.getTeam(group.team)
+
+    core.role.addGang(ply:SteamID(), ply:GetName(), role.index)
+    core.group.addGang(ply:SteamID(), ply:GetName(), group.index)
+    core.team.addGang(ply:SteamID(), ply:GetName(), team.index)
+
+    ply:SetTeam(team.index)
+  else
+    Msg("Role undefined")
+    return nil
+  end
+end
+
+function core.role.deletePlayerRole(ply)
+  local role = core.role.getPlayerRole(ply)
+  local group = core.group.getGroup(role.group)
+  local team = core.team.getTeam(group.team)
+
+  core.role.removeGang(ply:SteamID(), ply:GetName(), role.index)
+  core.group.removeGang(ply:SteamID(), ply:GetName(), group.index)
+  core.team.removeGang(ply:SteamID(), ply:GetName(), team.index)
 end
 
 function core.role.init(roles)
