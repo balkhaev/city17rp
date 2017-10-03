@@ -29,7 +29,7 @@ core.config.groups = {
   administration = {
     name = "Администрация города",
     team = "civilians",
-    spawn = "",
+    spawn = "548.93084716797,3056.7243652344,80.03125",
     access = {"settings", "poll", "management"}
   },
   traders = {
@@ -48,26 +48,26 @@ core.config.groups = {
   civilianDefence = {
     name = "Гражданская оборона",
     team = "alliance",
-    spawn = "",
+    spawn = "4419.1293945313,312.06140136719,76.03125",
     access = {"settings", "arrest"}
   },
   allianceArmy = {
     name = "Армия Альянса",
     team = "alliance",
-    spawn = "",
+    spawn = "4419.1293945313,312.06140136719,76.03125",
     access = {"settings"}
   },
   -- Повстанцы
   implementationDepartment = {
     name = "Отдел внедрения",
     team = "rebels",
-    spawn = "",
+    spawn = "-3369.4533691406,-2147.1401367188,80.03125",
     access = {"settings", "camouflage"}
   },
   rebelsArmy = {
     name = "Армия Повстанцев",
     team = "rebels",
-    spawn = "",
+    spawn = "-3369.4533691406,-2147.1401367188,80.03125",
     access = {"settings"}
   }
 }
