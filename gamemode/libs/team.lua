@@ -105,5 +105,4 @@ function core.team.init(teams)
   for teamKey, team in pairs(teams) do
     core.team.addTeam(teamKey, team)
   end
-  PrintTable(core.team.store)
 end
