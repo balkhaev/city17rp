@@ -1,7 +1,9 @@
 AddCSLuaFile("config/general.lua")
+AddCSLuaFile("libs/core.lua")
 AddCSLuaFile("libs/team.lua")
 AddCSLuaFile("libs/group.lua")
 AddCSLuaFile("libs/role.lua")
+AddCSLuaFile("libs/player.lua")
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 
@@ -12,6 +14,7 @@ include("libs/core.lua")
 include("libs/team.lua")
 include("libs/group.lua")
 include("libs/role.lua")
+include("libs/player.lua")
 include("shared.lua")
 
 core.init(core.config)
