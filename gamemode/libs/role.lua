@@ -7,7 +7,9 @@ function core.role.addRole(name, title, desc, groupName, access)
   local group = core.group.getGroup(groupName)
   
   if group then
+    Msg(group.team, "\n")
     local team = core.team.getTeam(group.team)
+    PrintTable(team)
 
     core.role.uniqIndex = core.role.uniqIndex + 1
 
