@@ -27,6 +27,8 @@ function GM:PlayerLoadout(ply)
   ply:StripWeapons()
 
   local role = ply:getRole()
+  Msg("===== Loadout Player======\n")
+  PrintTable(role)
 
   for _, weaponName in pairs(role.weapons) do
     ply:Give(weaponName)
