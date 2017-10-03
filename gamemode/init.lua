@@ -28,7 +28,7 @@ function GM:PlayerLoadout(ply)
 
   local role = ply:getRole()
 
-  for _, weaponName in role.weapons do
+  for _, weaponName in pairs(role.weapons) do
     ply:Give(weaponName)
   end
 end
