@@ -26,7 +26,7 @@ function GM:PlayerLoadout(ply)
   local role = core.role.getPlayerRole(ply)
   
   if not role then
-    core.role.setRole(ply, core.config.defaults.role)
+    role = core.role.setRole(ply, core.config.defaults.role)
   end
   
   for _, weaponName in role.weapons do
