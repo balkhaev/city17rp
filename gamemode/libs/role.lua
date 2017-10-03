@@ -37,12 +37,8 @@ function core.role.removeGang(playerId, roleIndex)
 end
 
 function core.role.getRole(roleName)
-  Msg("Search roleName ", roleName, "\n")
   for _, role in pairs(core.role.store) do
-    Msg(_, " ", role)
-    PrintTable(role)
     if role.name == roleName then
-      Msg("========= Found ======== ", roleName, " ============\n")
       return role
     end
   end
@@ -85,10 +81,12 @@ end
 function core.role.setPlayerRole(ply, roleName)
   Msg("Set role ", roleName, " for ", ply.SID, "\n")
   local role = core.role.getRole(roleName)
-  PrintTable(role)
 
   if role then
-    core.role.deletePlayerRole(ply)
+    if core.role.existsPlayerRole(ply) then
+      core.role.deletePlayerRole(ply)
+    end
+
     local group = core.group.getGroup(role.group)
     local team = core.team.getTeam(group.team)
 
