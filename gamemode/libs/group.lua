@@ -87,6 +87,10 @@ function core.group.getPlayerGroup(ply)
   return core.group.store[groupIndex]
 end
 
+function core.group.hasAccess(groupName, accessFlag)
+  return core.group.getGroup(groupName).access[accessFlag] ~= nil
+end
+
 function core.group.init(groups)
   for groupKey, group in pairs(groups) do
     core.group.addGroup(group.name, group.desc, group.team, group.access)

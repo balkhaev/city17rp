@@ -29,13 +29,13 @@ end
 hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
   local group = ply:getGroup()
 
-  if group.spawn then
+  if group.spawn and group.spawn ~= "" then
     local tab = string.Explode(",", group.spawn)
     ply:SetPos(Vector(tab[1],tab[2],tab[3]))
   end
 end)
 
-concommand.Add("setspawnpoint", function(ply, cmd, args)
+concommand.Add("getspawnpoint", function(ply, cmd, args)
   local x,y,z = ply:GetPos().x,ply:GetPos().y,ply:GetPos().z
   Msg(x..","..y..","..z)
 end)

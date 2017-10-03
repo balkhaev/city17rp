@@ -31,7 +31,6 @@ function core.role.addGang(playerId, playerName, roleIndex)
 end
 
 function core.role.removeGang(playerId, roleIndex)
-  -- core.role.store[roleIndex].gangs[playerId] = nil
   table.remove(core.role.store[roleIndex].gangs, playerId)
 end
 
@@ -56,7 +55,7 @@ end
 
 function core.role.indexPlayerRole(ply)
   for roleIndex, role in pairs(core.role.store) do
-    if role.gangs[ply:SteamID()] then
+    if role.gangs[ply:SteamID()] ~= nil then
       return roleIndex
     end
   end
@@ -104,6 +103,10 @@ function core.role.deletePlayerRole(ply)
   core.role.removeGang(ply:SteamID(), ply:GetName(), role.index)
   core.group.removeGang(ply:SteamID(), ply:GetName(), group.index)
   core.team.removeGang(ply:SteamID(), ply:GetName(), team.index)
+end
+
+function core.role.hasAccess(roleName, accessFlag)
+  return core.role.getRole(roleName).access[accessFlag] ~= nil
 end
 
 function core.role.init(roles)
