@@ -2,8 +2,8 @@ core.group = {}
 core.group.store = {}
 core.group.uniqIndex = 0
 
-function core.group.addGroup(name, title, desc, teamName, access)
-  local team = core.team.getTeam(teamName)
+function core.group.addGroup(name, group)
+  local team = core.team.getTeam(group.team)
   
   if team then
     core.group.uniqIndex = core.group.uniqIndex + 1
@@ -11,10 +11,11 @@ function core.group.addGroup(name, title, desc, teamName, access)
     core.group.store[core.group.uniqIndex] = {
       index = core.group.uniqIndex,
       name = name,
-      title = title or "Unknown Group",
-      description = desc or "N/A",
-      access = access or "",
-      team = teamName,
+      title = group.title or "Unknown Group",
+      description = group.desc or "N/A",
+      access = group.access or "",
+      team = group.team,
+      spawn = group.spawn,
       roles = {},
       gangs = {}
     }
@@ -96,7 +97,7 @@ end
 function core.group.init(groups)
   Msg("======Init groups======\n")
   for groupKey, group in pairs(groups) do
-    core.group.addGroup(groupKey, group.name, group.desc, group.team, group.access)
+    core.group.addGroup(groupKey, group)
   end
   PrintTable(core.group.store)
 end
