@@ -27,45 +27,45 @@ core.config.teams = {
 core.config.groups = {
   -- Мирные жители
   administration = {
-    name = "Администрация города",
+    title = "Администрация города",
     team = "civilians",
     spawn = "548.93084716797,3056.7243652344,80.03125",
     access = {"settings", "poll", "management"}
   },
   traders = {
-    name = "Торговцы",
+    title = "Торговцы",
     team = "civilians",
     spawn = "",
     access = {"settings", "trade"}
   },
   citizens = {
-    name = "Жители",
+    title = "Жители",
     team = "civilians",
     spawn = "",
     access = {"settings"}
   },
   -- Альянс
   civilianDefence = {
-    name = "Гражданская оборона",
+    title = "Гражданская оборона",
     team = "alliance",
     spawn = "4419.1293945313,312.06140136719,76.03125",
     access = {"settings", "arrest"}
   },
   allianceArmy = {
-    name = "Армия Альянса",
+    title = "Армия Альянса",
     team = "alliance",
     spawn = "4419.1293945313,312.06140136719,76.03125",
     access = {"settings"}
   },
   -- Повстанцы
   implementationDepartment = {
-    name = "Отдел внедрения",
+    title = "Отдел внедрения",
     team = "rebels",
     spawn = "-3369.4533691406,-2147.1401367188,80.03125",
     access = {"settings", "camouflage"}
   },
   rebelsArmy = {
-    name = "Армия Повстанцев",
+    title = "Армия Повстанцев",
     team = "rebels",
     spawn = "-3369.4533691406,-2147.1401367188,80.03125",
     access = {"settings"}
