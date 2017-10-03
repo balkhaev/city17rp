@@ -97,7 +97,7 @@ end
 function core.group.init(groups)
   Msg("======Init groups======\n")
   for groupKey, group in pairs(groups) do
-    Msg("Adding role "..group.title)
+    Msg("Adding role "..group.title.."\n")
     core.group.addGroup(groupKey, group)
   end
 end
