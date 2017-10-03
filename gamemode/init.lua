@@ -19,10 +19,6 @@ include("shared.lua")
 
 core.init(core.config)
 
-PrintTable(core.team.store)
-PrintTable(core.group.store)
-PrintTable(core.role.store)
-
 function GM:PlayerLoadout(ply)
   ply:StripWeapons()
 
