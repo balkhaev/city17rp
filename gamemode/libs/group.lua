@@ -60,6 +60,25 @@ function core.group.getGroupGangs(groupName)
   return nil
 end
 
+function core.group.indexPlayerGroup(ply)
+  for groupIndex, group in pairs(core.group.store) do
+    if group.gangs[ply:SteamID()] then
+      return groupIndex
+    end
+  end
+  return -1
+end
+
+function core.group.getPlayerGroup(ply)
+  local groupIndex = core.group.indexPlayerGroup(ply)
+
+  if groupIndex == -1 then
+    return nil
+  end
+
+  return core.group.store[groupIndex]
+end
+
 function core.group.init(groups)
   for groupKey, group in pairs(groups) do
     core.group.addGroup(group.name, group.desc, group.team, group.access)

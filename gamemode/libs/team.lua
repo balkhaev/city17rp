@@ -68,6 +68,25 @@ function core.team.getTeamGangs(teamName)
   return nil
 end
 
+function core.team.indexPlayerTeam(ply)
+  for teamIndex, team in pairs(core.team.store) do
+    if team.gangs[ply:SteamID()] then
+      return teamIndex
+    end
+  end
+  return -1
+end
+
+function core.team.getPlayerTeam(ply)
+  local teamIndex = core.team.indexPlayerTeam(ply)
+
+  if teamIndex == -1 then
+    return nil
+  end
+
+  return core.team.store[teamIndex]
+end
+
 function core.team.init(teams)
   for _, team in pairs(teams) do
     core.team.addTeam(team.name, team.desc)

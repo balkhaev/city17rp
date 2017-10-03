@@ -26,27 +26,16 @@ function GM:PlayerLoadout(ply)
   end
 end
 
-function GM:PlayerSelectSpawn(pl)
-  local spawns = ents.FindByClass("info_player_start")
-  local random_entry = math.random( #spawns )
-
-  return spawns[ random_entry ]
-end
-
 hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
-  if ply:GetPData("NewSpawn") then
-    local tab = string.Explode(",", ply:GetPData("NewSpawn"))
+  local group = ply:getGroup()
+
+  if group.spawn then
+    local tab = string.Explode(",", group.spawn)
     ply:SetPos(Vector(tab[1],tab[2],tab[3]))
   end
 end)
 
 concommand.Add("setspawnpoint", function(ply, cmd, args)
   local x,y,z = ply:GetPos().x,ply:GetPos().y,ply:GetPos().z
-  ply:SetPData("NewSpawn", x..","..y..","..z)
-  ply:PrintMessage(HUD_PRINTCENTER, "Spawnpoint Set, Use removespawnpoint to spawn normally")
-end)
-
-concommand.Add("removespawnpoint", function(ply, cmd, args)
-  local x,y,z = ply:GetPos().x,ply:GetPos().y,ply:GetPos().z
-  ply:SetPData("NewSpawn", x..","..y..","..z)
+  Msg(x..","..y..","..z)
 end)
