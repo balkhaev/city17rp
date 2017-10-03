@@ -2,7 +2,7 @@ core.group = {}
 core.group.store = {}
 core.group.uniqIndex = 0
 
-function core.group.addGroup(name, desc, teamName, access)
+function core.group.addGroup(name, title, desc, teamName, access)
   local team = core.team.getTeam(teamName)
   
   if team then
@@ -10,7 +10,8 @@ function core.group.addGroup(name, desc, teamName, access)
 
     core.group.store[core.group.uniqIndex] = {
       index = core.group.uniqIndex,
-      name = name or "Unknown Group",
+      name = name,
+      title = title or "Unknown Group",
       description = desc or "N/A",
       access = access or "",
       roles = {},
@@ -94,7 +95,7 @@ end
 function core.group.init(groups)
   Msg("======Init groups======\n")
   for groupKey, group in pairs(groups) do
-    core.group.addGroup(group.name, group.desc, group.team, group.access)
+    core.group.addGroup(groupKey, group.name, group.desc, group.team, group.access)
   end
   PrintTable(core.group.store)
 end
