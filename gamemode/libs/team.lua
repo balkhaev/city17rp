@@ -2,12 +2,13 @@ core.team = {}
 core.team.store = {}
 core.team.uniqIndex = 0
 
-function core.team.addTeam(name, desc)
+function core.team.addTeam(name, title, desc)
   core.team.uniqIndex = core.team.uniqIndex + 1
 
   core.team.store[core.team.uniqIndex] = {
     index = core.team.uniqIndex,
-    name = name or "Unknown Team",
+    name = name,
+    title = title or "Unknown Team",
     description = desc or "N/A",
     groups = {},
     roles = {},
@@ -101,8 +102,8 @@ end
 
 function core.team.init(teams)
   Msg("======Init teams======\n")
-  for _, team in pairs(teams) do
-    core.team.addTeam(team.name, team.desc)
+  for teamKey, team in pairs(teams) do
+    core.team.addTeam(teamKey, team.name, team.desc)
   end
   PrintTable(core.team.store)
 end
