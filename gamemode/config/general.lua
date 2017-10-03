@@ -58,34 +58,42 @@ core.config.groups = {
 core.config.roles = {
   citizen = {
     name = "Мирный житель",
-    group = "citizens"
+    group = "citizens",
+    weapons = {"weapon_citizenpackage","weapon_citizensuitcase","weapon_bugbait","weapon_brickbat","weapon_annabelle"}
   },
   rebelsCitizen = {
     name = "Доверенное лицо Повстанцев",
-    group = "citizens"
+    group = "citizens",
+    weapons = {}
   },
   allianceCitizen = {
     name = "Доверенное лицо Альянса",
-    group = "citizens"
+    group = "citizens",
+    weapons = {}
   },
   weaponTrader = {
     name = "Продавец оружия",
-    group = "traders"
+    group = "traders",
+    weapons = {}
   },
   armorTrader = {
     name = "Продавец брони",
-    group = "traders"
+    group = "traders",
+    weapons = {}
   },
   representativeMayor = {
     name = "Представитель мера",
-    group = "administration"
+    group = "administration",
+    weapons = {}
   },
   deputyMayor = {
     name = "Заместитель мера",
-    group = "administration"
+    group = "administration",
+    weapons = {}
   },
   mayor = {
     name = "Мер",
-    group = "administration"
+    group = "administration",
+    weapons = {}
   }
 }
