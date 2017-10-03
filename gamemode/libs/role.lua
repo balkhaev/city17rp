@@ -3,6 +3,7 @@ core.role.store = {}
 core.role.uniqIndex = 0
 
 function core.role.addRole(name, title, desc, groupName, access)
+  Msg("Adding role ", name, " ", title)
   local group = core.group.getGroup(groupName)
   
   if group then
@@ -78,7 +79,9 @@ function core.role.existsPlayerRole(ply)
 end
 
 function core.role.setPlayerRole(ply, roleName)
+  Msg("Setting role ", roleName, " for ", ply.SID)
   local role = core.role.getRole(roleName)
+  PrintTable(role)
 
   if role then
     core.role.deletePlayerRole(ply)
