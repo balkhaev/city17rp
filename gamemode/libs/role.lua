@@ -3,7 +3,7 @@ core.role.store = {}
 core.role.uniqIndex = 0
 
 function core.role.addRole(name, role)
-  Msg("Adding role ", name, " ", role.title, "\n")
+  Msg("Adding role ", role.title, "\n")
   local group = core.group.getGroup(role.group)
   
   if group then
