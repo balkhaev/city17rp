@@ -13,9 +13,6 @@ include("libs/group.lua")
 include("libs/role.lua")
 include("shared.lua")
 
-core.team.init(core.config.teams)
-core.role.init(core.config.roles)
-
 function GM:PlayerInitialSpawn( ply )
   ply:ConCommand( "team_menu" )
 end
