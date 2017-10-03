@@ -75,87 +75,87 @@ core.config.groups = {
 core.config.roles = {
   -- Мирные жители
   citizen = {
-    name = "Мирный житель",
+    title = "Мирный житель",
     group = "citizens",
     weapons = {"weapon_citizenpackage","weapon_citizensuitcase","weapon_bugbait","weapon_brickbat","weapon_annabelle"},
     access = {}
   },
   rebelsCitizen = {
-    name = "Доверенное лицо Повстанцев",
+    title = "Доверенное лицо Повстанцев",
     group = "citizens",
     weapons = {},
     access = {}
   },
   allianceCitizen = {
-    name = "Доверенное лицо Альянса",
+    title = "Доверенное лицо Альянса",
     group = "citizens",
     weapons = {},
     access = {}
   },
   weaponTrader = {
-    name = "Продавец оружия",
+    title = "Продавец оружия",
     group = "traders",
     weapons = {},
     access = {}
   },
   armorTrader = {
-    name = "Продавец брони",
+    title = "Продавец брони",
     group = "traders",
     weapons = {},
     access = {}
   },
   representativeMayor = {
-    name = "Представитель мера",
+    title = "Представитель мера",
     group = "administration",
     weapons = {},
     access = {}
   },
   deputyMayor = {
-    name = "Заместитель мера",
+    title = "Заместитель мера",
     group = "administration",
     weapons = {},
     access = {}
   },
   mayor = {
-    name = "Мер",
+    title = "Мер",
     group = "administration",
     weapons = {},
     access = {}
   },
   -- Альянс
   recruit = {
-    name = "Рекрут",
+    title = "Рекрут",
     group = "civilianDefence",
     weapons = {},
     access = {}
   },
   patrol = {
-    name = "Патрульный",
+    title = "Патрульный",
     group = "civilianDefence",
     weapons = {},
     access = {}
   },
   corporalGuard = {
-    name = "Разводящий",
+    title = "Разводящий",
     group = "civilianDefence",
     weapons = {},
     access = {}
   },
   -- Повстанцы
   scout = {
-    name = "Разведчик",
+    title = "Разведчик",
     group = "implementationDepartment",
     weapons = {},
     access = {}
   },
   spy = {
-    name = "Шпион",
+    title = "Шпион",
     group = "implementationDepartment",
     weapons = {},
     access = {}
   },
   saboteur = {
-    name = "Диверсант",
+    title = "Диверсант",
     group = "implementationDepartment",
     weapons = {},
     access = {}
