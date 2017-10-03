@@ -1,15 +1,15 @@
 local meta = FindMetaTable("Player")
 
 function meta:getRole()
-  return core.role.getPlayerRole(self.Player)
+  return core.role.getPlayerRole(self)
 end
 
 function meta:getGroup()
-  return core.group.getPlayerGroup(self.Player)
+  return core.group.getPlayerGroup(self)
 end
 
 function meta:getTeam()
-  return core.team.getPlayerTeam(self.Player)
+  return core.team.getPlayerTeam(self)
 end
 
 function meta:hasAccess(access)
