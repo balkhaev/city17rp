@@ -1,6 +1,6 @@
 function core.init(config)
   Msg("=======Init core=======\n")
-  PrintTable(config)
+  PrintTable(config.defaults)
 
   core.team.init(config.teams)
   core.group.init(config.groups)
