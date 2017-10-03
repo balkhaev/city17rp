@@ -117,7 +117,7 @@ function core.role.hasAccess(roleName, accessFlag)
 end
 
 function core.role.init(roles)
-  Msg("======Init roles\n=======")
+  Msg("======Init roles=======\n")
   TablePrint(roles)
   for roleKey, role in pairs(roles) do
     core.role.addRole(roleKey, role.name, role.desc, role.group, role.access)
