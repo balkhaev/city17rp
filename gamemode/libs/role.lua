@@ -116,9 +116,10 @@ function core.role.hasAccess(roleName, accessFlag)
   return core.role.getRole(roleName).access[accessFlag] ~= nil
 end
 
-function core.role.init()
+function core.role.init(roles)
   Msg("======Init roles=======\n")
-  TablePrint(core)
+  TablePrint(roles)
+  TablePrint(core.config.roles)
 
   for roleKey, role in pairs(core.config.roles) do
     core.role.addRole(roleKey, role.name, role.desc, role.group, role.access)
