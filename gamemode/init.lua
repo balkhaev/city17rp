@@ -33,6 +33,8 @@ end
 
 hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
   local group = ply:getGroup()
+    
+  Msg("Player ", ply:Nick(), " spawn on ", group.spawn, "\n")
 
   if group.spawn and group.spawn ~= "" then
     local tab = string.Explode(",", group.spawn)
