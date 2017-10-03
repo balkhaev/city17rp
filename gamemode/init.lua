@@ -29,7 +29,7 @@ function GM:PlayerLoadout(ply)
     core.role.setRole(ply, core.config.defaults.role)
   end
   
-  for _, weaponName in role.weapons
+  for _, weaponName in role.weapons do
     ply:Give(weaponName)
   end
 end
