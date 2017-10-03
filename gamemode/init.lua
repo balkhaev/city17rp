@@ -23,22 +23,13 @@ end
 function GM:PlayerLoadout(ply)
   ply:StripWeapons()
 
-  if ply:Team() == 1 then
-    ply:Give("weapon_physcannon")
-  elseif ply:Team() == 2 then
-    ply:Give("weapon_physgun")
+  local role = core.role.getPlayerRole(ply)
+  
+  if not role then
+    core.role.setRole(ply, core.config.defaults.role)
+  end
+  
+  for _, weaponName in role.weapons
+    ply:Give(weaponName)
   end
 end
- 
-function team_1( ply ) 
-  ply:SetTeam( 1 )
-  ply:Spawn()
-end 
- 
-function team_2( ply ) 
-  ply:SetTeam( 2 )
-  ply:Spawn()
-end 
- 
-concommand.Add( "team_1", team_1 )
-concommand.Add( "team_2", team_2 )
