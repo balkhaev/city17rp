@@ -100,7 +100,9 @@ function core.team.getPlayerTeam(ply)
 end
 
 function core.team.init(teams)
+  Msg("======Init teams======\n")
   for _, team in pairs(teams) do
     core.team.addTeam(team.name, team.desc)
   end
+  PrintTable(core.team.store)
 end
