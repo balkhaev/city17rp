@@ -3,6 +3,8 @@ GM.Author = "Narkeba"
 GM.Email = "narkeba@gmail.com"
 GM.Website = "narkeba.name"
 
+core = {}
+
 include("config/general.lua")
 include("libs/core.lua")
 include("libs/team.lua")
