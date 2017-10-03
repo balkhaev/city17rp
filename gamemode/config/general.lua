@@ -2,6 +2,7 @@ core.config = {}
 
 core.config.defaults = {
   role = "citizen",
+  access = {"settings"},
   spawnTime = 300
 }
 
@@ -30,45 +31,45 @@ core.config.groups = {
     title = "Администрация города",
     team = "civilians",
     spawn = "548.93084716797,3056.7243652344,80.03125",
-    access = {"settings", "poll", "management"}
+    access = {"poll", "management"}
   },
   traders = {
     title = "Торговцы",
     team = "civilians",
     spawn = "",
-    access = {"settings", "trade"}
+    access = {"trade"}
   },
   citizens = {
     title = "Жители",
     team = "civilians",
     spawn = "",
-    access = {"settings"}
+    access = {}
   },
   -- Альянс
   civilianDefence = {
     title = "Гражданская оборона",
     team = "alliance",
     spawn = "4419.1293945313,312.06140136719,76.03125",
-    access = {"settings", "arrest"}
+    access = {"arrest"}
   },
   allianceArmy = {
     title = "Армия Альянса",
     team = "alliance",
     spawn = "4419.1293945313,312.06140136719,76.03125",
-    access = {"settings"}
+    access = {}
   },
   -- Повстанцы
   implementationDepartment = {
     title = "Отдел внедрения",
     team = "rebels",
     spawn = "-3369.4533691406,-2147.1401367188,80.03125",
-    access = {"settings", "camouflage"}
+    access = {"camouflage"}
   },
   rebelsArmy = {
     title = "Армия Повстанцев",
     team = "rebels",
     spawn = "-3369.4533691406,-2147.1401367188,80.03125",
-    access = {"settings"}
+    access = {}
   }
 }
 
@@ -114,13 +115,13 @@ core.config.roles = {
     title = "Заместитель мера",
     group = "administration",
     weapons = {},
-    access = {}
+    access = {"managment"}
   },
   mayor = {
     title = "Мер",
     group = "administration",
     weapons = {},
-    access = {}
+    access = {"managment"}
   },
   -- Альянс
   recruit = {
