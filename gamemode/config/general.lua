@@ -28,33 +28,40 @@ core.config.groups = {
   -- Мирные жители
   administration = {
     name = "Администрация города",
-    team = "civilians"
+    team = "civilians",
+    spawn = {}
   },
   traders = {
     name = "Торговцы",
-    team = "civilians"
+    team = "civilians",
+    spawn = {}
   },
   citizens = {
     name = "Жители",
-    team = "civilians"
+    team = "civilians",
+    spawn = {}
   },
   -- Альянс
   civilianDefence = {
     name = "Гражданская оборона",
-    team = "alliance"
+    team = "alliance",
+    spawn = {}
   },
   allianceArmy = {
     name = "Армия Альянса",
-    team = "alliance"
+    team = "alliance",
+    spawn = {}
   },
   -- Повстанцы
   implementationDepartment = {
     name = "Отдел внедрения",
-    team = "rebels"
+    team = "rebels",
+    spawn = {}
   },
   rebelsArmy = {
     name = "Армия Повстанцев",
-    team = "rebels"
+    team = "rebels",
+    spawn = {}
   }
 }
 

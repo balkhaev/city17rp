@@ -88,6 +88,10 @@ function core.role.getPlayerRole(ply)
   return core.role.store[roleIndex]
 end
 
+function core.role.existsPlayerRole(ply)
+  return core.role.indexPlayerRole(ply) > -1
+end
+
 function core.role.init(roles)
   for roleKey, role in pairs(roles) do
     core.role.addRole(role.name, role.desc, role.group, role.access)
