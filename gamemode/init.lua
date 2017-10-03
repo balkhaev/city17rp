@@ -16,17 +16,16 @@ include("shared.lua")
 
 core.init(core.config)
 
-function GM:PlayerInitialSpawn(ply)
-  ply:ConCommand( "team_menu" )
-end
-
 function GM:PlayerLoadout(ply)
   ply:StripWeapons()
 
-  local role = core.role.getPlayerRole(ply)
+  local role
+  local roleIndex = core.role.indexPlayerRole(ply)
 
-  if role == nil then
+  if roleIndex == -1 then
     role = core.role.setRole(ply, core.config.defaults.role)
+  else
+    role = core.role.getPlayerRole(ply)
   end
 
   for _, weaponName in role.weapons do

@@ -69,13 +69,23 @@ function core.role.setRole(ply, roleName)
   end
 end
 
-function core.role.getPlayerRole(ply)
+function core.role.indexPlayerRole(ply)
   for roleIndex, role in pairs(core.role.store) do
     if role.gangs[ply:SteamID()] then
-      return role
+      return roleIndex
     end
   end
-  return nil
+  return -1
+end
+
+function core.role.getPlayerRole(ply)
+  local roleIndex = core.role.indexPlayerRole(ply)
+
+  if roleIndex == -1 then
+    return nil
+  end
+
+  return core.role.store[roleIndex]
 end
 
 function core.role.init(roles)
