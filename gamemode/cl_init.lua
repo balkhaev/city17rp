@@ -1,3 +1,5 @@
+core = {}
+
 include("shared.lua")
 
 function set_team()
