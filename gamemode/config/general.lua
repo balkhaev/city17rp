@@ -7,19 +7,19 @@ core.config.defaults = {
 
 core.config.teams = {
   civilians = {
-    name = "Мирные жители",
+    title = "Мирные жители",
     color = Color(125, 125, 125, 255)
   },
   rebels = {
-    name = "Повстанцы",
+    title = "Повстанцы",
     color = Color(225, 225, 0, 225)
   },
   alliance = {
-    name = "Альянс",
+    title = "Альянс",
     color = Color(225, 0, 225, 225)
   },
   zombie = {
-    name = "Зомби",
+    title = "Зомби",
     color = Color(0, 225, 255, 225)
   }
 }
