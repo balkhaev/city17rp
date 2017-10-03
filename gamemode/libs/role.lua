@@ -37,7 +37,7 @@ function core.role.removeGang(playerId, roleIndex)
 end
 
 function core.role.getRole(roleName)
-  Msg("Search roleName ", roleName)
+  Msg("Search roleName ", roleName, "\n")
   for _, role in pairs(core.role.store) do
     PrintTable(role)
     if role.name == roleName then
@@ -82,7 +82,7 @@ function core.role.existsPlayerRole(ply)
 end
 
 function core.role.setPlayerRole(ply, roleName)
-  Msg("Setting role ", roleName, " for ", ply.SID)
+  Msg("Set role ", roleName, " for ", ply.SID, "\n")
   local role = core.role.getRole(roleName)
   PrintTable(role)
 
@@ -97,7 +97,7 @@ function core.role.setPlayerRole(ply, roleName)
 
     ply:SetTeam(team.index)
   else
-    Msg("Role undefined")
+    Msg("Role undefined\n")
     return nil
   end
 end
@@ -117,6 +117,8 @@ function core.role.hasAccess(roleName, accessFlag)
 end
 
 function core.role.init(roles)
+  Msg("======Init roles\n=======")
+  TablePrint(roles)
   for roleKey, role in pairs(roles) do
     core.role.addRole(roleKey, role.name, role.desc, role.group, role.access)
   end
