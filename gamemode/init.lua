@@ -24,7 +24,7 @@ function GM:PlayerLoadout(ply)
 
   local role = ply:getRole()
   Msg("===== Loadout Player======\n")
-  PrintTable(role)
+  PrintTable(role.weapons)
 
   for _, weaponName in pairs(role.weapons) do
     ply:Give(weaponName)
@@ -34,7 +34,7 @@ end
 hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
   local group = ply:getGroup()
     
-  Msg("Player ", ply:Nick(), " spawn on ", group.spawn, "\n")
+  Msg("Player ", ply:Nick(), " spawn on ", group.spawn or "default spawn", "\n")
 
   if group.spawn and group.spawn ~= "" then
     local tab = string.Explode(",", group.spawn)
