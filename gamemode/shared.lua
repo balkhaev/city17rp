@@ -13,6 +13,6 @@ include("libs/role.lua")
 
 core.init(core.config)
 
-for teamKey, team in pairs(core.team.store) do
-  team.SetUp(team.index, team.name, team.color)
+for teamKey, teamVal in pairs(core.team.store) do
+  team.SetUp(teamVal.index, teamVal.name, teamVal.color)
 end
