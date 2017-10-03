@@ -1,7 +1,7 @@
 core.config = {}
 
 core.config.defaults = {
-  role = "deputyMayor",
+  role = "citizen",
   spawnTime = 300
 }
 
