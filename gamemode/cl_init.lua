@@ -1,6 +1,17 @@
 core = {}
 
 include("shared.lua")
+include("config/general.lua")
+include("libs/core.lua")
+include("libs/team.lua")
+include("libs/group.lua")
+include("libs/role.lua")
+
+core.init(core.config)
+
+for teamKey, teamVal in pairs(core.team.store) do
+  team.SetUp(teamVal.index, teamVal.name, teamVal.color)
+end
 
 function set_team()
  
