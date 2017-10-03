@@ -12,16 +12,20 @@ function meta:getTeam()
   return core.team.getPlayerTeam(self)
 end
 
-function meta:hasAccess(access)
+function meta:hasAccess(accessFlag)
+  if core.config.defaults.access[accessFlag] ~= nil then
+    return true
+  end
+
   local role = self:getRole()
 
-  if core.role.hasAccess(role.name, access) then
+  if core.role.hasAccess(role.name, accessFlag) then
     return true
   end
 
   local group = self:getGroup()
 
-  if core.group.hasAccess(group.name, access) then
+  if core.group.hasAccess(group.name, accessFlag) then
     return true
   end
 
