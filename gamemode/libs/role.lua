@@ -38,7 +38,6 @@ end
 
 function core.role.getRole(roleName)
   Msg("Search roleName ", roleName, "\n")
-  PrintTable(core.role.store)
   for _, role in pairs(core.role.store) do
     Msg(_, " ", role)
     PrintTable(role)
@@ -125,4 +124,6 @@ function core.role.init(roles)
   for roleKey, role in pairs(core.config.roles) do
     core.role.addRole(roleKey, role.name, role.desc, role.group, role.access)
   end
+
+  PrintTable(core.role.store)
 end
