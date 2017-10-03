@@ -7,7 +7,6 @@ function core.role.addRole(name, title, desc, groupName, access)
   local group = core.group.getGroup(groupName)
   
   if group then
-    PrintTable(group)
     local team = core.team.getTeam(group.team)
 
     core.role.uniqIndex = core.role.uniqIndex + 1
@@ -18,7 +17,7 @@ function core.role.addRole(name, title, desc, groupName, access)
       title = title,
       description = desc or "N/A",
       access = access or "",
-      group = group,
+      group = groupName,
       gangs = {}
     }
 
