@@ -92,7 +92,9 @@ function core.group.hasAccess(groupName, accessFlag)
 end
 
 function core.group.init(groups)
+  Msg("======Init groups======\n")
   for groupKey, group in pairs(groups) do
     core.group.addGroup(group.name, group.desc, group.team, group.access)
   end
+  PrintTable(core.group.store)
 end
