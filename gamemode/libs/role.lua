@@ -39,6 +39,16 @@ function core.role.getRole(roleName)
   return nil
 end
 
+function core.role.getRoleGangs(roleName)
+  local role = core.role.getRole(roleName)
+
+  if role then
+    return role.gangs
+  end
+
+  return nil
+end
+
 function core.role.setRole(ply, roleName)
   local role = core.role.getRole(roleName)
   

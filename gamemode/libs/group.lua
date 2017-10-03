@@ -40,6 +40,26 @@ function core.group.getGroup(groupName)
   return nil
 end
 
+function core.group.getGroupRoles(groupName)
+  local group = core.group.getGroup(groupName)
+
+  if group then
+    return group.groups
+  end
+
+  return nil
+end
+
+function core.group.getGroupGangs(groupName)
+  local group = core.group.getGroup(groupName)
+
+  if group then
+    return group.gangs
+  end
+
+  return nil
+end
+
 function core.group.init(groups)
   for groupKey, group in pairs(groups) do
     core.group.addGroup(group.name, group.desc, group.team, group.access)

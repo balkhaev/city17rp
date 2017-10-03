@@ -38,8 +38,38 @@ function core.team.getTeam(teamName)
   return nil
 end
 
+function core.team.getTeamGroups(teamName)
+  local team = core.team.getTeam(teamName)
+
+  if team then
+    return team.groups
+  end
+
+  return nil
+end
+
+function core.team.getTeamRoles(teamName)
+  local team = core.team.getTeam(teamName)
+
+  if team then
+    return team.roles
+  end
+
+  return nil
+end
+
+function core.team.getTeamGangs(teamName)
+  local team = core.team.getTeam(teamName)
+
+  if team then
+    return team.gangs
+  end
+
+  return nil
+end
+
 function core.team.init(teams)
-  for teamKey, team in pairs(teams) do
-    core.team.addTeam(team.title, team.desc)
+  for _, team in pairs(teams) do
+    core.team.addTeam(team.name, team.desc)
   end
 end

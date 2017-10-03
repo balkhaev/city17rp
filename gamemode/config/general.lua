@@ -25,6 +25,7 @@ core.config.teams = {
 }
 
 core.config.groups = {
+  -- Мирные жители
   administration = {
     name = "Администрация города",
     team = "civilians"
@@ -37,6 +38,7 @@ core.config.groups = {
     name = "Жители",
     team = "civilians"
   },
+  -- Альянс
   civilianDefence = {
     name = "Гражданская оборона",
     team = "alliance"
@@ -45,6 +47,7 @@ core.config.groups = {
     name = "Армия Альянса",
     team = "alliance"
   },
+  -- Повстанцы
   implementationDepartment = {
     name = "Отдел внедрения",
     team = "rebels"
@@ -56,6 +59,7 @@ core.config.groups = {
 }
 
 core.config.roles = {
+  -- Мирные жители
   citizen = {
     name = "Мирный житель",
     group = "citizens",
@@ -94,6 +98,38 @@ core.config.roles = {
   mayor = {
     name = "Мер",
     group = "administration",
+    weapons = {}
+  },
+  -- Альянс
+  recruit = {
+    name = "Рекрут",
+    group = "civilianDefence",
+    weapons = {}
+  },
+  patrol = {
+    name = "Патрульный",
+    group = "civilianDefence",
+    weapons = {}
+  },
+  corporalGuard = {
+    name = "Разводящий",
+    group = "civilianDefence",
+    weapons = {}
+  },
+  -- Повстанцы
+  scout = {
+    name = "Разведчик",
+    group = "implementationDepartment",
+    weapons = {}
+  },
+  spy = {
+    name = "Шпион",
+    group = "implementationDepartment",
+    weapons = {}
+  },
+  saboteur = {
+    name = "Диверсант",
+    group = "implementationDepartment",
     weapons = {}
   }
 }
