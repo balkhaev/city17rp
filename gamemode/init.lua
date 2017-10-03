@@ -1,5 +1,3 @@
-core = {}
-
 AddCSLuaFile("config/general.lua")
 AddCSLuaFile("libs/team.lua")
 AddCSLuaFile("libs/group.lua")
@@ -8,10 +6,13 @@ AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 
 include("config/general.lua")
+include("libs/core.lua")
 include("libs/team.lua")
 include("libs/group.lua")
 include("libs/role.lua")
 include("shared.lua")
+
+core.init(core.config)
 
 function GM:PlayerInitialSpawn( ply )
   ply:ConCommand( "team_menu" )
