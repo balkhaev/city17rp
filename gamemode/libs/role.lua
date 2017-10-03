@@ -1,5 +1,3 @@
-include("config/general.lua")
-
 core.role = {}
 core.role.store = {}
 core.role.uniqIndex = 0
@@ -120,7 +118,7 @@ end
 
 function core.role.init()
   Msg("======Init roles=======\n")
-  TablePrint(core.config.roles)
+  TablePrint(core.config)
 
   for roleKey, role in pairs(core.config.roles) do
     core.role.addRole(roleKey, role.name, role.desc, role.group, role.access)
