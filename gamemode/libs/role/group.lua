@@ -31,7 +31,7 @@ function core.group.addRole(roleIndex, roleName, groupIndex)
 end
 
 function core.group.removeRole(roleIndex, groupIndex)
-  table.remove(core.group.store[groupIndex].roles, roleIndex)
+  core.group.store[groupIndex].roles[roleIndex] = nil
 end
 
 function core.group.addGang(playerId, playerName, groupIndex)
@@ -39,7 +39,7 @@ function core.group.addGang(playerId, playerName, groupIndex)
 end
 
 function core.group.removeGang(playerId, groupIndex)
-  table.remove(core.group.store[groupIndex].gangs, playerId)
+  core.group.store[groupIndex].gangs[playerId] = nil
 end
 
 function core.group.getGroup(groupName)
