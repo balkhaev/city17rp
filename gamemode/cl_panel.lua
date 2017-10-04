@@ -1,19 +1,11 @@
-function KeyPressed (P, key)
-  Msg(key)
-  if key == 8 then
+hook.Add("Think", "openGeneralMenu", function()
+  if input.WasKeyPressed(27) then
     core.panel.createPanel(ply)
   end
-end
- 
-hook.Add( "KeyPress", "KeyPressedHook", KeyPressed )
-
-local function printKeyReleased( ply, key )
-  if key == 8 then
-    core.panel.destroyPanel(ply)
+  if input.WasKeyReleased(27) then
+    core.panel.destroyPanel()
   end
-end
- 
-hook.Add( "KeyRelease", "KeyReleasedHook", printKeyReleased )
+end)
 
 --[[
 local antispam 	= false -- Dont edit c:
