@@ -22,15 +22,7 @@ include("shared.lua")
 core.init(core.config)
 
 function GM:PlayerLoadout(ply)
-  ply:StripWeapons()
-
-  local role = ply:getRole()
-  Msg("===== Loadout Player======\n")
-  PrintTable(role.weapons)
-
-  for _, weaponName in pairs(role.weapons) do
-    ply:Give(weaponName)
-  end
+  core.role.giveRoleItems(ply, ply:getRoleName())
 end
 
 hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)

@@ -94,12 +94,10 @@ function core.role.setPlayerRole(ply, roleName)
     core.group.addGang(ply:SteamID(), ply:GetName(), group.index)
     core.team.addGang(ply:SteamID(), ply:GetName(), team.index)
 
+    core.role.giveRoleItems(ply, roleName)
+
     ply:SetTeam(team.index)
     ply:SetPData("role", role.name)
-
-    for _, weaponName in pairs(role.weapons) do
-      ply:Give(weaponName)
-    end
   else
     Msg("Role undefined\n")
     return nil
@@ -114,8 +112,16 @@ function core.role.deletePlayerRole(ply)
   core.role.removeGang(ply:SteamID(), ply:GetName(), role.index)
   core.group.removeGang(ply:SteamID(), ply:GetName(), group.index)
   core.team.removeGang(ply:SteamID(), ply:GetName(), team.index)
+end
+
+function core.role.giveRoleItems(ply, roleName)
+  local role = core.role.getRole(roleName)
 
   ply:StripWeapons()
+
+  for _, weaponName in pairs(role.weapons) do
+    ply:Give(weaponName)
+  end
 end
 
 function core.role.hasAccess(roleName, accessFlag)
