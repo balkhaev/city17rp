@@ -76,7 +76,6 @@ end
 
 function core.role.getPlayerRole(ply)
   local roleIndex = core.role.indexPlayerRole(ply)
-  Msg("getPlayerRole "..ply:Nick().." with index "..roleIndex)
 
   if roleIndex == -1 then
     return nil
