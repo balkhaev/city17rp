@@ -12,5 +12,11 @@ include("libs/panel.lua")
 
 core.init(core.config)
 
+net.Receive("setPlayerRole", function()
+  local roleName = net.ReadString()
+
+  core.role.setPlayerRole(LocalPlayer(), roleName)
+end)
+
 include("cl_hud.lua")
 include("cl_panel.lua")
