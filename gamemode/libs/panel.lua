@@ -34,20 +34,22 @@ function core.panel.createPanel(ply)
     ply:setNick(myText:GetValue())
   end
 
-  local SheetItemTwo = vgui.Create( "DPanel", PropertySheet )
-  SheetItemTwo:SetPos( 0, 0 )
-  SheetItemTwo:SetSize( PropertySheet:GetWide(), PropertySheet:GetTall() )
-  SheetItemTwo.Paint = function()
-    surface.SetDrawColor( 50, 50, 50, 255 )
-    surface.DrawRect( 0, 0, SheetItemTwo:GetWide(), SheetItemTwo:GetTall() )
-  end
+  if (ply:hasAccess("managment")) then
+    local SheetItemTwo = vgui.Create( "DPanel", PropertySheet )
+    SheetItemTwo:SetPos( 0, 0 )
+    SheetItemTwo:SetSize( PropertySheet:GetWide(), PropertySheet:GetTall() )
+    SheetItemTwo.Paint = function()
+      surface.SetDrawColor( 50, 50, 50, 255 )
+      surface.DrawRect( 0, 0, SheetItemTwo:GetWide(), SheetItemTwo:GetTall() )
+    end
 
-  local DComboBoxOne = vgui.Create( "DComboBox", SheetItemTwo )
-  DComboBoxOne:SetPos( 10, 10 )
-  DComboBoxOne:SetSize( 200, 425 )
-  DComboBoxOne:SetMultiple( false )
-  for _,v in ipairs(player.GetAll()) do
-    DComboBoxOne:AddItem(v:Name())
+    local DComboBoxOne = vgui.Create( "DComboBox", SheetItemTwo )
+    DComboBoxOne:SetPos( 10, 10 )
+    DComboBoxOne:SetSize( 200, 425 )
+    DComboBoxOne:SetMultiple( false )
+    for _,v in ipairs(player.GetAll()) do
+      DComboBoxOne:AddItem(v:Name())
+    end
   end
 
   PropertySheet:AddSheet( "Настройки", SheetItemOne, "gui/silkicons/user", false, false, "Punishment Commands" )

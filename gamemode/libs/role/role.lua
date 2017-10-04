@@ -117,8 +117,6 @@ end
 function core.role.giveRoleItems(ply, roleName)
   local role = core.role.getRole(roleName)
 
-  ply:StripWeapons()
-
   for _, weaponName in pairs(role.weapons) do
     ply:Give(weaponName)
   end

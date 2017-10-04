@@ -48,6 +48,15 @@ function meta:setNick(nick)
   self:SetPData("nickname", nick)
 end
 
+function meta:getPlayerByName(name)
+  name = string.lower(name);
+  for _,v in ipairs(player.GetHumans()) do
+    if string.find(string.lower(v:Name()),name,1,true) ~= nil then
+      return v
+    end
+  end
+end
+
 function GM:PlayerInitialSpawn(ply)
   ply.SID = ply:UserID()
 

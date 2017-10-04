@@ -22,13 +22,14 @@ include("shared.lua")
 core.init(core.config)
 
 function GM:PlayerLoadout(ply)
+  ply:StripWeapons()
   core.role.giveRoleItems(ply, ply:getRoleName())
 end
 
 hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
   local group = ply:getGroup()
-    
-  Msg("Player ", ply:Nick(), " spawn on ", group.spawn or "default spawn", "\n")
+
+  Msg("Player ", ply:Nick(), " spawn on ", group.spawn, "\n")
 
   if group.spawn and group.spawn ~= "" then
     local tab = string.Explode(",", group.spawn)
@@ -39,4 +40,16 @@ end)
 concommand.Add("getspawnpoint", function(ply, cmd, args)
   local x,y,z = ply:GetPos().x,ply:GetPos().y,ply:GetPos().z
   Msg(x..","..y..","..z)
+end)
+
+concommand.Add("setrole", function(ply, cmd, args)
+  if args[1] == nil then
+    return
+  end
+  if args[2] ~= nil then
+    core.role.setPlayerRole(ply:getPlayerByName(args[1]), args[2])
+    return
+  end
+
+  core.role.setPlayerRole(ply, args[1])
 end)
