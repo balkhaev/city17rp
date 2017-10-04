@@ -147,7 +147,7 @@ core.config.roles = {
     group = "civilianDefence",
     weapons = {},
     access = {"managment"}
-  }
+  },
   -- Повстанцы
   scout = {
     title = "Разведчик",
