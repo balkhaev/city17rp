@@ -30,7 +30,7 @@ function core.panel.createPanel()
   local myText = vgui.Create("DTextEntry", SheetItemOne)
   myText:SetText(ply:Nick())
 
-  local button = vgui.Create( "DTinyButton", SheetItemOne )
+  local button = vgui.Create( "DButton", SheetItemOne )
   -- button:SetSize( 100, 30 )
   -- button:SetPos( 50, 30 )
   button:SetText( "Set Nick" )
