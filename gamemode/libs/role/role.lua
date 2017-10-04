@@ -94,7 +94,7 @@ function core.role.setPlayerRole(ply, roleName)
     core.group.addGang(ply:SteamID(), ply:GetName(), group.index)
     core.team.addGang(ply:SteamID(), ply:GetName(), team.index)
 
-    core.role.giveRoleItems(ply, roleName)
+    -- core.role.giveRoleItems(ply, roleName)
 
     ply:SetTeam(team.index)
     -- ply:SetPData("role", role.name)
