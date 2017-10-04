@@ -33,6 +33,7 @@ function core.role.addGang(playerId, playerName, roleIndex)
 end
 
 function core.role.removeGang(playerId, roleIndex)
+  Msg("Remove gang "..playerId.." from role index "..roleIndex)
   table.remove(core.role.store[roleIndex].gangs, playerId)
 end
 
@@ -108,6 +109,8 @@ function core.role.deletePlayerRole(ply)
   local role = core.role.getPlayerRole(ply)
   local group = core.group.getGroup(role.group)
   local team = core.team.getTeam(group.team)
+
+  Msg("Removing role "..role.title.." for player "..ply:Nick())
 
   core.role.removeGang(ply:SteamID(), ply:GetName(), role.index)
   core.group.removeGang(ply:SteamID(), ply:GetName(), group.index)
