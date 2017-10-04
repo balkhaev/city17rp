@@ -8,8 +8,8 @@ AddCSLuaFile("libs/player.lua")
 AddCSLuaFile("libs/hud.lua")
 AddCSLuaFile("libs/panel.lua")
 AddCSLuaFile("cl_init.lua")
-AddCSLuaFile("cl_hud.lua")
-AddCSLuaFile("cl_panel.lua")
+-- AddCSLuaFile("cl_hud.lua")
+-- AddCSLuaFile("cl_panel.lua")
 
 core = {}
 
