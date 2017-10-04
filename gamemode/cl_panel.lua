@@ -1,14 +1,11 @@
-function GM:KeyPress(ply, key)
-  if key == "q" then
-    core.panel.createPanel(ply)
-  end
-end
-
 local menuOpen = false
 
 function GetKeyPress(ply)
-  if input.IsKeyDown(KEY_E) then
+  if input.IsKeyDown(KEY_Q) and menuOpen == false then
     core.panel.createPanel(ply)
+    menuOpen = true
+  elseif not input.IsKeyDown(KEY_Q) and menuOpen == true then
+    core.panel.destroyPanel()
   end
 end
 hook.Add( "Think", "GetKeyPress", GetKeyPress )
