@@ -56,6 +56,15 @@ function core.role.getRoleGangs(roleName)
   return nil
 end
 
+function core.role.getRoleBySteamID(steamID)
+  for roleIndex, role in pairs(core.role.store) do
+    if role.gangs[steamID] ~= nil then
+      return roleIndex
+    end
+  end
+  return -1
+end
+
 function core.role.indexPlayerRole(ply)
   for roleIndex, role in pairs(core.role.store) do
     if role.gangs[ply:SteamID()] ~= nil then
