@@ -97,7 +97,7 @@ function core.role.setPlayerRole(ply, roleName)
     core.role.giveRoleItems(ply, roleName)
 
     ply:SetTeam(team.index)
-    ply:SetPData("role", role.name)
+    -- ply:SetPData("role", role.name)
   else
     Msg("Role undefined\n")
     return nil
