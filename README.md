@@ -97,7 +97,7 @@
 
 # Roadmap
 
-#### Stage 1 :checked:
+#### Stage 1 :heavy_check_mark:
 - Выбрать карту ([Rp_City17](https://steamcommunity.com/sharedfiles/filedetails/?l=russian&id=150899249))
 - Сделать систему команд, групп, ролей
 - Спавн с заданным оружием по заданным координатам
