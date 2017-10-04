@@ -36,12 +36,14 @@ function meta:hasAccess(accessFlag)
   return false
 end
 
+
+local getNick = meta.Nick
 function meta:Nick()
   if (self:GetPData("nickname")) then
     return self:GetPData("nickname")
   end
 
-  return self:Nick()
+  return getNick()
 end
 
 function meta:setNick(nick)
