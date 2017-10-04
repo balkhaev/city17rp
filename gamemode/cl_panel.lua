@@ -5,7 +5,7 @@ end)
 
 hook.Add("Think", "Call_Admin_Thingy", function()
   Msg("Think")
-  if input.IsKeyDown(KP_F9) then
+  if input.IsKeyDown(27) then
     core.panel.createPanel(ply)
   end
 end)
