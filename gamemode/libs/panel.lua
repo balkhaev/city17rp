@@ -1,21 +1,18 @@
 core.panel = {}
+core.panel.current = {}
 
-local DermaPanel = vgui.Create( "DFrame" )
-DermaPanel:SetPos( 50,50 )
-DermaPanel:SetSize( 512, 512 )
-DermaPanel:SetTitle("City Panel")
-DermaPanel:SetVisible( false )
-DermaPanel:SetDraggable( true )
-DermaPanel:ShowCloseButton( true )
-DermaPanel:MakePopup()
-
-function core.panel.createPanel()
-  local ply = LocalPlayer()
-
-  DermaPanel:SetVisible( true )
+function core.panel.createPanel(ply)
+  core.panel.current = vgui.Create( "DFrame" )
+  core.panel.current:SetPos( 50,50 )
+  core.panel.current:SetSize( 512, 512 )
+  core.panel.current:SetTitle("City Panel")
+  core.panel.current:SetVisible( true )
+  core.panel.current:SetDraggable( true )
+  core.panel.current:ShowCloseButton( true )
+  core.panel.current:MakePopup()
 
   local PropertySheet = vgui.Create( "DPropertySheet" )
-  PropertySheet:SetParent( DermaPanel )
+  PropertySheet:SetParent( core.panel.current )
   PropertySheet:SetPos( 5, 30 )
   PropertySheet:SetSize( 500, 470 )
 
@@ -61,5 +58,5 @@ function core.panel.createPanel()
 end
 
 function core.panel.destroyPanel()
-  DermaPanel:SetVisible(false)
+  core.panel.current:Remove()
 end
