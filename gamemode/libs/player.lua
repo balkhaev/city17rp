@@ -43,7 +43,7 @@ function meta:Nick()
     return self:GetPData("nickname")
   end
 
-  return getNick()
+  return getNick(self)
 end
 
 function meta:setNick(nick)
