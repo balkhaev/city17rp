@@ -28,6 +28,7 @@ function GM:PlayerLoadout(ply)
   -- core.role.giveRoleItems(ply, ply:getRoleName())
 end
 
+--[[
 hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
   local group = ply:getGroup()
 
@@ -38,12 +39,13 @@ hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
     ply:SetPos(Vector(tab[1],tab[2],tab[3]))
   end
 end)
+--]]
 
 concommand.Add("getspawnpoint", function(ply, cmd, args)
   local x,y,z = ply:GetPos().x,ply:GetPos().y,ply:GetPos().z
   Msg(x..","..y..","..z)
 end)
-
+--[[
 concommand.Add("setrole", function(ply, cmd, args)
   if args[1] == nil then
     return
@@ -55,3 +57,4 @@ concommand.Add("setrole", function(ply, cmd, args)
 
   core.role.setPlayerRole(ply, args[1])
 end)
+--]]
