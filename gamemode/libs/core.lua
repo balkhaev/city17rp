@@ -16,10 +16,6 @@ function core.init(config)
   Msg("--- Init roles ---\n")
 
   for roleKey, role in pairs(core.config.roles) do
-    if role.title == nil then
-      PrintTable(role)
-    end
-
     Msg("Adding role "..role.title.."\n")
     core.role.addRole(roleKey, role)
   end
