@@ -48,6 +48,10 @@ function GM:PlayerInitialSpawn(ply)
   ply.SID = ply:UserID()
 
   if not core.role.existsPlayerRole(ply) then
-    core.role.setPlayerRole(ply, core.config.defaults.role)
+    if ply:GetPData("role") then
+      core.role.setPlayerRole(ply, ply:GetPData("role"))
+    else
+      core.role.setPlayerRole(ply, core.config.defaults.role)
+    end
   end
 end
