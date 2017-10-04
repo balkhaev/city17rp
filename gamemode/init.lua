@@ -8,8 +8,8 @@ AddCSLuaFile("libs/player.lua")
 AddCSLuaFile("libs/hud.lua")
 AddCSLuaFile("libs/panel.lua")
 AddCSLuaFile("cl_init.lua")
--- AddCSLuaFile("cl_hud.lua")
--- AddCSLuaFile("cl_panel.lua")
+AddCSLuaFile("cl_hud.lua")
+AddCSLuaFile("cl_panel.lua")
 
 core = {}
 
@@ -33,12 +33,10 @@ hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
 
   Msg("Player ", ply:Nick(), " spawn on ", group.spawn, "\n")
 
-  --[[
   if group.spawn and group.spawn ~= "" then
     local tab = string.Explode(",", group.spawn)
     ply:SetPos(Vector(tab[1],tab[2],tab[3]))
   end
-  --]]
 end)
 
 concommand.Add("getspawnpoint", function(ply, cmd, args)
