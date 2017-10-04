@@ -1,7 +1,7 @@
 core.panel = {}
 core.panel.current = {}
 
-function core.panel.createPanel(ply)
+function core.panel.createPanel(role)
   core.panel.current = vgui.Create( "DFrame" )
   core.panel.current:SetPos( 50,50 )
   core.panel.current:SetSize( 512, 512 )
