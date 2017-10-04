@@ -10,6 +10,19 @@ function GetKeyPress(ply)
 end
 hook.Add( "Think", "GetKeyPress", GetKeyPress )
 
+	
+function KeyPressed (P, key)
+	Msg (P:GetName().." pressed "..key.."\n")
+end
+ 
+hook.Add( "KeyPress", "KeyPressedHook", KeyPressed )
+
+local function printKeyReleased( ply, key )
+	print( ply:GetName() .. " released " .. key )
+end
+ 
+hook.Add( "KeyRelease", "KeyReleasedHook", printKeyReleased )
+
 --[[
 local antispam 	= false -- Dont edit c:
 local time 		= 60 -- Set your anti spam time here
