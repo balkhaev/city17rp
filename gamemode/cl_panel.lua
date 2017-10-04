@@ -1,4 +1,5 @@
 function KeyPressed (P, key)
+  Msg(key)
   if key == 8 then
     core.panel.createPanel(ply)
   end
