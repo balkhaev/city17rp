@@ -78,7 +78,7 @@ core.config.roles = {
   citizen = {
     title = "Мирный житель",
     group = "citizens",
-    weapons = {"weapon_citizenpackage","weapon_citizensuitcase","weapon_bugbait","weapon_brickbat","weapon_annabelle"},
+    weapons = {"weapon_citizenpackage","weapon_citizensuitcase","weapon_bugbait","weapon_annabelle"},
     access = {}
   },
   rebelsCitizen = {
