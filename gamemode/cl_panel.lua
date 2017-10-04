@@ -1,24 +1,15 @@
-local menuOpen = false
-
-function GetKeyPress(ply)
-  if input.IsKeyDown(KEY_Q) and menuOpen == false then
-    core.panel.createPanel(ply)
-    menuOpen = true
-  elseif not input.IsKeyDown(KEY_Q) and menuOpen == true then
-    core.panel.destroyPanel()
-  end
-end
-hook.Add( "Think", "GetKeyPress", GetKeyPress )
-
-	
 function KeyPressed (P, key)
-	Msg (P:GetName().." pressed "..key.."\n")
+  if key == 8 then
+    core.panel.createPanel(ply)
+  end
 end
  
 hook.Add( "KeyPress", "KeyPressedHook", KeyPressed )
 
 local function printKeyReleased( ply, key )
-	print( ply:GetName() .. " released " .. key )
+  if key == 8 then
+    core.panel.destroyPanel(ply)
+  end
 end
  
 hook.Add( "KeyRelease", "KeyReleasedHook", printKeyReleased )
