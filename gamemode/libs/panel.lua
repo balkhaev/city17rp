@@ -1,6 +1,6 @@
 core.panel = {}
 
-function core.panel.createPanel()
+function core.panel.createPanel(ply)
   local DermaPanel = vgui.Create( "DFrame" )
   DermaPanel:SetPos( 50,50 )
   DermaPanel:SetSize( 512, 512 )
@@ -31,6 +31,17 @@ function core.panel.createPanel()
     DComboBoxOne:AddItem(v:Name())
   end
 
+  local myText = vgui.Create("DTextEntry", SheetItemOne)
+  myText:SetText(ply:Nick())
+
+  local button = vgui.Create( "DButton", SheetItemOne )
+  button:SetSize( 100, 30 )
+  button:SetPos( 50, 30 )
+  button:SetText( "Set Nick" )
+  button.DoClick = function( button )
+    myText:GetValue()
+  end
+
   local SheetItemTwo = vgui.Create( "DPanel", PropertySheet )
   SheetItemTwo:SetPos( 0, 0 )
   SheetItemTwo:SetSize( PropertySheet:GetWide(), PropertySheet:GetTall() )
@@ -39,6 +50,6 @@ function core.panel.createPanel()
     surface.DrawRect( 0, 0, SheetItemTwo:GetWide(), SheetItemTwo:GetTall() )
   end
 
-  PropertySheet:AddSheet( "Command Menu", SheetItemOne, "gui/silkicons/user", false, false, "Punishment Commands" )
-  PropertySheet:AddSheet( "Fun Menu", SheetItemTwo, "gui/silkicons/group", false, false, "Fun Commands" )
+  PropertySheet:AddSheet( "Настройки", SheetItemOne, "gui/silkicons/user", false, false, "Punishment Commands" )
+  PropertySheet:AddSheet( "Хуемае", SheetItemTwo, "gui/silkicons/group", false, false, "Fun Commands" )
 end

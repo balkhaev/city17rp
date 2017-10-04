@@ -99,11 +99,3 @@ function core.team.getPlayerTeam(ply)
 
   return core.team.store[teamIndex]
 end
-
-function core.team.init(teams)
-  Msg("======Init teams======\n")
-  for teamKey, team in pairs(teams) do
-    Msg("Adding team "..team.title.."\n")
-    core.team.addTeam(teamKey, team)
-  end
-end

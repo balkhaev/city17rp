@@ -114,12 +114,3 @@ end
 function core.role.hasAccess(roleName, accessFlag)
   return core.role.getRole(roleName).access[accessFlag] ~= nil
 end
-
-function core.role.init(roles)
-  Msg("======Init roles=======\n")
-
-  for roleKey, role in pairs(core.config.roles) do
-    Msg("Adding role "..role.title.."\n")
-    core.role.addRole(roleKey, role)
-  end
-end
