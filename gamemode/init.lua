@@ -29,8 +29,6 @@ function GM:PlayerLoadout(ply)
 end
 
 hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
-  core.player = ply
-
   local group = ply:getGroup()
 
   Msg("Player ", ply:Nick(), " spawn on ", group.spawn, "\n")
