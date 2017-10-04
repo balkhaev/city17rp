@@ -25,7 +25,7 @@ core.init(core.config)
 
 function GM:PlayerLoadout(ply)
   ply:StripWeapons()
-  core.role.giveRoleItems(ply, ply:getRoleName())
+  -- core.role.giveRoleItems(ply, ply:getRoleName())
 end
 
 hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
