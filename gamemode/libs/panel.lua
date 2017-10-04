@@ -9,7 +9,9 @@ DermaPanel:SetDraggable( true )
 DermaPanel:ShowCloseButton( true )
 DermaPanel:MakePopup()
 
-function core.panel.createPanel(ply)
+function core.panel.createPanel()
+  local ply = LocalPlayer()
+
   DermaPanel:SetVisible( true )
 
   local PropertySheet = vgui.Create( "DPropertySheet" )
