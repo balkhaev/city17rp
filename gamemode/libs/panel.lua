@@ -1,9 +1,7 @@
 core.panel = {}
 core.panel.current = {}
 
-function core.panel.createPanel(localPly)
-  local role = core.role.getRoleBySteamID(localPly:SteamID())
-
+function core.panel.createPanel(ply)
   core.panel.current = vgui.Create( "DFrame" )
   core.panel.current:SetPos( 50,50 )
   core.panel.current:SetSize( 512, 512 )
@@ -27,17 +25,17 @@ function core.panel.createPanel(localPly)
   end
 
   local myText = vgui.Create("DTextEntry", SheetItemOne)
-  myText:SetText(localPly:Nick())
+  myText:SetText(ply:Nick())
 
   local button = vgui.Create( "DButton", SheetItemOne )
   button:SetPos( 50, 30 )
   button:SetText( "Set Nick" )
   button.DoClick = function( button )
-    localPly:setNick(myText:GetValue())
+    ply:setNick(myText:GetValue())
   end
 
-  PrintTable(localPly:getRole())
-  if (localPly:hasAccess("managment")) then
+  PrintTable(ply:getRole())
+  if (ply:hasAccess("managment")) then
     local SheetItemTwo = vgui.Create( "DPanel", PropertySheet )
     SheetItemTwo:SetPos( 0, 0 )
     SheetItemTwo:SetSize( PropertySheet:GetWide(), PropertySheet:GetTall() )
