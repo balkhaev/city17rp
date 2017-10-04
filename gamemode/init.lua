@@ -34,7 +34,8 @@ function GM:PlayerInitialSpawn(ply)
     end
   end
   
-  net.Start(ply:getRoleName())
+  net.Start("setPlayerRole")
+  net.WriteString(ply:getRoleName())
   net.Send(ply)
 end
 
