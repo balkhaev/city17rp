@@ -23,6 +23,8 @@ include("shared.lua")
 
 core.init(core.config)
 
+util.AddNetworkString("setPlayerRole")
+
 function GM:PlayerInitialSpawn(ply)
   ply.SID = ply:UserID()
 
