@@ -1,14 +1,16 @@
 core.panel = {}
 
+local DermaPanel = vgui.Create( "DFrame" )
+DermaPanel:SetPos( 50,50 )
+DermaPanel:SetSize( 512, 512 )
+DermaPanel:SetTitle("City Panel")
+DermaPanel:SetVisible( false )
+DermaPanel:SetDraggable( true )
+DermaPanel:ShowCloseButton( true )
+DermaPanel:MakePopup()
+
 function core.panel.createPanel(ply)
-  local DermaPanel = vgui.Create( "DFrame" )
-  DermaPanel:SetPos( 50,50 )
-  DermaPanel:SetSize( 512, 512 )
-  DermaPanel:SetTitle("City Panel")
   DermaPanel:SetVisible( true )
-  DermaPanel:SetDraggable( true )
-  DermaPanel:ShowCloseButton( true )
-  DermaPanel:MakePopup()
 
   local PropertySheet = vgui.Create( "DPropertySheet" )
   PropertySheet:SetParent( DermaPanel )
@@ -54,4 +56,8 @@ function core.panel.createPanel(ply)
 
   PropertySheet:AddSheet( "Настройки", SheetItemOne, "gui/silkicons/user", false, false, "Punishment Commands" )
   PropertySheet:AddSheet( "Хуемае", SheetItemTwo, "gui/silkicons/group", false, false, "Fun Commands" )
+end
+
+function core.panel.destroyPanel()
+  DermaPanel:SetVisible(false)
 end
