@@ -34,7 +34,6 @@ function core.panel.createPanel(ply)
     ply:setNick(myText:GetValue())
   end
 
-  PrintTable(ply:getRole())
   if (ply:hasAccess("managment")) then
     local SheetItemTwo = vgui.Create( "DPanel", PropertySheet )
     SheetItemTwo:SetPos( 0, 0 )
