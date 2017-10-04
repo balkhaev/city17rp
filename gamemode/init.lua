@@ -23,6 +23,21 @@ include("shared.lua")
 
 core.init(core.config)
 
+function GM:PlayerInitialSpawn(ply)
+  ply.SID = ply:UserID()
+
+  if not core.role.existsPlayerRole(ply) then
+    if ply:GetPData("role") then
+      core.role.setPlayerRole(ply, ply:GetPData("role"))
+    else
+      core.role.setPlayerRole(ply, core.config.defaults.role)
+    end
+  end
+  
+  net.Start(ply:getRoleName())
+  net.Send(ply)
+end
+
 function GM:PlayerLoadout(ply)
   ply:StripWeapons()
   core.role.giveRoleItems(ply, ply:getRoleName())
