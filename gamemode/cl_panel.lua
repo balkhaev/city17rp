@@ -1,6 +1,6 @@
-GM:KeyPress( pl, key )
+GM:KeyPress(ply, key)
 	if key == "q" then
-		core.panel.createPanel()
+		core.panel.createPanel(ply)
 	end
 end
 
