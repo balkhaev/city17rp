@@ -107,10 +107,9 @@ function core.role.setPlayerRole(ply, roleName)
 
     if SERVER then
       core.role.giveRoleItems(ply, roleName)
+      ply:SetTeam(team.index)
       ply:SetPData("role", role.name)
     end
-
-    ply:SetTeam(team.index)
   else
     Msg("Role undefined\n")
     return nil
