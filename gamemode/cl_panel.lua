@@ -1,8 +1,17 @@
 GM:KeyPress(ply, key)
-	if key == "q" then
-		core.panel.createPanel(ply)
-	end
+  if key == "q" then
+    core.panel.createPanel(ply)
+  end
 end
+
+local menuOpen = false
+
+function GetKeyPress(ply)
+  if input.IsKeyDown(KEY_E) then
+    core.panel.createPanel(ply)
+  end
+end
+hook.Add( "Think", "GetKeyPress", GetKeyPress )
 
 --[[
 local antispam 	= false -- Dont edit c:
