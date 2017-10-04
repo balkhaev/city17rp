@@ -122,9 +122,9 @@ function core.role.deletePlayerRole(ply)
 
   Msg("Removing role "..role.title.." for player "..ply:Nick())
 
-  core.role.removeGang(ply:SteamID(), ply:GetName(), role.index)
-  core.group.removeGang(ply:SteamID(), ply:GetName(), group.index)
-  core.team.removeGang(ply:SteamID(), ply:GetName(), team.index)
+  core.role.removeGang(ply:SteamID(), role.index)
+  core.group.removeGang(ply:SteamID(), group.index)
+  core.team.removeGang(ply:SteamID(), team.index)
 end
 
 function core.role.giveRoleItems(ply, roleName)
