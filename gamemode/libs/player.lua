@@ -58,15 +58,3 @@ function meta:getPlayerByName(name)
     end
   end
 end
-
-function GM:PlayerInitialSpawn(ply)
-  ply.SID = ply:UserID()
-
-  if not core.role.existsPlayerRole(ply) then
-    if ply:GetPData("role") then
-      core.role.setPlayerRole(ply, ply:GetPData("role"))
-    else
-      core.role.setPlayerRole(ply, core.config.defaults.role)
-    end
-  end
-end
