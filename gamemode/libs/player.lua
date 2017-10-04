@@ -32,6 +32,18 @@ function meta:hasAccess(accessFlag)
   return false
 end
 
+function meta:Nick()
+  if (self:GetPData("nickname")) then
+    return self:GetPData("nickname")
+  end
+
+  return self:Nick()
+end
+
+function meta:setNick(nick)
+  self:SetPData("nickname", nick)
+end
+
 function GM:PlayerInitialSpawn(ply)
   ply.SID = ply:UserID()
 
