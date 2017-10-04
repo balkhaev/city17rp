@@ -34,7 +34,7 @@ end
 
 function core.role.removeGang(playerId, roleIndex)
   Msg("Remove gang "..playerId.." from role index "..roleIndex)
-  table.remove(core.role.store[roleIndex].gangs, playerId)
+  core.role.store[roleIndex].gangs[playerId] = nil
 end
 
 function core.role.getRole(roleName)
