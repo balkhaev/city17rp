@@ -11,5 +11,5 @@ include("libs/panel.lua")
 
 core.init(core.config)
 
-include("cl_hud.lua")
-include("cl_panel.lua")
+-- include("cl_hud.lua")
+-- include("cl_panel.lua")
