@@ -143,7 +143,7 @@ core.config.roles = {
     access = {}
   },
   chiefCivilDefence = {
-    tile = "Начальник Гражданской обороны",
+    title = "Начальник Гражданской обороны",
     group = "civilianDefence",
     weapons = {},
     access = {"managment"}
