@@ -28,13 +28,13 @@ hook.Add( "Think", "CallBinding", function()
 end )
 --]]
 
-hook.Add("PlayerKeyPress","BindMenu",function(pl,key)
+hook.Add("PlayerKeyPress","BindMenu",function(ply,key)
   Msg(ply:hasAccess("managment").."\n")
   if key == KEY_Q then
     if core.panel.isOpen then
       core.panel.destroyPanel()
     else
-      core.panel.createPanel(LocalPlayer())
+      core.panel.createPanel(ply)
     end
   end
 end)
