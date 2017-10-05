@@ -154,5 +154,6 @@ function core.role.hasAccess(roleName, accessFlag)
 end
 
 function core.role.hasPlayerAccess(ply, accessFlag)
-  return core.role.hasAccess(ply:getRole().name, accessFlag)
+  local role = ply:getRole()
+  return core.role.hasAccess(role.name, accessFlag)
 end
