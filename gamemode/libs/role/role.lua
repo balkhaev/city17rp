@@ -113,7 +113,11 @@ function core.role.setPlayerRole(ply, roleName)
       ply:SetTeam(team.index)
       ply:SetPData("role", role.name)
     end
+
+    return true
   end
+
+  return false
 end
 
 function core.role.deletePlayerRole(ply)

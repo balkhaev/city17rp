@@ -5,7 +5,9 @@ function meta:getRole()
 end
 
 function meta:setRole(roleName)
-  core.role.setPlayerRole(self, roleName)
+  if core.role.setPlayerRole(self, roleName) then
+    self:SetNWString("role", roleName)
+  end
 end
 
 function meta:getRoleName()
@@ -59,18 +61,12 @@ function meta:getPlayerByName(name)
 end
 
 function meta:AddMoney(amount)
-  local current_cash = self:GetMoney()
-  self:SetMoney( current_cash + amount )
+  self:SetMoney( self:GetMoney() + amount )
 end
 
 function meta:SetMoney(amount)
   self:SetNetworkedInt( "Money", amount )
-  self:SaveMoney()
-end
-
-function meta:SaveMoney()
-  local cash = self:GetMoney()
-  self:SetPData("money", cash)
+  self:SetPData("money", amount)
 end
 
 function meta:SaveMoneyTXT()
