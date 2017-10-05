@@ -4,7 +4,7 @@ concommand.Add("getspawnpoint", function(ply, cmd, args)
 end)
 
 concommand.Add("setrole", function(ply, cmd, args)
-  if not ply:hasAccess("managment") then
+  if not ply:IsUserGroup("superadmin") or not ply:hasAccess("managment") then
     return
   end
 
