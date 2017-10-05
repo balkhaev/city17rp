@@ -4,6 +4,10 @@ function meta:getRole()
   return core.role.getPlayerRole(self)
 end
 
+function meta:setRole(roleName)
+  core.role.setPlayerRole(self, roleName)
+end
+
 function meta:getRoleName()
   return self:GetPData("role")
 end
@@ -32,7 +36,6 @@ function meta:hasAccess(accessFlag)
   return false
 end
 
-
 local getNick = meta.Nick
 function meta:Nick()
   if (self:GetPData("nickname")) then
@@ -53,4 +56,35 @@ function meta:getPlayerByName(name)
       return v
     end
   end
+end
+
+function meta:AddMoney(amount)
+  local current_cash = self:GetMoney()
+  self:SetMoney( current_cash + amount )
+end
+
+function meta:SetMoney(amount)
+  self:SetNetworkedInt( "Money", amount )
+  self:SaveMoney()
+end
+
+function meta:SaveMoney()
+  local cash = self:GetMoney()
+  self:SetPData("money", cash)
+end
+
+function meta:SaveMoneyTXT()
+  file.Write(gmod.GetGamemode().Name .."/Money/".. string.gsub(self:SteamID(), ":", "_") ..".txt", self:GetMoneyString())
+end
+
+function meta:TakeMoney(amount)
+  local target = self:GetEyeTrace().Entity
+  if target:IsPlayer() then
+    --Add money function here
+  end
+  self:AddMoney(-amount)
+end
+
+function meta:GetMoney()
+  return self:GetNetworkedInt( "Money" )
 end

@@ -3,7 +3,8 @@ core.config = {}
 core.config.defaults = {
   role = "citizen",
   access = {"settings"},
-  spawnTime = 300
+  spawnTime = 300,
+  money = 1000
 }
 
 core.config.teams = {

@@ -19,6 +19,7 @@ include("libs/role/team.lua")
 include("libs/role/group.lua")
 include("libs/role/role.lua")
 include("libs/player.lua")
+include("sv_commands.lua")
 include("shared.lua")
 
 core.init(core.config)
@@ -34,6 +35,15 @@ function GM:PlayerInitialSpawn(ply)
     else
       core.role.setPlayerRole(ply, core.config.defaults.role)
     end
+  end
+
+  local cash = ply:GetPData("money")
+
+  if cash == nil then
+    ply:SetPData("money", core.config.defaults.money)
+    ply:SetMoney( core.config.defaults.money )
+  else
+    ply:SetMoney( cash )
   end
 end
 
@@ -57,23 +67,47 @@ hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
   end
 end)
 
-concommand.Add("getspawnpoint", function(ply, cmd, args)
-  local x,y,z = ply:GetPos().x,ply:GetPos().y,ply:GetPos().z
-  Msg(x..","..y..","..z)
-end)
+--[[
+function GetNearestPlayer(zombie)
+    local distance = 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+    local zombiepos = zombie:GetPos()
+    local target = NULL
 
-concommand.Add("setrole", function(ply, cmd, args)
-  if not ply:hasAccess("managment") then
-    return
-  end
+    for _, v in pairs(player.GetAll()) do
+        local plydistance = v:GetPos():Distance(zombiepos)
 
-  if args[1] == nil then
-    return
-  end
-  if args[2] ~= nil then
-    core.role.setPlayerRole(ply:getPlayerByName(args[1]), args[2])
-    return
-  end
+        if plydistance < distance then
+            distance = plydistance
+            target = v
 
-  core.role.setPlayerRole(ply, args[1])
+        end
+
+    end
+
+    return target
+
+end
+
+local zombie = ents.Create("npc_zombie")
+zombie:SetPos(Vector)
+zombie:SetName("zombie")
+zombie:Spawn()
+local ply = GetNearestPlayer(zombie)
+local plypos = ply:GetPos()
+zombie:SetLastPosition(plypos)
+zombie:SetEnemy(ply)
+zombie:UpdateEnemyMemory( ply, plypos )
+zombie:SetSchedule( SCHED_CHASE_ENEMY  )
+--]]
+local zombieSpawnPos = { Vector(0,0,0), Vector(0,200,0) }
+hook.Add( "Think", "ZombieSpawner", function()
+  if ( self.ZombieTimer or 0 ) < CurTime() then
+    self.ZombieTimer = CurTime() + 10
+
+    local spawnpos = table.Random( zombieSpawnPos )
+
+    local zombie = ents.Create( "npc_zombie" )
+    zombie:SetPos( spawnpos )
+    zombie:Spawn()
+  end
 end)
