@@ -1,4 +1,5 @@
 core.panel = {}
+core.panel.isOpen = false
 core.panel.current = {}
 
 function core.panel.createPanel(ply)
@@ -28,10 +29,13 @@ function core.panel.createPanel(ply)
   if (ply:hasAccess("poll")) then
     core.panel.createPollSheet(PropertySheet, ply)
   end
+
+  core.panel.isOpen = true
 end
 
 function core.panel.destroyPanel()
   core.panel.current:Remove()
+  core.panel.isOpen = false
 end
 
 function core.panel.createSettingsSheet(Sheet, ply)
