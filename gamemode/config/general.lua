@@ -135,7 +135,7 @@ core.config.roles = {
   mayor = {
     title = "Мер",
     group = "administration",
-    model = "",
+    model = "models/player/breen.mdl",
     access = {"managment"},
     weapons = {}
   },
