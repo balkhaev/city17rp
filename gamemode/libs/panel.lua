@@ -88,7 +88,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
   button2:SetPos( 50, 30 )
   button2:SetText( "Set Role" )
   button2.DoClick = function( button )
-    core.role.setPlayerRole(DComboBox1:GetSelectedItems()[1], DComboBox2:GetSelectedItems()[1])
+    core.role.setPlayerRole(DComboBox1:GetSelected(), DComboBox2:GetSelected())
   end
 
   Sheet:AddSheet( "Управление", SheetItem, "gui/silkicons/group", false, false, "Управление группой ролей" )
@@ -119,14 +119,14 @@ function core.panel.createCamouflageSheet(Sheet, ply)
     DComboBox2:AddChoice(v)
   end
   DComboBox2.OnSelect = function( panel, index, value )
-    core.role.setPlayerRole(DComboBox2:GetSelectedItems()[1].Ply)
+    core.role.setPlayerRole(DComboBox2:GetSelected())
   end
 
   local button2 = vgui.Create( "DButton", SheetItem )
   button2:SetPos( 50, 30 )
   button2:SetText( "Set Role" )
   button2.DoClick = function( button )
-    core.role.setPlayerRole(DComboBox1:GetSelectedItems()[1], DComboBox2:GetSelectedItems()[1])
+    core.role.setPlayerRole(DComboBox1:GetSelected(), DComboBox2:GetSelected())
   end
 
   Sheet:AddSheet( "Камуфляж", SheetItem, "gui/silkicons/group", false, false, "Выбор камуфляжа" )
