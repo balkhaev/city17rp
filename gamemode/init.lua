@@ -99,10 +99,10 @@ zombie:SetEnemy(ply)
 zombie:UpdateEnemyMemory( ply, plypos )
 zombie:SetSchedule( SCHED_CHASE_ENEMY  )
 --]]
-local zombieSpawnPos = { Vector(0,0,0), Vector(0,200,0) }
+local zombieSpawnPos = { Vector(87.167327880859,5650.2534179688,-463.96875), Vector(92.311859130859,7093.9091796875,-465.96875) }
 hook.Add( "Think", "ZombieSpawner", function()
-  if ( self.ZombieTimer or 0 ) < CurTime() then
-    self.ZombieTimer = CurTime() + 10
+  if ( core.zombieTimer or 0 ) < CurTime() then
+    core.zombieTimer = CurTime() + 10
 
     local spawnpos = table.Random( zombieSpawnPos )
 
