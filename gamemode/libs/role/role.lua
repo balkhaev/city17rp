@@ -90,7 +90,7 @@ function core.role.existsPlayerRole(ply)
 end
 
 function core.role.setPlayerRole(ply, roleName)
-  Msg("Set role ", roleName, " for ", ply.SID, "\n")
+  Msg("Set role ", roleName, " for ", ply.Nick(), "\n")
   local role = core.role.getRole(roleName)
 
   if role then
