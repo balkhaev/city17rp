@@ -88,7 +88,7 @@ core.config.roles = {
     group = "citizens",
     model = "models/humans/Group01/Male_01.mdl",
     access = {},
-    weapons = {"weapon_citizenpackage","weapon_citizensuitcase","weapon_bugbait","weapon_annabelle"}
+    weapons = {}
   },
   rebelsCitizen = {
     title = "Доверенное лицо Повстанцев",
@@ -174,7 +174,7 @@ core.config.roles = {
     group = "allianceArmy",
     model = "models/player/Combine_Soldier.mdl",
     access = {},
-    weapons = {}
+    weapons = {"weapon_357","weapon_alyxgun","weapon_ar2","weapon_smg1","weapon_smg","weapon_stunstick"}
   },
   combineSoldier = {
     title = "Солдат",
@@ -188,7 +188,7 @@ core.config.roles = {
     group = "allianceArmy",
     model = "models/player/Combine_Soldier.mdl",
     access = {},
-    weapons = {}
+    weapons = {""}
   },
   combineSergeant = {
     title = "Сержант",
