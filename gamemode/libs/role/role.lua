@@ -105,13 +105,14 @@ function core.role.setPlayerRole(ply, roleName)
     core.team.addGang(ply:SteamID(), ply:GetName(), team.index)
 
     if SERVER then
+      net.Start("setPlayerRole")
+      net.WriteString(ply:getRoleName())
+      net.Send(ply)
+
       core.role.giveRoleItems(ply, roleName)
       ply:SetTeam(team.index)
       ply:SetPData("role", role.name)
     end
-  else
-    Msg("Role undefined\n")
-    return nil
   end
 end
 
@@ -128,6 +129,8 @@ function core.role.deletePlayerRole(ply)
 end
 
 function core.role.giveRoleItems(ply, roleName)
+  ply:StripWeapons()
+
   local role = core.role.getRole(roleName)
 
   for _, weaponName in pairs(role.weapons) do
@@ -136,5 +139,11 @@ function core.role.giveRoleItems(ply, roleName)
 end
 
 function core.role.hasAccess(roleName, accessFlag)
-  return core.role.getRole(roleName).access[accessFlag] ~= nil
+  local role = core.role.getRole(roleName)
+
+  if (role.access.all ~= nil) then
+    return true
+  end
+
+  return role.access[accessFlag] ~= nil
 end

@@ -35,15 +35,15 @@ function GM:PlayerInitialSpawn(ply)
       core.role.setPlayerRole(ply, core.config.defaults.role)
     end
   end
-  
-  net.Start("setPlayerRole")
-  net.WriteString(ply:getRoleName())
-  net.Send(ply)
 end
 
 function GM:PlayerLoadout(ply)
-  ply:StripWeapons()
   core.role.giveRoleItems(ply, ply:getRoleName())
+end
+
+function GM:PlayerSetModel( ply )
+  local role = ply:getRole()
+  ply:SetModel(role.model)
 end
 
 hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
@@ -63,6 +63,10 @@ concommand.Add("getspawnpoint", function(ply, cmd, args)
 end)
 
 concommand.Add("setrole", function(ply, cmd, args)
+  if not ply:hasAccess("managment") then
+    return
+  end
+
   if args[1] == nil then
     return
   end

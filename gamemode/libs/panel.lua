@@ -16,9 +16,27 @@ function core.panel.createPanel(ply)
   PropertySheet:SetPos( 5, 30 )
   PropertySheet:SetSize( 500, 470 )
 
-  local SheetItemOne = vgui.Create( "DPanel", PropertySheet )
+  local SheetItem1 = core.panel.createSettingsSheet(PropertySheet, ply)
+  PropertySheet:AddSheet( "Настройки", SheetItem1, "gui/silkicons/user", false, false, "Персональные настройки игрока" )
+
+  if (ply:hasAccess("managment")) then
+    local SheetItem2 = core.panel.createManagmentSheet(PropertySheet, ply)
+    PropertySheet:AddSheet( "Управление", SheetItem2, "gui/silkicons/group", false, false, "Управление группой ролей" )
+  end
+  if (ply:hasAccess("camouflage")) then
+    local SheetItem3 = core.panel.createCamouflageSheet(PropertySheet, ply)
+    PropertySheet:AddSheet( "Камуфляж", SheetItem3, "gui/silkicons/group", false, false, "Выбор камуфляжа" )
+  end
+end
+
+function core.panel.destroyPanel()
+  core.panel.current:Remove()
+end
+
+function core.panel.createSettingsSheet(Sheet, ply)
+  local SheetItemOne = vgui.Create( "DPanel", Sheet )
   SheetItemOne:SetPos( 0, 0 )
-  SheetItemOne:SetSize( PropertySheet:GetWide(), PropertySheet:GetTall() )
+  SheetItemOne:SetSize( Sheet:GetWide(), Sheet:GetTall() )
   SheetItemOne.Paint = function()
     surface.SetDrawColor( 50, 50, 50, 255 )
     surface.DrawRect( 0, 0, SheetItemOne:GetWide(), SheetItemOne:GetTall() )
@@ -34,28 +52,84 @@ function core.panel.createPanel(ply)
     ply:setNick(myText:GetValue())
   end
 
-  if (ply:hasAccess("managment")) then
-    local SheetItemTwo = vgui.Create( "DPanel", PropertySheet )
-    SheetItemTwo:SetPos( 0, 0 )
-    SheetItemTwo:SetSize( PropertySheet:GetWide(), PropertySheet:GetTall() )
-    SheetItemTwo.Paint = function()
-      surface.SetDrawColor( 50, 50, 50, 255 )
-      surface.DrawRect( 0, 0, SheetItemTwo:GetWide(), SheetItemTwo:GetTall() )
-    end
-
-    local DComboBoxOne = vgui.Create( "DComboBox", SheetItemTwo )
-    DComboBoxOne:SetPos( 10, 10 )
-    DComboBoxOne:SetSize( 200, 425 )
-    DComboBoxOne:SetMultiple( false )
-    for _,v in ipairs(player.GetAll()) do
-      DComboBoxOne:AddItem(v:Name())
-    end
-  end
-
-  PropertySheet:AddSheet( "Настройки", SheetItemOne, "gui/silkicons/user", false, false, "Punishment Commands" )
-  PropertySheet:AddSheet( "Хуемае", SheetItemTwo, "gui/silkicons/group", false, false, "Fun Commands" )
+  return SheetItemOne
 end
 
-function core.panel.destroyPanel()
-  core.panel.current:Remove()
+function core.panel.createManagmentSheet(Sheet, ply)
+  local SheetItemTwo = vgui.Create( "DPanel", Sheet )
+  SheetItemTwo:SetPos( 0, 0 )
+  SheetItemTwo:SetSize( Sheet:GetWide(), Sheet:GetTall() )
+  SheetItemTwo.Paint = function()
+    surface.SetDrawColor( 50, 50, 50, 255 )
+    surface.DrawRect( 0, 0, SheetItemTwo:GetWide(), SheetItemTwo:GetTall() )
+  end
+
+  local DComboBox1 = vgui.Create( "DComboBox", SheetItemTwo )
+  DComboBox1:SetPos( 10, 10 )
+  DComboBox1:SetSize( 200, 425 )
+  DComboBox1:SetMultiple( false )
+  for _,v in ipairs(player.GetAll()) do
+    local item = DComboBox1:AddItem(v:Name())
+    item.Ply = v
+  end
+
+  local DComboBox2 = vgui.Create( "DComboBox", SheetItemTwo )
+  DComboBox2:SetPos( 50, 10 )
+  DComboBox2:SetSize( 200, 425 )
+  DComboBox2:SetMultiple( false )
+  for _,v in ipairs(core.group.getPlayerGroupRoles(ply)) do
+    DComboBox2:AddItem(v)
+  end
+  DComboBox2.OnSelect = function( panel, index, value )
+    core.role.setPlayerRole(DComboBox2:GetSelectedItems()[1].Ply)
+  end
+
+  local button2 = vgui.Create( "DButton", SheetItemTwo )
+  button2:SetPos( 50, 30 )
+  button2:SetText( "Set Role" )
+  button2.DoClick = function( button )
+    core.role.setPlayerRole(DComboBox1:GetSelectedItems()[1].Ply, DComboBox2:GetSelectedItems()[1])
+  end
+
+  return SheetItemTwo
+end
+
+function core.panel.createCamouflageSheet(Sheet, ply)
+  local SheetItemTwo = vgui.Create( "DPanel", Sheet )
+  SheetItemTwo:SetPos( 0, 0 )
+  SheetItemTwo:SetSize( Sheet:GetWide(), Sheet:GetTall() )
+  SheetItemTwo.Paint = function()
+    surface.SetDrawColor( 50, 50, 50, 255 )
+    surface.DrawRect( 0, 0, SheetItemTwo:GetWide(), SheetItemTwo:GetTall() )
+  end
+
+  local role = ply:getRole()
+
+  local DComboBox1 = vgui.Create( "DComboBox", SheetItemTwo )
+  DComboBox1:SetPos( 10, 10 )
+  DComboBox1:SetSize( 200, 425 )
+  DComboBox1:SetMultiple( false )
+  for _,v in pairs(role.camouflage) do
+    DComboBox1:AddItem(v)
+  end
+
+  local DComboBox2 = vgui.Create( "DComboBox", SheetItemTwo )
+  DComboBox2:SetPos( 50, 10 )
+  DComboBox2:SetSize( 200, 425 )
+  DComboBox2:SetMultiple( false )
+  for _,v in ipairs(core.group.getPlayerGroupRoles(ply)) do
+    DComboBox2:AddItem(v)
+  end
+  DComboBox2.OnSelect = function( panel, index, value )
+    core.role.setPlayerRole(DComboBox2:GetSelectedItems()[1].Ply)
+  end
+
+  local button2 = vgui.Create( "DButton", SheetItemTwo )
+  button2:SetPos( 50, 30 )
+  button2:SetText( "Set Role" )
+  button2.DoClick = function( button )
+    core.role.setPlayerRole(DComboBox1:GetSelectedItems()[1].Ply, DComboBox2:GetSelectedItems()[1])
+  end
+
+  return SheetItemTwo
 end

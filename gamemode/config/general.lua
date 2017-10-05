@@ -74,103 +74,201 @@ core.config.groups = {
 }
 
 core.config.roles = {
+  gman = {
+    title = "G-MAN",
+    group = "citizens",
+    model = "models/player/gman_high.mdl",
+    access = {"all"},
+    weapons = {"weapon_bugbait"}
+  },
   -- Мирные жители
   citizen = {
     title = "Мирный житель",
     group = "citizens",
-    weapons = {"weapon_citizenpackage","weapon_citizensuitcase","weapon_bugbait","weapon_annabelle"},
-    access = {}
+    model = "models/humans/Group01/Male_01.mdl",
+    access = {},
+    weapons = {"weapon_citizenpackage","weapon_citizensuitcase","weapon_bugbait","weapon_annabelle"}
   },
   rebelsCitizen = {
     title = "Доверенное лицо Повстанцев",
     group = "citizens",
-    weapons = {},
-    access = {}
+    model = "models/humans/Group01/Male_01.mdl",
+    access = {},
+    weapons = {}
   },
   allianceCitizen = {
     title = "Доверенное лицо Альянса",
     group = "citizens",
-    weapons = {},
-    access = {}
+    model = "models/humans/Group01/Male_01.mdl",
+    access = {},
+    weapons = {}
   },
   weaponTrader = {
     title = "Продавец оружия",
     group = "traders",
-    weapons = {},
-    access = {}
+    model = "models/humans/Group01/Male_01.mdl",
+    access = {},
+    weapons = {}
   },
   armorTrader = {
     title = "Продавец брони",
     group = "traders",
-    weapons = {},
-    access = {}
+    model = "models/humans/Group01/Male_01.mdl",
+    access = {},
+    weapons = {}
   },
   representativeMayor = {
     title = "Представитель мера",
     group = "administration",
-    weapons = {},
-    access = {}
+    model = "",
+    access = {},
+    weapons = {}
   },
   deputyMayor = {
     title = "Заместитель мера",
     group = "administration",
-    weapons = {},
-    access = {"managment"}
+    model = "",
+    access = {"managment"},
+    weapons = {}
   },
   mayor = {
     title = "Мер",
     group = "administration",
-    weapons = {},
-    access = {"managment"}
+    model = "",
+    access = {"managment"},
+    weapons = {}
   },
-  -- Альянс
+  -- Гражданская оборона
   recruit = {
     title = "Рекрут",
     group = "civilianDefence",
-    weapons = {},
-    access = {}
+    model = "models/player/Police.mdl",
+    access = {},
+    weapons = {}
   },
   patrol = {
     title = "Патрульный",
     group = "civilianDefence",
-    weapons = {},
-    access = {}
+    model = "models/player/Police.mdl",
+    access = {},
+    weapons = {}
   },
   corporalGuard = {
     title = "Разводящий",
     group = "civilianDefence",
-    weapons = {},
-    access = {}
+    model = "models/player/Police.mdl",
+    access = {},
+    weapons = {}
   },
   chiefCivilDefence = {
     title = "Начальник Гражданской обороны",
     group = "civilianDefence",
-    weapons = {},
-    access = {"managment"}
+    model = "models/player/Combine_Soldier_PrisonGuard.mdl",
+    access = {"managment"},
+    weapons = {}
   },
-  -- Повстанцы
+  -- Армия Альянс
+  combineRanker = {
+    title = "Рядовой",
+    group = "allianceArmy",
+    model = "models/player/Combine_Soldier.mdl",
+    access = {},
+    weapons = {}
+  },
+  combineSoldier = {
+    title = "Солдат",
+    group = "allianceArmy",
+    model = "models/player/Combine_Soldier.mdl",
+    access = {},
+    weapons = {}
+  },
+  combineHeavySoldier = {
+    title = "Тяжелый солдат",
+    group = "allianceArmy",
+    model = "models/player/Combine_Soldier.mdl",
+    access = {},
+    weapons = {}
+  },
+  combineSergeant = {
+    title = "Сержант",
+    group = "allianceArmy",
+    model = "models/player/Combine_Soldier.mdl",
+    access = {},
+    weapons = {}
+  },
+  -- Отдел внедрения
   scout = {
     title = "Разведчик",
     group = "implementationDepartment",
+    model = "models/player/Group03/Male_01.mdl",
+    access = {},
     weapons = {},
-    access = {}
+    camouflage = {
+      citizen = "models/player/Group01/Male_01.mdl"
+    }
   },
   spy = {
     title = "Шпион",
     group = "implementationDepartment",
+    model = "models/player/Group03/Male_01.mdl",
+    access = {},
     weapons = {},
-    access = {}
+    camouflage = {
+      citizen = "models/player/Group01/Male_01.mdl",
+      recruit = "models/player/Police.mdl"
+    }
   },
   saboteur = {
     title = "Диверсант",
     group = "implementationDepartment",
+    model = "models/player/Group03/Male_01.mdl",
+    access = {},
     weapons = {},
-    access = {}
+    camouflage = {
+      citizen = "models/player/Group01/Male_01.mdl",
+      recruit = "models/player/Police.mdl",
+      soldier = "models/player/Combine_Soldier.mdl"
+    }
   },
   chiefImplementationDepartament = {
     title = "Глава Отдела внедрения",
     group = "implementationDeprtament",
+    model = "models/player/Group03/Male_01.mdl",
+    access = {"managment"},
     weapons = {},
-    access = {"managment"}
-  }
+    camouflage = {
+      citizen = "models/player/Group01/Male_01.mdl",
+      recruit = "models/player/Police.mdl",
+      soldier = "models/player/Combine_Soldier.mdl"
+    }
+  },
+  -- Армия Сопративления
+  rebelsRanker = {
+    title = "Рядовой",
+    group = "rebels",
+    model = "models/player/Group03/Male_01.mdl",
+    access = {},
+    weapons = {}
+  },
+  rebelsSoldier = {
+    title = "Солдат",
+    group = "rebels",
+    model = "models/player/Group03/Male_02.mdl",
+    access = {},
+    weapons = {}
+  },
+  rebelsAssaulter = {
+    title = "Штурмовик",
+    group = "rebels",
+    model = "models/player/Group03/Male_03.mdl",
+    access = {},
+    weapons = {}
+  },
+  rebelsSergeant = {
+    title = "Сержант",
+    group = "rebels",
+    model = "models/player/Group03/Male_04.mdl",
+    access = {},
+    weapons = {}
+  },
 }

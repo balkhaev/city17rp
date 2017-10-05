@@ -1,3 +1,4 @@
+--[[
 local menuIsOpen  = false
 
 hook.Add("Think", "openGeneralMenu", function()
@@ -10,4 +11,23 @@ hook.Add("Think", "openGeneralMenu", function()
     core.panel.destroyPanel()
   end
 
+end)
+--]]
+
+--[[
+local FirstPressed = false
+
+hook.Add( "Think", "CallBinding", function()
+  local cache = input.IsButtonDown(KEY_Q)
+
+  if cache and FirstPressed then
+    core.panel.createPanel(LocalPlayer())
+  end
+
+  FirstPressed = !cache
+end )
+--]]
+
+hook.Add("PlayerKeyPress","BindMenu",function(pl,key)
+  if key == KEY_Q then core.panel.createPanel(LocalPlayer()) end
 end)

@@ -18,5 +18,5 @@ net.Receive("setPlayerRole", function()
   core.role.setPlayerRole(LocalPlayer(), roleName)
 end)
 
-include("cl_hud.lua")
+-- include("cl_hud.lua")
 include("cl_panel.lua")

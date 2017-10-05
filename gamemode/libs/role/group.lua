@@ -90,6 +90,16 @@ function core.group.getPlayerGroup(ply)
   return core.group.store[groupIndex]
 end
 
+function core.group.getPlayerGroupRoles(ply)
+  local group = core.group.getPlayerGroup(ply)
+
+  if group == nil then
+    return
+  end
+
+  return group.roles
+end
+
 function core.group.hasAccess(groupName, accessFlag)
   return core.group.getGroup(groupName).access[accessFlag] ~= nil
 end
