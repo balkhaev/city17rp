@@ -88,7 +88,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
   button2:SetPos( 50, 30 )
   button2:SetText( "Set Role" )
   button2.DoClick = function( button )
-    core.role.setPlayerRole(DComboBox1:GetSelected(), DComboBox2:GetSelected())
+    core.role.setPlayerRole(DComboBox1:GetSelected()[2], DComboBox2:GetSelected()[2])
   end
 
   Sheet:AddSheet( "Управление", SheetItem, "gui/silkicons/group", false, false, "Управление группой ролей" )
