@@ -174,7 +174,7 @@ core.config.roles = {
     group = "allianceArmy",
     model = "models/player/Combine_Soldier.mdl",
     access = {},
-    weapons = {"weapon_357","weapon_alyxgun","weapon_ar2","weapon_smg1","weapon_smg","weapon_stunstick"}
+    weapons = {"weapon_357","weapon_alyxgun","weapon_ar2","weapon_smg1","weapon_stunstick"}
   },
   combineSoldier = {
     title = "Солдат",
