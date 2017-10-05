@@ -73,7 +73,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
   DComboBox1:SetPos( 10, 10 )
   DComboBox1:SetSize( 200, 425 )
   for _,v in ipairs(player.GetAll()) do
-    local item = DComboBox1:AddItem(v:Name())
+    local item = DComboBox1:AddChoice(v:Name())
     item.Ply = v
   end
 
@@ -81,7 +81,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
   DComboBox2:SetPos( 50, 10 )
   DComboBox2:SetSize( 200, 425 )
   for _,v in pairs(core.group.getPlayerGroupRoles(ply)) do
-    DComboBox2:AddItem(v)
+    DComboBox2:AddChoice(v)
   end
 
   local button2 = vgui.Create( "DButton", SheetItem )
@@ -109,14 +109,14 @@ function core.panel.createCamouflageSheet(Sheet, ply)
   DComboBox1:SetPos( 10, 10 )
   DComboBox1:SetSize( 200, 425 )
   for _,v in pairs(role.camouflage) do
-    DComboBox1:AddItem(v)
+    DComboBox1:AddChoice(v)
   end
 
   local DComboBox2 = vgui.Create( "DComboBox", SheetItem )
   DComboBox2:SetPos( 50, 10 )
   DComboBox2:SetSize( 200, 425 )
   for _,v in ipairs(core.group.getPlayerGroupRoles(ply)) do
-    DComboBox2:AddItem(v)
+    DComboBox2:AddChoice(v)
   end
   DComboBox2.OnSelect = function( panel, index, value )
     core.role.setPlayerRole(DComboBox2:GetSelectedItems()[1].Ply)
