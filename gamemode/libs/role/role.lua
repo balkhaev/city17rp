@@ -11,7 +11,7 @@ function core.role.addRole(name, role)
     core.role.uniqIndex = core.role.uniqIndex + 1
     
     role.index = core.role.uniqIndex
-    role.desc = role.desc or "N/A",
+    role.desc = role.desc or "N/A"
     role.gangs = {}
 
     core.role.store[core.role.uniqIndex] = role
