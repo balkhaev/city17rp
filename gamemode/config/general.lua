@@ -32,7 +32,7 @@ core.config.groups = {
     title = "Администрация города",
     team = "civilians",
     spawn = "548.93084716797,3056.7243652344,80.03125",
-    access = {"poll", "management"}
+    access = {"poll"}
   },
   traders = {
     title = "Торговцы",
@@ -80,7 +80,7 @@ core.config.roles = {
     group = "citizens",
     model = "models/player/gman_high.mdl",
     access = {"all"},
-    weapons = {"weapon_bugbait"}
+    weapons = {"weapon_physgun"}
   },
   -- Мирные жители
   citizen = {
@@ -129,7 +129,7 @@ core.config.roles = {
     title = "Заместитель мера",
     group = "administration",
     model = "",
-    access = {"managment"},
+    access = {},
     weapons = {}
   },
   mayor = {
@@ -145,28 +145,28 @@ core.config.roles = {
     group = "civilianDefence",
     model = "models/player/Police.mdl",
     access = {},
-    weapons = {}
+    weapons = {"weapon_stunstick"}
   },
   patrol = {
     title = "Патрульный",
     group = "civilianDefence",
     model = "models/player/Police.mdl",
     access = {},
-    weapons = {}
+    weapons = {"weapon_stunstick","weapon_pistol"}
   },
   corporalGuard = {
     title = "Разводящий",
     group = "civilianDefence",
     model = "models/player/Police.mdl",
     access = {},
-    weapons = {}
+    weapons = {"weapon_stunstick","weapon_pistol"}
   },
   chiefCivilDefence = {
     title = "Начальник Гражданской обороны",
     group = "civilianDefence",
     model = "models/player/Combine_Soldier_PrisonGuard.mdl",
     access = {"managment"},
-    weapons = {}
+    weapons = {"weapon_stunstick","weapon_pistol"}
   },
   -- Армия Альянс
   combineRanker = {
@@ -174,28 +174,28 @@ core.config.roles = {
     group = "allianceArmy",
     model = "models/player/Combine_Soldier.mdl",
     access = {},
-    weapons = {"weapon_357","weapon_alyxgun","weapon_ar2","weapon_smg1","weapon_stunstick"}
+    weapons = {"weapon_pistol"}
   },
   combineSoldier = {
     title = "Солдат",
     group = "allianceArmy",
     model = "models/player/Combine_Soldier.mdl",
     access = {},
-    weapons = {}
+    weapons = {"weapon_smg1","weapon_pistol"}
   },
   combineHeavySoldier = {
     title = "Тяжелый солдат",
     group = "allianceArmy",
     model = "models/player/Combine_Soldier.mdl",
     access = {},
-    weapons = {""}
+    weapons = {"weapon_shotgun","weapon_smg1","weapon_pistol"}
   },
   combineSergeant = {
     title = "Сержант",
     group = "allianceArmy",
     model = "models/player/Combine_Soldier.mdl",
     access = {},
-    weapons = {}
+    weapons = {"weapon_ar2","weapon_smg1","weapon_pistol"}
   },
   -- Отдел внедрения
   scout = {
@@ -203,7 +203,7 @@ core.config.roles = {
     group = "implementationDepartment",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
-    weapons = {},
+    weapons = {"weapon_357"},
     camouflage = {
       citizen = "models/player/Group01/Male_01.mdl"
     }
@@ -213,7 +213,7 @@ core.config.roles = {
     group = "implementationDepartment",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
-    weapons = {},
+    weapons = {"weapon_357"},
     camouflage = {
       citizen = "models/player/Group01/Male_01.mdl",
       recruit = "models/player/Police.mdl"
@@ -224,7 +224,7 @@ core.config.roles = {
     group = "implementationDepartment",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
-    weapons = {},
+    weapons = {"weapon_357"},
     camouflage = {
       citizen = "models/player/Group01/Male_01.mdl",
       recruit = "models/player/Police.mdl",
@@ -236,7 +236,7 @@ core.config.roles = {
     group = "implementationDeprtament",
     model = "models/player/Group03/Male_01.mdl",
     access = {"managment"},
-    weapons = {},
+    weapons = {"weapon_357"},
     camouflage = {
       citizen = "models/player/Group01/Male_01.mdl",
       recruit = "models/player/Police.mdl",
@@ -249,27 +249,27 @@ core.config.roles = {
     group = "rebels",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
-    weapons = {}
+    weapons = {"weapon_pistol"}
   },
   rebelsSoldier = {
     title = "Солдат",
     group = "rebels",
     model = "models/player/Group03/Male_02.mdl",
     access = {},
-    weapons = {}
+    weapons = {"weapon_smg1","weapon_pistol"}
   },
   rebelsAssaulter = {
     title = "Штурмовик",
     group = "rebels",
     model = "models/player/Group03/Male_03.mdl",
     access = {},
-    weapons = {}
+    weapons = {"weapon_smg1","weapon_pistol"}
   },
   rebelsSergeant = {
     title = "Сержант",
     group = "rebels",
     model = "models/player/Group03/Male_04.mdl",
     access = {},
-    weapons = {}
+    weapons = {"weapon_smg1","weapon_pistol"}
   },
 }
