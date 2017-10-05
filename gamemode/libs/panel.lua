@@ -71,21 +71,21 @@ function core.panel.createManagmentSheet(Sheet, ply)
 
   local DComboBox1 = vgui.Create( "DComboBox", SheetItem )
   DComboBox1:SetPos( 10, 10 )
-  DComboBox1:SetSize( 200, 150 )
+  DComboBox1:SetSize( 100, 30 )
   for _,v in ipairs(player.GetAll()) do
     DComboBox1:AddChoice(v:Name(), v)
   end
 
   local DComboBox2 = vgui.Create( "DComboBox", SheetItem )
-  DComboBox2:SetPos( 210, 10 )
-  DComboBox2:SetSize( 200, 150 )
+  DComboBox2:SetPos( 110, 10 )
+  DComboBox2:SetSize( 100, 30 )
   for _,v in pairs(core.group.getPlayerGroupRoles(ply)) do
     local role = core.role.getRole(v)
     DComboBox2:AddChoice(role.title, v)
   end
 
   local button2 = vgui.Create( "DButton", SheetItem )
-  button2:SetPos( 50, 30 )
+  button2:SetPos( 210, 30 )
   button2:SetText( "Set Role" )
   button2.DoClick = function( button )
     core.role.setPlayerRole(DComboBox1:GetOptionData(DComboBox1:GetSelectedID()), DComboBox2:GetOptionData(DComboBox2:GetSelectedID()))
