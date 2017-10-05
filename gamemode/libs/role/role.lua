@@ -14,7 +14,17 @@ function core.role.addRole(name, role)
     role.desc = role.desc or "N/A"
     role.gangs = {}
 
-    core.role.store[core.role.uniqIndex] = role
+    core.role.store[core.role.uniqIndex] = {
+      index = core.role.uniqIndex,
+      name = name,
+      title = role.title,
+      description = role.desc or "N/A",
+      access = role.access or "",
+      group = role.group,
+      weapons = role.weapons,
+      model = role.model,
+      gangs = {}
+    }
 
     core.group.addRole(core.role.uniqIndex, name, group.index)
     core.team.addRole(core.role.uniqIndex, name, team.index)
