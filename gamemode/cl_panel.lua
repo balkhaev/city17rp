@@ -29,5 +29,11 @@ end )
 --]]
 
 hook.Add("PlayerKeyPress","BindMenu",function(pl,key)
-  if key == KEY_Q then core.panel.createPanel(LocalPlayer()) end
+  if key == KEY_Q then
+    if core.panel.isOpen then
+      core.panel.destroyPanel()
+    else
+      core.panel.createPanel(LocalPlayer())
+    end
+  end
 end)
