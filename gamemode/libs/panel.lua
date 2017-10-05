@@ -84,10 +84,11 @@ function core.panel.createManagmentSheet(Sheet, ply)
     DComboBox2:AddChoice(role.title, v)
   end
 
-  local button2 = vgui.Create( "DButton", SheetItem )
-  button2:SetPos( 210, 30 )
-  button2:SetText( "Set Role" )
-  button2.DoClick = function( button )
+  local button1 = vgui.Create( "DButton", SheetItem )
+  button1:SetPos( 210, 10 )
+  button1:SetSize( 100, 30 )
+  button1:SetText( "Set Role" )
+  button1.DoClick = function( button )
     core.role.setPlayerRole(DComboBox1:GetOptionData(DComboBox1:GetSelectedID()), DComboBox2:GetOptionData(DComboBox2:GetSelectedID()))
   end
 
