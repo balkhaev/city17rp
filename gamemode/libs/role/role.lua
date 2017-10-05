@@ -146,15 +146,16 @@ end
 function core.role.hasAccess(roleName, accessFlag)
   local role = core.role.getRole(roleName)
 
-  if (role.access.all ~= nil) then
-    return true
+  for _,access in pairs(role.access) do
+    if access == "all" then
+      return true
+    end
+    if access == accessFlag then
+      return true
+    end
   end
-  
-  Msg(accessFlag, " ", roleName)
-  PrintTable(role.access)
-  Msg(role.access[accessFlag])
 
-  return role.access[accessFlag] ~= nil
+  return false
 end
 
 function core.role.hasPlayerAccess(ply, accessFlag)
