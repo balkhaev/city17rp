@@ -149,6 +149,10 @@ function core.role.hasAccess(roleName, accessFlag)
   if (role.access.all ~= nil) then
     return true
   end
+  
+  Msg(accessFlag, " ", roleName)
+  PrintTable(role.access)
+  Msg(role.access[accessFlag])
 
   return role.access[accessFlag] ~= nil
 end
