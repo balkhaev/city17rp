@@ -73,7 +73,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
   DComboBox1:SetPos( 10, 10 )
   DComboBox1:SetSize( 200, 425 )
   for _,v in ipairs(player.GetAll()) do
-    DComboBox1:AddChoice(v:Name(), v)
+    DComboBox1:AddChoice(v:Name())
   end
 
   local DComboBox2 = vgui.Create( "DComboBox", SheetItem )
@@ -88,7 +88,8 @@ function core.panel.createManagmentSheet(Sheet, ply)
   button2:SetPos( 50, 30 )
   button2:SetText( "Set Role" )
   button2.DoClick = function( button )
-    core.role.setPlayerRole(DComboBox1:GetSelected()[2], DComboBox2:GetSelected()[2])
+    local target = ply:getPlayerByName(DComboBox1:GetSelected())
+    core.role.setPlayerRole(target, DComboBox2:GetSelected()[2])
   end
 
   Sheet:AddSheet( "Управление", SheetItem, "gui/silkicons/group", false, false, "Управление группой ролей" )
