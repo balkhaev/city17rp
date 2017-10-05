@@ -29,6 +29,7 @@ end )
 --]]
 
 hook.Add("PlayerKeyPress","BindMenu",function(pl,key)
+  Msg(ply:hasAccess("managment").."\n")
   if key == KEY_Q then
     if core.panel.isOpen then
       core.panel.destroyPanel()
