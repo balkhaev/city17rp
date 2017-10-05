@@ -73,8 +73,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
   DComboBox1:SetPos( 10, 10 )
   DComboBox1:SetSize( 200, 425 )
   for _,v in ipairs(player.GetAll()) do
-    local item = DComboBox1:AddChoice(v:Name())
-    item.Ply = v
+    DComboBox1:AddChoice(v:Name(), v)
   end
 
   local DComboBox2 = vgui.Create( "DComboBox", SheetItem )
@@ -126,7 +125,7 @@ function core.panel.createCamouflageSheet(Sheet, ply)
   button2:SetPos( 50, 30 )
   button2:SetText( "Set Role" )
   button2.DoClick = function( button )
-    core.role.setPlayerRole(DComboBox1:GetSelectedItems()[1].Ply, DComboBox2:GetSelectedItems()[1])
+    core.role.setPlayerRole(DComboBox1:GetSelectedItems()[1], DComboBox2:GetSelectedItems()[1])
   end
 
   Sheet:AddSheet( "Камуфляж", SheetItem, "gui/silkicons/group", false, false, "Выбор камуфляжа" )
