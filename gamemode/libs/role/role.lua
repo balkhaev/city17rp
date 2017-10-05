@@ -90,6 +90,8 @@ function core.role.existsPlayerRole(ply)
 end
 
 function core.role.setPlayerRole(ply, roleName)
+  Msg(ply)
+  PrintTable(ply)
   Msg("Set role ", roleName, " for ", ply.Nick(), "\n")
   local role = core.role.getRole(roleName)
 
