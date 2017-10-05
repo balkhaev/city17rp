@@ -145,28 +145,28 @@ core.config.roles = {
     group = "civilianDefence",
     model = "models/player/Police.mdl",
     access = {},
-    weapons = {"weapon_stunstick"}
+    weapons = {"weapon_stunstick","guigui_handcuffed","weapon_stunner2","weapon_stunner"}
   },
   patrol = {
     title = "Патрульный",
     group = "civilianDefence",
     model = "models/player/Police.mdl",
     access = {},
-    weapons = {"weapon_stunstick","weapon_pistol"}
+    weapons = {"weapon_stunstick","weapon_pistol","guigui_handcuffed","weapon_stunner2","weapon_stunner"}
   },
   corporalGuard = {
     title = "Разводящий",
     group = "civilianDefence",
     model = "models/player/Police.mdl",
     access = {},
-    weapons = {"weapon_stunstick","weapon_pistol"}
+    weapons = {"weapon_stunstick","weapon_pistol","guigui_handcuffed","weapon_stunner2","weapon_stunner"}
   },
   chiefCivilDefence = {
     title = "Начальник Гражданской обороны",
     group = "civilianDefence",
     model = "models/player/Combine_Soldier_PrisonGuard.mdl",
     access = {"managment"},
-    weapons = {"weapon_stunstick","weapon_pistol"}
+    weapons = {"weapon_stunstick","weapon_pistol","guigui_handcuffed","weapon_stunner2","weapon_stunner"}
   },
   -- Армия Альянс
   combineRanker = {
