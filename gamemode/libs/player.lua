@@ -21,15 +21,11 @@ function meta:hasAccess(accessFlag)
     return true
   end
 
-  local role = self:getRole()
-
-  if core.role.hasAccess(role.name, accessFlag) then
+  if core.role.hasPlayerAccess(self, accessFlag) then
     return true
   end
 
-  local group = self:getGroup()
-
-  if core.group.hasAccess(group.name, accessFlag) then
+  if core.group.hasPlayerAccess(self, accessFlag) then
     return true
   end
 

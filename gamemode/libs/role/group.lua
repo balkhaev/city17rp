@@ -103,3 +103,7 @@ end
 function core.group.hasAccess(groupName, accessFlag)
   return core.group.getGroup(groupName).access[accessFlag] ~= nil
 end
+
+function core.group.hasPlayerAccess(ply, accessFlag)
+  return core.group.hasAccess(ply:getGroup().name, accessFlag)
+end

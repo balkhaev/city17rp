@@ -147,3 +147,7 @@ function core.role.hasAccess(roleName, accessFlag)
 
   return role.access[accessFlag] ~= nil
 end
+
+function core.role.hasPlayerAccess(ply, accessFlag)
+  return core.role.hasAccess(ply:getRole().name, accessFlag)
+end
