@@ -107,6 +107,7 @@ function core.role.setPlayerRole(ply, roleName)
 
     if SERVER then
       net.Start("setPlayerRole")
+      net.WriteString(ply:SteamID())
       net.WriteString(ply:getRoleName())
       net.Send(ply)
 

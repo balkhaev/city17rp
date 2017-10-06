@@ -4,7 +4,8 @@ core.config.defaults = {
   role = "citizen",
   access = {"settings"},
   spawnTime = 300,
-  money = 1000
+  money = 1000,
+  zombieLimit = 30
 }
 
 core.config.teams = {

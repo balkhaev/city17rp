@@ -15,6 +15,7 @@ resource.AddWorkshop("1159028293")
 
 core = {}
 
+include("shared.lua")
 include("config/general.lua")
 include("libs/core.lua")
 include("libs/role/team.lua")
@@ -22,7 +23,6 @@ include("libs/role/group.lua")
 include("libs/role/role.lua")
 include("libs/player.lua")
 include("sv_commands.lua")
-include("shared.lua")
 
 core.init(core.config)
 
@@ -69,47 +69,10 @@ hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
   end
 end)
 
---[[
-function GetNearestPlayer(zombie)
-    local distance = 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999
-    local zombiepos = zombie:GetPos()
-    local target = NULL
-
-    for _, v in pairs(player.GetAll()) do
-        local plydistance = v:GetPos():Distance(zombiepos)
-
-        if plydistance < distance then
-            distance = plydistance
-            target = v
-
-        end
-
-    end
-
-    return target
-
-end
-
-local zombie = ents.Create("npc_zombie")
-zombie:SetPos(Vector)
-zombie:SetName("zombie")
-zombie:Spawn()
-local ply = GetNearestPlayer(zombie)
-local plypos = ply:GetPos()
-zombie:SetLastPosition(plypos)
-zombie:SetEnemy(ply)
-zombie:UpdateEnemyMemory( ply, plypos )
-zombie:SetSchedule( SCHED_CHASE_ENEMY  )
---]]
-local zombieSpawnPos = { Vector(87.167327880859,5650.2534179688,-463.96875), Vector(92.311859130859,7093.9091796875,-465.96875) }
 hook.Add( "Think", "ZombieSpawner", function()
-  if ( core.zombieTimer or 0 ) < CurTime() then
-    core.zombieTimer = CurTime() + 10
+  if core.zombie.needSpawn() then
+    core.zombie.timer = CurTime() + 10
 
-    local spawnpos = table.Random( zombieSpawnPos )
-
-    local zombie = ents.Create( "npc_zombie" )
-    zombie:SetPos( spawnpos )
-    zombie:Spawn()
+    core.zombie.spawnZombie()
   end
 end)

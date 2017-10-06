@@ -29,6 +29,9 @@ function core.panel.createPanel(ply)
   if (ply:hasAccess("poll")) then
     core.panel.createPollSheet(PropertySheet, ply)
   end
+  if (ply:hasAccess("poll")) then
+    core.panel.createPollSheet(PropertySheet, ply)
+  end
 
   core.panel.isOpen = true
 end

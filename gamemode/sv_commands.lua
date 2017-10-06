@@ -4,18 +4,9 @@ concommand.Add("getspawnpoint", function(ply, cmd, args)
 end)
 
 concommand.Add("setrole", function(ply, cmd, args)
-    PrintTable(ply)
-  if not ply:IsUserGroup("superadmin") and not ply:hasAccess("managment") then
+  if args[2] == nil then
     return
   end
 
-  if args[1] == nil then
-    return
-  end
-  if args[2] ~= nil then
-    core.role.setPlayerRole(ply:getPlayerByName(args[1]), args[2])
-    return
-  end
-
-  core.role.setPlayerRole(ply, args[1])
+  core.role.setPlayerRole(player:getPlayerByName(args[1]), args[2])
 end)
