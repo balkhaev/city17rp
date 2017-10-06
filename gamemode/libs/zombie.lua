@@ -27,30 +27,32 @@ function core.zombie.spawnZombie()
 end
 
 function core.zombie.needSpawn()
-  --[[
   if core.zombie.isEvent then
+    if core.zombie.isMinLimit() then
+      core.zombie.endEvent()
+      return true
+    end
 
+    return false
   end
-  ]]--
-  return core.zombie.timer < CurTime() and core.zombie.count <= core.config.defaults.zombieLimit
+
+  return core.zombie.timer < CurTime() and core.zombie.isLimit()
 end
 
 function core.zombie.isLimit()
-  if core.zombie.isEvent then
-    return true
-  end
+  return core.zombie.count <= core.config.defaults.zombieLimit
+end
 
-  local isZombieLimit = core.zombie.count <= core.config.defaults.zombieLimit
-
-  if isZombieLimit then
-    core.zombie.startEvent()
-  end
-
-  return isZombieLimit
+function core.zombie.isMinLimit()
+  return core.zombie.count <= core.config.default.minZombieLimit
 end
 
 function core.zombie.startEvent()
   core.zombie.isEvent = true
+end
+
+function core.zombie.endEvent()
+  core.zombie.isEvent = false
 end
 
 function core.zombie.getNearestPlayer(zombie)

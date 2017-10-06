@@ -61,8 +61,6 @@ end
 hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
   local group = ply:getGroup()
 
-  Msg("Player ", ply:Nick(), " spawn on ", group.spawn, "\n")
-
   if group.spawn and group.spawn ~= "" then
     local tab = string.Explode(",", group.spawn)
     ply:SetPos(Vector(tab[1],tab[2],tab[3]))
@@ -74,5 +72,9 @@ hook.Add( "Think", "ZombieSpawner", function()
     core.zombie.timer = CurTime() + 10
 
     core.zombie.spawnZombie()
+
+    if (core.zombie.isLimit()) then
+      core.zombie.startEvent()
+    end
   end
 end)

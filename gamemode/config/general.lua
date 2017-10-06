@@ -5,7 +5,8 @@ core.config.defaults = {
   access = {"settings"},
   spawnTime = 300,
   money = 1000,
-  zombieLimit = 30
+  zombieLimit = 30,
+  minZombieLimit = 5
 }
 
 core.config.teams = {
