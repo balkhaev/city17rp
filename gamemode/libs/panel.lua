@@ -12,13 +12,12 @@ function core.panel.createPanel(ply)
   core.panel.current:ShowCloseButton( true )
   core.panel.current:MakePopup()
 
-  local PropertySheet = vgui.Create( "DPropertySheet" )
+  local PropertySheet = vgui.Create( "DColumnSheet" )
   PropertySheet:SetParent( core.panel.current )
   PropertySheet:SetPos( 5, 30 )
   PropertySheet:SetSize( 500, 470 )
 
-  local SheetItem1 = core.panel.createSettingsSheet(PropertySheet, ply)
-  PropertySheet:AddSheet( "Настройки", SheetItem1, "gui/silkicons/user", false, false, "Персональные настройки игрока" )
+  core.panel.createSettingsSheet(PropertySheet, ply)
 
   if (ply:hasAccess("managment")) then
     core.panel.createManagmentSheet(PropertySheet, ply)
@@ -42,20 +41,20 @@ function core.panel.destroyPanel()
 end
 
 function core.panel.createSettingsSheet(Sheet, ply)
-  local SheetItemOne = vgui.Create( "DPanel", Sheet )
-  SheetItemOne:SetPos( 0, 0 )
-  SheetItemOne:SetSize( Sheet:GetWide(), Sheet:GetTall() )
-  SheetItemOne.Paint = function()
+  local SheetItem = vgui.Create( "DPanel", Sheet )
+  SheetItem:SetPos( 0, 0 )
+  SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
+  SheetItem.Paint = function()
     surface.SetDrawColor( 50, 50, 50, 255 )
-    surface.DrawRect( 0, 0, SheetItemOne:GetWide(), SheetItemOne:GetTall() )
+    surface.DrawRect( 0, 0, SheetItem:GetWide(), SheetItem:GetTall() )
   end
 
-  local textInput = vgui.Create("DTextEntry", SheetItemOne)
+  local textInput = vgui.Create("DTextEntry", SheetItem)
   textInput:SetPos( 10, 10 )
   textInput:SetSize( 100, 30 )
   textInput:SetText(ply:Nick())
 
-  local button = vgui.Create( "DButton", SheetItemOne )
+  local button = vgui.Create( "DButton", SheetItem )
   button:SetPos( 110, 10 )
   button:SetSize( 70, 30 )
   button:SetText( "Set Nick" )
@@ -63,7 +62,20 @@ function core.panel.createSettingsSheet(Sheet, ply)
     ply:setNick(myText:GetValue())
   end
 
-  return SheetItemOne
+  local textInput2 = vgui.Create("DTextEntry", SheetItem)
+  textInput2:SetPos( 10, 10 )
+  textInput2:SetSize( 100, 30 )
+  textInput2:SetText(0)
+
+  local button2 = vgui.Create( "DButton", SheetItem )
+  button2:SetPos( 110, 10 )
+  button2:SetSize( 70, 30 )
+  button2:SetText( "Take Money" )
+  button2.DoClick = function( button )
+    ply:TakeMoney(textInput2:GetValue())
+  end
+
+  Sheet:AddSheet( "Настройки", SheetItem, "icon16/cross.png", false, false, "Персональные настройки игрока" )
 end
 
 function core.panel.createManagmentSheet(Sheet, ply)
@@ -98,7 +110,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
     core.role.setPlayerRole(DComboBox1:GetOptionData(DComboBox1:GetSelectedID()), DComboBox2:GetOptionData(DComboBox2:GetSelectedID()))
   end
 
-  Sheet:AddSheet( "Управление", SheetItem, "gui/silkicons/group", false, false, "Управление группой ролей" )
+  Sheet:AddSheet( "Управление", SheetItem, "icon16/tick.png", false, false, "Управление группой ролей" )
 end
 
 function core.panel.createCamouflageSheet(Sheet, ply)

@@ -64,15 +64,17 @@ function meta:SetMoney(amount)
   self:SetPData("money", amount)
 end
 
-function meta:SaveMoneyTXT()
-  file.Write(gmod.GetGamemode().Name .."/Money/".. string.gsub(self:SteamID(), ":", "_") ..".txt", self:GetMoneyString())
-end
-
 function meta:TakeMoney(amount)
-  local target = self:GetEyeTrace().Entity
-  if target:IsPlayer() then
-    --Add money function here
+  if not self:EnoughMoney(amount) then
+    return false
   end
+
+  local target = self:GetEyeTrace().Entity
+
+  if target:IsPlayer() then
+    target:AddMoney(amount)
+  end
+
   self:AddMoney(-amount)
 end
 
@@ -80,6 +82,9 @@ function meta:GetMoney()
   return self:GetNetworkedInt( "Money" )
 end
 
+function meta:EnoughMoney(amount)
+  return self:GetMoney() >= amount
+end
 
 function meta:getPlayerByName(name)
   name = string.lower(name);
