@@ -11,6 +11,8 @@ AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("cl_hud.lua")
 AddCSLuaFile("cl_panel.lua")
 
+resource.AddWorkshop("1159028293")
+
 core = {}
 
 include("config/general.lua")
