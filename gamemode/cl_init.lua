@@ -13,10 +13,10 @@ include("libs/panel.lua")
 core.init(core.config)
 
 net.Receive("setPlayerRole", function()
-  local steamID = net.ReadString()
+  local player = net.ReadEntity()
   local roleName = net.ReadString()
 
-  core.role.setPlayerRole(player:getPlayerBySteamID(steamID), roleName)
+  core.role.setPlayerRole(player, roleName)
 end)
 
 -- include("cl_hud.lua")
