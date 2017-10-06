@@ -15,6 +15,7 @@ core.init(core.config)
 net.Receive("setPlayerRole", function()
   local roleName = net.ReadString()
 
+    PrintTable(LocalPlayer())
   core.role.setPlayerRole(LocalPlayer(), roleName)
 end)
 
