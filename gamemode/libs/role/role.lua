@@ -106,14 +106,15 @@ function core.role.setPlayerRole(ply, roleName)
     core.team.addGang(ply:SteamID(), ply:GetName(), team.index)
 
     if SERVER then
+      ply:SetTeam(team.index)
+      ply:SetPData("role", role.name)
+
       net.Start("setPlayerRole")
       net.WriteEntity(ply)
-      net.WriteString(ply:getRoleName())
+      net.WriteString(role.name)
       net.Send(ply)
 
       core.role.giveRoleItems(ply, roleName)
-      ply:SetTeam(team.index)
-      ply:SetPData("role", role.name)
     end
 
     return true

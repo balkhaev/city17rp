@@ -17,16 +17,15 @@ function core.panel.createPanel(ply)
   PropertySheet:SetPos( 5, 30 )
   PropertySheet:SetSize( 500, 470 )
 
+  local role = ply:getRole()
+
   core.panel.createSettingsSheet(PropertySheet, ply)
 
   if (ply:hasAccess("managment")) then
     core.panel.createManagmentSheet(PropertySheet, ply)
   end
-  if (ply:hasAccess("camouflage")) then
+  if role.camouflage ~= nil then
     core.panel.createCamouflageSheet(PropertySheet, ply)
-  end
-  if (ply:hasAccess("poll")) then
-    core.panel.createPollSheet(PropertySheet, ply)
   end
   if (ply:hasAccess("poll")) then
     core.panel.createPollSheet(PropertySheet, ply)

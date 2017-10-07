@@ -8,5 +8,5 @@ concommand.Add("setrole", function(ply, cmd, args)
     return
   end
 
-  core.role.setPlayerRole(player:getPlayerByName(args[1]), args[2])
+  core.role.setPlayerRole(core.utils.getPlayerByNick(args[1]), args[2])
 end)

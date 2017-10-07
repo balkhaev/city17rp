@@ -13,11 +13,15 @@ function core.zombie.spawnZombie()
   zombie:Spawn()
 
   local ply = core.zombie.getNearestPlayer(zombie)
-  local plypos = ply:GetPos()
-  zombie:SetLastPosition(plypos)
-  zombie:SetEnemy(ply)
-  zombie:UpdateEnemyMemory( ply, plypos )
-  zombie:SetSchedule( SCHED_CHASE_ENEMY  )
+
+  if ply ~= NULL then
+    local plypos = ply:GetPos()
+    zombie:SetLastPosition(plypos)
+    zombie:SetEnemy(ply)
+    zombie:UpdateEnemyMemory( ply, plypos )
+    zombie:SetSchedule( SCHED_CHASE_ENEMY  )
+  end
+
 
   core.zombie.count = core.zombie.count + 1
 end

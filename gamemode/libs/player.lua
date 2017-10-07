@@ -23,7 +23,7 @@ function meta:getTeam()
 end
 
 function meta:hasAccess(accessFlag)
-  if ply:IsUserGroup("superadmin") then
+  if self:IsUserGroup("superadmin") then
     return true
   end
 
@@ -90,23 +90,6 @@ function meta:getPlayerByName(name)
   name = string.lower(name);
   for _,v in ipairs(player.GetHumans()) do
     if string.find(string.lower(v:Name()),name,1,true) ~= nil then
-      return v
-    end
-  end
-end
-
-function meta:getPlayerByNick(nick)
-  nick = string.lower(nick);
-  for _,v in ipairs(player.GetHumans()) do
-    if string.find(string.lower(v:Nick()),nick,1,true) ~= nil then
-      return v
-    end
-  end
-end
-
-function meta:getPlayerBySteamID(steamID)
-  for _,v in ipairs(player.GetHumans()) do
-    if string.find(v:SteamID(),steamID,1,true) ~= nil then
       return v
     end
   end
