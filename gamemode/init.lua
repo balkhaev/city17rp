@@ -21,6 +21,7 @@ include("libs/core.lua")
 include("libs/role/team.lua")
 include("libs/role/group.lua")
 include("libs/role/role.lua")
+include("libs/zombie.lua")
 include("libs/player.lua")
 include("sv_commands.lua")
 
