@@ -21,7 +21,7 @@ resource.AddWorkshop("746876505") -- Handcuffs
 resource.AddWorkshop("675824914") -- Half-Life 2 Melee Pack
 resource.AddWorkshop("314312925") -- [C3] Hand Cuff SWEP
 resource.AddWorkshop("104491619") -- Metropolice Pack
-resource.AddWorkshop("1077528956") -- Accurate HL2 Beta HUD - White
+-- resource.AddWorkshop("1077528956") -- Accurate HL2 Beta HUD - White
 resource.AddWorkshop("245482078") -- Empty Hands Swep
 
 core = {}
