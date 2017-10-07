@@ -76,7 +76,10 @@ core.config.groups = {
   }
 }
 
---cw_ammo_545x39(cw_ak74),cw_ammo_556x45(cw_ar15),cw_ammo_762x51(cw_g3a3),cw_ammo_9x19(cw_mp5),cw_ammo_50ae(cw_deagle),cw_ammo_338lapua(cw_l115),cw_ammo_44magnum(cw_mr96)
+-- CW: cw_ammo_545x39(cw_ak74),cw_ammo_556x45(cw_ar15),cw_ammo_762x51(cw_g3a3),cw_ammo_9x19(cw_mp5),cw_ammo_50ae(cw_deagle),cw_ammo_338lapua(cw_l115),cw_ammo_44magnum(cw_mr96)
+-- ECW: cw_shorty,cw_vss,cw_makarov,cw_p99,cw_mac11,cw_m3super90,cw_m249_official,cw_m1911,cw_m14,cw_l85a2
+-- HLMelee: weapon_hl2axe,weapon_hl2bottle,weapon_hl2brokenbottle,weapon_hl2hook,weapon_hl2pan,weapon_hl2pipe,weapon_hl2pickaxe,weapon_hl2pot,weapon_hl2shovel
+-- weapon_stunner_stun,weapon_stunner_shock
 
 core.config.roles = {
   gman = {
@@ -92,85 +95,87 @@ core.config.roles = {
     group = "citizens",
     model = "models/humans/Group01/Male_01.mdl",
     access = {},
-    weapons = {}
+    weapons = {"weapon_empty_hands","weapon_hl2pan"}
   },
+  --[[
   rebelsCitizen = {
     title = "Доверенное лицо Повстанцев",
     group = "citizens",
     model = "models/humans/Group01/Male_01.mdl",
     access = {},
-    weapons = {}
+    weapons = {"weapon_empty_hands","weapon_hl2pan"}
   },
   allianceCitizen = {
     title = "Доверенное лицо Альянса",
     group = "citizens",
     model = "models/humans/Group01/Male_01.mdl",
     access = {},
-    weapons = {}
+    weapons = {"weapon_hl2pan"}
   },
+  --]]
   weaponTrader = {
     title = "Продавец оружия",
     group = "traders",
     model = "models/humans/Group01/Male_01.mdl",
     access = {},
-    weapons = {}
+    weapons = {"weapon_empty_hands","weapon_hl2pan","cw_mr96"}
   },
   armorTrader = {
     title = "Продавец брони",
     group = "traders",
     model = "models/humans/Group01/Male_01.mdl",
     access = {},
-    weapons = {}
+    weapons = {"weapon_empty_hands","weapon_hl2pan","cw_mr96"}
   },
   representativeMayor = {
     title = "Представитель мера",
     group = "administration",
     model = "",
     access = {},
-    weapons = {}
+    weapons = {"weapon_empty_hands","cw_deagle"}
   },
   deputyMayor = {
     title = "Заместитель мера",
     group = "administration",
     model = "",
     access = {},
-    weapons = {}
+    weapons = {"weapon_empty_hands","cw_deagle"}
   },
   mayor = {
     title = "Мер",
     group = "administration",
     model = "models/player/breen.mdl",
     access = {"managment"},
-    weapons = {}
+    weapons = {"weapon_empty_hands","cw_deagle"}
   },
   -- Гражданская оборона
   recruit = {
     title = "Рекрут",
     group = "civilianDefence",
-    model = "models/player/Police.mdl",
+    model = "models/dpfilms/metropolice/playermodels/pm_retrocop.mdl",
     access = {},
-    weapons = {"weapon_stunstick","guigui_handcuffs","weapon_stunner2","weapon_stunner"}
+    weapons = {"weapon_empty_hands","weapon_stunstick","guigui_handcuffs","weapon_stunner_stun","handcuffsinhand"}
   },
   patrol = {
     title = "Патрульный",
     group = "civilianDefence",
-    model = "models/player/Police.mdl",
+    model = "models/dpfilms/metropolice/playermodels/pm_urban_police.mdl",
     access = {},
-    weapons = {"weapon_stunstick","cw_deagle","guigui_handcuffs","weapon_stunner2","weapon_stunner"}
+    weapons = {"weapon_empty_hands","weapon_stunstick","cw_m1911","guigui_handcuffs","weapon_stunner_stun","handcuffsinhand"}
   },
   corporalGuard = {
     title = "Разводящий",
     group = "civilianDefence",
-    model = "models/player/Police.mdl",
+    model = "models/dpfilms/metropolice/playermodels/pm_policetrench.mdl",
     access = {},
-    weapons = {"weapon_stunstick","weapon_pistol","guigui_handcuffs","weapon_stunner2","weapon_stunner"}
+    weapons = {"weapon_empty_hands","weapon_stunstick","cw_m1911","cw_mp5","guigui_handcuffs","weapon_stunner_stun","handcuffsinhand"}
   },
   chiefCivilDefence = {
     title = "Начальник Гражданской обороны",
     group = "civilianDefence",
-    model = "models/player/Combine_Soldier_PrisonGuard.mdl",
+    model = "models/dpfilms/metropolice/tron_police.mdl",
     access = {"managment"},
-    weapons = {"weapon_stunstick","weapon_pistol","guigui_handcuffs","weapon_stunner2","weapon_stunner","cw_ak74"}
+    weapons = {"weapon_empty_hands","weapon_stunstick","cw_m1911","guigui_handcuffs","weapon_stunner_stun","cw_ar15","handcuffsinhand"}
   },
   -- Армия Альянс
   combineRanker = {
@@ -178,28 +183,28 @@ core.config.roles = {
     group = "allianceArmy",
     model = "models/player/Combine_Soldier.mdl",
     access = {},
-    weapons = {"weapon_pistol"}
+    weapons = {"weapon_empty_hands","cw_fiveseven"}
   },
   combineSoldier = {
     title = "Солдат",
     group = "allianceArmy",
     model = "models/player/Combine_Soldier.mdl",
     access = {},
-    weapons = {"cw_ar15","weapon_smg1","weapon_pistol"}
+    weapons = {"weapon_empty_hands","cw_ar15","cw_ump45","cw_fiveseven"}
   },
   combineHeavySoldier = {
     title = "Тяжелый солдат",
     group = "allianceArmy",
     model = "models/player/Combine_Soldier.mdl",
     access = {},
-    weapons = {"weapon_shotgun","weapon_smg1","weapon_pistol"}
+    weapons = {"weapon_empty_hands","cw_shorty","cw_m249_official","cw_ump45","weapon_pistol"}
   },
   combineSergeant = {
     title = "Сержант",
     group = "allianceArmy",
     model = "models/player/Combine_Soldier.mdl",
     access = {},
-    weapons = {"weapon_ar2","weapon_smg1","weapon_pistol"}
+    weapons = {"weapon_empty_hands","weapon_ar2","cw_m14","cw_ump45","weapon_pistol"}
   },
   -- Отдел внедрения
   scout = {
@@ -207,7 +212,7 @@ core.config.roles = {
     group = "implementationDepartment",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
-    weapons = {"weapon_357","cw_g3a3"},
+    weapons = {"weapon_empty_hands","weapon_357","cw_g3a3"},
     camouflage = {
       citizen = "models/player/Group01/Male_01.mdl"
     }
@@ -217,7 +222,7 @@ core.config.roles = {
     group = "implementationDepartment",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
-    weapons = {"weapon_357"},
+    weapons = {"weapon_empty_hands","weapon_357","cw_m14"},
     camouflage = {
       citizen = "models/player/Group01/Male_01.mdl",
       recruit = "models/player/Police.mdl"
@@ -228,11 +233,12 @@ core.config.roles = {
     group = "implementationDepartment",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
-    weapons = {"weapon_357"},
+    weapons = {"weapon_empty_hands","weapon_357","cw_vss"},
     camouflage = {
       citizen = "models/player/Group01/Male_01.mdl",
       recruit = "models/player/Police.mdl",
-      soldier = "models/player/Combine_Soldier.mdl"
+      soldier = "models/player/Combine_Soldier.mdl",
+      barney="HD Barney"
     }
   },
   chiefImplementationDepartament = {
@@ -240,7 +246,7 @@ core.config.roles = {
     group = "implementationDeprtament",
     model = "models/player/Group03/Male_01.mdl",
     access = {"managment"},
-    weapons = {"weapon_357"},
+    weapons = {"weapon_empty_hands","weapon_357","cw_vss"},
     camouflage = {
       citizen = "models/player/Group01/Male_01.mdl",
       recruit = "models/player/Police.mdl",
@@ -253,34 +259,34 @@ core.config.roles = {
     group = "rebels",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
-    weapons = {"weapon_pistol"}
+    weapons = {"weapon_empty_hands","cw_mac11","cw_makarov"}
   },
   rebelsSoldier = {
     title = "Солдат",
     group = "rebels",
     model = "models/player/Group03/Male_02.mdl",
     access = {},
-    weapons = {"weapon_smg1","weapon_pistol"}
+    weapons = {"weapon_empty_hands","cw_ak74","cw_makarov"}
   },
   rebelsAssaulter = {
     title = "Штурмовик",
     group = "rebels",
     model = "models/player/Group03/Male_03.mdl",
     access = {},
-    weapons = {"weapon_smg1","weapon_pistol"}
+    weapons = {"weapon_empty_hands","cw_ak74","cw_ump45","cw_makarov"}
   },
   rebelSniper = {
     title = "Снайпер",
     group = "rebels",
     model = "models/player/Group03/Male_03.mdl",
     access = {},
-    weapons = {"cw_l115","weapon_pistol"}
+    weapons = {"weapon_empty_hands","cw_l115","cw_makarov"}
   },
   rebelsSergeant = {
     title = "Сержант",
     group = "rebels",
     model = "models/player/Group03/Male_04.mdl",
     access = {},
-    weapons = {"weapon_smg1","weapon_pistol"}
+    weapons = {"weapon_empty_hands","cw_ak74","cw_ump45","cw_makarov"}
   },
 }
