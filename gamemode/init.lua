@@ -11,7 +11,14 @@ AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("cl_hud.lua")
 AddCSLuaFile("cl_panel.lua")
 
-resource.AddWorkshop("1159028293")
+resource.AddWorkshop("299164995")
+resource.AddWorkshop("1124240829")
+resource.AddWorkshop("349050451")
+resource.AddWorkshop("207948202")
+resource.AddWorkshop("586182552")
+resource.AddWorkshop("647098998")
+resource.AddWorkshop("627908510")
+resource.AddWorkshop("746876505")
 
 core = {}
 

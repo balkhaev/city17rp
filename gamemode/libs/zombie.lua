@@ -4,10 +4,6 @@ core.zombie.count = 0
 core.zombie.timer = 0
 core.zombie.isEvent = false
 
-GM:OnNPCKilled( function(npc, attacker, inflictor )
-
-end)
-
 function core.zombie.spawnZombie()
   local spawnpos = table.Random( core.zombie.spawnPos )
 
@@ -44,7 +40,7 @@ function core.zombie.isLimit()
 end
 
 function core.zombie.isMinLimit()
-  return core.zombie.count <= core.config.default.minZombieLimit
+  return core.zombie.count <= core.config.defaults.minZombieLimit
 end
 
 function core.zombie.startEvent()
