@@ -11,14 +11,12 @@ AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("cl_hud.lua")
 AddCSLuaFile("cl_panel.lua")
 
-resource.AddWorkshop("299164995")
-resource.AddWorkshop("1124240829")
-resource.AddWorkshop("349050451")
-resource.AddWorkshop("207948202")
-resource.AddWorkshop("586182552")
-resource.AddWorkshop("647098998")
-resource.AddWorkshop("627908510")
-resource.AddWorkshop("746876505")
+-- resource.AddWorkshop("299164995") -- Call Of Duty: Black Ops II Weapons Pack
+resource.AddWorkshop("349050451") -- Customizable Weaponry 2.0
+resource.AddWorkshop("975698959") -- Stunners Pack
+resource.AddWorkshop("647098998") -- Stunner
+resource.AddWorkshop("627908510") -- Easy Thirdperson
+resource.AddWorkshop("746876505") -- Handcuffs
 
 core = {}
 

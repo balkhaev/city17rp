@@ -76,6 +76,8 @@ core.config.groups = {
   }
 }
 
+--cw_ammo_545x39(cw_ak74),cw_ammo_556x45(cw_ar15),cw_ammo_762x51(cw_g3a3),cw_ammo_9x19(cw_mp5),cw_ammo_50ae(cw_deagle),cw_ammo_338lapua(cw_l115),cw_ammo_44magnum(cw_mr96)
+
 core.config.roles = {
   gman = {
     title = "G-MAN",
@@ -147,28 +149,28 @@ core.config.roles = {
     group = "civilianDefence",
     model = "models/player/Police.mdl",
     access = {},
-    weapons = {"weapon_stunstick","guigui_handcuffed","weapon_stunner2","weapon_stunner"}
+    weapons = {"weapon_stunstick","guigui_handcuffs","weapon_stunner2","weapon_stunner"}
   },
   patrol = {
     title = "Патрульный",
     group = "civilianDefence",
     model = "models/player/Police.mdl",
     access = {},
-    weapons = {"weapon_stunstick","weapon_pistol","guigui_handcuffed","weapon_stunner2","weapon_stunner"}
+    weapons = {"weapon_stunstick","cw_deagle","guigui_handcuffs","weapon_stunner2","weapon_stunner"}
   },
   corporalGuard = {
     title = "Разводящий",
     group = "civilianDefence",
     model = "models/player/Police.mdl",
     access = {},
-    weapons = {"weapon_stunstick","weapon_pistol","guigui_handcuffed","weapon_stunner2","weapon_stunner"}
+    weapons = {"weapon_stunstick","weapon_pistol","guigui_handcuffs","weapon_stunner2","weapon_stunner"}
   },
   chiefCivilDefence = {
     title = "Начальник Гражданской обороны",
     group = "civilianDefence",
     model = "models/player/Combine_Soldier_PrisonGuard.mdl",
     access = {"managment"},
-    weapons = {"weapon_stunstick","weapon_pistol","guigui_handcuffed","weapon_stunner2","weapon_stunner"}
+    weapons = {"weapon_stunstick","weapon_pistol","guigui_handcuffs","weapon_stunner2","weapon_stunner","cw_ak74"}
   },
   -- Армия Альянс
   combineRanker = {
@@ -183,7 +185,7 @@ core.config.roles = {
     group = "allianceArmy",
     model = "models/player/Combine_Soldier.mdl",
     access = {},
-    weapons = {"weapon_smg1","weapon_pistol"}
+    weapons = {"cw_ar15","weapon_smg1","weapon_pistol"}
   },
   combineHeavySoldier = {
     title = "Тяжелый солдат",
@@ -205,7 +207,7 @@ core.config.roles = {
     group = "implementationDepartment",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
-    weapons = {"weapon_357"},
+    weapons = {"weapon_357","cw_g3a3"},
     camouflage = {
       citizen = "models/player/Group01/Male_01.mdl"
     }
@@ -266,6 +268,13 @@ core.config.roles = {
     model = "models/player/Group03/Male_03.mdl",
     access = {},
     weapons = {"weapon_smg1","weapon_pistol"}
+  },
+  rebelSniper = {
+    title = "Снайпер",
+    group = "rebels",
+    model = "models/player/Group03/Male_03.mdl",
+    access = {},
+    weapons = {"cw_l115","weapon_pistol"}
   },
   rebelsSergeant = {
     title = "Сержант",
