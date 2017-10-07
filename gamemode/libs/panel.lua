@@ -98,7 +98,10 @@ function core.panel.createManagmentSheet(Sheet, ply)
   DComboBox2:SetSize( 100, 30 )
   for _,v in pairs(core.group.getPlayerGroupRoles(ply)) do
     local role = core.role.getRole(v)
-    DComboBox2:AddChoice(role.title, v)
+
+    if not role.hasAccess("managment") then
+      DComboBox2:AddChoice(role.title, v)
+    end
   end
 
   local button1 = vgui.Create( "DButton", SheetItem )
