@@ -40,7 +40,7 @@ include("libs/role/role.lua")
 include("libs/zombie.lua")
 include("libs/player.lua")
 include("libs/drone.lua")
-include("network.lua")
+include("libs/network.lua")
 include("sv_commands.lua")
 include("sv_combinedoors.lua")
 
