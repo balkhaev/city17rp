@@ -42,6 +42,7 @@ include("libs/zombie.lua")
 include("libs/player.lua")
 include("libs/drone.lua")
 include("libs/network.lua")
+include("sv_entities.lua")
 include("sv_commands.lua")
 include("sv_combinedoors.lua")
 
