@@ -34,7 +34,7 @@ function core.role.addGang(playerId, playerName, roleIndex)
 end
 
 function core.role.removeGang(playerId, roleIndex)
-  Msg("Remove gang "..playerId.." from role index "..roleIndex)
+  Msg("Remove gang "..playerId.." from role index "..roleIndex.."\n")
   core.role.store[roleIndex].gangs[playerId] = nil
 end
 
@@ -110,10 +110,10 @@ function core.role.setPlayerRole(ply, roleName)
       ply:SetTeam(team.index)
       ply:SetPData("role", role.name)
 
-      net.Start("setPlayerRole")
-      net.WriteString(ply:Nick())
+      net.Start("receivePlayerRole")
+      net.WriteString(ply:SteamID())
       net.WriteString(role.name)
-      net.Send(ply)
+      net.Broadcast()
 
       core.role.giveRoleItems(ply, roleName)
     end

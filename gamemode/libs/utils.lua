@@ -8,11 +8,3 @@ function core.utils.getPlayerByNick(nick)
     end
   end
 end
-
-function core.utils.getPlayerBySteamID(steamID)
-  for _,v in ipairs(player.GetHumans()) do
-    if string.find(v:SteamID(),steamID,1,true) ~= nil then
-      return v
-    end
-  end
-end

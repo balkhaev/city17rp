@@ -47,17 +47,11 @@ include("sv_combinedoors.lua")
 
 core.init(core.config)
 
-util.AddNetworkString("setPlayerRole")
-
-function GM:PlayerInitialSpawn(ply)
-  ply.SID = ply:UserID()
-
-  if not core.role.existsPlayerRole(ply) then
-    if ply:GetPData("role") then
-      core.role.setPlayerRole(ply, ply:GetPData("role"))
-    else
-      core.role.setPlayerRole(ply, core.config.defaults.role)
-    end
+hook.Add( "PlayerInitialSpawn", "CityInitialSpawn", function(ply)
+  if ply:GetPData("role") then
+    core.role.setPlayerRole(ply, ply:GetPData("role"))
+  else
+    core.role.setPlayerRole(ply, core.config.defaults.role)
   end
 
   local cash = ply:GetPData("money")
@@ -68,7 +62,7 @@ function GM:PlayerInitialSpawn(ply)
   else
     ply:SetMoney( cash )
   end
-end
+end)
 
 function GM:PlayerLoadout(ply)
   core.role.giveRoleItems(ply, ply:getRoleName())
@@ -80,7 +74,7 @@ hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
   if group.spawn and group.spawn ~= "" then
     local randPos = table.Random( group.spawn )
     local tab = string.Explode(",", randPos)
-    ply:SetPos(Vector(tab[1],tab[2],tab[3]))
+    ply:SetPos(Vector(tab[1], tab[2], tab[3]))
   end
 end)
 

@@ -93,7 +93,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
   DComboBox1:SetPos( 10, 10 )
   DComboBox1:SetSize( 100, 30 )
   for _,v in ipairs(player.GetAll()) do
-    DComboBox1:AddChoice(v:Name(), v)
+    DComboBox1:AddChoice(v:Name(), v:SteamID())
   end
 
   local DComboBox2 = vgui.Create( "DComboBox", SheetItem )
@@ -120,7 +120,10 @@ function core.panel.createManagmentSheet(Sheet, ply)
   button1:SetSize( 70, 30 )
   button1:SetText( "Set Role" )
   button1.DoClick = function( button )
-    core.role.setPlayerRole(DComboBox1:GetOptionData(DComboBox1:GetSelectedID()), DComboBox2:GetOptionData(DComboBox2:GetSelectedID()))
+    net.Start("setPlayerRole")
+    net.WriteString(DComboBox1:GetOptionData(DComboBox1:GetSelectedID()))
+    net.WriteString(DComboBox2:GetOptionData(DComboBox2:GetSelectedID()))
+    net.SendToServer()
   end
 
   Sheet:AddSheet( "Управление", SheetItem, "icon16/group_edit.png", false, false, "Управление группой ролей" )

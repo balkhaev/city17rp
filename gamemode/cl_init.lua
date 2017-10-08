@@ -13,12 +13,24 @@ include("libs/utils.lua")
 
 core.init(core.config)
 
-net.Receive("setPlayerRole", function()
-  local playerName = net.ReadString()
-  local roleName = net.ReadString()
+local strIdentifier = "PlayerReady"
 
-  core.role.setPlayerRole(core.utils.getPlayerByNick(playerName), roleName)
+hook.Add ("Think", "PlayerReady", function ()
+  if IsValid (LocalPlayer()) then
+    net.Start("getPlayerRole")
+    net.SendToServer()
+
+    net.Receive("receivePlayerRole", function()
+      local steamID = net.ReadString()
+      local roleName = net.ReadString()
+
+      core.role.setPlayerRole(player.GetBySteamID(steamID), roleName)
+    end)
+
+    hook.Remove ("Think", strIdentifier)
+  end
 end)
+
 
 -- include("cl_hud.lua")
 include("cl_panel.lua")
