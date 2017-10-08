@@ -3,6 +3,8 @@ core.panel.isOpen = false
 core.panel.current = {}
 
 function core.panel.createPanel(ply)
+  core.panel.isOpen = true
+
   core.panel.current = vgui.Create( "DFrame" )
   core.panel.current:SetPos( 50,50 )
   core.panel.current:SetSize( 512, 512 )
@@ -34,7 +36,8 @@ function core.panel.createPanel(ply)
     core.panel.createPollSheet(PropertySheet, ply)
   end
 
-  core.panel.isOpen = true
+  core.panel.createHelpSheet(PropertySheet, ply)
+  core.panel.createAboutSheet(PropertySheet, ply)
 end
 
 function core.panel.destroyPanel()
@@ -65,12 +68,12 @@ function core.panel.createSettingsSheet(Sheet, ply)
   end
 
   local textInput2 = vgui.Create("DTextEntry", SheetItem)
-  textInput2:SetPos( 10, 10 )
+  textInput2:SetPos( 10, 110 )
   textInput2:SetSize( 100, 30 )
   textInput2:SetText(0)
 
   local button2 = vgui.Create( "DButton", SheetItem )
-  button2:SetPos( 110, 10 )
+  button2:SetPos( 110, 110 )
   button2:SetSize( 70, 30 )
   button2:SetText( "Take Money" )
   button2.DoClick = function( button )
@@ -102,7 +105,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
 
   if ply:hasAccess("all") then
     for _,role in pairs(core.role.store) do
-      DComboBox2:AddChoice(role.title, role.name)
+      DComboBox2:AddChoice("["..role.group.."]"..role.title, role.name)
     end
   else
     for _,v in pairs(core.group.getPlayerGroupRoles(ply)) do
@@ -176,17 +179,29 @@ function core.panel.createDroneSheet(Sheet, ply)
     surface.DrawRect( 0, 0, SheetItem:GetWide(), SheetItem:GetTall() )
   end
 
-  local myText = vgui.Create("DTextEntry", SheetItem)
-  myText:SetText(ply:Nick())
-
-  local button = vgui.Create( "DButton", SheetItem )
-  button:SetPos( 50, 30 )
-  button:SetText( "Set Nick" )
-  button.DoClick = function( button )
-    ply:setNick(myText:GetValue())
-  end
+  local SpawnI = vgui.Create( "SpawnIcon" , SheetItem ) -- SpawnIcon
+  SpawnI:SetPos( 75, 75 )
+  SpawnI:SetModel( "models/dronesrewrite/spydr/spydr.mdl" ) -- Model we want for this spawn icon
 
   Sheet:AddSheet( "Дроны", SheetItem, "icon16/joystick.png", false, false, "Создание дронов" )
+end
+
+function core.panel.createHelpSheet(Sheet, ply)
+  local SheetItem = vgui.Create( "HTML", Sheet )
+  SheetItem:SetPos( 0, 0 )
+  SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
+  SheetItem:OpenURL("https://gist.github.com/balkhaev/8ba71987ccbcf08beb2bd9c9548ee910")
+
+  Sheet:AddSheet( "Помощь", SheetItem, "icon16/help.png", false, false )
+end
+
+function core.panel.createAboutSheet(Sheet, ply)
+  local SheetItem = vgui.Create( "HTML", Sheet )
+  SheetItem:SetPos( 0, 0 )
+  SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
+  SheetItem:OpenURL("https://github.com/balkhaev/city17rp/blob/master/README.md")
+
+  Sheet:AddSheet( "О режиме", SheetItem, "icon16/information.png", false, false )
 end
 
 function core.panel.createPollSheet(Sheet, ply)

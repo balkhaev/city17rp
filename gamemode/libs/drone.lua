@@ -1,5 +1,7 @@
 -- dronesrewrite_medic,dronesrewrite_ardrone,dronesrewrite_balltur,dronesrewrite_bomb,dronesrewrite_camera,dronesrewrite_turret,dronesrewrite_defender,dronesrewrite_dropship,dronesrewrite_dxl,dronesrewrite_firestorm,dronesrewrite_helicopter,dronesrewrite_laser,dronesrewrite_attackdr(sick!),dronesrewrite_gunner,dronesrewrite_minedr,dronesrewrite_nanodr,dronesrewrite_plasmadr,dronesrewrite_racerdr,dronesrewrite_scout,dronesrewrite_sniper,dronesrewrite_spyspider,dronesrewrite_spy
 
+-- dronesrewrite_exmac,dronesrewrite_skyartillery,dronesrewrite_crucifier,dronesrewrite_helldrone,dronesrewrite_melon,dronesrewrite_mothership,dronesrewrite_nukedr,dronesrewrite_plotdr,dronesrewrite_rainbow,dronesrewrite_walkart,dronesrewrite_drrwalker,dronesrewrite_swiborg
+
 hook.Add( "InitPostEntity", "SpawnDrones", function()
   local drone = ents.Create("dronesrewrite_scout")
   if not IsValid( drone ) then return end

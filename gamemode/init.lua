@@ -12,6 +12,8 @@ AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("cl_hud.lua")
 AddCSLuaFile("cl_panel.lua")
 
+-- gmod_admin_cleanup
+
 -- resource.AddWorkshop("299164995") -- Call Of Duty: Black Ops II Weapons Pack
 resource.AddWorkshop("349050451") -- Customizable Weaponry 2.0
 resource.AddWorkshop("358608166") -- Extra Customizable Weaponry 2.0
