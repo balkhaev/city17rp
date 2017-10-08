@@ -39,6 +39,8 @@ include("libs/role/group.lua")
 include("libs/role/role.lua")
 include("libs/zombie.lua")
 include("libs/player.lua")
+include("libs/drone.lua")
+include("network.lua")
 include("sv_commands.lua")
 include("sv_combinedoors.lua")
 
@@ -75,7 +77,8 @@ hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
   local group = ply:getGroup()
 
   if group.spawn and group.spawn ~= "" then
-    local tab = string.Explode(",", group.spawn)
+    local randPos = table.Random( group.spawn )
+    local tab = string.Explode(",", randPos)
     ply:SetPos(Vector(tab[1],tab[2],tab[3]))
   end
 end)

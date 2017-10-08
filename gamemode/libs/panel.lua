@@ -27,6 +27,9 @@ function core.panel.createPanel(ply)
   if role.camouflage ~= nil then
     core.panel.createCamouflageSheet(PropertySheet, ply)
   end
+  if (ply:hasAccess("drones")) then
+    core.panel.createDroneSheet(PropertySheet, ply)
+  end
   if (ply:hasAccess("poll")) then
     core.panel.createPollSheet(PropertySheet, ply)
   end
@@ -74,7 +77,7 @@ function core.panel.createSettingsSheet(Sheet, ply)
     ply:TakeMoney(textInput2:GetValue())
   end
 
-  Sheet:AddSheet( "Настройки", SheetItem, "icon16/cross.png", false, false, "Персональные настройки игрока" )
+  Sheet:AddSheet( "Настройки", SheetItem, "icon16/cog.png", false, false, "Персональные настройки игрока" )
 end
 
 function core.panel.createManagmentSheet(Sheet, ply)
@@ -120,7 +123,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
     core.role.setPlayerRole(DComboBox1:GetOptionData(DComboBox1:GetSelectedID()), DComboBox2:GetOptionData(DComboBox2:GetSelectedID()))
   end
 
-  Sheet:AddSheet( "Управление", SheetItem, "icon16/tick.png", false, false, "Управление группой ролей" )
+  Sheet:AddSheet( "Управление", SheetItem, "icon16/group_edit.png", false, false, "Управление группой ролей" )
 end
 
 function core.panel.createCamouflageSheet(Sheet, ply)
@@ -158,7 +161,29 @@ function core.panel.createCamouflageSheet(Sheet, ply)
     core.role.setPlayerRole(DComboBox1:GetSelected(), DComboBox2:GetSelected())
   end
 
-  Sheet:AddSheet( "Камуфляж", SheetItem, "gui/silkicons/group", false, false, "Выбор камуфляжа" )
+  Sheet:AddSheet( "Камуфляж", SheetItem, "icon16/user_suit.png", false, false, "Выбор камуфляжа" )
+end
+
+function core.panel.createDroneSheet(Sheet, ply)
+  local SheetItem = vgui.Create( "DPanel", Sheet )
+  SheetItem:SetPos( 0, 0 )
+  SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
+  SheetItem.Paint = function()
+    surface.SetDrawColor( 50, 50, 50, 255 )
+    surface.DrawRect( 0, 0, SheetItem:GetWide(), SheetItem:GetTall() )
+  end
+
+  local myText = vgui.Create("DTextEntry", SheetItem)
+  myText:SetText(ply:Nick())
+
+  local button = vgui.Create( "DButton", SheetItem )
+  button:SetPos( 50, 30 )
+  button:SetText( "Set Nick" )
+  button.DoClick = function( button )
+    ply:setNick(myText:GetValue())
+  end
+
+  Sheet:AddSheet( "Дроны", SheetItem, "icon16/joystick.png", false, false, "Создание дронов" )
 end
 
 function core.panel.createPollSheet(Sheet, ply)
@@ -180,5 +205,5 @@ function core.panel.createPollSheet(Sheet, ply)
     ply:setNick(myText:GetValue())
   end
 
-  Sheet:AddSheet( "Голосование", SheetItem, "gui/silkicons/group", false, false, "Проведение голосований" )
+  Sheet:AddSheet( "Голосование", SheetItem, "icon16/thumb_up.png", false, false, "Проведение голосований" )
 end

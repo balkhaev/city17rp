@@ -1,14 +1,15 @@
 core.zombie = {}
-core.zombie.spawnPos = { Vector(87.167327880859,5650.2534179688,-463.96875), Vector(92.311859130859,7093.9091796875,-465.96875) }
+core.zombie.spawnPos = { "87.167327880859,5650.2534179688,-463.96875", "92.311859130859,7093.9091796875,-465.96875","1390.6419677734,6618.8603515625,-435.72940063477","1049.6564941406,5010.859375,-465.96875","2000.3262939453,3035.2922363281,-465.96875" }
 core.zombie.count = 0
 core.zombie.timer = 0
 core.zombie.isEvent = false
 
 function core.zombie.spawnZombie()
   local spawnpos = table.Random( core.zombie.spawnPos )
+  local spawnVector = Vector(string.Explode(",", spawnpos))
 
   local zombie = ents.Create( "npc_zombie" )
-  zombie:SetPos( spawnpos )
+  zombie:SetPos( spawnVector )
   zombie:SetName("zombie")
   zombie:Spawn()
 
