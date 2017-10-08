@@ -111,7 +111,7 @@ function core.role.setPlayerRole(ply, roleName)
       ply:SetPData("role", role.name)
 
       net.Start("setPlayerRole")
-      net.WriteEntity(ply)
+      net.WriteString(ply:Nick())
       net.WriteString(role.name)
       net.Send(ply)
 

@@ -9,14 +9,15 @@ include("libs/role/role.lua")
 include("libs/player.lua")
 include("libs/hud.lua")
 include("libs/panel.lua")
+include("libs/utils.lua")
 
 core.init(core.config)
 
 net.Receive("setPlayerRole", function()
-  local player = net.ReadEntity()
+  local playerName = net.ReadString()
   local roleName = net.ReadString()
 
-  core.role.setPlayerRole(player, roleName)
+  core.role.setPlayerRole(core.utils.getPlayerByNick(playerName), roleName)
 end)
 
 -- include("cl_hud.lua")
