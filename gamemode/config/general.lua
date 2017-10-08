@@ -154,28 +154,28 @@ core.config.roles = {
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_retrocop.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","weapon_stunstick","guigui_handcuffs","weapon_stunner_stun","handcuffsinhand"}
+    weapons = {"weapon_empty_hands","weapon_stunstick","guigui_handcuffs","weapon_stunner_stun"}
   },
   patrol = {
     title = "Патрульный",
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_urban_police.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","weapon_stunstick","cw_m1911","guigui_handcuffs","weapon_stunner_stun","handcuffsinhand"}
+    weapons = {"weapon_empty_hands","weapon_stunstick","cw_m1911","guigui_handcuffs","weapon_stunner_stun"}
   },
   corporalGuard = {
     title = "Разводящий",
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_policetrench.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","weapon_stunstick","cw_m1911","cw_mp5","guigui_handcuffs","weapon_stunner_stun","handcuffsinhand"}
+    weapons = {"weapon_empty_hands","weapon_stunstick","cw_m1911","cw_mp5","guigui_handcuffs","weapon_stunner_stun"}
   },
   chiefCivilDefence = {
     title = "Начальник Гражданской обороны",
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/tron_police.mdl",
     access = {"managment"},
-    weapons = {"weapon_empty_hands","weapon_stunstick","cw_m1911","guigui_handcuffs","weapon_stunner_stun","cw_ar15","handcuffsinhand"}
+    weapons = {"weapon_empty_hands","weapon_stunstick","cw_m1911","guigui_handcuffs","weapon_stunner_stun","cw_ar15"}
   },
   -- Армия Альянс
   combineRanker = {
