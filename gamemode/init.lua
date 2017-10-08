@@ -36,6 +36,7 @@ include("libs/role/role.lua")
 include("libs/zombie.lua")
 include("libs/player.lua")
 include("sv_commands.lua")
+include("sv_combinedoors.lua")
 
 core.init(core.config)
 
