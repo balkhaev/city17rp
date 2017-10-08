@@ -16,13 +16,17 @@ resource.AddWorkshop("349050451") -- Customizable Weaponry 2.0
 resource.AddWorkshop("358608166") -- Extra Customizable Weaponry 2.0
 resource.AddWorkshop("975698959") -- Stunners Pack
 resource.AddWorkshop("647098998") -- Stunner
-resource.AddWorkshop("627908510") -- Easy Thirdperson
 resource.AddWorkshop("746876505") -- Handcuffs
 resource.AddWorkshop("675824914") -- Half-Life 2 Melee Pack
 resource.AddWorkshop("314312925") -- [C3] Hand Cuff SWEP
 resource.AddWorkshop("104491619") -- Metropolice Pack
 -- resource.AddWorkshop("1077528956") -- Accurate HL2 Beta HUD - White
 resource.AddWorkshop("245482078") -- Empty Hands Swep
+resource.AddWorkshop("627908510") -- Easy Thirdperson
+resource.AddWorkshop("834188196") -- Over-the-Shoulder Thirdperson
+resource.AddWorkshop("682125090") -- Portable Force Field
+resource.AddWorkshop("669642096") -- Drones Rewrite
+resource.AddWorkshop("675560712") -- QuantumOS HUD v 1.11
 
 core = {}
 
@@ -65,11 +69,6 @@ end
 
 function GM:PlayerLoadout(ply)
   core.role.giveRoleItems(ply, ply:getRoleName())
-end
-
-function GM:PlayerSetModel( ply )
-  local role = ply:getRole()
-  ply:SetModel(role.model)
 end
 
 hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)

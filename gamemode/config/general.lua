@@ -87,7 +87,7 @@ core.config.roles = {
     group = "citizens",
     model = "models/player/gman_high.mdl",
     access = {"all"},
-    weapons = {"weapon_physgun"}
+    weapons = {"weapon_physgun","gods_little_finger_v2"}
   },
   -- Мирные жители
   citizen = {
@@ -130,14 +130,14 @@ core.config.roles = {
   representativeMayor = {
     title = "Представитель мера",
     group = "administration",
-    model = "",
+    model = "models/humans/suitfem/female_02.mdl",
     access = {},
     weapons = {"weapon_empty_hands","cw_deagle"}
   },
   deputyMayor = {
     title = "Заместитель мера",
     group = "administration",
-    model = "",
+    model = "models/taggart/gallahan.mdl",
     access = {},
     weapons = {"weapon_empty_hands","cw_deagle"}
   },
@@ -197,7 +197,7 @@ core.config.roles = {
     group = "allianceArmy",
     model = "models/player/Combine_Soldier.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","cw_shorty","cw_m249_official","cw_ump45","weapon_pistol"}
+    weapons = {"weapon_empty_hands","cw_shorty","cw_m249_official","weapon_hexshield","weapon_pistol"}
   },
   combineSergeant = {
     title = "Сержант",

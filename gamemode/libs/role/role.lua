@@ -106,6 +106,7 @@ function core.role.setPlayerRole(ply, roleName)
     core.team.addGang(ply:SteamID(), ply:GetName(), team.index)
 
     if SERVER then
+      ply:SetModel(role.model)
       ply:SetTeam(team.index)
       ply:SetPData("role", role.name)
 
@@ -140,6 +141,7 @@ function core.role.giveRoleItems(ply, roleName)
 
   local role = core.role.getRole(roleName)
 
+  ply:GetHands()
   for _, weaponName in pairs(role.weapons) do
     ply:Give(weaponName)
   end
