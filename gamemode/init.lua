@@ -23,7 +23,7 @@ resource.AddWorkshop("675824914") -- Half-Life 2 Melee Pack
 resource.AddWorkshop("104491619") -- Metropolice Pack
 -- resource.AddWorkshop("1077528956") -- Accurate HL2 Beta HUD - White
 resource.AddWorkshop("245482078") -- Empty Hands Swep
-resource.AddWorkshop("627908510") -- Easy Thirdperson
+-- resource.AddWorkshop("627908510") -- Easy Thirdperson
 resource.AddWorkshop("834188196") -- Over-the-Shoulder Thirdperson
 resource.AddWorkshop("682125090") -- Portable Force Field
 resource.AddWorkshop("669642096") -- Drones Rewrite
