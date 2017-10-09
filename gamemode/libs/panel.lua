@@ -188,8 +188,8 @@ function core.panel.createTradeSheet(Sheet, ply)
   if (ply:hasAccess("weaponTrade")) then
     local panel1 = vgui.Create( "DPanel", SheetItem )
 
-    for i,weapon in pairs(core.config.goods.weapon) do
-      local weaponEnt = ents.Create(weapon.entity)
+    for i,weapon in pairs(core.config.goods.weapons) do
+      local weaponEnt = ents.FindByName(weapon.entity)
       if not IsValid( weaponEnt ) then return end
       local weaponModel = weaponEnt:GetModel()
 
@@ -197,12 +197,13 @@ function core.panel.createTradeSheet(Sheet, ply)
       SpawnI:SetPos( 75 * i, 75 )
       SpawnI:SetModel( weaponModel )
     end
+
     SheetItem:AddSheet( "Оружие", panel1, "icon16/cross.png" )
 
     local panel2 = vgui.Create( "DPanel", SheetItem )
 
     for i,ammo in pairs(core.config.goods.ammo) do
-      local weaponEnt = ents.Create(ammo.entity)
+      local weaponEnt = ents.CreateClientProp(ammo.entity)
       if not IsValid( weaponEnt ) then return end
       local weaponModel = weaponEnt:GetModel()
 
@@ -210,12 +211,13 @@ function core.panel.createTradeSheet(Sheet, ply)
       SpawnI:SetPos( 75 * i, 75 )
       SpawnI:SetModel( weaponModel )
     end
+
     SheetItem:AddSheet( "Патроны", panel2, "icon16/cross.png" )
 
     local panel3 = vgui.Create( "DPanel", SheetItem )
 
     for i,equip in pairs(core.config.goods.equips) do
-      local weaponEnt = ents.Create(equip.entity)
+      local weaponEnt = ents.CreateClientProp(equip.entity)
       if not IsValid( weaponEnt ) then return end
       local weaponModel = weaponEnt:GetModel()
 
@@ -223,6 +225,7 @@ function core.panel.createTradeSheet(Sheet, ply)
       SpawnI:SetPos( 75 * i, 75 )
       SpawnI:SetModel( weaponModel )
     end
+
     SheetItem:AddSheet( "Обвесы", panel3, "icon16/cross.png" )
   end
 

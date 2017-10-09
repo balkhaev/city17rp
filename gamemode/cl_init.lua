@@ -8,7 +8,7 @@ include("libs/role/team.lua")
 include("libs/role/group.lua")
 include("libs/role/role.lua")
 include("libs/player.lua")
-include("libs/hud.lua")
+-- include("libs/hud.lua")
 include("libs/panel.lua")
 include("libs/utils.lua")
 
@@ -24,6 +24,7 @@ hook.Add ("Think", "PlayerReady", function ()
       local roleName = net.ReadString()
 
       core.role.setPlayerRole(player.GetBySteamID(steamID), roleName)
+      hook.Call("PlayerIsReady")
     end)
 
     net.Receive("startedPoll", function()
