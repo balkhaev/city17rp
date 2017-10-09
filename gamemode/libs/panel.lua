@@ -7,17 +7,16 @@ function core.panel.createPanel(ply)
 
   core.panel.current = vgui.Create( "DFrame" )
   core.panel.current:SetPos( 50,50 )
-  core.panel.current:SetSize( 512, 512 )
+  core.panel.current:SetSize( ScrW()/2,  ScrH()/2 )
   core.panel.current:SetTitle("City Panel")
   core.panel.current:SetVisible( true )
   core.panel.current:SetDraggable( true )
   core.panel.current:ShowCloseButton( true )
   core.panel.current:MakePopup()
 
-  local PropertySheet = vgui.Create( "DColumnSheet" )
-  PropertySheet:SetParent( core.panel.current )
+  local PropertySheet = vgui.Create( "DColumnSheet", core.panel.current )
   PropertySheet:SetPos( 5, 30 )
-  PropertySheet:SetSize( 500, 470 )
+  PropertySheet:SetSize( core.panel.current:GetWide()-10, core.panel.current:GetTall()-35 )
 
   local role = ply:getRole()
 
@@ -96,20 +95,28 @@ function core.panel.createManagmentSheet(Sheet, ply)
   end
 
   local AppList = vgui.Create( "DListView", SheetItem )
-  AppList:SetSize( 280, 450 )
+  AppList:SetSize( SheetItem:GetWide()/2, Sheet:GetTall() )
   AppList:SetMultiSelect( false )
   AppList:AddColumn( "Nick" )
   AppList:AddColumn( "Group" )
   AppList:AddColumn( "Role" )
   AppList:AddColumn( "SteamID" )
-  for _,v in ipairs(player.GetAll()) do
-    if v:isGroup("citizens") then
-      AppList:AddLine(v:Name(), v:GetGroupTitle(), v:GetRoleTitle(), v:SteamID())
+  if ply:hasAccess("all") then
+    for _,v in ipairs(player.GetAll()) do
+      AppList:AddLine(v:Name(), v:getGroupTitle(), v:getRoleTitle(), v:SteamID())
+    end
+  else
+    for _,v in ipairs(player.GetAll()) do
+      if v:isGroup("citizens") then
+        AppList:AddLine(v:Name(), v:getGroupTitle(), v:getRoleTitle(), v:SteamID())
+      end
     end
   end
 
+
   local AppList2 = vgui.Create( "DListView", SheetItem )
-  AppList2:SetSize( 200, 420 )
+  AppList2:SetSize( SheetItem:GetWide()/2, Sheet:GetTall() )
+  AppList2:SetPos( SheetItem:GetWide()/2, 0 )
   AppList2:SetMultiSelect( false )
   AppList2:AddColumn( "Role" )
   AppList2:AddColumn( "Group" )
@@ -133,9 +140,12 @@ function core.panel.createManagmentSheet(Sheet, ply)
   button1:SetSize( 70, 30 )
   button1:SetText( "Set Role" )
   button1.DoClick = function( button )
+    local AppLine1 = AppList:GetSelected()[1]
+    local AppLine2 = AppList2:GetSelected()[1]
+
     net.Start("setPlayerRole")
-    net.WriteString(AppList:GetColumnText(4))
-    net.WriteString(AppList2:GetColumnText(3))
+    net.WriteString(AppLine1:GetColumnText(4))
+    net.WriteString(AppLine2:GetColumnText(3))
     net.SendToServer()
   end
 
@@ -186,19 +196,21 @@ function core.panel.createTradeSheet(Sheet, ply)
   SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
 
   if (ply:hasAccess("weaponTrade")) then
-    local panel1 = vgui.Create( "DPanel", SheetItem )
+    --[[
+      local panel1 = vgui.Create( "DPanel", SheetItem )
 
-    for i,weapon in pairs(core.config.goods.weapons) do
-      local weaponEnt = ents.FindByName(weapon.entity)
-      if not IsValid( weaponEnt ) then return end
-      local weaponModel = weaponEnt:GetModel()
+      for i,weapon in pairs(core.config.goods.weapons) do
+        local weaponEnt = ents.FindByName(weapon.entity)
+        if not IsValid( weaponEnt ) then return end
+        local weaponModel = weaponEnt:GetModel()
 
-      local SpawnI = vgui.Create( "SpawnIcon" , panel1 ) -- SpawnIcon
-      SpawnI:SetPos( 75 * i, 75 )
-      SpawnI:SetModel( weaponModel )
-    end
+        local SpawnI = vgui.Create( "SpawnIcon" , panel1 ) -- SpawnIcon
+        SpawnI:SetPos( 75 * i, 75 )
+        SpawnI:SetModel( weaponModel )
+      end
 
-    SheetItem:AddSheet( "Оружие", panel1, "icon16/cross.png" )
+      SheetItem:AddSheet( "Оружие", panel1, "icon16/cross.png" )
+    --]]
 
     local panel2 = vgui.Create( "DPanel", SheetItem )
 

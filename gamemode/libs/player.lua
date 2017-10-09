@@ -15,7 +15,7 @@ function meta:getRoleName()
 end
 
 function meta:getRoleTitle()
-  local role = core.group.getRole(self)
+  local role = self:getRole()
   return role.title
 end
 
