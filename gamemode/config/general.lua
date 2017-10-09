@@ -36,12 +36,6 @@ core.config.groups = {
     spawn = {"548.93084716797,3056.7243652344,80.03125"},
     access = {"poll"}
   },
-  traders = {
-    title = "Торговцы",
-    team = "civilians",
-    spawn = "",
-    access = {"trade"}
-  },
   citizens = {
     title = "Жители",
     team = "civilians",
@@ -115,16 +109,16 @@ core.config.roles = {
   --]]
   weaponTrader = {
     title = "Продавец оружия",
-    group = "traders",
+    group = "citizens",
     model = "models/humans/Group01/Male_03.mdl",
-    access = {"weaponTrade"},
+    access = {"trade","weaponTrade"},
     weapons = {"weapon_empty_hands","weapon_hl2pan","cw_mr96"}
   },
   armorTrader = {
     title = "Продавец брони",
-    group = "traders",
+    group = "citizens",
     model = "models/humans/Group01/Male_04.mdl",
-    access = {"armorTrade"},
+    access = {"trade","armorTrade"},
     weapons = {"weapon_empty_hands","weapon_hl2pan","cw_mr96"}
   },
   representativeMayor = {

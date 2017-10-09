@@ -96,43 +96,46 @@ function core.panel.createManagmentSheet(Sheet, ply)
   end
 
   local AppList = vgui.Create( "DListView", SheetItem )
-  AppList:Dock( FILL )
+  AppList:SetSize( 280, 450 )
   AppList:SetMultiSelect( false )
   AppList:AddColumn( "Nick" )
   AppList:AddColumn( "Group" )
   AppList:AddColumn( "Role" )
   AppList:AddColumn( "SteamID" )
   for _,v in ipairs(player.GetAll()) do
-    AppList:AddLine(v:Name(), v:GetGroupTitle(), v:GetRoleTitle(), v:SteamID())
+    if v:isGroup("citizens") then
+      AppList:AddLine(v:Name(), v:GetGroupTitle(), v:GetRoleTitle(), v:SteamID())
+    end
   end
 
-  local DComboBox2 = vgui.Create( "DComboBox", SheetItem )
-  DComboBox2:SetPos( 110, 10 )
-  DComboBox2:SetSize( 100, 30 )
-
+  local AppList2 = vgui.Create( "DListView", SheetItem )
+  AppList2:SetSize( 200, 420 )
+  AppList2:SetMultiSelect( false )
+  AppList2:AddColumn( "Role" )
+  AppList2:AddColumn( "Group" )
+  AppList2:AddColumn( "Name" )
   if ply:hasAccess("all") then
     for _,role in pairs(core.role.store) do
-      DComboBox2:AddChoice("["..role.group.."]"..role.title, role.name)
+      AppList2:AddLine(role.title, role.group, role.name)
     end
   else
     for _,v in pairs(core.group.getPlayerGroupRoles(ply)) do
       local role = core.role.getRole(v)
 
       if not role.hasAccess("managment") then
-        DComboBox2:AddChoice(role.title, v)
+        AppList2:AddLine(role.title, role.group, role.name)
       end
     end
   end
 
-
   local button1 = vgui.Create( "DButton", SheetItem )
-  button1:SetPos( 210, 10 )
+  button1:SetPos( 420, 450 )
   button1:SetSize( 70, 30 )
   button1:SetText( "Set Role" )
   button1.DoClick = function( button )
     net.Start("setPlayerRole")
     net.WriteString(AppList:GetColumnText(4))
-    net.WriteString(DComboBox2:GetOptionData(DComboBox2:GetSelectedID()))
+    net.WriteString(AppList2:GetColumnText(3))
     net.SendToServer()
   end
 

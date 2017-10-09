@@ -24,8 +24,13 @@ function meta:getGroup()
 end
 
 function meta:getGroupTitle()
-  local group = core.group.getPlayerGroup(self)
+  local group = self:getGroup()
   return group.title
+end
+
+function meta:isGroup(groupName)
+  local group = self:getGroup()
+  return group.name == groupName
 end
 
 function meta:getTeam()
