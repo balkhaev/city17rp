@@ -26,6 +26,12 @@ hook.Add ("Think", "PlayerReady", function ()
       core.role.setPlayerRole(player.GetBySteamID(steamID), roleName)
     end)
 
+    net.Receive("startedPoll", function()
+      local pollQuestion = net.ReadString()
+
+      core.panel.createPoll(pollQuestion)
+    end)
+
     hook.Remove ("Think", "PlayerReady")
   end
 end)

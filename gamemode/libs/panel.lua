@@ -181,24 +181,49 @@ function core.panel.createCamouflageSheet(Sheet, ply)
 end
 
 function core.panel.createTradeSheet(Sheet, ply)
-  local SheetItem = vgui.Create( "DPanel", Sheet )
+  local SheetItem = vgui.Create( "DPropertySheet", Sheet )
   SheetItem:SetPos( 0, 0 )
   SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
-  SheetItem.Paint = function()
-    surface.SetDrawColor( 50, 50, 50, 255 )
-    surface.DrawRect( 0, 0, SheetItem:GetWide(), SheetItem:GetTall() )
-  end
 
   if (ply:hasAccess("weaponTrade")) then
+    local panel1 = vgui.Create( "DPanel", SheetItem )
+
     for i,weapon in pairs(core.config.goods.weapon) do
       local weaponEnt = ents.Create(weapon.entity)
       if not IsValid( weaponEnt ) then return end
       local weaponModel = weaponEnt:GetModel()
 
-      local SpawnI = vgui.Create( "SpawnIcon" , SheetItem ) -- SpawnIcon
+      local SpawnI = vgui.Create( "SpawnIcon" , panel1 ) -- SpawnIcon
       SpawnI:SetPos( 75 * i, 75 )
       SpawnI:SetModel( weaponModel )
     end
+    SheetItem:AddSheet( "Оружие", panel1, "icon16/cross.png" )
+
+    local panel2 = vgui.Create( "DPanel", SheetItem )
+
+    for i,ammo in pairs(core.config.goods.ammo) do
+      local weaponEnt = ents.Create(ammo.entity)
+      if not IsValid( weaponEnt ) then return end
+      local weaponModel = weaponEnt:GetModel()
+
+      local SpawnI = vgui.Create( "SpawnIcon" , panel2 ) -- SpawnIcon
+      SpawnI:SetPos( 75 * i, 75 )
+      SpawnI:SetModel( weaponModel )
+    end
+    SheetItem:AddSheet( "Патроны", panel2, "icon16/cross.png" )
+
+    local panel3 = vgui.Create( "DPanel", SheetItem )
+
+    for i,equip in pairs(core.config.goods.equips) do
+      local weaponEnt = ents.Create(equip.entity)
+      if not IsValid( weaponEnt ) then return end
+      local weaponModel = weaponEnt:GetModel()
+
+      local SpawnI = vgui.Create( "SpawnIcon" , panel3 ) -- SpawnIcon
+      SpawnI:SetPos( 75 * i, 75 )
+      SpawnI:SetModel( weaponModel )
+    end
+    SheetItem:AddSheet( "Обвесы", panel3, "icon16/cross.png" )
   end
 
   Sheet:AddSheet( "Торговля", SheetItem, "icon16/thumb_up.png", false, false, "Покупка товаров для продажи" )
