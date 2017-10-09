@@ -26,6 +26,9 @@ function core.panel.createPanel(ply)
   if (ply:hasAccess("managment")) then
     core.panel.createManagmentSheet(PropertySheet, ply)
   end
+  if (ply:hasAccess("trade")) then
+    core.panel.createTradeSheet(PropertySheet, ply)
+  end
   if role.camouflage ~= nil then
     core.panel.createCamouflageSheet(PropertySheet, ply)
   end
@@ -202,6 +205,28 @@ function core.panel.createAboutSheet(Sheet, ply)
   SheetItem:OpenURL("https://github.com/balkhaev/city17rp/blob/master/README.md")
 
   Sheet:AddSheet( "О режиме", SheetItem, "icon16/information.png", false, false )
+end
+
+function core.panel.createTradeSheet(Sheet, ply)
+  local SheetItem = vgui.Create( "DPanel", Sheet )
+  SheetItem:SetPos( 0, 0 )
+  SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
+  SheetItem.Paint = function()
+    surface.SetDrawColor( 50, 50, 50, 255 )
+    surface.DrawRect( 0, 0, SheetItem:GetWide(), SheetItem:GetTall() )
+  end
+
+  local myText = vgui.Create("DTextEntry", SheetItem)
+  myText:SetText(ply:Nick())
+
+  local button = vgui.Create( "DButton", SheetItem )
+  button:SetPos( 50, 30 )
+  button:SetText( "Set Nick" )
+  button.DoClick = function( button )
+    ply:setNick(myText:GetValue())
+  end
+
+  Sheet:AddSheet( "Торговля", SheetItem, "icon16/thumb_up.png", false, false, "Покупка товаров для продажи" )
 end
 
 function core.panel.createPollSheet(Sheet, ply)

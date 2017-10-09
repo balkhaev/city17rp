@@ -1,5 +1,6 @@
 AddCSLuaFile("shared.lua")
 AddCSLuaFile("config/general.lua")
+AddCSLuaFile("config/goods.lua")
 AddCSLuaFile("libs/core.lua")
 AddCSLuaFile("libs/utils.lua")
 AddCSLuaFile("libs/role/team.lua")
@@ -35,6 +36,7 @@ core = {}
 
 include("shared.lua")
 include("config/general.lua")
+include("config/goods.lua")
 include("libs/core.lua")
 include("libs/utils.lua")
 include("libs/role/team.lua")

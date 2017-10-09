@@ -2,6 +2,7 @@ core = {}
 
 include("shared.lua")
 include("config/general.lua")
+include("config/goods.lua")
 include("libs/core.lua")
 include("libs/role/team.lua")
 include("libs/role/group.lua")

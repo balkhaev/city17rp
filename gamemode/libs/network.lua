@@ -1,6 +1,9 @@
 util.AddNetworkString("setPlayerRole")
 util.AddNetworkString("getPlayerRole")
 util.AddNetworkString("receivePlayerRole")
+util.AddNetworkString("createAmmo")
+util.AddNetworkString("createWeapon")
+util.AddNetworkString("createDrone")
 
 net.Receive("setPlayerRole", function(len,ply)
   if not ply:hasAccess("managment") then
@@ -20,7 +23,27 @@ net.Receive("getPlayerRole", function(len,ply)
   net.Send(ply)
 end)
 
-net.Receive("createDrone", function()
+net.Receive("createDrone", function(len,ply)
+  local droneName = net.ReadString()
+  local dronePos = string.Explode(",", net.ReadString())
+
+  local drone = ents.Create(droneName)
+  if not IsValid( drone ) then return end
+  drone:SetPos( Vector( dronePos ) )
+  drone:Spawn()
+end)
+
+net.Receive("createAmmo", function(len,ply)
+  local droneName = net.ReadString()
+  local dronePos = string.Explode(",", net.ReadString())
+
+  local drone = ents.Create(droneName)
+  if not IsValid( drone ) then return end
+  drone:SetPos( Vector( dronePos ) )
+  drone:Spawn()
+end)
+
+net.Receive("createWeapon", function(len,ply)
   local droneName = net.ReadString()
   local dronePos = string.Explode(",", net.ReadString())
 

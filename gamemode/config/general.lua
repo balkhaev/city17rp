@@ -93,7 +93,7 @@ core.config.roles = {
   citizen = {
     title = "Мирный житель",
     group = "citizens",
-    model = "models/humans/Group01/Male_01.mdl",
+    model = "models/humans/Group01/Male_02.mdl",
     access = {},
     weapons = {"weapon_empty_hands","weapon_hl2pan"}
   },
@@ -116,15 +116,15 @@ core.config.roles = {
   weaponTrader = {
     title = "Продавец оружия",
     group = "traders",
-    model = "models/humans/Group01/Male_01.mdl",
-    access = {},
+    model = "models/humans/Group01/Male_03.mdl",
+    access = {"weaponTrade"},
     weapons = {"weapon_empty_hands","weapon_hl2pan","cw_mr96"}
   },
   armorTrader = {
     title = "Продавец брони",
     group = "traders",
-    model = "models/humans/Group01/Male_01.mdl",
-    access = {},
+    model = "models/humans/Group01/Male_04.mdl",
+    access = {"armorTrade"},
     weapons = {"weapon_empty_hands","weapon_hl2pan","cw_mr96"}
   },
   representativeMayor = {
