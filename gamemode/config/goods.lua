@@ -27,6 +27,10 @@ core.config.goods.weapons = {
   }
 }
 
+core.config.goods.equips = {
+
+}
+
 core.config.goods.ammo = {
   {
     entity = "cw_ammo_545x39",

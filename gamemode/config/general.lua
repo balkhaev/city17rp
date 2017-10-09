@@ -114,10 +114,17 @@ core.config.roles = {
     access = {"trade","weaponTrade"},
     weapons = {"weapon_empty_hands","weapon_hl2pan","cw_mr96"}
   },
+  droneTrader = {
+    title = "Продавец дронов",
+    group = "citizens",
+    model = "models/humans/Group01/Male_04.mdl",
+    access = {"trade","droneTrade"},
+    weapons = {"weapon_empty_hands","weapon_hl2pan","cw_mr96"}
+  },
   armorTrader = {
     title = "Продавец брони",
     group = "citizens",
-    model = "models/humans/Group01/Male_04.mdl",
+    model = "models/humans/Group01/Male_05.mdl",
     access = {"trade","armorTrade"},
     weapons = {"weapon_empty_hands","weapon_hl2pan","cw_mr96"}
   },
