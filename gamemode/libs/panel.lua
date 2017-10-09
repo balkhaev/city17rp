@@ -95,11 +95,15 @@ function core.panel.createManagmentSheet(Sheet, ply)
     surface.DrawRect( 0, 0, SheetItem:GetWide(), SheetItem:GetTall() )
   end
 
-  local DComboBox1 = vgui.Create( "DComboBox", SheetItem )
-  DComboBox1:SetPos( 10, 10 )
-  DComboBox1:SetSize( 100, 30 )
+  local AppList = vgui.Create( "DListView", SheetItem )
+  AppList:Dock( FILL )
+  AppList:SetMultiSelect( false )
+  AppList:AddColumn( "Nick" )
+  AppList:AddColumn( "Group" )
+  AppList:AddColumn( "Role" )
+  AppList:AddColumn( "SteamID" )
   for _,v in ipairs(player.GetAll()) do
-    DComboBox1:AddChoice(v:Name(), v:SteamID())
+    AppList:AddLine(v:Name(), v:GetGroupTitle(), v:GetRoleTitle(), v:SteamID())
   end
 
   local DComboBox2 = vgui.Create( "DComboBox", SheetItem )
@@ -127,7 +131,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
   button1:SetText( "Set Role" )
   button1.DoClick = function( button )
     net.Start("setPlayerRole")
-    net.WriteString(DComboBox1:GetOptionData(DComboBox1:GetSelectedID()))
+    net.WriteString(AppList:GetColumnText(4))
     net.WriteString(DComboBox2:GetOptionData(DComboBox2:GetSelectedID()))
     net.SendToServer()
   end
@@ -173,6 +177,52 @@ function core.panel.createCamouflageSheet(Sheet, ply)
   Sheet:AddSheet( "Камуфляж", SheetItem, "icon16/user_suit.png", false, false, "Выбор камуфляжа" )
 end
 
+function core.panel.createTradeSheet(Sheet, ply)
+  local SheetItem = vgui.Create( "DPanel", Sheet )
+  SheetItem:SetPos( 0, 0 )
+  SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
+  SheetItem.Paint = function()
+    surface.SetDrawColor( 50, 50, 50, 255 )
+    surface.DrawRect( 0, 0, SheetItem:GetWide(), SheetItem:GetTall() )
+  end
+
+  if (ply:hasAccess("weaponTrade")) then
+    for i,weapon in pairs(core.config.goods.weapon) do
+      local weaponEnt = ents.Create(weapon.entity)
+      if not IsValid( weaponEnt ) then return end
+      local weaponModel = weaponEnt:GetModel()
+
+      local SpawnI = vgui.Create( "SpawnIcon" , SheetItem ) -- SpawnIcon
+      SpawnI:SetPos( 75 * i, 75 )
+      SpawnI:SetModel( weaponModel )
+    end
+  end
+
+  Sheet:AddSheet( "Торговля", SheetItem, "icon16/thumb_up.png", false, false, "Покупка товаров для продажи" )
+end
+
+function core.panel.createPollSheet(Sheet, ply)
+  local SheetItem = vgui.Create( "DPanel", Sheet )
+  SheetItem:SetPos( 0, 0 )
+  SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
+  SheetItem.Paint = function()
+    surface.SetDrawColor( 50, 50, 50, 255 )
+    surface.DrawRect( 0, 0, SheetItem:GetWide(), SheetItem:GetTall() )
+  end
+
+  local myText = vgui.Create("DTextEntry", SheetItem)
+  myText:SetText(ply:Nick())
+
+  local button = vgui.Create( "DButton", SheetItem )
+  button:SetPos( 50, 30 )
+  button:SetText( "Set Nick" )
+  button.DoClick = function( button )
+    ply:setNick(myText:GetValue())
+  end
+
+  Sheet:AddSheet( "Голосование", SheetItem, "icon16/thumb_up.png", false, false, "Проведение голосований" )
+end
+
 function core.panel.createDroneSheet(Sheet, ply)
   local SheetItem = vgui.Create( "DPanel", Sheet )
   SheetItem:SetPos( 0, 0 )
@@ -205,48 +255,4 @@ function core.panel.createAboutSheet(Sheet, ply)
   SheetItem:OpenURL("https://github.com/balkhaev/city17rp/blob/master/README.md")
 
   Sheet:AddSheet( "О режиме", SheetItem, "icon16/information.png", false, false )
-end
-
-function core.panel.createTradeSheet(Sheet, ply)
-  local SheetItem = vgui.Create( "DPanel", Sheet )
-  SheetItem:SetPos( 0, 0 )
-  SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
-  SheetItem.Paint = function()
-    surface.SetDrawColor( 50, 50, 50, 255 )
-    surface.DrawRect( 0, 0, SheetItem:GetWide(), SheetItem:GetTall() )
-  end
-
-  local myText = vgui.Create("DTextEntry", SheetItem)
-  myText:SetText(ply:Nick())
-
-  local button = vgui.Create( "DButton", SheetItem )
-  button:SetPos( 50, 30 )
-  button:SetText( "Set Nick" )
-  button.DoClick = function( button )
-    ply:setNick(myText:GetValue())
-  end
-
-  Sheet:AddSheet( "Торговля", SheetItem, "icon16/thumb_up.png", false, false, "Покупка товаров для продажи" )
-end
-
-function core.panel.createPollSheet(Sheet, ply)
-  local SheetItem = vgui.Create( "DPanel", Sheet )
-  SheetItem:SetPos( 0, 0 )
-  SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
-  SheetItem.Paint = function()
-    surface.SetDrawColor( 50, 50, 50, 255 )
-    surface.DrawRect( 0, 0, SheetItem:GetWide(), SheetItem:GetTall() )
-  end
-
-  local myText = vgui.Create("DTextEntry", SheetItem)
-  myText:SetText(ply:Nick())
-
-  local button = vgui.Create( "DButton", SheetItem )
-  button:SetPos( 50, 30 )
-  button:SetText( "Set Nick" )
-  button.DoClick = function( button )
-    ply:setNick(myText:GetValue())
-  end
-
-  Sheet:AddSheet( "Голосование", SheetItem, "icon16/thumb_up.png", false, false, "Проведение голосований" )
 end

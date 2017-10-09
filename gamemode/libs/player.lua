@@ -14,6 +14,11 @@ function meta:getRoleName()
   return self:GetPData("role")
 end
 
+function meta:getRoleTitle()
+  local role = core.group.getRole(self)
+  return role.title
+end
+
 function meta:getGroup()
   return core.group.getPlayerGroup(self)
 end
