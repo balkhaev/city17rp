@@ -1,9 +1,8 @@
 util.AddNetworkString("setPlayerRole")
 util.AddNetworkString("getPlayerRole")
 util.AddNetworkString("receivePlayerRole")
-util.AddNetworkString("createAmmo")
-util.AddNetworkString("createWeapon")
-util.AddNetworkString("createDrone")
+util.AddNetworkString("tradeBuy")
+util.AddNetworkString("createEntity")
 
 net.Receive("setPlayerRole", function(len,ply)
   if not ply:hasAccess("managment") then
@@ -23,32 +22,16 @@ net.Receive("getPlayerRole", function(len,ply)
   net.Send(ply)
 end)
 
-net.Receive("createDrone", function(len,ply)
-  local droneName = net.ReadString()
-  local dronePos = string.Explode(",", net.ReadString())
+net.Receive("createEntity", function(len,ply)
+  if not ply:hasAccess("trade") then
+    return
+  end
 
-  local drone = ents.Create(droneName)
-  if not IsValid( drone ) then return end
-  drone:SetPos( Vector( dronePos ) )
-  drone:Spawn()
-end)
+  local ammoName = net.ReadString()
+  local eyeTrace = ply:GetEyeTrace()
 
-net.Receive("createAmmo", function(len,ply)
-  local droneName = net.ReadString()
-  local dronePos = string.Explode(",", net.ReadString())
-
-  local drone = ents.Create(droneName)
-  if not IsValid( drone ) then return end
-  drone:SetPos( Vector( dronePos ) )
-  drone:Spawn()
-end)
-
-net.Receive("createWeapon", function(len,ply)
-  local droneName = net.ReadString()
-  local dronePos = string.Explode(",", net.ReadString())
-
-  local drone = ents.Create(droneName)
-  if not IsValid( drone ) then return end
-  drone:SetPos( Vector( dronePos ) )
-  drone:Spawn()
+  local entity = ents.Create(ammoName)
+  if not IsValid( entity ) then return end
+  entity:SetPos( eyeTrace.HitPos )
+  entity:Spawn()
 end)
