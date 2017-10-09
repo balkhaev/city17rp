@@ -1,13 +1,13 @@
 local meta = FindMetaTable("Player")
 
-function meta:getRole()
-  return core.role.getPlayerRole(self)
-end
-
 function meta:setRole(roleName)
   if core.role.setPlayerRole(self, roleName) then
     self:SetNWString("role", roleName)
   end
+end
+
+function meta:getRole()
+  return core.role.getPlayerRole(self)
 end
 
 function meta:getRoleName()
@@ -16,6 +16,11 @@ end
 
 function meta:getGroup()
   return core.group.getPlayerGroup(self)
+end
+
+function meta:getGroupTitle()
+  local group = core.group.getPlayerGroup(self)
+  return group.title
 end
 
 function meta:getTeam()

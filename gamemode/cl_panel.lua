@@ -39,15 +39,6 @@ hook.Add("PlayerKeyPress","BindMenu",function(ply,key)
 end)
 
 local ply = LocalPlayer();
-local Tags = {}
-Tags["owner"] = "Owner";
-Tags["superadmin"] = "Super Admin";
-Tags["admin"] = "Administrator";
-Tags["mod"] = "Moderator";
-Tags["vip"] = "VIP";
-Tags["operator"] = "DJ";
-Tags["user"] = "";
--- Example Tags["USERGROUP"] = "DISPLAY NAME";
 
 hook.Add("PostDrawOpaqueRenderables", "drawadminname", function()
   for k, ply in pairs( player.GetAll() ) do
@@ -66,7 +57,7 @@ hook.Add("PostDrawOpaqueRenderables", "drawadminname", function()
     local pos4 = ply:GetPos() + offset4 + ang:Up()
     ang:RotateAroundAxis(ang:Forward(), 90)
     ang:RotateAroundAxis(ang:Right(), 90)
-    local tag = Tags[ply:GetUserGroup()]
+    local tag = ply:getGroupTitle()
     if tag and (team.GetName(LocalPlayer():Team()) == team.GetName(ply:Team())) then
       cam.Start3D2D(pos, Angle(0, ang.y, 90), 0.25)
       draw.SimpleTextOutlined(ply:Nick(), "Trebuchet24", 1, 1, team.GetColor(ply:Team()), TEXT_ALIGN_CENTER, 1, 1, HSVToColor( ply:Health(), 1, 1) )

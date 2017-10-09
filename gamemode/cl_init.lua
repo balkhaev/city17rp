@@ -13,8 +13,6 @@ include("libs/utils.lua")
 
 core.init(core.config)
 
-local strIdentifier = "PlayerReady"
-
 hook.Add ("Think", "PlayerReady", function ()
   if IsValid (LocalPlayer()) then
     net.Start("getPlayerRole")
@@ -27,7 +25,7 @@ hook.Add ("Think", "PlayerReady", function ()
       core.role.setPlayerRole(player.GetBySteamID(steamID), roleName)
     end)
 
-    hook.Remove ("Think", strIdentifier)
+    hook.Remove ("Think", "PlayerReady")
   end
 end)
 
