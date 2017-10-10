@@ -4,6 +4,8 @@ util.AddNetworkString("receivePlayerRole")
 util.AddNetworkString("getTraderGoods")
 util.AddNetworkString("receiveTraderGoods")
 util.AddNetworkString("traderBuy")
+util.AddNetworkString("getPlayerRoles")
+util.AddNetworkString("receivePlayerRoles")
 
 net.Receive("setPlayerRole", function(len,ply)
   if not ply:hasAccess("managment") then
@@ -25,6 +27,12 @@ net.Receive("getPlayerRole", function(len,ply)
   net.Start("receivePlayerRole")
   net.WriteString(ply:SteamID())
   net.WriteString(ply:getRoleName())
+  net.Send(ply)
+end)
+
+net.Receive("getPlayerRoles", function(len,ply)
+  net.Start("receivePlayerRoles")
+  net.WriteTable(core.role.store)
   net.Send(ply)
 end)
 

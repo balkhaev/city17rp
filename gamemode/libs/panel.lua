@@ -204,6 +204,7 @@ function core.panel.createTradeSheet(Sheet, ply)
 
       local SpawnI = vgui.Create( "SpawnIcon", grid1 ) -- SpawnIcon
       SpawnI:SetModel( weaponEnt:GetModel() )
+      SpawnI:SetText( weapon.title )
 
       SpawnI.DoClick = function(btn)
         net.Start("traderBuy")
@@ -225,6 +226,7 @@ function core.panel.createTradeSheet(Sheet, ply)
 
       local SpawnI = vgui.Create( "SpawnIcon" , grid2 )
       SpawnI:SetModel( ammoEnt:GetModel() )
+      SpawnI:SetText( ammo.title )
 
       SpawnI.DoClick = function(btn)
         net.Start("traderBuy")
@@ -245,6 +247,7 @@ function core.panel.createTradeSheet(Sheet, ply)
 
       local SpawnI = vgui.Create( "SpawnIcon" , grid3 )
       SpawnI:SetModel( equipEnt:GetModel() )
+      SpawnI:SetText( equip.title )
 
       SpawnI.DoClick = function(btn)
         net.Start("traderBuy")
@@ -317,3 +320,38 @@ function core.panel.createAboutSheet(Sheet, ply)
 
   Sheet:AddSheet( "О режиме", SheetItem, "icon16/information.png", false, false )
 end
+
+--[[
+function fridge()
+        local food = {}
+
+        food[1] = "models/props_junk/garbage_milkcarton002a.mdl"
+	food[2] = "models/props_junk/PopCan01a.mdl"
+	food[3] = "models/props_junk/garbage_takeoutcarton001a.mdl"
+	food[4] = "models/props_junk/watermelon01.mdl"
+	food[5] = "models/props_junk/garbage_metalcan001a.mdl"
+	food[6] = "models/props_lab/box01a.mdl"
+	food[7] = "models/props_lab/box01b.mdl"
+
+        local frame = vgui.Create("DFrame")
+	local IconList = vgui.Create( "DPanelList", frame )
+
+	frame:Center()
+	frame:SetSize(220,200)
+	frame:SetTitle("Fridge")
+	frame:MakePopup()
+
+ 	IconList:EnableVerticalScrollbar( true )
+ 	IconList:EnableHorizontal( true )
+ 	IconList:SetPadding( 4 )
+	IconList:SetPos(10,30)
+	IconList:SetSize(200, 160)
+
+	for k,v in pairs(food) do
+	local icon = vgui.Create( "SpawnIcon", IconList )
+	icon:SetModel( v )
+ 	IconList:AddItem( icon )
+	icon.DoClick = function( icon ) surface.PlaySound( "ui/buttonclickrelease.wav" ) RunConsoleCommand("gm_spawn", v) end
+	end
+end
+--]]
