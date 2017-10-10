@@ -1,8 +1,7 @@
 util.AddNetworkString("setPlayerRole")
 util.AddNetworkString("getPlayerRole")
 util.AddNetworkString("receivePlayerRole")
-util.AddNetworkString("tradeBuy")
-util.AddNetworkString("createEntity")
+util.AddNetworkString("traderBuy")
 
 net.Receive("setPlayerRole", function(len,ply)
   if not ply:hasAccess("managment") then
@@ -13,6 +12,11 @@ net.Receive("setPlayerRole", function(len,ply)
   local roleName = net.ReadString()
 
   core.role.setPlayerRole(player.GetBySteamID(steamID), roleName)
+
+  net.Start("receivePlayerRole")
+  net.WriteString(ply:SteamID())
+  net.WriteString(role.name)
+  net.Broadcast()
 end)
 
 net.Receive("getPlayerRole", function(len,ply)
@@ -22,15 +26,20 @@ net.Receive("getPlayerRole", function(len,ply)
   net.Send(ply)
 end)
 
-net.Receive("createEntity", function(len,ply)
+net.Receive("traderBuy", function(len,ply)
   if not ply:hasAccess("trade") then
     return
   end
 
-  local ammoName = net.ReadString()
+  local entityType = net.ReadString()
+  local entityName = net.ReadString()
+  local good = core.good.getGood(entityType, entityName)
+
+  if good == nil then return end
+
   local eyeTrace = ply:GetEyeTrace()
 
-  local entity = ents.Create(ammoName)
+  local entity = ents.Create(good.entity)
   if not IsValid( entity ) then return end
   entity:SetPos( eyeTrace.HitPos )
   entity:Spawn()

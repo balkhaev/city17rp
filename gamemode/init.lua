@@ -45,6 +45,7 @@ include("libs/role/role.lua")
 include("libs/zombie.lua")
 include("libs/player.lua")
 -- include("libs/drone.lua")
+include("libs/good.lua")
 include("sv_network.lua")
 include("sv_entities.lua")
 include("sv_commands.lua")
@@ -53,10 +54,12 @@ include("sv_combinedoors.lua")
 core.init(core.config)
 
 hook.Add( "PlayerInitialSpawn", "CityInitialSpawn", function(ply)
-  if ply:GetPData("role") then
-    core.role.setPlayerRole(ply, ply:GetPData("role"))
-  else
-    core.role.setPlayerRole(ply, core.config.defaults.role)
+  if not core.role.existsPlayerRole(ply) then
+    if ply:GetPData("role") then
+      core.role.setPlayerRole(ply, ply:GetPData("role"))
+    else
+      core.role.setPlayerRole(ply, core.config.defaults.role)
+    end
   end
 
   local cash = ply:GetPData("money")

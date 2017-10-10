@@ -264,35 +264,35 @@ core.config.roles = {
   -- Армия Сопративления
   rebelsRanker = {
     title = "Рядовой",
-    group = "rebels",
+    group = "rebelsArmy",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
     weapons = {"weapon_empty_hands","cw_mac11","cw_makarov"}
   },
   rebelsSoldier = {
     title = "Солдат",
-    group = "rebels",
+    group = "rebelsArmy",
     model = "models/player/Group03/Male_02.mdl",
     access = {},
     weapons = {"weapon_empty_hands","cw_ak74","cw_makarov"}
   },
   rebelsAssaulter = {
     title = "Штурмовик",
-    group = "rebels",
+    group = "rebelsArmy",
     model = "models/player/Group03/Male_03.mdl",
     access = {},
     weapons = {"weapon_empty_hands","cw_ak74","cw_ump45","cw_makarov"}
   },
   rebelSniper = {
     title = "Снайпер",
-    group = "rebels",
+    group = "rebelsArmy",
     model = "models/player/Group03/Male_03.mdl",
     access = {},
     weapons = {"weapon_empty_hands","cw_l115","cw_makarov"}
   },
   rebelsSergeant = {
     title = "Сержант",
-    group = "rebels",
+    group = "rebelsArmy",
     model = "models/player/Group03/Male_04.mdl",
     access = {},
     weapons = {"weapon_empty_hands","cw_ak74","cw_ump45","cw_makarov"}

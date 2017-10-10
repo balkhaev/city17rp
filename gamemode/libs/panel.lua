@@ -7,8 +7,8 @@ function core.panel.createPanel(ply)
 
   core.panel.current = vgui.Create( "DFrame" )
   core.panel.current:SetPos( 50,50 )
-  core.panel.current:SetSize( ScrW()/2,  ScrH()/2 )
-  core.panel.current:SetTitle("City Panel")
+  core.panel.current:SetSize( ScrW()-200,  ScrH()-200 )
+  core.panel.current:SetTitle("City 17 Panel")
   core.panel.current:SetVisible( true )
   core.panel.current:SetDraggable( true )
   core.panel.current:ShowCloseButton( true )
@@ -70,12 +70,12 @@ function core.panel.createSettingsSheet(Sheet, ply)
   end
 
   local textInput2 = vgui.Create("DTextEntry", SheetItem)
-  textInput2:SetPos( 10, 110 )
+  textInput2:SetPos( 10, 40 )
   textInput2:SetSize( 100, 30 )
   textInput2:SetText(0)
 
   local button2 = vgui.Create( "DButton", SheetItem )
-  button2:SetPos( 110, 110 )
+  button2:SetPos( 110, 40 )
   button2:SetSize( 70, 30 )
   button2:SetText( "Take Money" )
   button2.DoClick = function( button )
@@ -95,7 +95,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
   end
 
   local AppList = vgui.Create( "DListView", SheetItem )
-  AppList:SetSize( SheetItem:GetWide()/2, Sheet:GetTall() )
+  AppList:SetSize( SheetItem:GetWide()/2 - 100, Sheet:GetTall() )
   AppList:SetMultiSelect( false )
   AppList:AddColumn( "Nick" )
   AppList:AddColumn( "Group" )
@@ -115,15 +115,15 @@ function core.panel.createManagmentSheet(Sheet, ply)
 
 
   local AppList2 = vgui.Create( "DListView", SheetItem )
-  AppList2:SetSize( SheetItem:GetWide()/2, Sheet:GetTall() )
-  AppList2:SetPos( SheetItem:GetWide()/2, 0 )
+  AppList2:SetSize( SheetItem:GetWide()/2 - 100, Sheet:GetTall() )
+  AppList2:SetPos( SheetItem:GetWide()/2 - 100, 0 )
   AppList2:SetMultiSelect( false )
   AppList2:AddColumn( "Role" )
   AppList2:AddColumn( "Group" )
   AppList2:AddColumn( "Name" )
   if ply:hasAccess("all") then
     for _,role in pairs(core.role.store) do
-      AppList2:AddLine(role.title, role.group, role.name)
+      AppList2:AddLine(role.title, core.group.getGroupTitle(role.group), role.name)
     end
   else
     for _,v in pairs(core.group.getPlayerGroupRoles(ply)) do
@@ -136,7 +136,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
   end
 
   local button1 = vgui.Create( "DButton", SheetItem )
-  button1:SetPos( 420, 450 )
+  button1:SetPos( SheetItem:GetWide() - 195, Sheet:GetTall() - 40 )
   button1:SetSize( 70, 30 )
   button1:SetText( "Set Role" )
   button1.DoClick = function( button )
@@ -205,7 +205,7 @@ function core.panel.createTradeSheet(Sheet, ply)
         local weaponModel = weaponEnt:GetModel()
 
         local SpawnI = vgui.Create( "SpawnIcon" , panel1 ) -- SpawnIcon
-        SpawnI:SetPos( 75 * i, 75 )
+        SpawnI:SetPos( 75 * (i-1), 0 )
         SpawnI:SetModel( weaponModel )
       end
 
@@ -220,8 +220,15 @@ function core.panel.createTradeSheet(Sheet, ply)
       local weaponModel = weaponEnt:GetModel()
 
       local SpawnI = vgui.Create( "SpawnIcon" , panel2 ) -- SpawnIcon
-      SpawnI:SetPos( 75 * i, 75 )
+      SpawnI:SetPos( 75 * (i-1), 0 )
       SpawnI:SetModel( weaponModel )
+
+      SpawnI.DoClick = function(btn)
+        net.Start("traderBuy")
+        net.WriteString("ammo")
+        net.WriteString(ammo.entity)
+        net.SendToServer()
+      end
     end
 
     SheetItem:AddSheet( "Патроны", panel2, "icon16/cross.png" )
@@ -234,7 +241,7 @@ function core.panel.createTradeSheet(Sheet, ply)
       local weaponModel = weaponEnt:GetModel()
 
       local SpawnI = vgui.Create( "SpawnIcon" , panel3 ) -- SpawnIcon
-      SpawnI:SetPos( 75 * i, 75 )
+      SpawnI:SetPos( 75 * (i-1), 0 )
       SpawnI:SetModel( weaponModel )
     end
 
@@ -276,7 +283,7 @@ function core.panel.createDroneSheet(Sheet, ply)
   end
 
   local SpawnI = vgui.Create( "SpawnIcon" , SheetItem ) -- SpawnIcon
-  SpawnI:SetPos( 75, 75 )
+  SpawnI:SetPos( 0, 0 )
   SpawnI:SetModel( "models/dronesrewrite/spydr/spydr.mdl" ) -- Model we want for this spawn icon
 
   Sheet:AddSheet( "Дроны", SheetItem, "icon16/joystick.png", false, false, "Создание дронов" )

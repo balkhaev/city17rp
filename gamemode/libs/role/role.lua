@@ -4,7 +4,7 @@ core.role.uniqIndex = 0
 
 function core.role.addRole(name, role)
   local group = core.group.getGroup(role.group)
-  
+
   if group then
     local team = core.team.getTeam(group.team)
 
@@ -110,11 +110,6 @@ function core.role.setPlayerRole(ply, roleName)
       ply:SetTeam(team.index)
       ply:SetPData("role", role.name)
 
-      net.Start("receivePlayerRole")
-      net.WriteString(ply:SteamID())
-      net.WriteString(role.name)
-      net.Broadcast()
-
       core.role.giveRoleItems(ply, roleName)
     end
 
@@ -129,7 +124,7 @@ function core.role.deletePlayerRole(ply)
   local group = core.group.getGroup(role.group)
   local team = core.team.getTeam(group.team)
 
-  Msg("Removing role "..role.title.." for player "..ply:Nick())
+  Msg("Removing role "..role.title.." for player "..ply:Nick().."\n")
 
   core.role.removeGang(ply:SteamID(), role.index)
   core.group.removeGang(ply:SteamID(), group.index)
