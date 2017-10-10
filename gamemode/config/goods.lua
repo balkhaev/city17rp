@@ -38,3 +38,7 @@ core.config.goods.ammo = {
     cost = 100
   }
 }
+
+core.config.goods.drones = {
+  {}
+}

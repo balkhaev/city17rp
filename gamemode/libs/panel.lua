@@ -196,32 +196,28 @@ function core.panel.createTradeSheet(Sheet, ply)
   SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
 
   if (ply:hasAccess("weaponTrade")) then
-    --[[
-      local panel1 = vgui.Create( "DPanel", SheetItem )
+    local panel1 = vgui.Create( "DPanel", SheetItem )
 
-      for i,weapon in pairs(core.config.goods.weapons) do
-        local weaponEnt = ents.FindByName(weapon.entity)
-        if not IsValid( weaponEnt ) then return end
-        local weaponModel = weaponEnt:GetModel()
+    for i,weapon in pairs(core.config.goods.weapons) do
+      local weaponEnt = ents.CreateClientProp(weapon.entity)
+      if not IsValid( weaponEnt ) then return end
 
-        local SpawnI = vgui.Create( "SpawnIcon" , panel1 ) -- SpawnIcon
-        SpawnI:SetPos( 75 * (i-1), 0 )
-        SpawnI:SetModel( weaponModel )
-      end
+      local SpawnI = vgui.Create( "SpawnIcon" , panel1 ) -- SpawnIcon
+      SpawnI:SetPos( 75 * (i-1), 0 )
+      SpawnI:SetModel( weaponEnt:GetModel() )
+    end
 
-      SheetItem:AddSheet( "Оружие", panel1, "icon16/cross.png" )
-    --]]
+    SheetItem:AddSheet( "Оружие", panel1, "icon16/cross.png" )
 
     local panel2 = vgui.Create( "DPanel", SheetItem )
 
     for i,ammo in pairs(core.config.goods.ammo) do
-      local weaponEnt = ents.CreateClientProp(ammo.entity)
-      if not IsValid( weaponEnt ) then return end
-      local weaponModel = weaponEnt:GetModel()
+      local ammoEnt = ents.CreateClientProp(ammo.entity)
+      if not IsValid( ammoEnt ) then return end
 
       local SpawnI = vgui.Create( "SpawnIcon" , panel2 ) -- SpawnIcon
       SpawnI:SetPos( 75 * (i-1), 0 )
-      SpawnI:SetModel( weaponModel )
+      SpawnI:SetModel( ammoEnt:GetModel() )
 
       SpawnI.DoClick = function(btn)
         net.Start("traderBuy")
@@ -236,13 +232,12 @@ function core.panel.createTradeSheet(Sheet, ply)
     local panel3 = vgui.Create( "DPanel", SheetItem )
 
     for i,equip in pairs(core.config.goods.equips) do
-      local weaponEnt = ents.CreateClientProp(equip.entity)
-      if not IsValid( weaponEnt ) then return end
-      local weaponModel = weaponEnt:GetModel()
+      local equipEnt = ents.CreateClientProp(equip.entity)
+      if not IsValid( equipEnt ) then return end
 
       local SpawnI = vgui.Create( "SpawnIcon" , panel3 ) -- SpawnIcon
       SpawnI:SetPos( 75 * (i-1), 0 )
-      SpawnI:SetModel( weaponModel )
+      SpawnI:SetModel( equipEnt:GetModel() )
     end
 
     SheetItem:AddSheet( "Обвесы", panel3, "icon16/cross.png" )
