@@ -19,7 +19,7 @@ net.Receive("setPlayerRole", function(len,ply)
 
   net.Start("receivePlayerRole")
   net.WriteString(ply:SteamID())
-  net.WriteString(role.name)
+  net.WriteString(roleName)
   net.Broadcast()
 end)
 

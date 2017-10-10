@@ -115,6 +115,8 @@ function core.role.setPlayerRole(ply, roleName)
     end
 
     return true
+  else
+    Msg("[setPlayerRole] ", ply:Nick(), " with unknown role - ", roleName)
   end
 
   return false

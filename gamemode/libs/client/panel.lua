@@ -66,7 +66,7 @@ function core.panel.createSettingsSheet(Sheet, ply)
   button:SetSize( 70, 30 )
   button:SetText( "Set Nick" )
   button.DoClick = function( button )
-    ply:setNick(myText:GetValue())
+    ply:setNick(textInput:GetValue())
   end
 
   local textInput2 = vgui.Create("DTextEntry", SheetItem)
@@ -107,11 +107,12 @@ function core.panel.createManagmentSheet(Sheet, ply)
     end
   else
     for _,v in ipairs(player.GetAll()) do
-      if v:isGroup("citizens") then
+      if v:isGroup("citizens") or v:getGroupName() == ply:getGroupName() then
         AppList:AddLine(v:Name(), v:getGroupTitle(), v:getRoleTitle(), v:SteamID())
       end
     end
   end
+  AppList:SelectFirstItem()
 
 
   local AppList2 = vgui.Create( "DListView", SheetItem )
@@ -134,6 +135,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
       end
     end
   end
+  AppList2:SelectFirstItem()
 
   local button1 = vgui.Create( "DButton", SheetItem )
   button1:SetPos( SheetItem:GetWide() - 195, Sheet:GetTall() - 40 )
@@ -197,6 +199,8 @@ function core.panel.createTradeSheet(Sheet, ply)
 
   if (ply:hasAccess("weaponTrade")) then
     local grid1 = vgui.Create( "DGrid", SheetItem )
+    grid1:SetColWide( 76 )
+    grid1:SetRowHeight( 76 )
 
     for i,weapon in pairs(core.config.goods.weapons) do
       local weaponEnt = ents.CreateClientProp(weapon.entity)
@@ -219,6 +223,8 @@ function core.panel.createTradeSheet(Sheet, ply)
     SheetItem:AddSheet( "Оружие", grid1 )
 
     local grid2 = vgui.Create( "DGrid", SheetItem )
+    grid2:SetColWide( 76 )
+    grid2:SetRowHeight( 76 )
 
     for i,ammo in pairs(core.config.goods.ammo) do
       local ammoEnt = ents.CreateClientProp(ammo.entity)
@@ -240,6 +246,8 @@ function core.panel.createTradeSheet(Sheet, ply)
     SheetItem:AddSheet( "Патроны", grid2 )
 
     local grid3 = vgui.Create( "DGrid", SheetItem )
+    grid3:SetColWide( 76 )
+    grid3:SetRowHeight( 76 )
 
     for i,equip in pairs(core.config.goods.equips) do
       local equipEnt = ents.CreateClientProp(equip.entity)
@@ -262,7 +270,7 @@ function core.panel.createTradeSheet(Sheet, ply)
     SheetItem:AddSheet( "Обвесы", grid3 )
   end
 
-  Sheet:AddSheet( "Торговля", SheetItem, "icon16/thumb_up.png", false, false, "Покупка товаров для продажи" )
+  Sheet:AddSheet( "Торговля", SheetItem, "icon16/money.png", false, false, "Покупка товаров для продажи" )
 end
 
 function core.panel.createPollSheet(Sheet, ply)
@@ -296,9 +304,22 @@ function core.panel.createDroneSheet(Sheet, ply)
     surface.DrawRect( 0, 0, SheetItem:GetWide(), SheetItem:GetTall() )
   end
 
-  local SpawnI = vgui.Create( "SpawnIcon" , SheetItem ) -- SpawnIcon
+  local grid = vgui.Create( "DGrid", SheetItem )
+  grid:SetColWide( 76 )
+  grid:SetRowHeight( 76 )
+
+  local SpawnI = vgui.Create( "SpawnIcon" , grid ) -- SpawnIcon
   SpawnI:SetPos( 0, 0 )
   SpawnI:SetModel( "models/dronesrewrite/spydr/spydr.mdl" ) -- Model we want for this spawn icon
+
+  SpawnI.DoClick = function(btn)
+    net.Start("traderBuy")
+    net.WriteString("drones")
+    net.WriteString("dronesrewrite_spy")
+    net.SendToServer()
+  end
+
+  grid:AddItem( SpawnI )
 
   Sheet:AddSheet( "Дроны", SheetItem, "icon16/joystick.png", false, false, "Создание дронов" )
 end

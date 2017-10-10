@@ -16,20 +16,42 @@ end
 
 function meta:getRoleTitle()
   local role = self:getRole()
+
+  if role == nil then
+    return "Unknown role"
+  end
+
   return role.title
 end
 
 function meta:getGroup()
-  return core.group.getPlayerGroup(self)
+  local group = core.group.getPlayerGroup(self)
+
+  if group == nil then
+    Msg("[getGroup] ", self:Nick()," without group")
+    return nil
+  end
+
+  return group
 end
 
 function meta:getGroupTitle()
   local group = self:getGroup()
+
+  if group == nil then
+    return "Unknown group"
+  end
+
   return group.title
 end
 
 function meta:isGroup(groupName)
   local group = self:getGroup()
+
+  if group == nil then
+    return false
+  end
+
   return group.name == groupName
 end
 

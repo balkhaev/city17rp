@@ -32,6 +32,16 @@ core.config.goods.ammo = {
     entity = "cw_ammo_545x39",
     title = "545x39",
     cost = 100
+  },
+  {
+    entity = "cw_ammo_crate_regular",
+    title = "Ammo Crate",
+    cost = 500
+  },
+  {
+    entity = "cw_ammo_crate_small",
+    title = "Small Ammo Crate",
+    cost = 300
   }
 }
 
