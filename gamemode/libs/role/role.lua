@@ -19,6 +19,7 @@ function core.role.addRole(name, role)
       group = role.group,
       weapons = role.weapons,
       model = role.model,
+      salary = role.salary or group.salary,
       gangs = {}
     }
 

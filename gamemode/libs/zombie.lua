@@ -29,23 +29,18 @@ end
 
 function core.zombie.needSpawn()
   if core.zombie.isEvent then
-    if core.zombie.isMinLimit() then
+    if core.zombie.count <= core.config.defaults.minZombieLimit then
       core.zombie.endEvent()
-      return true
     end
 
     return false
   end
 
-  return core.zombie.timer < CurTime() and core.zombie.isLimit()
+  return core.zombie.timer < CurTime()
 end
 
 function core.zombie.isLimit()
   return core.zombie.count <= core.config.defaults.zombieLimit
-end
-
-function core.zombie.isMinLimit()
-  return core.zombie.count <= core.config.defaults.minZombieLimit
 end
 
 function core.zombie.startEvent()

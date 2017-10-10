@@ -79,17 +79,13 @@ function meta:SetMoney(amount)
   self:SetPData("money", amount)
 end
 
-function meta:TakeMoney(amount)
+function meta:TakeMoney(target, amount)
+  if not target:IsPlauer() then return end
   if not self:EnoughMoney(amount) then
     return false
   end
 
-  local target = self:GetEyeTrace().Entity
-
-  if target:IsPlayer() then
-    target:AddMoney(amount)
-  end
-
+  target:AddMoney(amount)
   self:AddMoney(-amount)
 end
 

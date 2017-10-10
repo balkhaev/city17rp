@@ -35,12 +35,16 @@ net.Receive("traderBuy", function(len,ply)
   local entityName = net.ReadString()
   local good = core.good.getGood(entityType, entityName)
 
-  if good == nil then return end
+  --if good == nil then return end
+
+  local entity = ents.Create(good.entity)
+  --if not IsValid( entity ) then return end
+  --if not ply:EnoughMoney(amount) then return end
+
+  ply:AddMoney(-good.cost)
 
   local eyeTrace = ply:GetEyeTrace()
 
-  local entity = ents.Create(good.entity)
-  if not IsValid( entity ) then return end
   entity:SetPos( eyeTrace.HitPos )
   entity:Spawn()
 end)

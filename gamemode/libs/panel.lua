@@ -196,27 +196,34 @@ function core.panel.createTradeSheet(Sheet, ply)
   SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
 
   if (ply:hasAccess("weaponTrade")) then
-    local panel1 = vgui.Create( "DPanel", SheetItem )
+    local grid1 = vgui.Create( "DGrid", SheetItem )
 
     for i,weapon in pairs(core.config.goods.weapons) do
       local weaponEnt = ents.CreateClientProp(weapon.entity)
       if not IsValid( weaponEnt ) then return end
 
-      local SpawnI = vgui.Create( "SpawnIcon" , panel1 ) -- SpawnIcon
-      SpawnI:SetPos( 75 * (i-1), 0 )
+      local SpawnI = vgui.Create( "SpawnIcon", grid1 ) -- SpawnIcon
       SpawnI:SetModel( weaponEnt:GetModel() )
+
+      SpawnI.DoClick = function(btn)
+        net.Start("traderBuy")
+        net.WriteString("weapons")
+        net.WriteString(weapon.entity)
+        net.SendToServer()
+      end
+
+      grid1:AddItem( SpawnI )
     end
 
-    SheetItem:AddSheet( "Оружие", panel1, "icon16/cross.png" )
+    SheetItem:AddSheet( "Оружие", grid1 )
 
-    local panel2 = vgui.Create( "DPanel", SheetItem )
+    local grid2 = vgui.Create( "DGrid", SheetItem )
 
     for i,ammo in pairs(core.config.goods.ammo) do
       local ammoEnt = ents.CreateClientProp(ammo.entity)
       if not IsValid( ammoEnt ) then return end
 
-      local SpawnI = vgui.Create( "SpawnIcon" , panel2 ) -- SpawnIcon
-      SpawnI:SetPos( 75 * (i-1), 0 )
+      local SpawnI = vgui.Create( "SpawnIcon" , grid2 )
       SpawnI:SetModel( ammoEnt:GetModel() )
 
       SpawnI.DoClick = function(btn)
@@ -225,22 +232,31 @@ function core.panel.createTradeSheet(Sheet, ply)
         net.WriteString(ammo.entity)
         net.SendToServer()
       end
+      grid2:AddItem( SpawnI )
     end
 
-    SheetItem:AddSheet( "Патроны", panel2, "icon16/cross.png" )
+    SheetItem:AddSheet( "Патроны", grid2 )
 
-    local panel3 = vgui.Create( "DPanel", SheetItem )
+    local grid3 = vgui.Create( "DGrid", SheetItem )
 
     for i,equip in pairs(core.config.goods.equips) do
       local equipEnt = ents.CreateClientProp(equip.entity)
       if not IsValid( equipEnt ) then return end
 
-      local SpawnI = vgui.Create( "SpawnIcon" , panel3 ) -- SpawnIcon
-      SpawnI:SetPos( 75 * (i-1), 0 )
+      local SpawnI = vgui.Create( "SpawnIcon" , grid3 )
       SpawnI:SetModel( equipEnt:GetModel() )
+
+      SpawnI.DoClick = function(btn)
+        net.Start("traderBuy")
+        net.WriteString("equips")
+        net.WriteString(equip.entity)
+        net.SendToServer()
+      end
+
+      grid3:AddItem( SpawnI )
     end
 
-    SheetItem:AddSheet( "Обвесы", panel3, "icon16/cross.png" )
+    SheetItem:AddSheet( "Обвесы", grid3 )
   end
 
   Sheet:AddSheet( "Торговля", SheetItem, "icon16/thumb_up.png", false, false, "Покупка товаров для продажи" )
