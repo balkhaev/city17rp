@@ -6,8 +6,9 @@ function core.panel.createPanel(ply)
   core.panel.isOpen = true
 
   core.panel.current = vgui.Create( "DFrame" )
-  core.panel.current:SetPos( 50,50 )
-  core.panel.current:SetSize( ScrW()-200,  ScrH()-200 )
+  --core.panel.current:SetPos( 50,50 )
+  core.panel.current:Center()
+  core.panel.current:SetSize( 700, 700 )
   core.panel.current:SetTitle("City 17 Panel")
   core.panel.current:SetVisible( true )
   core.panel.current:SetDraggable( true )
@@ -35,11 +36,15 @@ function core.panel.createPanel(ply)
   if ply:hasAccess("poll") then
     core.panel.createPollSheet(PropertySheet, ply)
   end
+  if ply:IsUserGroup("superadmin") then
+    core.panel.createAdminSheet(PropertySheet, ply)
+  end
 
   core.panel.createHelpSheet(PropertySheet, ply)
   core.panel.createAboutSheet(PropertySheet, ply)
 end
 
+--[[
 function core.panel.createSettingsSheet(Sheet, ply)
   local SheetItem = vgui.Create( "DPanel", Sheet )
   SheetItem:SetPos( 0, 0 )
@@ -49,6 +54,8 @@ function core.panel.createSettingsSheet(Sheet, ply)
     surface.DrawRect( 0, 0, SheetItem:GetWide(), SheetItem:GetTall() )
   end
 
+  Label("Поменять ник", SheetItem)
+
   local textInput = vgui.Create("DTextEntry", SheetItem)
   textInput:SetPos( 10, 10 )
   textInput:SetSize( 100, 30 )
@@ -57,10 +64,12 @@ function core.panel.createSettingsSheet(Sheet, ply)
   local button = vgui.Create( "DButton", SheetItem )
   button:SetPos( 110, 10 )
   button:SetSize( 70, 30 )
-  button:SetText( "Set Nick" )
+  button:SetText( "Поменять" )
   button.DoClick = function( button )
     ply:setNick(textInput:GetValue())
   end
+
+  Label("Передать деньги", SheetItem)
 
   local textInput2 = vgui.Create("DTextEntry", SheetItem)
   textInput2:SetPos( 10, 40 )
@@ -70,7 +79,44 @@ function core.panel.createSettingsSheet(Sheet, ply)
   local button2 = vgui.Create( "DButton", SheetItem )
   button2:SetPos( 110, 40 )
   button2:SetSize( 70, 30 )
-  button2:SetText( "Take Money" )
+  button2:SetText( "Передать" )
+  button2.DoClick = function( button )
+    ply:TakeMoney(textInput2:GetValue())
+  end
+
+  Sheet:AddSheet( "Настройки", SheetItem, "icon16/cog.png", false, false, "Персональные настройки игрока" )
+end
+--]]
+
+function core.panel.createSettingsSheet(Sheet, ply)
+  local SheetItem = vgui.Create( "DTileLayout", Sheet )
+  SheetItem:SetBaseSize( 32 )
+  SheetItem:Dock( FILL )
+  SheetItem:SetDrawBackground( true )
+  SheetItem:SetBackgroundColor( Color( 50, 50, 50 ) )
+
+  Label("Поменять ник", SheetItem)
+
+  local textInput = vgui.Create("DTextEntry", SheetItem)
+  --textInput:SetSize( 100, 30 )
+  textInput:SetText(ply:Nick())
+
+  local button = vgui.Create( "DButton", SheetItem )
+  --button:SetSize( 70, 30 )
+  button:SetText( "Поменять" )
+  button.DoClick = function( button )
+    ply:setNick(textInput:GetValue())
+  end
+
+  Label("Передать деньги", SheetItem)
+
+  local textInput2 = vgui.Create("DTextEntry", SheetItem)
+  --textInput2:SetSize( 100, 30 )
+  textInput2:SetText(0)
+
+  local button2 = vgui.Create( "DButton", SheetItem )
+  --button2:SetSize( 70, 30 )
+  button2:SetText( "Передать" )
   button2.DoClick = function( button )
     ply:TakeMoney(textInput2:GetValue())
   end
@@ -115,20 +161,20 @@ function core.panel.createManagmentSheet(Sheet, ply)
   AppList2:AddColumn( "Role" )
   AppList2:AddColumn( "Group" )
   AppList2:AddColumn( "Name" )
-  if ply:hasAccess("all") then
-    for _,role in pairs(core.role.store) do
+
+  net.Start( "getPlayerRoles" )
+  net.SendToServer()
+
+  net.Receive("receivePlayerRoles", function()
+    AppList2:Clear()
+    local roles = net.ReadTable()
+
+    for _,role in pairs(roles) do
       AppList2:AddLine(role.title, core.group.getGroupTitle(role.group), role.name)
     end
-  else
-    for _,v in pairs(core.group.getPlayerGroupRoles(ply)) do
-      local role = core.role.getRole(v)
 
-      if not role.hasAccess("managment") then
-        AppList2:AddLine(role.title, role.group, role.name)
-      end
-    end
-  end
-  AppList2:SelectFirstItem()
+    AppList2:SelectFirstItem()
+  end)
 
   local button1 = vgui.Create( "DButton", SheetItem )
   button1:SetPos( SheetItem:GetWide() - 195, Sheet:GetTall() - 40 )
@@ -336,6 +382,28 @@ function core.panel.createAboutSheet(Sheet, ply)
   SheetItem:OpenURL("https://github.com/balkhaev/city17rp/blob/master/README.md")
 
   Sheet:AddSheet( "О режиме", SheetItem, "icon16/information.png", false, false )
+end
+
+function core.panel.createAdminSheet(Sheet, ply)
+  local SheetItem = vgui.Create( "DPropertySheet", Sheet )
+  SheetItem:SetPos( 0, 0 )
+  SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
+
+  local AppList = vgui.Create( "DListView", SheetItem )
+  AppList:SetSize( SheetItem:GetWide()/2 - 100, Sheet:GetTall() )
+  AppList:SetMultiSelect( false )
+  AppList:AddColumn( "Nick" )
+  AppList:AddColumn( "Group" )
+  AppList:AddColumn( "Role" )
+  AppList:AddColumn( "SteamID" )
+  for _,v in ipairs(player.GetAll()) do
+    AppList:AddLine(v:Name(), v:getGroupTitle(), v:getRoleTitle(), v:SteamID())
+  end
+  AppList:SelectFirstItem()
+
+  SheetItem:AddSheet( "Игроки", AppList )
+
+  Sheet:AddSheet( "Админ", SheetItem, "icon16/award_star_bronze_1.png", false, false )
 end
 
 function core.panel.destroyPanel()

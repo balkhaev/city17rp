@@ -8,23 +8,19 @@ include("libs/utils.lua")
 include("libs/role/team.lua")
 include("libs/role/group.lua")
 include("libs/role/role.lua")
-include("libs/player.lua")
-include("libs/client/hud.lua")
-include("libs/client/panel.lua")
+include("client/libs/hud.lua")
+include("client/libs/panel.lua")
+include("sh_player.lua")
 
 core.init(core.config)
 
 hook.Add ("Think", "PlayerReady", function ()
   if not IsValid (LocalPlayer()) then return end
 
-  net.Receive("startedPoll", function()
-    local pollQuestion = net.ReadString()
-
-    core.panel.createPoll(pollQuestion)
-  end)
+  include("client/cl_hud.lua")
+  include("client/cl_panel.lua")
+  include("client/cl_network.lua")
 
   hook.Remove ("Think", "PlayerReady")
 end)
 
-include("cl_hud.lua")
-include("cl_panel.lua")
