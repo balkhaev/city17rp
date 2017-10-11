@@ -17,18 +17,6 @@ core.init(core.config)
 hook.Add ("Think", "PlayerReady", function ()
   if not IsValid (LocalPlayer()) then return end
 
-  net.Start("getPlayerRole")
-  net.SendToServer()
-
-  net.Receive("receivePlayerRole", function()
-    local steamID = net.ReadString()
-    local roleName = net.ReadString()
-
-    core.role.setPlayerRole(player.GetBySteamID(steamID), roleName)
-    Msg("Received role ", roleName, " for ", steamID)
-    hook.Call("PlayerIsReady")
-  end)
-
   net.Receive("startedPoll", function()
     local pollQuestion = net.ReadString()
 

@@ -15,22 +15,17 @@ AddCSLuaFile("cl_panel.lua")
 
 -- gmod_admin_cleanup
 
--- resource.AddWorkshop("299164995") -- Call Of Duty: Black Ops II Weapons Pack
 resource.AddWorkshop("349050451") -- Customizable Weaponry 2.0
 resource.AddWorkshop("358608166") -- Extra Customizable Weaponry 2.0
 resource.AddWorkshop("975698959") -- Stunners Pack
--- resource.AddWorkshop("647098998") -- Stunner
 resource.AddWorkshop("746876505") -- Handcuffs
 resource.AddWorkshop("675824914") -- Half-Life 2 Melee Pack
 -- resource.AddWorkshop("314312925") -- [C3] Hand Cuff SWEP
 resource.AddWorkshop("104491619") -- Metropolice Pack
--- resource.AddWorkshop("1077528956") -- Accurate HL2 Beta HUD - White
 resource.AddWorkshop("245482078") -- Empty Hands Swep
--- resource.AddWorkshop("627908510") -- Easy Thirdperson
 resource.AddWorkshop("834188196") -- Over-the-Shoulder Thirdperson
 resource.AddWorkshop("682125090") -- Portable Force Field
 resource.AddWorkshop("669642096") -- Drones Rewrite
--- resource.AddWorkshop("675560712") -- QuantumOS HUD v 1.11
 
 core = {}
 
@@ -42,6 +37,7 @@ include("libs/utils.lua")
 include("libs/role/team.lua")
 include("libs/role/group.lua")
 include("libs/role/role.lua")
+include("libs/disguise.lua")
 include("libs/zombie.lua")
 include("libs/player.lua")
 -- include("libs/drone.lua")
@@ -56,9 +52,9 @@ core.init(core.config)
 hook.Add( "PlayerInitialSpawn", "CityInitialSpawn", function(ply)
   if not core.role.existsPlayerRole(ply) then
     if ply:GetPData("role") then
-      core.role.setPlayerRole(ply, ply:GetPData("role"))
+      ply:setRole(ply:GetPData("role"))
     else
-      core.role.setPlayerRole(ply, core.config.defaults.role)
+      ply:setRole(core.config.defaults.role)
     end
   end
 

@@ -1,34 +1,9 @@
-util.AddNetworkString("setPlayerRole")
-util.AddNetworkString("getPlayerRole")
-util.AddNetworkString("receivePlayerRole")
+util.AddNetworkString("getPlayerRoles")
+util.AddNetworkString("receivePlayerRoles")
 util.AddNetworkString("getTraderGoods")
 util.AddNetworkString("receiveTraderGoods")
 util.AddNetworkString("traderBuy")
-util.AddNetworkString("getPlayerRoles")
-util.AddNetworkString("receivePlayerRoles")
-
-net.Receive("setPlayerRole", function(len,ply)
-  if not ply:hasAccess("managment") then
-    return
-  end
-
-  local steamID = net.ReadString()
-  local roleName = net.ReadString()
-
-  core.role.setPlayerRole(player.GetBySteamID(steamID), roleName)
-
-  net.Start("receivePlayerRole")
-  net.WriteString(ply:SteamID())
-  net.WriteString(roleName)
-  net.Broadcast()
-end)
-
-net.Receive("getPlayerRole", function(len,ply)
-  net.Start("receivePlayerRole")
-  net.WriteString(ply:SteamID())
-  net.WriteString(ply:getRoleName())
-  net.Send(ply)
-end)
+util.AddNetworkString("setCamouflage")
 
 net.Receive("getPlayerRoles", function(len,ply)
   net.Start("receivePlayerRoles")
@@ -67,4 +42,12 @@ net.Receive("traderBuy", function(len,ply)
 
   entity:SetPos( eyeTrace.HitPos )
   entity:Spawn()
+end)
+
+net.Receive("setCamouflage", function(len,ply)
+  if not ply:hasAccess("camouflage") then return end
+
+  local roleName = net.ReadString()
+
+  core.disguise.setCamouflage(ply, roleName)
 end)

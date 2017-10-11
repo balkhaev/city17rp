@@ -18,33 +18,26 @@ function core.panel.createPanel(ply)
   PropertySheet:SetPos( 5, 30 )
   PropertySheet:SetSize( core.panel.current:GetWide()-10, core.panel.current:GetTall()-35 )
 
-  local role = ply:getRole()
-
   core.panel.createSettingsSheet(PropertySheet, ply)
 
-  if (ply:hasAccess("managment")) then
+  if ply:hasAccess("managment") then
     core.panel.createManagmentSheet(PropertySheet, ply)
   end
-  if (ply:hasAccess("trade")) then
+  if ply:hasAccess("trade") then
     core.panel.createTradeSheet(PropertySheet, ply)
   end
-  if role.camouflage ~= nil then
+  if ply:hasAccess("camouflage") then
     core.panel.createCamouflageSheet(PropertySheet, ply)
   end
-  if (ply:hasAccess("drones")) then
+  if ply:hasAccess("drones") then
     core.panel.createDroneSheet(PropertySheet, ply)
   end
-  if (ply:hasAccess("poll")) then
+  if ply:hasAccess("poll") then
     core.panel.createPollSheet(PropertySheet, ply)
   end
 
   core.panel.createHelpSheet(PropertySheet, ply)
   core.panel.createAboutSheet(PropertySheet, ply)
-end
-
-function core.panel.destroyPanel()
-  core.panel.current:Remove()
-  core.panel.isOpen = false
 end
 
 function core.panel.createSettingsSheet(Sheet, ply)
@@ -163,30 +156,33 @@ function core.panel.createCamouflageSheet(Sheet, ply)
     surface.DrawRect( 0, 0, SheetItem:GetWide(), SheetItem:GetTall() )
   end
 
-  local role = ply:getRole()
+  if ply:hasAccess("all") then
+    for i,camoRole in pairs(core.role.store) do
+      local DButton = vgui.Create( "DButton", SheetItem )
+      DButton:SetPos( 200 * (i-1) + 10, 10 )
+      DButton:SetSize( 200, 425 )
+      DButton:AddChoice(camoRole.title)
+      DButton.DoClick = function()
+        net.Start("setCamouflage")
+        net.WriteString(camoRole.name)
+        net.SendToServer()
+      end
+    end
+  else
+    local role = ply:getRole()
 
-  local DComboBox1 = vgui.Create( "DComboBox", SheetItem )
-  DComboBox1:SetPos( 10, 10 )
-  DComboBox1:SetSize( 200, 425 )
-  for _,v in pairs(role.camouflage) do
-    DComboBox1:AddChoice(v)
-  end
-
-  local DComboBox2 = vgui.Create( "DComboBox", SheetItem )
-  DComboBox2:SetPos( 50, 10 )
-  DComboBox2:SetSize( 200, 425 )
-  for _,v in ipairs(core.group.getPlayerGroupRoles(ply)) do
-    DComboBox2:AddChoice(v)
-  end
-  DComboBox2.OnSelect = function( panel, index, value )
-    core.role.setPlayerRole(DComboBox2:GetSelected())
-  end
-
-  local button2 = vgui.Create( "DButton", SheetItem )
-  button2:SetPos( 50, 30 )
-  button2:SetText( "Set Role" )
-  button2.DoClick = function( button )
-    core.role.setPlayerRole(DComboBox1:GetSelected(), DComboBox2:GetSelected())
+    for i,v in pairs(role.camouflage) do
+      local camoRole = core.role.getRole(v)
+      local DButton = vgui.Create( "DButton", SheetItem )
+      DButton:SetPos( 200 * (i-1) + 10, 10 )
+      DButton:SetSize( 200, 425 )
+      DButton:AddChoice(camoRole.title)
+      DButton.DoClick = function()
+        net.Start("setCamouflage")
+        net.WriteString(camoRole.name)
+        net.SendToServer()
+      end
+    end
   end
 
   Sheet:AddSheet( "Камуфляж", SheetItem, "icon16/user_suit.png", false, false, "Выбор камуфляжа" )
@@ -340,6 +336,11 @@ function core.panel.createAboutSheet(Sheet, ply)
   SheetItem:OpenURL("https://github.com/balkhaev/city17rp/blob/master/README.md")
 
   Sheet:AddSheet( "О режиме", SheetItem, "icon16/information.png", false, false )
+end
+
+function core.panel.destroyPanel()
+  core.panel.current:Remove()
+  core.panel.isOpen = false
 end
 
 --[[

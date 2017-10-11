@@ -7,11 +7,11 @@ function meta:setRole(roleName)
 end
 
 function meta:getRole()
-  return core.role.getPlayerRole(self)
+  return core.role.getRole(self:getRoleName())
 end
 
 function meta:getRoleName()
-  return self:GetPData("role")
+  return self:GetNWString("role")
 end
 
 function meta:getRoleTitle()
