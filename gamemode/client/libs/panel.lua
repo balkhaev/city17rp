@@ -90,7 +90,9 @@ function core.panel.createSettingsSheet(Sheet, ply)
   button2:SetPos( 10, 50 )
   button2:SetText( "Передать" )
   button2.DoClick = function( button )
-    ply:TakeMoney(textInput2:GetValue())
+    net.Start( "takeMoney" )
+    net.WriteInt(textInput2:GetValue())
+    net.SendToServer()
   end
 
   Sheet:AddSheet( "Настройки", SheetItem, "icon16/cog.png", false, false, "Персональные настройки игрока" )
@@ -175,11 +177,12 @@ function core.panel.createCamouflageSheet(Sheet, ply)
   end
 
   local AppList2 = vgui.Create( "DListView", SheetItem )
-  AppList2:SetSize( SheetItem:GetWide()/2 - 100, Sheet:GetTall() )
-  AppList2:SetPos( SheetItem:GetWide()/2 - 100, 0 )
+  AppList2:SetSize( SheetItem:GetWide() - 120, SheetItem:GetTall() )
+  AppList2:SetPos( 0, 0 )
   AppList2:SetMultiSelect( false )
-  AppList2:AddColumn( "Role" )
-  AppList2:AddColumn( "Name" )
+  AppList2:AddColumn( "Роль" )
+  AppList2:AddColumn( "Группа" )
+  AppList2:AddColumn( "Тех" )
 
   net.Start( "getCamouflages" )
   net.SendToServer()
@@ -189,7 +192,9 @@ function core.panel.createCamouflageSheet(Sheet, ply)
     local camouflages = net.ReadTable()
 
     for _,camoRole in pairs(camouflages) do
-      AppList2:AddLine(camoRole.title, camoRole.name)
+      local group = core.group.getGroup(camoRole.group)
+
+      AppList2:AddLine(camoRole.title, group.title, camoRole.name)
     end
 
     AppList2:SelectFirstItem()
@@ -197,7 +202,7 @@ function core.panel.createCamouflageSheet(Sheet, ply)
 
   function AppList2:DoDoubleClick(num, line)
     net.Start("setCamouflage")
-    net.WriteString(line:GetColumnText(2))
+    net.WriteString(line:GetColumnText(3))
     net.SendToServer()
   end
 

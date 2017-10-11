@@ -2,6 +2,8 @@ util.AddNetworkString("setPlayerRole")
 util.AddNetworkString("getPlayerRoles")
 util.AddNetworkString("receivePlayerRoles")
 
+util.AddNetworkString("takeMoney")
+
 util.AddNetworkString("traderBuy")
 util.AddNetworkString("getTraderGoods")
 util.AddNetworkString("receiveTraderGoods")
@@ -19,7 +21,7 @@ function sendPlayerRoles(ply)
     for _,v in pairs(core.group.getPlayerGroupRoles(ply)) do
       local role = core.role.getRole(v)
 
-      if not role.hasAccess("managment") then
+      if not core.role.hasAccess(role.name, "managment") then
         table.insert(rolesToSend, role)
       end
     end
@@ -50,6 +52,13 @@ net.Receive("getPlayerRoles", function(len,ply)
   sendPlayerRoles(ply)
 end)
 
+net.Receive("takeMoney", function(len,ply)
+  local amount = net.ReadInt()
+  local eyeTrace = ply:GetEyeTrace()
+
+  ply:TakeMoney( eyeTrace.HitPos, amount )
+end)
+
 net.Receive("getTraderGoods", function(len,ply)
   if not ply:hasAccess("trade") then
     return
@@ -73,7 +82,7 @@ net.Receive("traderBuy", function(len,ply)
 
   local entity = ents.Create(good.entity)
   if not IsValid( entity ) then return end
-  if not ply:EnoughMoney(amount) then return end
+  if not ply:EnoughMoney(good.cost) then return end
 
   ply:AddMoney(-good.cost)
 
@@ -110,4 +119,10 @@ net.Receive("getCamouflages", function(len,ply)
   net.Start("receiveCamouflages")
   net.WriteTable(camouflagesToSend)
   net.Send(ply)
+end)
+
+net.Receive("removeCamouflage", function(len,ply)
+  if not ply:hasAccess("camouflage") then return end
+
+  core.disguise.removeCamouflage(ply)
 end)
