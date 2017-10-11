@@ -10,21 +10,7 @@ util.AddNetworkString("setCamouflage")
 util.AddNetworkString("getCamouflages")
 util.AddNetworkString("receiveCamouflages")
 
-net.Receive("setPlayerRole", function(len,ply)
-  if not ply:hasAccess("managment") then
-    return
-  end
-
-  local steamID = net.ReadString()
-  local roleName = net.ReadString()
-  local target = player.GetBySteamID(steamID)
-
-  if (target:isGroup("citizens") or target:getGroupName() == ply:getGroupName()) or ply:hasAccess("admin") then
-    target:setRole(roleName)
-  end
-end)
-
-net.Receive("getPlayerRoles", function(len,ply)
+function sendPlayerRoles(ply)
   local rolesToSend = {}
 
   if ply:hasAccess("admin") then
@@ -42,6 +28,26 @@ net.Receive("getPlayerRoles", function(len,ply)
   net.Start("receivePlayerRoles")
   net.WriteTable(rolesToSend)
   net.Send(ply)
+end
+
+net.Receive("setPlayerRole", function(len,ply)
+  if not ply:hasAccess("managment") then
+    return
+  end
+
+  local steamID = net.ReadString()
+  local roleName = net.ReadString()
+  local target = player.GetBySteamID(steamID)
+
+  if (target:isGroup("citizens") or target:getGroupName() == ply:getGroupName()) or ply:hasAccess("admin") then
+    target:setRole(roleName)
+  end
+
+  sendPlayerRoles(ply)
+end)
+
+net.Receive("getPlayerRoles", function(len,ply)
+  sendPlayerRoles(ply)
 end)
 
 net.Receive("getTraderGoods", function(len,ply)

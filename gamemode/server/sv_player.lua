@@ -2,7 +2,16 @@ local meta = FindMetaTable("Player")
 
 function meta:setRole(roleName)
   if core.role.setPlayerRole(self, roleName) then
+    local role = core.role.getRole(roleName)
+    local group = core.group.getGroup(role.group)
+    local team = core.team.getTeam(group.team)
+
     self:SetNWString("role", roleName)
+    self:SetModel(role.model)
+    self:SetTeam(team.index)
+    self:SetPData("role", role.name)
+
+    core.role.giveRoleItems(self, roleName)
   end
 end
 

@@ -106,14 +106,6 @@ function core.role.setPlayerRole(ply, roleName)
     core.group.addGang(ply:SteamID(), ply:GetName(), group.index)
     core.team.addGang(ply:SteamID(), ply:GetName(), team.index)
 
-    if SERVER then
-      ply:SetModel(role.model)
-      ply:SetTeam(team.index)
-      ply:SetPData("role", role.name)
-
-      core.role.giveRoleItems(ply, roleName)
-    end
-
     return true
   else
     Msg("[setPlayerRole] ", ply:Nick(), " with unknown role - ", roleName)
