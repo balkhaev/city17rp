@@ -29,7 +29,7 @@ function core.hud.paintPanel( x, y, w, h, colors )
   surface.DrawRect( x, y, w, h );
 end
  
-function core.hud.paintText( x, y, text, font, colors )
+function core.hud.paintText( x, y, text, font, colors, size )
   surface.SetFont( font );
 
   surface.SetTextPos( x + 1, y + 1 );

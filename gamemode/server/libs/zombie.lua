@@ -6,7 +6,8 @@ core.zombie.isEvent = false
 
 function core.zombie.spawnZombie()
   local spawnpos = table.Random( core.zombie.spawnPos )
-  local spawnVector = Vector(string.Explode(",", spawnpos))
+  local explopos = string.Explode(",", spawnpos)
+  local spawnVector = Vector(explopos[1],explopos[2],explopos[3])
 
   local zombie = ents.Create( "npc_zombie" )
   zombie:SetPos( spawnVector )

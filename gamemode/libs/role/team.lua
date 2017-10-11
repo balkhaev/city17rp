@@ -10,6 +10,7 @@ function core.team.addTeam(name, team)
     name = name,
     title = team.title or "Unknown Team",
     description = team.desc or "N/A",
+    color = team.color,
     groups = {},
     roles = {},
     gangs = {}

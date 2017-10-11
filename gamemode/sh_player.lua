@@ -19,7 +19,7 @@ function meta:getRoleTitle()
 end
 
 function meta:getGroup()
-  local group = core.group.getPlayerGroup(self)
+  local group = core.group.getGroup(self:getGroupName())
 
   if group == nil then
     Msg("[getGroup] ", self:Nick()," without group")
@@ -27,6 +27,10 @@ function meta:getGroup()
   end
 
   return group
+end
+
+function meta:getGroupName()
+  return self:GetNWString("group")
 end
 
 function meta:getGroupTitle()

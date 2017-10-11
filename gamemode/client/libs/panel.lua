@@ -7,13 +7,14 @@ function core.panel.createPanel(ply)
 
   core.panel.current = vgui.Create( "DFrame" )
   --core.panel.current:SetPos( 50,50 )
-  core.panel.current:Center()
-  core.panel.current:SetSize( 700, 700 )
+  core.panel.current:SetSize( 1100, 900 )
   core.panel.current:SetTitle("City 17 Panel")
+  core.panel.current:SetSizable( true )
   core.panel.current:SetVisible( true )
   core.panel.current:SetDraggable( true )
   core.panel.current:ShowCloseButton( true )
   core.panel.current:MakePopup()
+  core.panel.current:Center()
 
   local PropertySheet = vgui.Create( "DColumnSheet", core.panel.current )
   PropertySheet:SetPos( 5, 30 )
@@ -44,78 +45,49 @@ function core.panel.createPanel(ply)
   core.panel.createAboutSheet(PropertySheet, ply)
 end
 
---[[
 function core.panel.createSettingsSheet(Sheet, ply)
-  local SheetItem = vgui.Create( "DPanel", Sheet )
+  local SheetItem = vgui.Create( "DIconLayout", Sheet )
   SheetItem:SetPos( 0, 0 )
   SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
-  SheetItem.Paint = function()
-    surface.SetDrawColor( 50, 50, 50, 255 )
-    surface.DrawRect( 0, 0, SheetItem:GetWide(), SheetItem:GetTall() )
-  end
+  SheetItem:SetSpaceY( 5 )
+  SheetItem:SetSpaceX( 5 )
 
-  Label("Поменять ник", SheetItem)
+  local ListItem = SheetItem:Add( "DPanel" )
+  ListItem:SetSize( 110, 80 )
 
-  local textInput = vgui.Create("DTextEntry", SheetItem)
-  textInput:SetPos( 10, 10 )
-  textInput:SetSize( 100, 30 )
+  local lab = Label("Сменить ник", ListItem)
+  lab:SetPos(10, 3)
+  lab:SetColor( Color( 0, 0, 0 ) )
+
+  local textInput = vgui.Create("DTextEntry", ListItem)
+  textInput:SetSize( 90, 20 )
+  textInput:SetPos( 10, 25 )
   textInput:SetText(ply:Nick())
 
-  local button = vgui.Create( "DButton", SheetItem )
-  button:SetPos( 110, 10 )
-  button:SetSize( 70, 30 )
-  button:SetText( "Поменять" )
+  local button = vgui.Create( "DButton", ListItem )
+  button:SetSize( 90, 20 )
+  button:SetPos( 10, 50 )
+  button:SetText( "Сменить" )
   button.DoClick = function( button )
     ply:setNick(textInput:GetValue())
   end
 
-  Label("Передать деньги", SheetItem)
+  local ListItem2 = SheetItem:Add( "DPanel" )
+  ListItem2:SetSize( 110, 80 )
 
-  local textInput2 = vgui.Create("DTextEntry", SheetItem)
-  textInput2:SetPos( 10, 40 )
-  textInput2:SetSize( 100, 30 )
+  local lab2 = Label("Передать деньги", ListItem2)
+  lab2:SetSize(90,20)
+  lab2:SetPos(10, 3)
+  lab2:SetColor( Color( 0, 0, 0 ) )
+
+  local textInput2 = vgui.Create("DTextEntry", ListItem2)
+  textInput2:SetSize( 90, 20 )
+  textInput2:SetPos( 10, 25 )
   textInput2:SetText(0)
 
-  local button2 = vgui.Create( "DButton", SheetItem )
-  button2:SetPos( 110, 40 )
-  button2:SetSize( 70, 30 )
-  button2:SetText( "Передать" )
-  button2.DoClick = function( button )
-    ply:TakeMoney(textInput2:GetValue())
-  end
-
-  Sheet:AddSheet( "Настройки", SheetItem, "icon16/cog.png", false, false, "Персональные настройки игрока" )
-end
---]]
-
-function core.panel.createSettingsSheet(Sheet, ply)
-  local SheetItem = vgui.Create( "DTileLayout", Sheet )
-  SheetItem:SetBaseSize( 32 )
-  SheetItem:Dock( FILL )
-  SheetItem:SetDrawBackground( true )
-  SheetItem:SetBackgroundColor( Color( 50, 50, 50 ) )
-
-  Label("Поменять ник", SheetItem)
-
-  local textInput = vgui.Create("DTextEntry", SheetItem)
-  --textInput:SetSize( 100, 30 )
-  textInput:SetText(ply:Nick())
-
-  local button = vgui.Create( "DButton", SheetItem )
-  --button:SetSize( 70, 30 )
-  button:SetText( "Поменять" )
-  button.DoClick = function( button )
-    ply:setNick(textInput:GetValue())
-  end
-
-  Label("Передать деньги", SheetItem)
-
-  local textInput2 = vgui.Create("DTextEntry", SheetItem)
-  --textInput2:SetSize( 100, 30 )
-  textInput2:SetText(0)
-
-  local button2 = vgui.Create( "DButton", SheetItem )
-  --button2:SetSize( 70, 30 )
+  local button2 = vgui.Create( "DButton", ListItem2 )
+  button2:SetSize( 90, 20 )
+  button2:SetPos( 10, 50 )
   button2:SetText( "Передать" )
   button2.DoClick = function( button )
     ply:TakeMoney(textInput2:GetValue())

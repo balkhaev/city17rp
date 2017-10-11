@@ -14,7 +14,7 @@ function sendPlayerRoles(ply)
   local rolesToSend = {}
 
   if ply:hasAccess("admin") then
-    rolesToSend = core.roles.store
+    rolesToSend = core.role.store
   else
     for _,v in pairs(core.group.getPlayerGroupRoles(ply)) do
       local role = core.role.getRole(v)

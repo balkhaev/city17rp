@@ -6,12 +6,15 @@ function meta:setRole(roleName)
     local group = core.group.getGroup(role.group)
     local team = core.team.getTeam(group.team)
 
-    self:SetNWString("role", roleName)
     self:SetModel(role.model)
     self:SetTeam(team.index)
+
+    self:SetNWString("role", role.name)
+    self:SetNWString("group", group.name)
+    self:SetNWString("team", team.name)
     self:SetPData("role", role.name)
 
-    core.role.giveRoleItems(self, roleName)
+    core.role.giveRoleItems(self, role.name)
   end
 end
 

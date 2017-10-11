@@ -10,16 +10,14 @@ local colors = {
   },
   text = {
     shadow = Color( 0, 0, 0, 200 ),
-    text = Color( 255, 255, 255, 255 )
+    text = Color( 255, 221, 85 )
   }
 };
 
-local function HUDPaint()
+hook.Add( "HUDPaint", "PaintOurHud", function()
   client = client or LocalPlayer();
 
-  if not client:Alive() then
-    return;
-  end
+  if not client:Alive() then return; end
 
   local _, th = core.hud.textSize("TEXT", vars.font);
 
@@ -34,11 +32,9 @@ local function HUDPaint()
 
   core.hud.paintPanel( x, y, width, height, colors.background );
 
-  local text = client:GetMoney() .. "$";
+  local text = "Money: "..client:GetMoney() .. "$";
   core.hud.paintText( cx, cy, text, vars.font, colors.text );
-end
-
-hook.Add( "HUDPaint", "PaintOurHud", HUDPaint );
+end);
 
 
 hook.Add("PostDrawOpaqueRenderables", "drawadminname", function()
