@@ -19,13 +19,15 @@ net.Receive("setPlayerRole", function(len,ply)
   local roleName = net.ReadString()
   local target = player.GetBySteamID(steamID)
 
-  target:setRole(roleName)
+  if (target:isGroup("citizens") or target:getGroupName() == ply:getGroupName()) or ply:hasAccess("admin") then
+    target:setRole(roleName)
+  end
 end)
 
 net.Receive("getPlayerRoles", function(len,ply)
   local rolesToSend = {}
 
-  if ply:hasAccess("all") then
+  if ply:hasAccess("admin") then
     rolesToSend = core.roles.store
   else
     for _,v in pairs(core.group.getPlayerGroupRoles(ply)) do
@@ -61,11 +63,11 @@ net.Receive("traderBuy", function(len,ply)
   local entityName = net.ReadString()
   local good = core.good.getGood(entityType, entityName)
 
-  --if good == nil then return end
+  if good == nil then return end
 
   local entity = ents.Create(good.entity)
-  --if not IsValid( entity ) then return end
-  --if not ply:EnoughMoney(amount) then return end
+  if not IsValid( entity ) then return end
+  if not ply:EnoughMoney(amount) then return end
 
   ply:AddMoney(-good.cost)
 
@@ -87,7 +89,8 @@ net.Receive("getCamouflages", function(len,ply)
   if not ply:hasAccess("camouflage") then return end
 
   local camouflagesToSend = {}
-  if ply:hasAccess("all") then
+
+  if ply:hasAccess("admin") then
     camouflagesToSend = core.role.store
   else
     local role = ply:getRole()

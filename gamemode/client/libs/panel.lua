@@ -36,7 +36,7 @@ function core.panel.createPanel(ply)
   if ply:hasAccess("poll") then
     core.panel.createPollSheet(PropertySheet, ply)
   end
-  if ply:IsUserGroup("superadmin") then
+  if ply:hasAccess("admin") then
     core.panel.createAdminSheet(PropertySheet, ply)
   end
 
@@ -140,7 +140,8 @@ function core.panel.createManagmentSheet(Sheet, ply)
   AppList:AddColumn( "Group" )
   AppList:AddColumn( "Role" )
   AppList:AddColumn( "SteamID" )
-  if ply:hasAccess("all") then
+
+  if ply:hasAccess("admin") then
     for _,v in ipairs(player.GetAll()) do
       AppList:AddLine(v:Name(), v:getGroupTitle(), v:getRoleTitle(), v:SteamID())
     end

@@ -80,7 +80,7 @@ core.config.roles = {
     title = "G-MAN",
     group = "citizens",
     model = "models/player/gman_high.mdl",
-    access = {"all"},
+    access = {"admin"},
     weapons = {"weapon_physgun","gods_little_finger_v2"},
     salary = 0
   },
