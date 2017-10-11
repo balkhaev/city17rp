@@ -102,7 +102,7 @@ function meta:SetMoney(amount)
 end
 
 function meta:TakeMoney(target, amount)
-  if not target:IsPlauer() then return end
+  if not target:IsPlayer() then return end
   if not self:EnoughMoney(amount) then
     return false
   end
