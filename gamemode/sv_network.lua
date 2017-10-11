@@ -1,10 +1,14 @@
 util.AddNetworkString("setPlayerRole")
 util.AddNetworkString("getPlayerRoles")
 util.AddNetworkString("receivePlayerRoles")
+
+util.AddNetworkString("traderBuy")
 util.AddNetworkString("getTraderGoods")
 util.AddNetworkString("receiveTraderGoods")
-util.AddNetworkString("traderBuy")
+
 util.AddNetworkString("setCamouflage")
+util.AddNetworkString("getCamouflages")
+util.AddNetworkString("receiveCamouflages")
 
 net.Receive("setPlayerRole", function(len,ply)
   if not ply:hasAccess("managment") then
@@ -19,8 +23,6 @@ net.Receive("setPlayerRole", function(len,ply)
 end)
 
 net.Receive("getPlayerRoles", function(len,ply)
-  net.Start("receivePlayerRoles")
-
   local rolesToSend = {}
 
   if ply:hasAccess("all") then
@@ -35,6 +37,7 @@ net.Receive("getPlayerRoles", function(len,ply)
     end
   end
 
+  net.Start("receivePlayerRoles")
   net.WriteTable(rolesToSend)
   net.Send(ply)
 end)
@@ -83,7 +86,19 @@ end)
 net.Receive("getCamouflages", function(len,ply)
   if not ply:hasAccess("camouflage") then return end
 
-  net.Start("receiveTraderGoods")
-  net.WriteTable(core.good.getGoods())
+  local camouflagesToSend = {}
+  if ply:hasAccess("all") then
+    camouflagesToSend = core.role.store
+  else
+    local role = ply:getRole()
+
+    for i,v in pairs(role.camouflage) do
+      local camoRole = core.role.getRole(v)
+      table.insert(camouflagesToSend, camoRole)
+    end
+  end
+
+  net.Start("receiveCamouflages")
+  net.WriteTable(camouflagesToSend)
   net.Send(ply)
 end)

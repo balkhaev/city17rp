@@ -153,7 +153,6 @@ function core.panel.createManagmentSheet(Sheet, ply)
   end
   AppList:SelectFirstItem()
 
-
   local AppList2 = vgui.Create( "DListView", SheetItem )
   AppList2:SetSize( SheetItem:GetWide()/2 - 100, Sheet:GetTall() )
   AppList2:SetPos( SheetItem:GetWide()/2 - 100, 0 )
@@ -202,33 +201,31 @@ function core.panel.createCamouflageSheet(Sheet, ply)
     surface.DrawRect( 0, 0, SheetItem:GetWide(), SheetItem:GetTall() )
   end
 
-  if ply:hasAccess("all") then
-    for i,camoRole in pairs(core.role.store) do
-      local DButton = vgui.Create( "DButton", SheetItem )
-      DButton:SetPos( 200 * (i-1) + 10, 10 )
-      DButton:SetSize( 200, 425 )
-      DButton:AddChoice(camoRole.title)
-      DButton.DoClick = function()
-        net.Start("setCamouflage")
-        net.WriteString(camoRole.name)
-        net.SendToServer()
-      end
-    end
-  else
-    local role = ply:getRole()
+  local AppList2 = vgui.Create( "DListView", SheetItem )
+  AppList2:SetSize( SheetItem:GetWide()/2 - 100, Sheet:GetTall() )
+  AppList2:SetPos( SheetItem:GetWide()/2 - 100, 0 )
+  AppList2:SetMultiSelect( false )
+  AppList2:AddColumn( "Role" )
+  AppList2:AddColumn( "Name" )
 
-    for i,v in pairs(role.camouflage) do
-      local camoRole = core.role.getRole(v)
-      local DButton = vgui.Create( "DButton", SheetItem )
-      DButton:SetPos( 200 * (i-1) + 10, 10 )
-      DButton:SetSize( 200, 425 )
-      DButton:AddChoice(camoRole.title)
-      DButton.DoClick = function()
-        net.Start("setCamouflage")
-        net.WriteString(camoRole.name)
-        net.SendToServer()
-      end
+  net.Start( "getCamouflages" )
+  net.SendToServer()
+
+  net.Receive("receiveCamouflages", function()
+    AppList2:Clear()
+    local camouflages = net.ReadTable()
+
+    for _,camoRole in pairs(camouflages) do
+      AppList2:AddLine(camoRole.title, camoRole.name)
     end
+
+    AppList2:SelectFirstItem()
+  end)
+
+  function AppList2:DoDoubleClick(num, line)
+    net.Start("setCamouflage")
+    net.WriteString(line:GetColumnText(2))
+    net.SendToServer()
   end
 
   Sheet:AddSheet( "Камуфляж", SheetItem, "icon16/user_suit.png", false, false, "Выбор камуфляжа" )
