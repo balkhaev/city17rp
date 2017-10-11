@@ -47,10 +47,10 @@ core.config.groups = {
     title = "Гражданская оборона",
     team = "alliance",
     spawn = {"4419.1293945313,312.06140136719,90.03125","4095.565918,313.184845,90.031250","3966.547852,212.987381,90.031250","4004.686768,347.076691,90.031250","4281.187988,190.602524,90.031250","4706.687012,357.306213,90.031250","4853.449219,341.679016,90.031250","4839.239258,201.259186,90.031250","4831.524414,67.929428,90.031250","4753.032715,63.711517,90.031250","4753.472168,151.331009,90.031250","4742.128418,248.027023,90.031250"},
-    access = {"arrest"}
+    access = {}
   },
-  allianceArmy = {
-    title = "Армия Альянса",
+  ota = {
+    title = "Overwatch Transhuman Arm",
     team = "alliance",
     spawn = {"4419.1293945313,312.06140136719,90.03125","4095.565918,313.184845,90.031250","3966.547852,212.987381,90.031250","4004.686768,347.076691,90.031250","4281.187988,190.602524,90.031250","4706.687012,357.306213,90.031250","4853.449219,341.679016,90.031250","4839.239258,201.259186,90.031250","4831.524414,67.929428,90.031250","4753.032715,63.711517,90.031250","4753.472168,151.331009,90.031250","4742.128418,248.027023,90.031250"},
     access = {}
@@ -90,7 +90,7 @@ core.config.roles = {
     group = "citizens",
     model = "models/player/Group01/Male_09.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","weapon_hl2pan"},
+    weapons = {"weapon_empty_hands","weapon_fists"},
     salary = 5
   },
   --[[
@@ -125,19 +125,11 @@ core.config.roles = {
     weapons = {"weapon_empty_hands","weapon_hl2pan","cw_mr96"},
     salary = 10
   },
-  armorTrader = {
-    title = "Продавец брони",
-    group = "citizens",
-    model = "models/player/Group01/Male_05.mdl",
-    access = {"trade","armorTrade"},
-    weapons = {"weapon_empty_hands","weapon_hl2pan","cw_mr96"},
-    salary = 10
-  },
   -- Мерия
   representativeMayor = {
     title = "Представитель мера",
     group = "administration",
-    model = "models/humans/suitfem/female_02.mdl",
+    model = "models/player/female_02_suit.mdl",
     access = {},
     weapons = {"weapon_empty_hands","cw_deagle"},
     salary = 15
@@ -159,7 +151,7 @@ core.config.roles = {
     salary = 25
   },
   -- Гражданская оборона
-  recruit = {
+  crct = {
     title = "Рекрут",
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_retrocop.mdl",
@@ -167,69 +159,61 @@ core.config.roles = {
     weapons = {"weapon_empty_hands","guigui_handcuffs","weapon_stunner_stun"},
     salary = 5
   },
-  patrol = {
-    title = "Патрульный",
+  cpvt = {
+    title = "Рядовой",
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_urban_police.mdl",
     access = {},
     weapons = {"weapon_empty_hands","cw_p99","guigui_handcuffs","weapon_stunner_stun"},
     salary = 10
   },
-  corporalGuard = {
-    title = "Разводящий",
+  ccpl = {
+    title = "Капрал",
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_policetrench.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","cw_p99","cw_mp5","guigui_handcuffs","weapon_stunner_stun"},
+    weapons = {"weapon_empty_hands","cw_g36c","cw_p99","guigui_handcuffs","weapon_stunner_stun"},
     salary = 15
   },
-  deputyChiefCivilDefence = {
-    title = "Заместитель начальника Гражданской обороны",
+  ccpt = {
+    title = "Капитан ГО",
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_hunter_police.mdl",
     access = {"managment"},
-    weapons = {"weapon_empty_hands","cw_p99","guigui_handcuffs","weapon_stunner_stun","cw_ar15"},
+    weapons = {"weapon_empty_hands","cw_ar15","cw_p99","guigui_handcuffs","weapon_stunner_stun"},
     salary = 20
   },
-  chiefCivilDefence = {
-    title = "Начальник Гражданской обороны",
+  ccmd = {
+    title = "Командир ГО",
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_rtb_police.mdl",
     access = {"managment"},
-    weapons = {"weapon_empty_hands","cw_p99","guigui_handcuffs","weapon_stunner_stun","cw_ar15"},
+    weapons = {"weapon_empty_hands","cw_l85a2","cw_deagle","guigui_handcuffs","weapon_stunner_stun"},
     salary = 25
   },
   -- Армия Альянс
-  combineRanker = {
-    title = "Рядовой",
-    group = "allianceArmy",
-    model = "models/player/Combine_Soldier.mdl",
-    access = {},
-    weapons = {"weapon_empty_hands","cw_fiveseven"},
-    salary = 5
-  },
-  combineSoldier = {
+  ows = {
     title = "Солдат",
-    group = "allianceArmy",
+    group = "ota",
     model = "models/player/Combine_Soldier.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","cw_ar15","cw_ump45","cw_fiveseven"},
+    weapons = {"weapon_empty_hands","cw_ar15","cw_fiveseven"},
     salary = 10
   },
-  combineHeavySoldier = {
+  owc = {
     title = "Тяжелый солдат",
-    group = "allianceArmy",
+    group = "ota",
     model = "models/player/Combine_Soldier_PrisonGuard.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","cw_shorty","cw_m249_official","weapon_hexshield","weapon_pistol"},
+    weapons = {"weapon_empty_hands","cw_shorty","cw_m249_official","weapon_hexshield","cw_fiveseven"},
     salary = 15
   },
-  combineSergeant = {
-    title = "Сержант",
-    group = "allianceArmy",
+  eow = {
+    title = "Элитный солдат",
+    group = "ota",
     model = "models/player/Combine_Super_Soldier.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","weapon_ar2","cw_m14","cw_ump45","weapon_pistol"},
+    weapons = {"weapon_empty_hands","cw_m14","cw_scarh","weapon_hexshield","cw_fiveseven"},
     salary = 20
   },
   -- Отдел внедрения
@@ -238,76 +222,76 @@ core.config.roles = {
     group = "implementationDepartment",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","weapon_357","cw_g3a3"},
+    weapons = {"weapon_empty_hands","cw_mp5","cw_m1911"},
     salary = 10,
-    camouflage = { "citizen" }
+    camouflage = { "citizen", "crct" }
   },
   spy = {
     title = "Шпион",
     group = "implementationDepartment",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","weapon_357","cw_m14"},
+    weapons = {"weapon_empty_hands","cw_ump45","cw_m1911"},
     salary = 15,
-    camouflage = { "citizen", "recruit" }
+    camouflage = { "citizen", "crct", "ows" }
   },
   saboteur = {
     title = "Диверсант",
     group = "implementationDepartment",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","weapon_357","cw_vss"},
+    weapons = {"weapon_empty_hands","cw_vss","cw_m1911"},
     salary = 20,
-    camouflage = { "citizen", "recruit", "combineSoldier" }
+    camouflage = { "citizen", "crct", "ows", "owc" }
   },
-  chiefImplementationDepartament = {
+  chiefID = {
     title = "Глава Отдела внедрения",
-    group = "implementationDeprtament",
+    group = "implementationDepartment",
     model = "models/player/Group03/Male_01.mdl",
     access = {"managment"},
-    weapons = {"weapon_empty_hands","weapon_357","cw_vss"},
+    weapons = {"weapon_empty_hands","cw_vss","cw_m1911"},
     salary = 25,
-    camouflage = { "citizen", "recruit", "combineSoldier" }
+    camouflage = { "citizen", "crct", "ows", "owc" }
   },
   -- Армия Сопративления
-  rebelsRanker = {
-    title = "Рядовой",
+  rrct = {
+    title = "Рекрут",
     group = "rebelsArmy",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","cw_mac11","cw_makarov"},
+    weapons = {"weapon_empty_hands","cw_mac11","cw_makarov","weapon_hl2pan"},
     salary = 5
   },
-  rebelsSoldier = {
-    title = "Солдат",
+  rpvt = {
+    title = "Рядовой",
     group = "rebelsArmy",
     model = "models/player/Group03/Male_02.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","cw_ak74","cw_makarov"},
+    weapons = {"weapon_empty_hands","cw_ak74","cw_makarov","weapon_hl2pan"},
     salary = 10
   },
-  rebelsAssaulter = {
-    title = "Штурмовик",
+  rcpl = {
+    title = "Капрал",
     group = "rebelsArmy",
     model = "models/player/Group03/Male_03.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","cw_ak74","cw_ump45","cw_makarov"},
+    weapons = {"weapon_empty_hands","cw_ak74","cw_ump45","cw_makarov","weapon_hl2pickaxe"},
     salary = 15
   },
-  rebelSniper = {
-    title = "Снайпер",
-    group = "rebelsArmy",
-    model = "models/player/Group03/Male_03.mdl",
-    access = {},
-    weapons = {"weapon_empty_hands","cw_l115","cw_makarov"},
-    salary = 15
-  },
-  rebelsSergeant = {
+  rsgt = {
     title = "Сержант",
     group = "rebelsArmy",
     model = "models/player/Group03/Male_04.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","cw_ak74","cw_ump45","cw_makarov"},
+    weapons = {"weapon_empty_hands","cw_g3a3","cw_ump45","cw_makarov","weapon_hl2hook"},
     salary = 20
   },
+  rlt = {
+    title = "Лейтенант",
+    group = "rebelsArmy",
+    model = "models/player/Group03/Male_03.mdl",
+    access = {},
+    weapons = {"weapon_empty_hands","cw_l115","cw_g3a3","cw_makarov","weapon_hl2shovel"},
+    salary = 15
+  }
 }
