@@ -1,4 +1,5 @@
 AddCSLuaFile("shared.lua")
+AddCSLuaFile("sh_player.lua")
 AddCSLuaFile("config/general.lua")
 AddCSLuaFile("config/goods.lua")
 AddCSLuaFile("libs/core.lua")
@@ -13,7 +14,6 @@ AddCSLuaFile("client/libs/panel.lua")
 AddCSLuaFile("client/cl_hud.lua")
 AddCSLuaFile("client/cl_panel.lua")
 AddCSLuaFile("client/cl_network.lua")
-AddCSLuaFile("sh_player.lua")
 
 -- gmod_admin_cleanup
 
@@ -32,22 +32,23 @@ resource.AddWorkshop("669642096") -- Drones Rewrite
 core = {}
 
 include("shared.lua")
+include("sh_player.lua")
 include("config/general.lua")
 include("config/goods.lua")
 include("libs/core.lua")
 include("libs/utils.lua")
+include("libs/good.lua")
 include("libs/role/team.lua")
 include("libs/role/group.lua")
 include("libs/role/role.lua")
-include("libs/disguise.lua")
-include("libs/zombie.lua")
--- include("libs/drone.lua")
-include("libs/good.lua")
-include("sv_network.lua")
-include("sv_entities.lua")
-include("sv_commands.lua")
-include("sv_combinedoors.lua")
-include("sh_player.lua")
+include("server/libs/disguise.lua")
+include("server/libs/zombie.lua")
+-- include("server/libs/drone.lua")
+include("server/sv_network.lua")
+include("server/sv_entities.lua")
+include("server/sv_commands.lua")
+include("server/sv_combinedoors.lua")
+include("server/sv_player.lua")
 
 core.init(core.config)
 
