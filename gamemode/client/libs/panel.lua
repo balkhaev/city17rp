@@ -91,7 +91,7 @@ function core.panel.createSettingsSheet(Sheet, ply)
   button2:SetText( "Передать" )
   button2.DoClick = function( button )
     net.Start( "takeMoney" )
-    net.WriteInt(textInput2:GetValue())
+    net.WriteInt(textInput2:GetValue(),32)
     net.SendToServer()
   end
 
@@ -99,6 +99,8 @@ function core.panel.createSettingsSheet(Sheet, ply)
 end
 
 function core.panel.createManagmentSheet(Sheet, ply)
+  local locPly = LocalPlayer()
+
   local SheetItem = vgui.Create( "DPanel", Sheet )
   SheetItem:SetPos( 0, 0 )
   SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
@@ -108,34 +110,15 @@ function core.panel.createManagmentSheet(Sheet, ply)
   end
 
   local AppList = vgui.Create( "DListView", SheetItem )
-  AppList:SetSize( SheetItem:GetWide()/2 - 100, SheetItem:GetTall() - 50 )
+  AppList:SetSize( SheetItem:GetWide()/2 - 100, SheetItem:GetTall() - 40 )
   AppList:SetMultiSelect( false )
   AppList:AddColumn( "Nick" )
   AppList:AddColumn( "Group" )
   AppList:AddColumn( "Role" )
   AppList:AddColumn( "SteamID" )
 
-  net.Receive("receivePlayerRoles", function()
-    AppList:Clear()
-    if ply:hasAccess("admin") then
-      for _,v in ipairs(player.GetAll()) do
-        AppList:AddLine(v:Name(), v:getGroupTitle(), v:getRoleTitle(), v:SteamID())
-      end
-    else
-      for _,v in ipairs(player.GetAll()) do
-        if v:isGroup("citizens") or v:getGroupName() == ply:getGroupName() then
-          AppList:AddLine(v:Name(), v:getGroupTitle(), v:getRoleTitle(), v:SteamID())
-        end
-      end
-    end
-
-    AppList:SortByColumn(3)
-    AppList:SelectFirstItem()
-  end)
-
-
   local AppList2 = vgui.Create( "DListView", SheetItem )
-  AppList2:SetSize( SheetItem:GetWide()/2 - 100, Sheet:GetTall() - 50 )
+  AppList2:SetSize( SheetItem:GetWide()/2-20, Sheet:GetTall() - 40 )
   AppList2:SetPos( SheetItem:GetWide()/2 - 100, 0 )
   AppList2:SetMultiSelect( false )
   AppList2:AddColumn( "Role" )
@@ -146,6 +129,23 @@ function core.panel.createManagmentSheet(Sheet, ply)
   net.SendToServer()
 
   net.Receive("receivePlayerRoles", function()
+    AppList:Clear()
+
+    if ply:hasAccess("admin") then
+      for _,v in ipairs(player.GetAll()) do
+        AppList:AddLine(v:Name(), v:getGroupTitle(), v:getRoleTitle(), v:SteamID())
+      end
+    else
+      for _,v in ipairs(player.GetAll()) do
+        if v:SteamID() ~= locPly:SteamID() and (v:isGroup("citizens") or v:getGroupName() == ply:getGroupName()) then
+          AppList:AddLine(v:Name(), v:getGroupTitle(), v:getRoleTitle(), v:SteamID())
+        end
+      end
+    end
+
+    AppList:SortByColumn(3)
+    AppList:SelectFirstItem()
+
     AppList2:Clear()
     local roles = net.ReadTable()
 
@@ -158,7 +158,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
   end)
 
   local button1 = vgui.Create( "DButton", SheetItem )
-  button1:SetPos( SheetItem:GetWide() - 1, Sheet:GetTall() )
+  button1:SetPos( SheetItem:GetWide() - 195, SheetItem:GetTall()-35 )
   button1:SetSize( 70, 30 )
   button1:SetText( "Set Role" )
   button1.DoClick = function( button )
@@ -227,8 +227,8 @@ function core.panel.createTradeSheet(Sheet, ply)
   net.Receive("receiveTraderGoods", function()
     local goodWithTypes = net.ReadTable()
 
-    for goodType, goods in (goodWithTypes) do
-      Msg("Received "..goodType)
+    for goodType, goods in pairs(goodWithTypes) do
+      --Msg("Received "..goodType)
     end
   end)
 
@@ -363,7 +363,7 @@ function core.panel.createHelpSheet(Sheet, ply)
   local SheetItem = vgui.Create( "HTML", Sheet )
   SheetItem:SetPos( 0, 0 )
   SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
-  SheetItem:OpenURL("https://gist.github.com/balkhaev/8ba71987ccbcf08beb2bd9c9548ee910")
+  SheetItem:OpenURL("http://telegra.ph/Pomoshch-HL2RP-10-12")
 
   Sheet:AddSheet( "Помощь", SheetItem, "icon16/help.png", false, false )
 end
@@ -372,7 +372,7 @@ function core.panel.createAboutSheet(Sheet, ply)
   local SheetItem = vgui.Create( "HTML", Sheet )
   SheetItem:SetPos( 0, 0 )
   SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
-  SheetItem:OpenURL("https://github.com/balkhaev/city17rp/blob/master/README.md")
+  SheetItem:OpenURL("http://telegra.ph/City-17-RP-10-12-2")
 
   Sheet:AddSheet( "О режиме", SheetItem, "icon16/information.png", false, false )
 end
@@ -396,12 +396,22 @@ function core.panel.createAdminSheet(Sheet, ply)
   end
   AppList:SelectFirstItem()
 
+  local textInput = vgui.Create("DTextEntry", panel)
+  textInput:SetPos( SheetItem:GetWide() - 200, Sheet:GetTall() - 230 )
+  textInput:SetSize( 90, 20 )
+  textInput:SetText(0)
+
   local button1 = vgui.Create( "DButton", panel )
-  button1:SetPos( SheetItem:GetWide() - 195, Sheet:GetTall() - 40 )
+  button1:SetPos( SheetItem:GetWide() - 200, Sheet:GetTall() - 200 )
   button1:SetSize( 70, 30 )
   button1:SetText( "Set Money" )
   button1.DoClick = function( button )
+    local AppLine = AppList:GetSelected()[1]
 
+    net.Start( "giveMoney" )
+    net.WriteString(AppLine:GetColumnText(4))
+    net.WriteInt(textInput:GetValue(), 32)
+    net.SendToServer()
   end
 
   SheetItem:AddSheet( "Игроки", panel )

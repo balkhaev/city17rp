@@ -46,5 +46,5 @@ core.config.goods.ammo = {
 }
 
 core.config.goods.drones = {
-  {}
+
 }

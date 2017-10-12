@@ -2,6 +2,7 @@ util.AddNetworkString("setPlayerRole")
 util.AddNetworkString("getPlayerRoles")
 util.AddNetworkString("receivePlayerRoles")
 
+util.AddNetworkString("giveMoney")
 util.AddNetworkString("takeMoney")
 
 util.AddNetworkString("traderBuy")
@@ -53,10 +54,10 @@ net.Receive("getPlayerRoles", function(len,ply)
 end)
 
 net.Receive("takeMoney", function(len,ply)
-  local amount = net.ReadInt()
+  local amount = net.ReadInt(32)
   local eyeTrace = ply:GetEyeTrace()
 
-  ply:TakeMoney( eyeTrace.HitPos, amount )
+  ply:TakeMoney( eyeTrace.Entity, amount )
 end)
 
 net.Receive("getTraderGoods", function(len,ply)
@@ -92,7 +93,11 @@ net.Receive("traderBuy", function(len,ply)
 
   local entity = ents.Create(good.entity)
   if not IsValid( entity ) then return end
-  if not ply:EnoughMoney(good.cost) then return end
+
+  if not ply:EnoughMoney(good.cost) then
+    ply:PrintMessage(HUD_PRINTTALK, "Не хватает денег")
+    return
+  end
 
   ply:AddMoney(-good.cost)
 
@@ -136,4 +141,14 @@ net.Receive("removeCamouflage", function(len,ply)
   if not ply:hasAccess("camouflage") then return end
 
   ply:RemoveCamouflage()
+end)
+
+net.Receive("giveMoney", function(len,ply)
+  if not ply:hasAccess("admin") then return end
+
+  local steamID = net.ReadString()
+  local amount = net.ReadInt(32)
+  local target = player.GetBySteamID(steamID)
+
+  target:AddMoney(amount)
 end)
