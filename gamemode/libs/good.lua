@@ -13,6 +13,7 @@ function core.good.addGood(goodType, good)
     entity = good.entity,
     title = good.title,
     cost = good.cost,
+    type = goodType,
     model = goodEnt:GetModel()
   }
 
@@ -31,4 +32,14 @@ function core.good.getGood(goodType, goodEntity)
       return good
     end
   end
+end
+
+function core.good.getGoodsByType(goodType)
+  local out = {}
+
+  for index, good in pairs(core.good.store) do
+    if good.type == goodType then out[index] = good end
+  end
+
+  return out
 end

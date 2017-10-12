@@ -64,8 +64,18 @@ net.Receive("getTraderGoods", function(len,ply)
     return
   end
 
+  local goodsToSend = {}
+
+  if (ply:hasAccess("tradeWeapon")) then
+    goodsToSend = {
+      weapons = core.good.getGoodsByType("weapons"),
+      equips = core.good.getGoodsByType("equips"),
+      ammo = core.good.getGoodsByType("ammo")
+    }
+  end
+
   net.Start("receiveTraderGoods")
-  net.WriteTable(core.good.getGoods())
+  net.WriteTable(goodsToSend)
   net.Send(ply)
 end)
 
@@ -96,8 +106,9 @@ net.Receive("setCamouflage", function(len,ply)
   if not ply:hasAccess("camouflage") then return end
 
   local roleName = net.ReadString()
+  local role = core.role.getRole(roleName)
 
-  core.disguise.setCamouflage(ply, roleName)
+  ply:SetCamouflage(role.model, role.group)
 end)
 
 net.Receive("getCamouflages", function(len,ply)
@@ -124,5 +135,5 @@ end)
 net.Receive("removeCamouflage", function(len,ply)
   if not ply:hasAccess("camouflage") then return end
 
-  core.disguise.removeCamouflage(ply)
+  ply:RemoveCamouflage()
 end)

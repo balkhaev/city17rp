@@ -108,7 +108,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
   end
 
   local AppList = vgui.Create( "DListView", SheetItem )
-  AppList:SetSize( SheetItem:GetWide()/2 - 100, Sheet:GetTall() )
+  AppList:SetSize( SheetItem:GetWide()/2 - 100, SheetItem:GetTall() - 50 )
   AppList:SetMultiSelect( false )
   AppList:AddColumn( "Nick" )
   AppList:AddColumn( "Group" )
@@ -135,7 +135,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
 
 
   local AppList2 = vgui.Create( "DListView", SheetItem )
-  AppList2:SetSize( SheetItem:GetWide()/2 - 100, Sheet:GetTall() )
+  AppList2:SetSize( SheetItem:GetWide()/2 - 100, Sheet:GetTall() - 50 )
   AppList2:SetPos( SheetItem:GetWide()/2 - 100, 0 )
   AppList2:SetMultiSelect( false )
   AppList2:AddColumn( "Role" )
@@ -158,7 +158,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
   end)
 
   local button1 = vgui.Create( "DButton", SheetItem )
-  button1:SetPos( SheetItem:GetWide() - 195, Sheet:GetTall() - 40 )
+  button1:SetPos( SheetItem:GetWide() - 1, Sheet:GetTall() )
   button1:SetSize( 70, 30 )
   button1:SetText( "Set Role" )
   button1.DoClick = function( button )
@@ -220,6 +220,17 @@ function core.panel.createTradeSheet(Sheet, ply)
   local SheetItem = vgui.Create( "DPropertySheet", Sheet )
   SheetItem:SetPos( 0, 0 )
   SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
+
+  net.Start("getTraderGoods")
+  net.SendToServer()
+
+  net.Receive("receiveTraderGoods", function()
+    local goodWithTypes = net.ReadTable()
+
+    for goodType, goods in (goodWithTypes) do
+      Msg("Received "..goodType)
+    end
+  end)
 
   if (ply:hasAccess("weaponTrade")) then
     local grid1 = vgui.Create( "DGrid", SheetItem )

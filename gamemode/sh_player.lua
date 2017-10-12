@@ -9,6 +9,10 @@ function meta:getRoleName()
 end
 
 function meta:getRoleTitle()
+  if self.camouflageGroup ~= nil then
+    return self.camouflageGroup
+  end
+
   local role = self:getRole()
 
   if role == nil then

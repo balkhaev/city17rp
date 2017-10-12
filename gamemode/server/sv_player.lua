@@ -40,3 +40,15 @@ function meta:TakeMoney(target, amount)
   target:AddMoney(amount)
   self:AddMoney(-amount)
 end
+
+function meta:SetCamouflage(roleModel, roleGroup)
+  self.camouflageGroup = roleGroup
+  self:SetModel(roleModel)
+end
+
+function meta:RemoveCamouflage()
+  local role = self:getRole()
+
+  self.camouflageGroup = nil
+  self:SetModel(role.model)
+end

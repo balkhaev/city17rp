@@ -20,6 +20,13 @@ function core.init(config)
     core.role.addRole(roleKey, role)
   end
 
+  for goodType, goods in pairs(core.config.goods) do
+    for _, good in pairs(goods) do
+      Msg("Adding good "..good.title.." with type "..goodType.."\n")
+      core.good.addGood(goodType, good)
+    end
+  end
+
   for teamKey, teamVal in pairs(core.team.store) do
     team.SetUp(teamVal.index, teamVal.name, teamVal.color)
   end
