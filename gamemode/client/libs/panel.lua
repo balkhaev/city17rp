@@ -115,18 +115,24 @@ function core.panel.createManagmentSheet(Sheet, ply)
   AppList:AddColumn( "Role" )
   AppList:AddColumn( "SteamID" )
 
-  if ply:hasAccess("admin") then
-    for _,v in ipairs(player.GetAll()) do
-      AppList:AddLine(v:Name(), v:getGroupTitle(), v:getRoleTitle(), v:SteamID())
-    end
-  else
-    for _,v in ipairs(player.GetAll()) do
-      if v:isGroup("citizens") or v:getGroupName() == ply:getGroupName() then
+  net.Receive("receivePlayerRoles", function()
+    AppList:Clear()
+    if ply:hasAccess("admin") then
+      for _,v in ipairs(player.GetAll()) do
         AppList:AddLine(v:Name(), v:getGroupTitle(), v:getRoleTitle(), v:SteamID())
       end
+    else
+      for _,v in ipairs(player.GetAll()) do
+        if v:isGroup("citizens") or v:getGroupName() == ply:getGroupName() then
+          AppList:AddLine(v:Name(), v:getGroupTitle(), v:getRoleTitle(), v:SteamID())
+        end
+      end
     end
-  end
-  AppList:SelectFirstItem()
+
+    AppList:SortByColumn(3)
+    AppList:SelectFirstItem()
+  end)
+
 
   local AppList2 = vgui.Create( "DListView", SheetItem )
   AppList2:SetSize( SheetItem:GetWide()/2 - 100, Sheet:GetTall() )
@@ -147,6 +153,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
       AppList2:AddLine(role.title, core.group.getGroupTitle(role.group), role.name)
     end
 
+    AppList2:SortByColumn(2)
     AppList2:SelectFirstItem()
   end)
 
@@ -364,8 +371,10 @@ function core.panel.createAdminSheet(Sheet, ply)
   SheetItem:SetPos( 0, 0 )
   SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
 
-  local AppList = vgui.Create( "DListView", SheetItem )
-  AppList:SetSize( SheetItem:GetWide()/2 - 100, Sheet:GetTall() )
+  local panel = vgui.Create( "DPanel", SheetItem )
+
+  local AppList = vgui.Create( "DListView", panel )
+  AppList:SetSize( SheetItem:GetWide()/2 - 200, Sheet:GetTall() )
   AppList:SetMultiSelect( false )
   AppList:AddColumn( "Nick" )
   AppList:AddColumn( "Group" )
@@ -376,7 +385,15 @@ function core.panel.createAdminSheet(Sheet, ply)
   end
   AppList:SelectFirstItem()
 
-  SheetItem:AddSheet( "Игроки", AppList )
+  local button1 = vgui.Create( "DButton", panel )
+  button1:SetPos( SheetItem:GetWide() - 195, Sheet:GetTall() - 40 )
+  button1:SetSize( 70, 30 )
+  button1:SetText( "Set Money" )
+  button1.DoClick = function( button )
+
+  end
+
+  SheetItem:AddSheet( "Игроки", panel )
 
   Sheet:AddSheet( "Админ", SheetItem, "icon16/award_star_bronze_1.png", false, false )
 end

@@ -18,6 +18,10 @@ function meta:setRole(roleName)
   end
 end
 
+function meta:setGroup(groupName)
+  self:SetNWString("group", groupName)
+end
+
 function meta:AddMoney(amount)
   self:SetMoney( self:GetMoney() + amount )
 end

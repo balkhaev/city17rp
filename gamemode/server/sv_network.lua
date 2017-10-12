@@ -41,7 +41,7 @@ net.Receive("setPlayerRole", function(len,ply)
   local roleName = net.ReadString()
   local target = player.GetBySteamID(steamID)
 
-  if (target:isGroup("citizens") or target:getGroupName() == ply:getGroupName()) or ply:hasAccess("admin") then
+  if ply:hasAccess("admin") or (target:isGroup("citizens") or target:getGroupName() == ply:getGroupName()) then
     target:setRole(roleName)
   end
 
