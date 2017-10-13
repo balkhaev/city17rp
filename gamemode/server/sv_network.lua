@@ -15,17 +15,20 @@ util.AddNetworkString("receiveCamouflages")
 
 function sendPlayerRoles(ply)
   local rolesToSend = {}
+  local roles
 
   if ply:hasAccess("admin") then
-    rolesToSend = core.role.store
+    roles = core.role.store
   else
-    for _,v in pairs(core.group.getPlayerGroupRoles(ply)) do
-      local role = core.role.getRole(v)
+    roles = core.role.getRolesByGroup(ply:getGroupName())
+  end
 
-      if not core.role.hasAccess(role.name, "managment") then
-        table.insert(rolesToSend, role)
-      end
-    end
+  for _,role in pairs(roles) do
+    table.insert(rolesToSend, {
+      title = role.title,
+      groupTitle = core.group.getGroupTitle(role.group),
+      name = role.name
+    })
   end
 
   net.Start("receivePlayerRoles")
@@ -120,16 +123,20 @@ net.Receive("getCamouflages", function(len,ply)
   if not ply:hasAccess("camouflage") then return end
 
   local camouflagesToSend = {}
+  local camouflages
 
   if ply:hasAccess("admin") then
-    camouflagesToSend = core.role.store
+    camouflages = core.role.store
   else
-    local role = ply:getRole()
+    camouflages = core.role.getCamouflageRoles(ply:getRoleName())
+  end
 
-    for i,v in pairs(role.camouflage) do
-      local camoRole = core.role.getRole(v)
-      table.insert(camouflagesToSend, camoRole)
-    end
+  for i,camoRole in pairs(camouflages) do
+    table.insert(camouflagesToSend, {
+      title = camoRole.title,
+      groupTitle = core.group.getGroupTitle(camoRole.group),
+      name = camoRole.name
+    })
   end
 
   net.Start("receiveCamouflages")

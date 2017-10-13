@@ -1,12 +1,5 @@
 AddCSLuaFile("shared.lua")
 AddCSLuaFile("sh_player.lua")
-AddCSLuaFile("config/general.lua")
-AddCSLuaFile("config/goods.lua")
-AddCSLuaFile("libs/core.lua")
-AddCSLuaFile("libs/utils.lua")
-AddCSLuaFile("libs/role/team.lua")
-AddCSLuaFile("libs/role/group.lua")
-AddCSLuaFile("libs/role/role.lua")
 
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("client/libs/hud.lua")

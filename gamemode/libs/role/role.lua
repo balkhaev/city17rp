@@ -20,6 +20,7 @@ function core.role.addRole(name, role)
       weapons = role.weapons,
       model = role.model,
       salary = role.salary or group.salary,
+      camouflage = role.camouflage or {},
       gangs = {}
     }
 
@@ -65,6 +66,30 @@ function core.role.getRoleBySteamID(steamID)
     end
   end
   return -1
+end
+
+function core.role.getRolesByGroup(groupName)
+  local out = {}
+
+  for indexRole, role in pairs(core.role.store) do
+    if role.group == groupName then
+      out[indexRole] = role
+    end
+  end
+
+  return out
+end
+
+function core.role.getCamouflageRoles(roleName)
+  local plyRole = core.role.getRole(roleName)
+  local out = {}
+
+  for camoIndex, camouflageRole in pairs(plyRole.camouflage) do
+    local role = core.role.getRole(camouflageRole)
+    out[camoIndex] = role
+  end
+
+  return out
 end
 
 function core.role.indexPlayerRole(ply)

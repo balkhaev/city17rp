@@ -130,6 +130,9 @@ function core.panel.createManagmentSheet(Sheet, ply)
 
   net.Receive("receivePlayerRoles", function()
     AppList:Clear()
+    AppList2:Clear()
+
+    local roles = net.ReadTable()
 
     if ply:hasAccess("admin") then
       for _,v in ipairs(player.GetAll()) do
@@ -143,18 +146,15 @@ function core.panel.createManagmentSheet(Sheet, ply)
       end
     end
 
-    AppList:SortByColumn(3)
-    AppList:SelectFirstItem()
-
-    AppList2:Clear()
-    local roles = net.ReadTable()
-
     for _,role in pairs(roles) do
-      AppList2:AddLine(role.title, core.group.getGroupTitle(role.group), role.name)
+      AppList2:AddLine(role.title, role.groupTitle, role.name)
     end
 
     AppList2:SortByColumn(2)
     AppList2:SelectFirstItem()
+
+    AppList:SortByColumn(3)
+    AppList:SelectFirstItem()
   end)
 
   local button1 = vgui.Create( "DButton", SheetItem )
@@ -199,9 +199,7 @@ function core.panel.createCamouflageSheet(Sheet, ply)
     local camouflages = net.ReadTable()
 
     for _,camoRole in pairs(camouflages) do
-      local group = core.group.getGroup(camoRole.group)
-
-      AppList2:AddLine(camoRole.title, group.title, camoRole.name)
+      AppList2:AddLine(camoRole.title, camoRole.groupTitle, camoRole.name)
     end
 
     AppList2:SelectFirstItem()
