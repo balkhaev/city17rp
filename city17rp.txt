@@ -5,5 +5,5 @@
   "maps"		    "^rp_"
   "hide"		    "0"
   "menusystem"	"1"
-  "info"		    "Pwn everyone!"
+  "info"		    "Half-life 2 RP Mode"
 }

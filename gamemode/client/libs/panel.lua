@@ -31,9 +31,6 @@ function core.panel.createPanel(ply)
   if ply:hasAccess("camouflage") then
     core.panel.createCamouflageSheet(PropertySheet, ply)
   end
-  if ply:hasAccess("drones") then
-    core.panel.createDroneSheet(PropertySheet, ply)
-  end
   if ply:hasAccess("poll") then
     core.panel.createPollSheet(PropertySheet, ply)
   end
@@ -226,82 +223,28 @@ function core.panel.createTradeSheet(Sheet, ply)
     local goodWithTypes = net.ReadTable()
 
     for goodType, goods in pairs(goodWithTypes) do
-      --Msg("Received "..goodType)
+      local grid = vgui.Create( "DGrid", SheetItem )
+      grid:SetColWide( 76 )
+      grid:SetRowHeight( 76 )
+
+      for _, good in pairs(goods) do
+        local SpawnI = vgui.Create( "SpawnIcon", grid ) -- SpawnIcon
+        SpawnI:SetModel( good.model )
+        SpawnI:SetText( good.title )
+
+        SpawnI.DoClick = function(btn)
+          net.Start("traderBuy")
+          net.WriteString(goodType)
+          net.WriteString(good.entity)
+          net.SendToServer()
+        end
+
+        grid:AddItem( SpawnI )
+      end
+
+      SheetItem:AddSheet( goodType, grid )
     end
   end)
-
-  if (ply:hasAccess("weaponTrade")) then
-    local grid1 = vgui.Create( "DGrid", SheetItem )
-    grid1:SetColWide( 76 )
-    grid1:SetRowHeight( 76 )
-
-    for i,weapon in pairs(core.config.goods.weapons) do
-      local weaponEnt = ents.CreateClientProp(weapon.entity)
-      if not IsValid( weaponEnt ) then return end
-
-      local SpawnI = vgui.Create( "SpawnIcon", grid1 ) -- SpawnIcon
-      SpawnI:SetModel( weaponEnt:GetModel() )
-      SpawnI:SetText( weapon.title )
-
-      SpawnI.DoClick = function(btn)
-        net.Start("traderBuy")
-        net.WriteString("weapons")
-        net.WriteString(weapon.entity)
-        net.SendToServer()
-      end
-
-      grid1:AddItem( SpawnI )
-    end
-
-    SheetItem:AddSheet( "Оружие", grid1 )
-
-    local grid2 = vgui.Create( "DGrid", SheetItem )
-    grid2:SetColWide( 76 )
-    grid2:SetRowHeight( 76 )
-
-    for i,ammo in pairs(core.config.goods.ammo) do
-      local ammoEnt = ents.CreateClientProp(ammo.entity)
-      if not IsValid( ammoEnt ) then return end
-
-      local SpawnI = vgui.Create( "SpawnIcon" , grid2 )
-      SpawnI:SetModel( ammoEnt:GetModel() )
-      SpawnI:SetText( ammo.title )
-
-      SpawnI.DoClick = function(btn)
-        net.Start("traderBuy")
-        net.WriteString("ammo")
-        net.WriteString(ammo.entity)
-        net.SendToServer()
-      end
-      grid2:AddItem( SpawnI )
-    end
-
-    SheetItem:AddSheet( "Патроны", grid2 )
-
-    local grid3 = vgui.Create( "DGrid", SheetItem )
-    grid3:SetColWide( 76 )
-    grid3:SetRowHeight( 76 )
-
-    for i,equip in pairs(core.config.goods.equips) do
-      local equipEnt = ents.CreateClientProp(equip.entity)
-      if not IsValid( equipEnt ) then return end
-
-      local SpawnI = vgui.Create( "SpawnIcon" , grid3 )
-      SpawnI:SetModel( equipEnt:GetModel() )
-      SpawnI:SetText( equip.title )
-
-      SpawnI.DoClick = function(btn)
-        net.Start("traderBuy")
-        net.WriteString("equips")
-        net.WriteString(equip.entity)
-        net.SendToServer()
-      end
-
-      grid3:AddItem( SpawnI )
-    end
-
-    SheetItem:AddSheet( "Обвесы", grid3 )
-  end
 
   Sheet:AddSheet( "Торговля", SheetItem, "icon16/money.png", false, false, "Покупка товаров для продажи" )
 end
@@ -326,35 +269,6 @@ function core.panel.createPollSheet(Sheet, ply)
   end
 
   Sheet:AddSheet( "Голосование", SheetItem, "icon16/thumb_up.png", false, false, "Проведение голосований" )
-end
-
-function core.panel.createDroneSheet(Sheet, ply)
-  local SheetItem = vgui.Create( "DPanel", Sheet )
-  SheetItem:SetPos( 0, 0 )
-  SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
-  SheetItem.Paint = function()
-    surface.SetDrawColor( 50, 50, 50, 255 )
-    surface.DrawRect( 0, 0, SheetItem:GetWide(), SheetItem:GetTall() )
-  end
-
-  local grid = vgui.Create( "DGrid", SheetItem )
-  grid:SetColWide( 76 )
-  grid:SetRowHeight( 76 )
-
-  local SpawnI = vgui.Create( "SpawnIcon" , grid ) -- SpawnIcon
-  SpawnI:SetPos( 0, 0 )
-  SpawnI:SetModel( "models/dronesrewrite/spydr/spydr.mdl" ) -- Model we want for this spawn icon
-
-  SpawnI.DoClick = function(btn)
-    net.Start("traderBuy")
-    net.WriteString("drones")
-    net.WriteString("dronesrewrite_spy")
-    net.SendToServer()
-  end
-
-  grid:AddItem( SpawnI )
-
-  Sheet:AddSheet( "Дроны", SheetItem, "icon16/joystick.png", false, false, "Создание дронов" )
 end
 
 function core.panel.createHelpSheet(Sheet, ply)

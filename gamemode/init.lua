@@ -20,7 +20,7 @@ resource.AddWorkshop("104491619") -- Metropolice Pack
 resource.AddWorkshop("245482078") -- Empty Hands Swep
 resource.AddWorkshop("834188196") -- Over-the-Shoulder Thirdperson
 resource.AddWorkshop("682125090") -- Portable Force Field
-resource.AddWorkshop("669642096") -- Drones Rewrite
+--resource.AddWorkshop("669642096") -- Drones Rewrite
 
 core = {}
 
@@ -31,11 +31,10 @@ include("config/goods.lua")
 include("libs/core.lua")
 include("libs/utils.lua")
 include("libs/good.lua")
+include("libs/zombie.lua")
 include("libs/role/team.lua")
 include("libs/role/group.lua")
 include("libs/role/role.lua")
-include("server/libs/zombie.lua")
--- include("server/libs/drone.lua")
 include("server/sv_network.lua")
 include("server/sv_entities.lua")
 include("server/sv_commands.lua")
@@ -91,4 +90,25 @@ end)
 
 hook.Add("PlayerCanHearPlayersVoice" , "VoiceRadius" , function( p1 , p2 )
   return (p1:GetPos():Distance(p2:GetPos()) <= 2000)
+end)
+
+hook.Add( "PlayerSay", "Chat", function (pl, text, teamonly )
+  if text == "/roll" then
+    pl:ConCommand( "rollthedice")
+    return ""
+  end
+end)
+
+
+local function RespawnPlayer(ply)
+  ply:UnLock()
+  ply:ChatPrint("Вы можете возродиться")
+end
+
+hook.Add("PlayerDeath", "ForcePlayerRespawn", function (ply)
+  if core.config.defaults.spawnTime ~= 0 then
+    ply:Lock()
+    ply:ChatPrint("Вы должны подождать " .. core.config.defaults.spawnTime .. " секунд перед возрождением")
+    timer.Simple(core.config.defaults.spawnTime, RespawnPlayer, ply)
+  end
 end)

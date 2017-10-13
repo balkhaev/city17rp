@@ -7,3 +7,7 @@ concommand.Add("setrole", function(ply, cmd, args)
 
   player:setRole(args[2])
 end)
+
+concommand.Add( "rollthedice", function( ply )
+  PrintMessage( HUD_PRINTTALK, ply:Nick().." выкинул "..math.random(1,100)..".")
+end )

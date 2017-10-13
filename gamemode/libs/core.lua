@@ -20,13 +20,10 @@ function core.init(config)
     core.role.addRole(roleKey, role)
   end
 
-  if SERVER then
-    PrintTable(core.config.goods)
-    for goodType, goods in pairs(core.config.goods) do
-      for _, good in pairs(goods) do
-        Msg("Adding good "..good.title.." with type "..goodType.."\n")
-        core.good.addGood(goodType, good)
-      end
+  for goodType, goods in pairs(core.config.goods) do
+    for _, good in pairs(goods) do
+      Msg("Adding good "..good.title.." with type "..goodType.."\n")
+      core.good.addGood(goodType, good)
     end
   end
 
