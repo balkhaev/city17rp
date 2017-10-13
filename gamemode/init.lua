@@ -70,20 +70,31 @@ hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
   local group = ply:getGroup()
 
   if group.spawn and group.spawn ~= "" then
-    local randPos = table.Random( group.spawn )
-    local tab = string.Explode(",", randPos)
-    ply:SetPos(Vector(tab[1], tab[2], tab[3]))
+    ply:SetPos(core.utils.getRandomVector( group.spawn ))
   end
 end)
 
 hook.Add( "Think", "ZombieSpawner", function()
   if core.zombie.needSpawn() then
-    core.zombie.timer = CurTime() + 10
+    core.zombie.timer = CurTime() + core.zombie.getTimout()
+    local zombieSpawns
 
-    core.zombie.spawnZombie()
+    if core.zombie.isEvent then
+      zombieSpawns = core.zombie.spawnPos
+    else
+      zombieSpawns = core.zombie.spawnPos
+    end
 
-    if (core.zombie.isLimit()) then
-      core.zombie.startEvent()
+    core.zombie.spawnZombie(core.utils.getRandomVector(zombieSpawns))
+
+    if core.zombie.isEvent then
+      if core.zombie.isMinLimit() then
+        core.zombie.endEvent()
+      end
+    else
+      if core.zombie.isLimit() then
+        core.zombie.startEvent()
+      end
     end
   end
 end)

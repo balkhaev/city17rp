@@ -8,3 +8,10 @@ function core.utils.getPlayerByNick(nick)
     end
   end
 end
+
+function core.utils.getRandomVector(table)
+  local spawnpos = table.Random( table )
+  local explopos = string.Explode(",", spawnpos)
+
+  return Vector(explopos[1],explopos[2],explopos[3])
+end

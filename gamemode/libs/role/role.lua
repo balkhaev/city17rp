@@ -158,7 +158,11 @@ function core.role.giveRoleItems(ply, roleName)
 
   ply:GetHands()
   for _, weaponName in pairs(role.weapons) do
-    ply:Give(weaponName)
+    if string.find(weaponName, "cw_") then
+      for i=1,5 do ply:Give(weaponName) end
+    else
+      ply:Give(weaponName)
+    end
   end
 end
 
