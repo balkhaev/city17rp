@@ -96,6 +96,9 @@ hook.Add( "PlayerSay", "Chat", function (pl, text, teamonly )
   if text == "/roll" then
     pl:ConCommand( "rollthedice")
     return ""
+  elseif string.sub(text, 1, 3) == "/me" then
+    PrintMessage( HUD_PRINTTALK, ply:Nick().." "..string.sub(text, 3))
+    return ""
   end
 end)
 
