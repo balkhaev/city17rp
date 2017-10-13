@@ -3,6 +3,8 @@ core.zombie.spawnPos = { "87.167327880859,5650.2534179688,-463.96875", "92.31185
 core.zombie.timer = 0
 core.zombie.isEvent = false
 
+-- npc_zombie, npc_fastzombie
+
 function core.zombie.spawnZombie(spawnVector)
   local zombie = ents.Create( "npc_zombie" )
   zombie:SetPos( spawnVector )
@@ -18,6 +20,10 @@ function core.zombie.spawnZombie(spawnVector)
     zombie:UpdateEnemyMemory( ply, plypos )
     zombie:SetSchedule( SCHED_CHASE_ENEMY  )
   end
+end
+
+function core.zombie.getZombieName()
+
 end
 
 function core.zombie.needSpawn()

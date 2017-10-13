@@ -35,11 +35,12 @@ include("libs/zombie.lua")
 include("libs/role/team.lua")
 include("libs/role/group.lua")
 include("libs/role/role.lua")
+include("server/sv_npc.lua")
+include("server/sv_player.lua")
 include("server/sv_network.lua")
 include("server/sv_entities.lua")
 include("server/sv_commands.lua")
 include("server/sv_combinedoors.lua")
-include("server/sv_player.lua")
 
 core.init(core.config)
 
