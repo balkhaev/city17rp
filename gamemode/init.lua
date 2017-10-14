@@ -127,3 +127,15 @@ hook.Add("PlayerDeath", "ForcePlayerRespawn", function (ply)
     timer.Simple(core.config.defaults.spawnTime, RespawnPlayer, ply)
   end
 end)
+
+function GM:PostGamemodeLoaded()
+  timer.Create("hlrp_payday", 300, 0, function()
+    for k,v in pairs(player.GetAll()) do
+      local role = core.role.getPlayerRole( v )
+
+      v:AddMoney(role.salary);
+
+      v:ChatPrint("You have earned $" .. string.Comma(role.salary) .. ". It has been sent to your bank.");
+    end
+  end);
+end
