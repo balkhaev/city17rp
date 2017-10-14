@@ -3,7 +3,8 @@ core.config = {}
 core.config.defaults = {
   role = "citizen",
   access = {"settings"},
-  spawnTime = 180,
+  spawnTime = 10,
+  voiceRadius = 1000,
   money = 1000,
   zombieLimit = 60,
   minZombieLimit = 5
@@ -33,7 +34,7 @@ core.config.groups = {
   administration = {
     title = "Администрация города",
     team = "civilians",
-    spawn = {"548.93084716797,3056.7243652344,80.03125"},
+    spawn = {"6437.854004,-1430.561279,4220.031250"},
     access = {"poll"}
   },
   citizens = {
@@ -156,7 +157,7 @@ core.config.roles = {
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_retrocop.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","guigui_handcuffs","weapon_stunner_stun"},
+    weapons = {"weapon_empty_hands","weapon_stunner_stun"},
     salary = 5
   },
   cpvt = {
@@ -164,7 +165,7 @@ core.config.roles = {
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_urban_police.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","cw_p99","guigui_handcuffs","weapon_stunner_stun"},
+    weapons = {"weapon_empty_hands","cw_p99","weapon_stunner_stun"},
     salary = 10
   },
   ccpl = {
@@ -172,7 +173,7 @@ core.config.roles = {
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_policetrench.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","cw_g36c","cw_p99","guigui_handcuffs","weapon_stunner_stun"},
+    weapons = {"weapon_empty_hands","cw_g36c","cw_p99","weapon_stunner_stun"},
     salary = 15
   },
   ccpt = {
@@ -180,7 +181,7 @@ core.config.roles = {
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_hunter_police.mdl",
     access = {"managment"},
-    weapons = {"weapon_empty_hands","cw_ar15","cw_p99","guigui_handcuffs","weapon_stunner_stun"},
+    weapons = {"weapon_empty_hands","cw_ar15","cw_p99","weapon_stunner_stun"},
     salary = 20
   },
   ccmd = {
@@ -188,7 +189,7 @@ core.config.roles = {
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_rtb_police.mdl",
     access = {"managment"},
-    weapons = {"weapon_empty_hands","cw_l85a2","cw_deagle","guigui_handcuffs","weapon_stunner_stun"},
+    weapons = {"weapon_empty_hands","cw_l85a2","cw_deagle","weapon_stunner_stun"},
     salary = 25
   },
   -- Армия Альянс

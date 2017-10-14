@@ -19,10 +19,8 @@ function core.npc.addRelation(ply)
     local team = ply:getTeam()
 
     if team.name == "rebels" then
-      Msg(ply:SteamID(), " Rebels\n")
       npc:AddEntityRelationship( ply, D_LI, 99 )
     elseif team.name == "alliance" then
-      Msg(ply:SteamID(), " Alliance\n")
       npc:AddEntityRelationship( ply, D_FR, 99 )
     end
   end

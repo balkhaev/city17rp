@@ -71,3 +71,23 @@ function meta:RemoveCamouflage()
   self.camouflageGroup = nil
   self:SetModel(role.model)
 end
+
+function meta:hasAccess(accessFlag)
+  if self:IsUserGroup("superadmin") then
+    return true
+  end
+
+  if core.config.defaults.access[accessFlag] ~= nil then
+    return true
+  end
+
+  if core.role.hasPlayerAccess(self, accessFlag) then
+    return true
+  end
+
+  if core.group.hasPlayerAccess(self, accessFlag) then
+    return true
+  end
+
+  return false
+end

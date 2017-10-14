@@ -46,6 +46,7 @@ function core.role.getRole(roleName)
       return role
     end
   end
+  Msg(roleName .. " not found\n")
   return nil
 end
 

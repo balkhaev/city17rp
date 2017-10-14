@@ -138,7 +138,7 @@ function core.panel.createManagmentSheet(Sheet, ply)
 
     local roles = net.ReadTable()
 
-    if ply:hasAccess("admin") then
+    if ply:IsAdmin("admin") then
       for _,v in ipairs(player.GetAll()) do
         AppList:AddLine(v:Name(), v:getGroupTitle(), v:getRoleTitle(), v:SteamID())
       end

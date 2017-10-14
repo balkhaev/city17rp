@@ -43,9 +43,9 @@ include("server/sv_entities.lua")
 include("server/sv_commands.lua")
 include("server/sv_combinedoors.lua")
 
-function GM:PostGamemodeLoaded()
-  core.init(core.config)
+core.init(core.config)
 
+function GM:PostGamemodeLoaded()
   timer.Create("hlrp_payday", 300, 0, function()
     for k,v in pairs(player.GetAll()) do
       local role = core.role.getPlayerRole( v )
@@ -116,7 +116,7 @@ hook.Add( "Think", "ZombieSpawner", function()
 end)
 
 hook.Add("PlayerCanHearPlayersVoice" , "VoiceRadius" , function( p1 , p2 )
-  return (p1:GetPos():Distance(p2:GetPos()) <= 2000)
+  return (p1:GetPos():Distance(p2:GetPos()) <= core.config.defaults.voiceRadius)
 end)
 
 hook.Add( "PlayerSay", "Chat", function (pl, text, teamonly )
