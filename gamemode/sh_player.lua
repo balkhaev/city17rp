@@ -13,24 +13,7 @@ function meta:getRoleTitle()
     return self.camouflageGroup
   end
 
-  local role = self:getRole()
-
-  if role == nil then
-    return "Unknown role"
-  end
-
-  return role.title
-end
-
-function meta:getGroup()
-  local group = core.group.getGroup(self:getGroupName())
-
-  if group == nil then
-    Msg("[getGroup] ", self:Nick()," without group")
-    return nil
-  end
-
-  return group
+  return self:GetNWString("roleTitle")
 end
 
 function meta:getGroupName()
@@ -38,13 +21,7 @@ function meta:getGroupName()
 end
 
 function meta:getGroupTitle()
-  local group = self:getGroup()
-
-  if group == nil then
-    return "Unknown group"
-  end
-
-  return group.title
+  return self:GetNWString("groupTitle")
 end
 
 function meta:isGroup(groupName)
@@ -55,10 +32,6 @@ function meta:isGroup(groupName)
   end
 
   return group.name == groupName
-end
-
-function meta:getTeam()
-  return core.team.getPlayerTeam(self)
 end
 
 function meta:hasAccess(accessFlag)

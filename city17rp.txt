@@ -1,6 +1,6 @@
 "city17rp"
 {
-  "base"		    ""
+  "base"		    "base"
   "title"		    "City 17 RP"
   "maps"		    "^rp_"
   "hide"		    "0"

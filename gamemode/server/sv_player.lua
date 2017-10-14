@@ -10,12 +10,31 @@ function meta:setRole(roleName)
     self:SetTeam(team.index)
 
     self:SetNWString("role", role.name)
+    self:SetNWString("roleTitle", role.title)
     self:SetNWString("group", group.name)
+    self:SetNWString("groupTitle", group.title)
     self:SetNWString("team", team.name)
+    self:SetNWString("teamTitle", team.title)
     self:SetPData("role", role.name)
 
     core.role.giveRoleItems(self, role.name)
+    core.npc.addRelation(self)
   end
+end
+
+function meta:getGroup()
+  local group = core.group.getGroup(self:getGroupName())
+
+  if group == nil then
+    Msg("[getGroup] ", self:Nick()," without group")
+    return nil
+  end
+
+  return group
+end
+
+function meta:getTeam()
+  return core.team.getPlayerTeam(self)
 end
 
 function meta:setGroup(groupName)

@@ -39,7 +39,6 @@ end);
 
 hook.Add("PostDrawOpaqueRenderables", "drawadminname", function()
   for k, ply in pairs( player.GetAll() ) do
-    if ply:getRole() == nil then return end
     if not ply:Alive() then return end
 
     local offset = Vector(0, 0, 80)

@@ -32,7 +32,7 @@ end
 
 function core.zombie.getZombieCount()
   local zombieTable = ents.FindByClass( "npc_zombie" )
-  return zombieTable.Count
+  return table.Count(zombieTable)
 end
 
 function core.zombie.isLimit()

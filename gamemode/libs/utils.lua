@@ -9,9 +9,16 @@ function core.utils.getPlayerByNick(nick)
   end
 end
 
-function core.utils.getRandomVector(table)
-  local spawnpos = table.Random( table )
+function core.utils.getRandomVector(spawns)
+  local spawnpos = table.Random( spawns )
   local explopos = string.Explode(",", spawnpos)
 
   return Vector(explopos[1],explopos[2],explopos[3])
+end
+
+function core.utils.tableConcat(t1,t2)
+  for i=1,#t2 do
+    t1[#t1+1] = t2[i]
+  end
+  return t1
 end

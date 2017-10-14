@@ -22,24 +22,31 @@ function core.panel.createPanel(ply)
 
   core.panel.createSettingsSheet(PropertySheet, ply)
 
-  if ply:hasAccess("managment") then
-    core.panel.createManagmentSheet(PropertySheet, ply)
-  end
-  if ply:hasAccess("trade") then
-    core.panel.createTradeSheet(PropertySheet, ply)
-  end
-  if ply:hasAccess("camouflage") then
-    core.panel.createCamouflageSheet(PropertySheet, ply)
-  end
-  if ply:hasAccess("poll") then
-    core.panel.createPollSheet(PropertySheet, ply)
-  end
-  if ply:hasAccess("admin") then
-    core.panel.createAdminSheet(PropertySheet, ply)
-  end
+  net.Start( "getPlayerRoles" )
+  net.SendToServer()
 
-  core.panel.createHelpSheet(PropertySheet, ply)
-  core.panel.createAboutSheet(PropertySheet, ply)
+  net.Receive("receivePlayerRoles", function()
+    local accesses = net.ReadTable()
+
+    if ply:IsAdmin() or table.HasValue(accesses,"managment") then
+      core.panel.createManagmentSheet(PropertySheet, ply)
+    end
+    if ply:IsAdmin() or table.HasValue(accesses,"trade") then
+      core.panel.createTradeSheet(PropertySheet, ply)
+    end
+    if ply:IsAdmin() or table.HasValue(accesses,"camouflage") then
+      core.panel.createCamouflageSheet(PropertySheet, ply)
+    end
+    if ply:IsAdmin() or table.HasValue(accesses,"poll") then
+      core.panel.createPollSheet(PropertySheet, ply)
+    end
+    if ply:IsAdmin() then
+      core.panel.createAdminSheet(PropertySheet, ply)
+    end
+
+    core.panel.createHelpSheet(PropertySheet, ply)
+    core.panel.createAboutSheet(PropertySheet, ply)
+  end)
 end
 
 function core.panel.createSettingsSheet(Sheet, ply)

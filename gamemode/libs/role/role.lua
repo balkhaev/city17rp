@@ -116,8 +116,8 @@ function core.role.existsPlayerRole(ply)
 end
 
 function core.role.setPlayerRole(ply, roleName)
-  Msg("Set role ", roleName, " for ", ply:Nick(), "\n")
   local role = core.role.getRole(roleName)
+  Msg("Set role ", role.title, " for ", ply:Nick(), "\n")
 
   if role then
     if core.role.existsPlayerRole(ply) then

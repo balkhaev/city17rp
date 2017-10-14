@@ -1,22 +1,29 @@
+core.npc = {}
+core.npc.store = {}
+
 local conf = {
-  alyxSpawnVector = Vector()
+  alyxSpawnVector = Vector(4365.419434,-711.756287,140.031250)
 }
 
 hook.Add( "InitPostEntity", "SpawnAlyx", function()
   local alyx = ents.Create( "npc_alyx" )
-  alyx:StripWeapons()
   alyx:SetPos( conf.alyxSpawnVector )
   alyx:SetName("Alyx")
   alyx:Spawn()
 
-  local allianceGangs = core.role.getTeamGangs("alliance")
-  local rebelsGangs = core.role.getTeamGangs("rebels")
-
-  for steamID, playerName in pairs(allianceGangs) do
-    alyx:AddEntityRelationship( steamID, D_FR, 99 )
-  end
-
-  for steamID, playerName in pairs(rebelsGangs) do
-    alyx:AddEntityRelationship( steamID, D_LI, 99 )
-  end
+  table.insert(core.npc.store, alyx)
 end )
+
+function core.npc.addRelation(ply)
+  for i,npc in pairs(core.npc.store) do
+    local team = ply:getTeam()
+
+    if team.name == "rebels" then
+      Msg(ply:SteamID(), " Rebels\n")
+      npc:AddEntityRelationship( ply, D_LI, 99 )
+    elseif team.name == "alliance" then
+      Msg(ply:SteamID(), " Alliance\n")
+      npc:AddEntityRelationship( ply, D_FR, 99 )
+    end
+  end
+end

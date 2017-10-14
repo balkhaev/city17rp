@@ -20,6 +20,7 @@ resource.AddWorkshop("104491619") -- Metropolice Pack
 resource.AddWorkshop("245482078") -- Empty Hands Swep
 resource.AddWorkshop("834188196") -- Over-the-Shoulder Thirdperson
 resource.AddWorkshop("682125090") -- Portable Force Field
+resource.AddWorkshop("632126111") -- iNPC - Artifical Intelligence Module
 --resource.AddWorkshop("669642096") -- Drones Rewrite
 
 core = {}
@@ -42,7 +43,21 @@ include("server/sv_entities.lua")
 include("server/sv_commands.lua")
 include("server/sv_combinedoors.lua")
 
-core.init(core.config)
+function GM:PostGamemodeLoaded()
+  core.init(core.config)
+
+  timer.Create("hlrp_payday", 300, 0, function()
+    for k,v in pairs(player.GetAll()) do
+      local role = core.role.getPlayerRole( v )
+
+      if role == nil then return end
+
+      v:AddMoney(role.salary);
+
+      v:ChatPrint("Вы получили " .. string.Comma(role.salary) .. "$.");
+    end
+  end);
+end
 
 hook.Add( "PlayerInitialSpawn", "CityInitialSpawn", function(ply)
   if not core.role.existsPlayerRole(ply) then
@@ -106,36 +121,21 @@ end)
 
 hook.Add( "PlayerSay", "Chat", function (pl, text, teamonly )
   if text == "/roll" then
-    PrintMessage( HUD_PRINTTALK, ply:Nick().." выкинул "..math.random(1,100)..".")
+    PrintMessage( HUD_PRINTTALK, pl:Nick().." выкинул "..math.random(1,100)..".")
     return ""
   elseif string.sub(text, 1, 3) == "/me" then
-    PrintMessage( HUD_PRINTTALK, ply:Nick().." "..string.sub(text, 3))
+    PrintMessage( HUD_PRINTTALK, pl:Nick().." "..string.sub(text, 5))
     return ""
   end
 end)
-
-
-local function RespawnPlayer(ply)
-  ply:UnLock()
-  ply:ChatPrint("Вы можете возродиться")
-end
 
 hook.Add("PlayerDeath", "ForcePlayerRespawn", function (ply)
   if core.config.defaults.spawnTime ~= 0 then
     ply:Lock()
     ply:ChatPrint("Вы должны подождать " .. core.config.defaults.spawnTime .. " секунд перед возрождением")
-    timer.Simple(core.config.defaults.spawnTime, RespawnPlayer, ply)
+    timer.Simple(core.config.defaults.spawnTime, function()
+      ply:UnLock()
+      ply:ChatPrint("Вы можете возродиться")
+    end)
   end
 end)
-
-function GM:PostGamemodeLoaded()
-  timer.Create("hlrp_payday", 300, 0, function()
-    for k,v in pairs(player.GetAll()) do
-      local role = core.role.getPlayerRole( v )
-
-      v:AddMoney(role.salary);
-
-      v:ChatPrint("You have earned $" .. string.Comma(role.salary) .. ". It has been sent to your bank.");
-    end
-  end);
-end

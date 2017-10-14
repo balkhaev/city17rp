@@ -13,6 +13,24 @@ util.AddNetworkString("setCamouflage")
 util.AddNetworkString("getCamouflages")
 util.AddNetworkString("receiveCamouflages")
 
+util.AddNetworkString("getPlayerAccess")
+util.AddNetworkString("receivePlayerAccess")
+
+net.Receive("getPlayerAccess", function(len,ply)
+  local role = ply:getRole()
+  local group = ply:getGroup()
+
+  local accessToSend = core.utils.tableConcat(role.access,group.access)
+
+  if ply:IsAdmin() then
+    table.insert(accessToSend, "admin")
+  end
+
+  net.Start("receivePlayerAccess")
+  net.WriteTable(accessToSend)
+  net.Send(ply)
+end)
+
 function sendPlayerRoles(ply)
   local rolesToSend = {}
   local roles
