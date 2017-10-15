@@ -22,10 +22,10 @@ function core.panel.createPanel(ply)
 
   core.panel.createSettingsSheet(PropertySheet, ply)
 
-  net.Start( "getPlayerRoles" )
+  net.Start( "getPlayerAccess" )
   net.SendToServer()
 
-  net.Receive("receivePlayerRoles", function()
+  net.Receive("receivePlayerAccess", function()
     local accesses = net.ReadTable()
 
     if ply:IsAdmin() or table.HasValue(accesses,"managment") then
