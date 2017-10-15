@@ -157,7 +157,7 @@ core.config.roles = {
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_retrocop.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","weapon_stunner_stun"},
+    weapons = {"weapon_empty_hands","weapon_stunner_stun","weapon_cuff_standard"},
     salary = 5
   },
   cpvt = {
@@ -165,7 +165,7 @@ core.config.roles = {
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_urban_police.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","cw_p99","weapon_stunner_stun"},
+    weapons = {"weapon_empty_hands","cw_p99","weapon_stunner_stun","weapon_cuff_elastic"},
     salary = 10
   },
   ccpl = {
@@ -173,7 +173,7 @@ core.config.roles = {
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_policetrench.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","cw_g36c","cw_p99","weapon_stunner_stun"},
+    weapons = {"weapon_empty_hands","cw_g36c","cw_p99","weapon_stunner_stun","weapon_cuff_elastic"},
     salary = 15
   },
   ccpt = {
@@ -181,7 +181,7 @@ core.config.roles = {
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_hunter_police.mdl",
     access = {"managment"},
-    weapons = {"weapon_empty_hands","cw_ar15","cw_p99","weapon_stunner_stun"},
+    weapons = {"weapon_empty_hands","cw_ar15","cw_p99","weapon_stunner_stun","weapon_cuff_elastic"},
     salary = 20
   },
   ccmd = {
@@ -189,7 +189,7 @@ core.config.roles = {
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_rtb_police.mdl",
     access = {"managment"},
-    weapons = {"weapon_empty_hands","cw_l85a2","cw_deagle","weapon_stunner_stun"},
+    weapons = {"weapon_empty_hands","cw_l85a2","cw_deagle","weapon_stunner_stun","weapon_cuff_elastic"},
     salary = 25
   },
   -- Армия Альянс

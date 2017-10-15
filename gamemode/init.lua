@@ -25,6 +25,7 @@ core = {}
 
 include("shared.lua")
 include("sh_player.lua")
+include("config/gamemode.lua")
 include("config/general.lua")
 include("config/goods.lua")
 include("libs/core.lua")

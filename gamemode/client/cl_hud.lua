@@ -39,6 +39,8 @@ end);
 
 hook.Add("PostDrawOpaqueRenderables", "drawadminname", function()
   for k, ply in pairs( player.GetAll() ) do
+    if (ply:GetPos():Distance(LocalPlayer():GetPos()) > 500) then return end
+
     if not ply:Alive() then return end
 
     local offset = Vector(0, 0, 80)
@@ -48,14 +50,12 @@ hook.Add("PostDrawOpaqueRenderables", "drawadminname", function()
     local pos2 = ply:GetPos() + offset2 + ang:Up()
     ang:RotateAroundAxis(ang:Forward(), 90)
     ang:RotateAroundAxis(ang:Right(), 90)
-    local tag = ply:getGroupTitle()
-    if tag and (team.GetName(LocalPlayer():Team()) == team.GetName(ply:Team())) then
-      cam.Start3D2D(pos, Angle(0, ang.y, 90), 0.25)
-      draw.SimpleText(ply:Nick(), "Trebuchet24", 1, 1, team.GetColor(ply:Team()), TEXT_ALIGN_CENTER, 1, 1, HSVToColor( ply:Health(), 1, 1) )
-      cam.End3D2D()
-      cam.Start3D2D(pos2, Angle(0, ang.y, 90), 0.25)
-      draw.SimpleText(tag, "Trebuchet24", 2, 2, HSVToColor(math.abs(math.sin(CurTime() * 0.1) * 335), 1, 1), TEXT_ALIGN_CENTER, 1, 1, Color(0, 0, 0))
-      cam.End3D2D()
-    end
+
+    cam.Start3D2D(pos, Angle(0, ang.y, 90), 0.25)
+    draw.SimpleText(ply:Nick(), "Trebuchet24", 1, 1, team.GetColor(ply:Team()), TEXT_ALIGN_CENTER, 1, 1, HSVToColor( ply:Health(), 1, 1) )
+    cam.End3D2D()
+    cam.Start3D2D(pos2, Angle(0, ang.y, 90), 0.25)
+    draw.SimpleText(ply:getRoleTitle(), "Trebuchet24", 2, 2, HSVToColor(math.abs(math.sin(CurTime() * 0.1) * 335), 1, 1), TEXT_ALIGN_CENTER, 1, 1, Color(0, 0, 0))
+    cam.End3D2D()
   end
 end)
