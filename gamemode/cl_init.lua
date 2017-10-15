@@ -11,6 +11,12 @@ hook.Add ("Think", "PlayerReady", function ()
   hook.Remove ("Think", "PlayerReady")
 end)
 
+function GM:DrawDeathNotice( x, y )
+end
+
+function GM:HUDDrawTargetID()
+end
+
 include("client/cl_hud.lua")
 include("client/cl_panel.lua")
 include("client/cl_network.lua")
