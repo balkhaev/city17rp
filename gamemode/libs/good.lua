@@ -27,7 +27,7 @@ end
 function core.good.getGood(goodType, goodEntity)
   if core.config.goods[goodType] == nil then return nil end
 
-  for _, good in pairs(core.config.goods[goodType]) do
+  for _, good in pairs(core.good.store) do
     if good.entity == goodEntity then
       return good
     end
