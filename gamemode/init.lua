@@ -13,15 +13,13 @@ AddCSLuaFile("client/cl_network.lua")
 resource.AddWorkshop("349050451") -- Customizable Weaponry 2.0
 resource.AddWorkshop("358608166") -- Extra Customizable Weaponry 2.0
 resource.AddWorkshop("975698959") -- Stunners Pack
-resource.AddWorkshop("746876505") -- Handcuffs
+-- resource.AddWorkshop("746876505") -- Handcuffs
 resource.AddWorkshop("675824914") -- Half-Life 2 Melee Pack
--- resource.AddWorkshop("314312925") -- [C3] Hand Cuff SWEP
 resource.AddWorkshop("104491619") -- Metropolice Pack
 resource.AddWorkshop("245482078") -- Empty Hands Swep
 resource.AddWorkshop("834188196") -- Over-the-Shoulder Thirdperson
 resource.AddWorkshop("682125090") -- Portable Force Field
 resource.AddWorkshop("632126111") -- iNPC - Artifical Intelligence Module
---resource.AddWorkshop("669642096") -- Drones Rewrite
 
 core = {}
 
