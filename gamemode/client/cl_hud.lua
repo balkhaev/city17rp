@@ -39,7 +39,7 @@ end);
 
 hook.Add("PostDrawOpaqueRenderables", "drawadminname", function()
   for k, ply in pairs( player.GetAll() ) do
-    if (ply:GetPos():Distance(LocalPlayer():GetPos()) > 500) then return end
+    if (ply:GetPos():Distance(LocalPlayer():GetPos()) > 200) then return end
 
     if not ply:Alive() then return end
 

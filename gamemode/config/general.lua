@@ -223,7 +223,7 @@ core.config.roles = {
     group = "implementationDepartment",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","cw_mp5","cw_m1911"},
+    weapons = {"weapon_empty_hands","cw_mp5","cw_m1911","weapon_hl2pipe"},
     salary = 10,
     camouflage = { "citizen", "crct" }
   },
@@ -232,7 +232,7 @@ core.config.roles = {
     group = "implementationDepartment",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","cw_ump45","cw_m1911"},
+    weapons = {"weapon_empty_hands","cw_ump45","cw_m1911","weapon_hl2pipe"},
     salary = 15,
     camouflage = { "citizen", "crct", "ows" }
   },
@@ -241,7 +241,7 @@ core.config.roles = {
     group = "implementationDepartment",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
-    weapons = {"weapon_empty_hands","cw_vss","cw_m1911"},
+    weapons = {"weapon_empty_hands","cw_vss","cw_m1911","weapon_hl2pipe"},
     salary = 20,
     camouflage = { "citizen", "crct", "ows", "owc" }
   },

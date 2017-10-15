@@ -1,6 +1,7 @@
 AddCSLuaFile("shared.lua")
 AddCSLuaFile("sh_player.lua")
 
+AddCSLuaFile("config/gamemode.lua")
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("client/libs/hud.lua")
 AddCSLuaFile("client/libs/panel.lua")
