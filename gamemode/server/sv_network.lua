@@ -134,7 +134,7 @@ net.Receive("setCamouflage", function(len,ply)
   local roleName = net.ReadString()
   local role = core.role.getRole(roleName)
 
-  ply:SetCamouflage(role.model, role.group)
+  ply:SetCamouflage(role.model, role.title)
 end)
 
 net.Receive("getCamouflages", function(len,ply)

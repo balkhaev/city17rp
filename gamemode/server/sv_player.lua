@@ -60,16 +60,16 @@ function meta:TakeMoney(target, amount)
   self:AddMoney(-amount)
 end
 
-function meta:SetCamouflage(roleModel, roleGroup)
-  self.camouflageGroup = roleGroup
+function meta:SetCamouflage(roleModel, roleTitle)
   self:SetModel(roleModel)
+  self:SetNWString("roleTitle", roleTitle)
 end
 
 function meta:RemoveCamouflage()
   local role = self:getRole()
 
-  self.camouflageGroup = nil
   self:SetModel(role.model)
+  self:SetNWString("groupTitle", role.title)
 end
 
 function meta:hasAccess(accessFlag)
