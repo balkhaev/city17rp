@@ -286,5 +286,21 @@ core.config.roles = {
     access = {},
     weapons = {"weapon_empty_hands","cw_l115","cw_g3a3","cw_makarov","weapon_hl2shovel"},
     salary = 15
+  },
+  odessa = {
+    title = "Одесса Кэббедж",
+    group = "rebelsArmy",
+    model = "models/player/odessa.mdl",
+    access = {"managment"},
+    weapons = {"weapon_empty_hands","cw_shorty","cw_g3a3","cw_makarov","weapon_hl2shovel"},
+    salary = 30
+  },
+  alyx = {
+    title = "Аликс Вэнс",
+    group = "rebelsArmy",
+    model = "models/player/alyx.mdl",
+    access = {"camouflage"},
+    weapons = {"weapon_empty_hands","cw_shorty","cw_g3a3","cw_makarov","weapon_hl2shovel"},
+    salary = 30
   }
 }
