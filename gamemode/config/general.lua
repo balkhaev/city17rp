@@ -4,6 +4,7 @@ core.config.defaults = {
   role = "citizen",
   access = {"settings"},
   spawnTime = 10,
+  chatRadius = 1000,
   voiceRadius = 1000,
   money = 1000,
   zombieLimit = 60,
