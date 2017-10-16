@@ -1,6 +1,7 @@
 core = {}
 
 include("shared.lua")
+include("libs/utils.lua")
 include("config/gamemode.lua")
 include("client/libs/hud.lua")
 include("client/libs/panel.lua")

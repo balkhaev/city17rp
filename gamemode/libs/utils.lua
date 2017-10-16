@@ -22,3 +22,11 @@ function core.utils.tableConcat(t1,t2)
   end
   return t1
 end
+
+-- Short helper for input.LookupBinding, returns capitalised key or a default
+function core.utils.key(binding, default)
+  local b = input.LookupBinding(binding)
+  if not b then return default end
+
+  return string.upper(b)
+end

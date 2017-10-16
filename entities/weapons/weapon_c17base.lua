@@ -139,21 +139,13 @@ if CLIENT then
     surface.DrawLine( x, y + length, x, y + gap )
   end
 
-  local GetPTranslation = LANG.GetParamTranslation
-
   -- Many non-gun weapons benefit from some help
   local help_spec = { text = "", font = "TabLarge", xalign = TEXT_ALIGN_CENTER }
   function SWEP:DrawHelp()
     local data = self.HUDHelp
 
-    local translate = data.translatable
     local primary = data.primary
     local secondary = data.secondary
-
-    if translate then
-      primary = primary and GetPTranslation(primary, data.translate_params)
-      secondary = secondary and GetPTranslation(secondary, data.translate_params)
-    end
 
     help_spec.pos = { ScrW() / 2.0, ScrH() - 40 }
     help_spec.text = secondary or primary
@@ -170,9 +162,9 @@ if CLIENT then
 
   -- mousebuttons are enough for most weapons
   local default_key_params = {
-    primaryfire = Key("+attack", "LEFT MOUSE"),
-    secondaryfire = Key("+attack2", "RIGHT MOUSE"),
-    usekey = Key("+use", "USE")
+    primaryfire = core.utils.key("+attack", "LEFT MOUSE"),
+    secondaryfire = core.utils.key("+attack2", "RIGHT MOUSE"),
+    usekey = core.utils.key("+use", "USE")
   };
 
   function SWEP:AddHUDHelp(primary_text, secondary_text, translate, extra_params)
