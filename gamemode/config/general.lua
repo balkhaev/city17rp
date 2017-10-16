@@ -64,7 +64,7 @@ core.config.groups = {
     access = {"camouflage"}
   },
   rebelsArmy = {
-    title = "Армия Повстанцев",
+    title = "Армия Сопротивления",
     team = "rebels",
     spawn = {"-3369.4533691406,-2147.1401367188,80.03125","-3383.854248,-2053.615723,80.031250","-3388.353271,-1961.415161,80.031250","-3307.349121,-1958.488647,80.031250","-3306.977295,-2045.555054,80.031250","-3307.333252,-2135.121826,80.031250","-3307.865967,-2232.508057,80.031250","-3308.638428,-2335.323242,80.031250","-3309.332031,-2402.856934,80.031250","-3426.955566,-2423.624512,80.031250","-3424.474854,-2340.374023,80.031250"},
     access = {}
@@ -118,14 +118,6 @@ core.config.roles = {
     weapons = {"weapon_empty_hands","weapon_hl2pan","cw_mr96"},
     salary = 10
   },
-  droneTrader = {
-    title = "Продавец дронов",
-    group = "citizens",
-    model = "models/player/Group01/Male_04.mdl",
-    access = {"trade","droneTrade"},
-    weapons = {"weapon_empty_hands","weapon_hl2pan","cw_mr96"},
-    salary = 10
-  },
   -- Мерия
   representativeMayor = {
     title = "Представитель мера",
@@ -153,7 +145,7 @@ core.config.roles = {
   },
   -- Гражданская оборона
   crct = {
-    title = "Рекрут",
+    title = "Рекрут ГО",
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_retrocop.mdl",
     access = {},
@@ -161,7 +153,7 @@ core.config.roles = {
     salary = 5
   },
   cpvt = {
-    title = "Рядовой",
+    title = "Рядовой ГО",
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_urban_police.mdl",
     access = {},
@@ -169,7 +161,7 @@ core.config.roles = {
     salary = 10
   },
   ccpl = {
-    title = "Капрал",
+    title = "Капрал ГО",
     group = "civilianDefence",
     model = "models/dpfilms/metropolice/playermodels/pm_policetrench.mdl",
     access = {},
@@ -194,7 +186,7 @@ core.config.roles = {
   },
   -- Армия Альянс
   ows = {
-    title = "Солдат",
+    title = "Солдат OTA",
     group = "ota",
     model = "models/player/Combine_Soldier.mdl",
     access = {},
@@ -202,7 +194,7 @@ core.config.roles = {
     salary = 10
   },
   owc = {
-    title = "Тяжелый солдат",
+    title = "Тяжелый солдат OTA",
     group = "ota",
     model = "models/player/Combine_Soldier_PrisonGuard.mdl",
     access = {},
@@ -210,7 +202,7 @@ core.config.roles = {
     salary = 15
   },
   eow = {
-    title = "Элитный солдат",
+    title = "Элитный солдат OTA",
     group = "ota",
     model = "models/player/Combine_Super_Soldier.mdl",
     access = {},
@@ -219,27 +211,27 @@ core.config.roles = {
   },
   -- Отдел внедрения
   scout = {
-    title = "Разведчик",
+    title = "Разведчик Сопротивления",
     group = "implementationDepartment",
-    model = "models/player/Group03/Male_01.mdl",
+    model = "models/player/Group03/Male_06.mdl",
     access = {},
     weapons = {"weapon_empty_hands","cw_mp5","cw_m1911","weapon_hl2pipe"},
     salary = 10,
     camouflage = { "citizen", "crct" }
   },
   spy = {
-    title = "Шпион",
+    title = "Шпион Сопротивления",
     group = "implementationDepartment",
-    model = "models/player/Group03/Male_01.mdl",
+    model = "models/player/Group03/Male_07.mdl",
     access = {},
     weapons = {"weapon_empty_hands","cw_ump45","cw_m1911","weapon_hl2pipe"},
     salary = 15,
     camouflage = { "citizen", "crct", "ows" }
   },
   saboteur = {
-    title = "Диверсант",
+    title = "Диверсант Сопротивления",
     group = "implementationDepartment",
-    model = "models/player/Group03/Male_01.mdl",
+    model = "models/player/Group03/Male_08.mdl",
     access = {},
     weapons = {"weapon_empty_hands","cw_vss","cw_m1911","weapon_hl2pipe"},
     salary = 20,
@@ -248,15 +240,15 @@ core.config.roles = {
   chiefID = {
     title = "Глава Отдела внедрения",
     group = "implementationDepartment",
-    model = "models/player/Group03/Male_01.mdl",
+    model = "models/player/Group03/Male_09.mdl",
     access = {"managment"},
     weapons = {"weapon_empty_hands","cw_vss","cw_m1911"},
     salary = 25,
     camouflage = { "citizen", "crct", "ows", "owc" }
   },
-  -- Армия Сопративления
+  -- Армия Сопротивления
   rrct = {
-    title = "Рекрут",
+    title = "Рекрут Сопротивления",
     group = "rebelsArmy",
     model = "models/player/Group03/Male_01.mdl",
     access = {},
@@ -264,7 +256,7 @@ core.config.roles = {
     salary = 5
   },
   rpvt = {
-    title = "Рядовой",
+    title = "Рядовой Сопротивления",
     group = "rebelsArmy",
     model = "models/player/Group03/Male_02.mdl",
     access = {},
@@ -272,7 +264,7 @@ core.config.roles = {
     salary = 10
   },
   rcpl = {
-    title = "Капрал",
+    title = "Капрал Сопротивления",
     group = "rebelsArmy",
     model = "models/player/Group03/Male_03.mdl",
     access = {},
@@ -280,7 +272,7 @@ core.config.roles = {
     salary = 15
   },
   rsgt = {
-    title = "Сержант",
+    title = "Сержант Сопротивления",
     group = "rebelsArmy",
     model = "models/player/Group03/Male_04.mdl",
     access = {},
@@ -288,9 +280,9 @@ core.config.roles = {
     salary = 20
   },
   rlt = {
-    title = "Лейтенант",
+    title = "Лейтенант Сопротивления",
     group = "rebelsArmy",
-    model = "models/player/Group03/Male_03.mdl",
+    model = "models/player/Group03/Male_05.mdl",
     access = {},
     weapons = {"weapon_empty_hands","cw_l115","cw_g3a3","cw_makarov","weapon_hl2shovel"},
     salary = 15
