@@ -116,6 +116,10 @@ hook.Add( "Think", "ZombieSpawner", function()
   end
 end)
 
+hook.Add( "PlayerNoClip", "ULXNoclipConversion", function(ply)
+  ply:ConCommand("ulx noclip")
+end)
+
 hook.Add("PlayerCanHearPlayersVoice" , "VoiceRadius" , function( p1 , p2 )
   return (p1:GetPos():Distance(p2:GetPos()) <= core.config.defaults.voiceRadius)
 end)
