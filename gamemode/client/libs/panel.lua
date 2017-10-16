@@ -282,7 +282,7 @@ function core.panel.createHelpSheet(Sheet, ply)
   local SheetItem = vgui.Create( "HTML", Sheet )
   SheetItem:SetPos( 0, 0 )
   SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
-  SheetItem:OpenURL("http://telegra.ph/Pomoshch-HL2RP-10-12")
+  SheetItem:OpenURL("https://balkhaev.github.io/city17rp/help.html")
 
   Sheet:AddSheet( "Помощь", SheetItem, "icon16/help.png", false, false )
 end
@@ -291,7 +291,7 @@ function core.panel.createAboutSheet(Sheet, ply)
   local SheetItem = vgui.Create( "HTML", Sheet )
   SheetItem:SetPos( 0, 0 )
   SheetItem:SetSize( Sheet:GetWide(), Sheet:GetTall() )
-  SheetItem:OpenURL("http://telegra.ph/City-17-RP-10-12-2")
+  SheetItem:OpenURL("https://balkhaev.github.io/city17rp/")
 
   Sheet:AddSheet( "О режиме", SheetItem, "icon16/information.png", false, false )
 end
