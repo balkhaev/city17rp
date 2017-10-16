@@ -119,6 +119,10 @@ hook.Add("PlayerCanHearPlayersVoice" , "VoiceRadius" , function( p1 , p2 )
   return (p1:GetPos():Distance(p2:GetPos()) <= core.config.defaults.voiceRadius)
 end)
 
+hook.Add("PlayerCanSeePlayersChat" , "ChatRadius" , function( text, teamOnly, p1 , p2 )
+  return (p1:GetPos():Distance(p2:GetPos()) <= core.config.defaults.voiceRadius)
+end)
+
 hook.Add( "PlayerSay", "Chat", function (pl, text, teamonly )
   if text == "/roll" then
     PrintMessage( HUD_PRINTTALK, pl:Nick().." выкинул "..math.random(1,100)..".")
