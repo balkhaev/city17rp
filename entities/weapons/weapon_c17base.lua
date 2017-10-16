@@ -2,20 +2,6 @@
 
 AddCSLuaFile()
 
----- TTT SPECIAL EQUIPMENT FIELDS
-
--- This must be set to one of the WEAPON_ types in TTT weapons for weapon
--- carrying limits to work properly. See /gamemode/shared.lua for all possible
--- weapon categories.
-SWEP.Kind = WEAPON_NONE
-
--- If CanBuy is a table that contains ROLE_TRAITOR and/or ROLE_DETECTIVE, those
--- players are allowed to purchase it and it will appear in their Equipment Menu
--- for that purpose. If CanBuy is nil this weapon cannot be bought.
---   Example: SWEP.CanBuy = { ROLE_TRAITOR }
--- (just setting to nil here to document its existence, don't make this buyable)
-SWEP.CanBuy = nil
-
 if CLIENT then
   -- If this is a buyable weapon (ie. CanBuy is not nil) EquipMenuData must be
   -- a table containing some information to show in the Equipment Menu. See
@@ -50,67 +36,45 @@ end
 
 ---- MISC TTT-SPECIFIC BEHAVIOUR CONFIGURATION
 
--- ALL weapons in TTT must have weapon_tttbase as their SWEP.Base. It provides
--- some functions that TTT expects, and you will get errors without them.
--- Of course this is weapon_tttbase itself, so I comment this out here.
---  SWEP.Base = "weapon_tttbase"
-
--- If true AND SWEP.Kind is not WEAPON_EQUIP, then this gun can be spawned as
--- random weapon by a ttt_random_weapon entity.
-SWEP.AutoSpawnable = false
-
 -- Set to true if weapon can be manually dropped by players (with Q)
 SWEP.AllowDrop = true
 
--- Set to true if weapon kills silently (no death scream)
-SWEP.IsSilent = false
-
--- If this weapon should be given to players upon spawning, set a table of the
--- roles this should happen for here
---  SWEP.InLoadoutFor = { ROLE_TRAITOR, ROLE_DETECTIVE, ROLE_INNOCENT }
-
--- DO NOT set SWEP.WeaponID. Only the standard TTT weapons can have it. Custom
--- SWEPs do not need it for anything.
---  SWEP.WeaponID = nil
-
----- YE OLDE SWEP STUFF
-
 if CLIENT then
-  SWEP.DrawCrosshair   = false
-  SWEP.ViewModelFOV    = 82
-  SWEP.ViewModelFlip   = true
+  SWEP.DrawCrosshair = false
+  SWEP.ViewModelFOV = 82
+  SWEP.ViewModelFlip = true
   SWEP.CSMuzzleFlashes = true
 end
 
 SWEP.Base = "weapon_base"
 
-SWEP.Category           = "TTT"
-SWEP.Spawnable          = false
+SWEP.Category = "C17RP"
+SWEP.Spawnable = false
 
 SWEP.IsGrenade = false
 
-SWEP.Weight             = 5
-SWEP.AutoSwitchTo       = false
-SWEP.AutoSwitchFrom     = false
+SWEP.Weight = 5
+SWEP.AutoSwitchTo = false
+SWEP.AutoSwitchFrom = false
 
-SWEP.Primary.Sound          = Sound( "Weapon_Pistol.Empty" )
-SWEP.Primary.Recoil         = 1.5
-SWEP.Primary.Damage         = 1
-SWEP.Primary.NumShots       = 1
-SWEP.Primary.Cone           = 0.02
-SWEP.Primary.Delay          = 0.15
+SWEP.Primary.Sound = Sound( "Weapon_Pistol.Empty" )
+SWEP.Primary.Recoil = 1.5
+SWEP.Primary.Damage = 1
+SWEP.Primary.NumShots = 1
+SWEP.Primary.Cone = 0.02
+SWEP.Primary.Delay = 0.15
 
-SWEP.Primary.ClipSize       = -1
-SWEP.Primary.DefaultClip    = -1
-SWEP.Primary.Automatic      = false
-SWEP.Primary.Ammo           = "none"
-SWEP.Primary.ClipMax        = -1
+SWEP.Primary.ClipSize = -1
+SWEP.Primary.DefaultClip = -1
+SWEP.Primary.Automatic = false
+SWEP.Primary.Ammo = "none"
+SWEP.Primary.ClipMax = -1
 
-SWEP.Secondary.ClipSize     = 1
-SWEP.Secondary.DefaultClip  = 1
-SWEP.Secondary.Automatic    = false
-SWEP.Secondary.Ammo         = "none"
-SWEP.Secondary.ClipMax      = -1
+SWEP.Secondary.ClipSize = 1
+SWEP.Secondary.DefaultClip = 1
+SWEP.Secondary.Automatic = false
+SWEP.Secondary.Ammo = "none"
+SWEP.Secondary.ClipMax = -1
 
 SWEP.HeadshotMultiplier = 2.7
 
@@ -124,14 +88,12 @@ SWEP.ReloadAnim = ACT_VM_RELOAD
 
 SWEP.fingerprints = {}
 
-local sparkle = CLIENT and CreateConVar("ttt_crazy_sparks", "0", FCVAR_ARCHIVE)
-
 -- crosshair
 if CLIENT then
-  local sights_opacity = CreateConVar("ttt_ironsights_crosshair_opacity", "0.8", FCVAR_ARCHIVE)
-  local crosshair_brightness = CreateConVar("ttt_crosshair_brightness", "1.0", FCVAR_ARCHIVE)
-  local crosshair_size = CreateConVar("ttt_crosshair_size", "1.0", FCVAR_ARCHIVE)
-  local disable_crosshair = CreateConVar("ttt_disable_crosshair", "0", FCVAR_ARCHIVE)
+  local sights_opacity = CreateConVar("c17_ironsights_crosshair_opacity", "0.8", FCVAR_ARCHIVE)
+  local crosshair_brightness = CreateConVar("c17_crosshair_brightness", "1.0", FCVAR_ARCHIVE)
+  local crosshair_size = CreateConVar("c17_crosshair_size", "1.0", FCVAR_ARCHIVE)
+  local disable_crosshair = CreateConVar("c17_disable_crosshair", "0", FCVAR_ARCHIVE)
 
   function SWEP:DrawHUD()
     if self.HUDHelp then
@@ -139,13 +101,15 @@ if CLIENT then
     end
 
     local client = LocalPlayer()
-    if disable_crosshair:GetBool() or (not IsValid(client)) then return end
+    if disable_crosshair:GetBool() or (not IsValid(client)) then
+      return
+    end
 
     local sights = (not self.NoSights) and self:GetIronsights()
 
     local x = math.floor(ScrW() / 2.0)
     local y = math.floor(ScrH() / 2.0)
-    local scale = math.max(0.2,  10 * self:GetPrimaryCone())
+    local scale = math.max(0.2, 10 * self:GetPrimaryCone())
 
     local LastShootTime = self:LastShootTime()
     scale = scale * (2 - math.Clamp( (CurTime() - LastShootTime) * 5, 0.0, 1.0 ))
@@ -178,20 +142,20 @@ if CLIENT then
   local GetPTranslation = LANG.GetParamTranslation
 
   -- Many non-gun weapons benefit from some help
-  local help_spec = {text = "", font = "TabLarge", xalign = TEXT_ALIGN_CENTER}
+  local help_spec = { text = "", font = "TabLarge", xalign = TEXT_ALIGN_CENTER }
   function SWEP:DrawHelp()
     local data = self.HUDHelp
 
     local translate = data.translatable
-    local primary   = data.primary
+    local primary = data.primary
     local secondary = data.secondary
 
     if translate then
-      primary   = primary   and GetPTranslation(primary,   data.translate_params)
+      primary = primary and GetPTranslation(primary, data.translate_params)
       secondary = secondary and GetPTranslation(secondary, data.translate_params)
     end
 
-    help_spec.pos  = {ScrW() / 2.0, ScrH() - 40}
+    help_spec.pos = { ScrW() / 2.0, ScrH() - 40 }
     help_spec.text = secondary or primary
     draw.TextShadow(help_spec, 2)
 
@@ -206,9 +170,9 @@ if CLIENT then
 
   -- mousebuttons are enough for most weapons
   local default_key_params = {
-    primaryfire   = Key("+attack",  "LEFT MOUSE"),
+    primaryfire = Key("+attack", "LEFT MOUSE"),
     secondaryfire = Key("+attack2", "RIGHT MOUSE"),
-    usekey        = Key("+use",     "USE")
+    usekey = Key("+use", "USE")
   };
 
   function SWEP:AddHUDHelp(primary_text, secondary_text, translate, extra_params)
@@ -229,7 +193,9 @@ function SWEP:PrimaryAttack(worldsnd)
   self:SetNextSecondaryFire( CurTime() + self.Primary.Delay )
   self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
 
-  if not self:CanPrimaryAttack() then return end
+  if not self:CanPrimaryAttack() then
+    return
+  end
 
   if not worldsnd then
     self:EmitSound( self.Primary.Sound, self.Primary.SoundLevel )
@@ -242,9 +208,11 @@ function SWEP:PrimaryAttack(worldsnd)
   self:TakePrimaryAmmo( 1 )
 
   local owner = self.Owner
-  if not IsValid(owner) or owner:IsNPC() or (not owner.ViewPunch) then return end
+  if not IsValid(owner) or owner:IsNPC() or (not owner.ViewPunch) then
+    return
+  end
 
-  owner:ViewPunch( Angle( util.SharedRandom(self:GetClass(),-0.2,-0.1,0) * self.Primary.Recoil, util.SharedRandom(self:GetClass(),-0.1,0.1,1) * self.Primary.Recoil, 0 ) )
+  owner:ViewPunch( Angle( util.SharedRandom(self:GetClass(), -0.2, -0.1, 0) * self.Primary.Recoil, util.SharedRandom(self:GetClass(), -0.1, 0.1, 1) * self.Primary.Recoil, 0 ) )
 end
 
 function SWEP:DryFire(setnext)
@@ -258,7 +226,9 @@ function SWEP:DryFire(setnext)
 end
 
 function SWEP:CanPrimaryAttack()
-  if not IsValid(self.Owner) then return end
+  if not IsValid(self.Owner) then
+    return
+  end
 
   if self:Clip1() <= 0 then
     self:DryFire(self.SetNextPrimaryFire)
@@ -268,22 +238,15 @@ function SWEP:CanPrimaryAttack()
 end
 
 function SWEP:CanSecondaryAttack()
-  if not IsValid(self.Owner) then return end
+  if not IsValid(self.Owner) then
+    return
+  end
 
   if self:Clip2() <= 0 then
     self:DryFire(self.SetNextSecondaryFire)
     return false
   end
   return true
-end
-
-local function Sparklies(attacker, tr, dmginfo)
-  if tr.HitWorld and tr.MatType == MAT_METAL then
-    local eff = EffectData()
-    eff:SetOrigin(tr.HitPos)
-    eff:SetNormal(tr.HitNormal)
-    util.Effect("cball_bounce", eff)
-  end
 end
 
 function SWEP:ShootBullet( dmg, recoil, numbul, cone )
@@ -296,25 +259,24 @@ function SWEP:ShootBullet( dmg, recoil, numbul, cone )
   local sights = self:GetIronsights()
 
   numbul = numbul or 1
-  cone   = cone   or 0.01
+  cone = cone or 0.01
 
   local bullet = {}
-  bullet.Num    = numbul
-  bullet.Src    = self.Owner:GetShootPos()
-  bullet.Dir    = self.Owner:GetAimVector()
+  bullet.Num = numbul
+  bullet.Src = self.Owner:GetShootPos()
+  bullet.Dir = self.Owner:GetAimVector()
   bullet.Spread = Vector( cone, cone, 0 )
   bullet.Tracer = 4
   bullet.TracerName = self.Tracer or "Tracer"
-  bullet.Force  = 10
+  bullet.Force = 10
   bullet.Damage = dmg
-  if CLIENT and sparkle:GetBool() then
-    bullet.Callback = Sparklies
-  end
 
   self.Owner:FireBullets( bullet )
 
   -- Owner can die after firebullets
-  if (not IsValid(self.Owner)) or (not self.Owner:Alive()) or self.Owner:IsNPC() then return end
+  if (not IsValid(self.Owner)) or (not self.Owner:Alive()) or self.Owner:IsNPC() then
+    return
+  end
 
   if ((game.SinglePlayer() and SERVER) or
   ((not game.SinglePlayer()) and CLIENT and IsFirstTimePredicted())) then
@@ -342,10 +304,13 @@ function SWEP:IsEquipment()
   return WEPS.IsEquipment(self)
 end
 
-function SWEP:DrawWeaponSelection() end
+function SWEP:DrawWeaponSelection()
+end
 
 function SWEP:SecondaryAttack()
-  if self.NoSights or (not self.IronSightsPos) then return end
+  if self.NoSights or (not self.IronSightsPos) then
+    return
+  end
 
   self:SetIronsights(not self:GetIronsights())
 
@@ -358,7 +323,9 @@ function SWEP:Deploy()
 end
 
 function SWEP:Reload()
-  if ( self:Clip1() == self.Primary.ClipSize or self.Owner:GetAmmoCount( self.Primary.Ammo ) <= 0 ) then return end
+  if ( self:Clip1() == self.Primary.ClipSize or self.Owner:GetAmmoCount( self.Primary.Ammo ) <= 0 ) then
+    return
+  end
   self:DefaultReload(self.ReloadAnim)
   self:SetIronsights( false )
 end
@@ -376,21 +343,21 @@ end
 -- The OnDrop() hook is useless for this as it happens AFTER the drop. OwnerChange
 -- does not occur when a drop happens for some reason. Hence this thing.
 function SWEP:PreDrop()
-  if SERVER and IsValid(self.Owner) and self.Primary.Ammo != "none" then
-  local ammo = self:Ammo1()
+  if SERVER and IsValid(self.Owner) and self.Primary.Ammo ~= "none" then
+    local ammo = self:Ammo1()
 
-  -- Do not drop ammo if we have another gun that uses this type
-  for _, w in pairs(self.Owner:GetWeapons()) do
-    if IsValid(w) and w != self and w:GetPrimaryAmmoType() == self:GetPrimaryAmmoType() then
-    ammo = 0
+    -- Do not drop ammo if we have another gun that uses this type
+    for _, w in pairs(self.Owner:GetWeapons()) do
+      if IsValid(w) and w ~= self and w:GetPrimaryAmmoType() == self:GetPrimaryAmmoType() then
+        ammo = 0
+      end
     end
-  end
 
-  self.StoredAmmo = ammo
+    self.StoredAmmo = ammo
 
-  if ammo > 0 then
-    self.Owner:RemoveAmmo(ammo, self.Primary.Ammo)
-  end
+    if ammo > 0 then
+      self.Owner:RemoveAmmo(ammo, self.Primary.Ammo)
+    end
   end
 end
 
@@ -401,7 +368,7 @@ function SWEP:DampenDrop()
   -- this when dropping guns on death.
   local phys = self:GetPhysicsObject()
   if IsValid(phys) then
-    phys:SetVelocityInstantaneous(Vector(0,0,-75) + phys:GetVelocity() * 0.001)
+    phys:SetVelocityInstantaneous(Vector(0, 0, -75) + phys:GetVelocity() * 0.001)
     phys:AddAngleVelocity(phys:GetAngleVelocity() * -0.99)
   end
 end
@@ -430,7 +397,7 @@ function SWEP:Equip(newowner)
     end
   end
 
-  if SERVER and IsValid(newowner) and self.StoredAmmo > 0 and self.Primary.Ammo != "none" then
+  if SERVER and IsValid(newowner) and self.StoredAmmo > 0 and self.Primary.Ammo ~= "none" then
   local ammo = newowner:GetAmmoCount(self.Primary.Ammo)
   local given = math.min(self.StoredAmmo, self.Primary.ClipMax - ammo)
 
@@ -457,10 +424,16 @@ end
 
 --- Dummy functions that will be replaced when SetupDataTables runs. These are
 --- here for when that does not happen (due to e.g. stacking base classes)
-function SWEP:GetIronsightsTime() return -1 end
-function SWEP:SetIronsightsTime() end
-function SWEP:GetIronsightsPredicted() return false end
-function SWEP:SetIronsightsPredicted() end
+function SWEP:GetIronsightsTime()
+  return -1
+end
+function SWEP:SetIronsightsTime()
+end
+function SWEP:GetIronsightsPredicted()
+  return false
+end
+function SWEP:SetIronsightsPredicted()
+end
 
 -- Set up ironsights dt bool. Weapons using their own DT vars will have to make
 -- sure they call this.
@@ -487,7 +460,9 @@ function SWEP:Initialize()
 end
 
 function SWEP:CalcViewModel()
-  if (not CLIENT) or (not IsFirstTimePredicted()) then return end
+  if (not CLIENT) or (not IsFirstTimePredicted()) then
+    return
+  end
   self.bIron = self:GetIronsights()
   self.fIronTime = self:GetIronsightsTime()
   self.fCurrentTime = CurTime()
@@ -539,7 +514,9 @@ local LOWER_POS = Vector(0, 0, -2)
 
 local IRONSIGHT_TIME = 0.25
 function SWEP:GetViewModelPosition( pos, ang )
-  if (not self.IronSightsPos) or (self.bIron == nil) then return pos, ang end
+  if (not self.IronSightsPos) or (self.bIron == nil) then
+    return pos, ang
+  end
 
   local bIron = self.bIron
   local time = self.fCurrentTime + (SysTime() - self.fCurrentSysTime) * game.GetTimeScale() * host_timescale:GetFloat()
@@ -562,16 +539,18 @@ function SWEP:GetViewModelPosition( pos, ang )
   if fIronTime > time - IRONSIGHT_TIME then
     mul = math.Clamp( (time - fIronTime) / IRONSIGHT_TIME, 0, 1 )
 
-    if not bIron then mul = 1 - mul end
+    if not bIron then
+      mul = 1 - mul
+    end
   end
 
   local offset = self.IronSightsPos + (ttt_lowered:GetBool() and LOWER_POS or vector_origin)
 
   if self.IronSightsAng then
     ang = ang * 1
-    ang:RotateAroundAxis( ang:Right(),    self.IronSightsAng.x * mul )
-    ang:RotateAroundAxis( ang:Up(),       self.IronSightsAng.y * mul )
-    ang:RotateAroundAxis( ang:Forward(),  self.IronSightsAng.z * mul )
+    ang:RotateAroundAxis( ang:Right(), self.IronSightsAng.x * mul )
+    ang:RotateAroundAxis( ang:Up(), self.IronSightsAng.y * mul )
+    ang:RotateAroundAxis( ang:Forward(), self.IronSightsAng.z * mul )
   end
 
   pos = pos + offset.x * ang:Right() * mul

@@ -53,7 +53,7 @@ function SWEP:PrimaryAttack()
   self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
 
   if self:CanPrimaryAttack() then
-    self:BeaconDrop()
+    self:ShowCard()
   end
 end
 function SWEP:SecondaryAttack()
@@ -64,46 +64,15 @@ function SWEP:SecondaryAttack()
   end
 end
 
-local throwsound = Sound( "Weapon_SLAM.SatchelThrow" )
-
 -- might be able to move this drop/stick stuff into something more general now
 -- that a number of weapons use it
-function SWEP:BeaconDrop()
+function SWEP:ShowCard()
   if SERVER then
     local ply = self.Owner
     if not IsValid(ply) then return end
 
-    if self.Planted then return end
-
-    local vsrc = ply:GetShootPos()
-    local vang = ply:GetAimVector()
-    local vvel = ply:GetVelocity()
-
-    local vthrow = vvel + vang * 200
-
-    local beacon = ents.Create("ttt_beacon")
-    if IsValid(beacon) then
-      beacon:SetPos(vsrc + vang * 10)
-      beacon:SetOwner(ply)
-      beacon:Spawn()
-
-      beacon:PointAtEntity(ply)
-
-      local ang = beacon:GetAngles()
-      ang:RotateAroundAxis(ang:Right(), 90)
-      beacon:SetAngles(ang)
-
-      beacon:PhysWake()
-      local phys = beacon:GetPhysicsObject()
-      if IsValid(phys) then
-        phys:SetVelocity(vthrow)
-      end
-
-      self:PlacedBeacon()
-    end
+    chat.AddText( Color( 100, 100, 255 ), ply, ", you are holding ", Color( 100, 255, 100 ), ply:GetActiveWeapon():GetClass() )
   end
-
-  self:EmitSound(throwsound)
 end
 
 function SWEP:BeaconStick()
