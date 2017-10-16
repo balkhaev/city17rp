@@ -7,7 +7,7 @@ core.config.defaults = {
   chatRadius = 1000,
   voiceRadius = 1000,
   money = 1000,
-  zombieLimit = 60,
+  zombieLimit = 30,
   minZombieLimit = 5
 }
 
