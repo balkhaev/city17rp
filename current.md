@@ -16,12 +16,11 @@
 - Биржа труда
 - Систему дня и ночи
 - Аренду квартир и номеров
+- Систему пропов, любой проп можно украсть, положить в карман или купить в магазине
 
 
 ```
 https://www.gmodstore.com/scripts/view/4411/simple-stamina
 https://www.gmodstore.com/scripts/view/4148/simple-item-shop-added-craftingmod-support
 https://www.gmodstore.com/scripts/view/4498/zvendor-ammo-weapons
-https://nulledbb.com/thread-CAC-LEAK-LATEST
-https://nulledbb.com/thread-aBoards-Information-Boards
 ```
