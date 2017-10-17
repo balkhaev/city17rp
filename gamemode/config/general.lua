@@ -76,6 +76,7 @@ core.config.groups = {
 -- ECW: cw_shorty,cw_vss,cw_makarov,cw_p99,cw_mac11,cw_m3super90,cw_m249_official,cw_m1911,cw_m14,cw_l85a2
 -- HLMelee: weapon_hl2axe,weapon_hl2bottle,weapon_hl2brokenbottle,weapon_hl2hook,weapon_hl2pan,weapon_hl2pipe,weapon_hl2pickaxe,weapon_hl2pot,weapon_hl2shovel
 -- weapon_stunner_stun,weapon_stunner_shock
+-- weapon_medkit
 
 core.config.roles = {
   gman = {

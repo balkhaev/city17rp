@@ -61,12 +61,10 @@ function GM:PostGamemodeLoaded()
 end
 
 hook.Add( "PlayerInitialSpawn", "CityInitialSpawn", function(ply)
-  if not core.role.existsPlayerRole(ply) then
-    if ply:GetPData("role") then
-      ply:setRole(ply:GetPData("role"))
-    else
-      ply:setRole(core.config.defaults.role)
-    end
+  if ply:GetPData("role") then
+    ply:setRole(ply:GetPData("role"))
+  else
+    ply:setRole(core.config.defaults.role)
   end
 
   local cash = ply:GetPData("money")
