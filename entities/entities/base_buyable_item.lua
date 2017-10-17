@@ -105,16 +105,4 @@ end
 if ( SERVER ) then return end -- We do NOT want to execute anything below in this FILE on SERVER
 
 function ENT:Draw()
-
-  local pos = self:GetPos()
-  local lcolor = render.ComputeLighting( pos, Vector( 0, 0, 1 ) )
-  local c = self:GetBallColor()
-
-  lcolor.x = c.r * ( math.Clamp( lcolor.x, 0, 1 ) + 0.5 ) * 255
-  lcolor.y = c.g * ( math.Clamp( lcolor.y, 0, 1 ) + 0.5 ) * 255
-  lcolor.z = c.b * ( math.Clamp( lcolor.z, 0, 1 ) + 0.5 ) * 255
-
-  local size = math.Clamp( self:GetBallSize(), self.MinSize, self.MaxSize )
-  render.DrawSprite( pos, size, size, Color( lcolor.x, lcolor.y, lcolor.z, 255 ) )
-
 end
