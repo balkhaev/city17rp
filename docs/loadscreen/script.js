@@ -2,7 +2,8 @@ var elements = {
   servername: document.getElementById('servername'),
   maxplayers: document.getElementById('maxplayers'),
   mapname: document.getElementById('mapname'),
-  loading: document.getElementById('loading')
+  loading: document.getElementById('loading'),
+  overlay: document.getElementById('background-overlay')
 }
 elements.loadingStatus = elements.loading.getElementsByClassName('loading-status')[0];
 elements.loadingBar = elements.loading.getElementsByClassName('loading-bar')[0];
@@ -51,21 +52,26 @@ function SetFilesNeeded( needed ) {
 
 var backgrounds = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg'];
 var currentBackgroundIndex = 0;
+
 setInterval(function() {
   currentBackgroundIndex = currentBackgroundIndex === backgrounds.length - 1 ? 0 : currentBackgroundIndex + 1;
-  document.body.style.backgroundImage = 'url("backgrounds/'+backgrounds[currentBackgroundIndex]+'")';
+
+  var newBackgroundRule = 'url("backgrounds/'+backgrounds[currentBackgroundIndex]+'")';
+  elements.overlay.style.backgroundImage = newBackgroundRule;
+
+  animateShowOpacity(elements.overlay, function(elem) {
+    document.body.style.backgroundImage = newBackgroundRule;
+    elem.style.opacity = '0';
+  })
 }, 5000)
 
-function animateShow(elem, interId){
-  if(elem.style.opacity === 0){
-    clearInterval(interId);
-  } else {
-    elem.style.opacity -= 0.1;
-  }
-}
-
-function animateOpacity(elem) {
+function animateShowOpacity(elem, cb){
   var interId = setInterval(function() {
-    animateShow(elem, interId)
+    if(elem.style.opacity === '1'){
+      clearInterval(interId);
+      if (cb) { cb(elem) }
+    } else {
+      elem.style.opacity = parseFloat(elem.style.opacity) + 0.1;
+    }
   }, 300)
 }
