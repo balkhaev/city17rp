@@ -35,11 +35,7 @@ SWEP.Secondary.Automatic    = true
 SWEP.Secondary.Ammo         = "none"
 SWEP.Secondary.Delay        = 1.0
 
-SWEP.Kind                   = WEAPON_EQUIP
--- DISABLED
---SWEP.CanBuy = {ROLE_DETECTIVE} -- only detectives can buy
 SWEP.LimitedStock           = true -- only buyable once
-SWEP.WeaponID               = AMMO_BEACON
 
 SWEP.Spawnable              = true
 SWEP.AllowDrop              = false
@@ -64,14 +60,12 @@ function SWEP:SecondaryAttack()
   end
 end
 
--- might be able to move this drop/stick stuff into something more general now
--- that a number of weapons use it
 function SWEP:ShowCard()
   if SERVER then
     local ply = self.Owner
     if not IsValid(ply) then return end
 
-    chat.AddText( Color( 100, 100, 255 ), ply, ", you are holding ", Color( 100, 255, 100 ), ply:GetActiveWeapon():GetClass() )
+    chat.AddText(Color( 100, 100, 255 ), ply, " показал свою ID карту. \n"..ply:getRoleTitle())
   end
 end
 
@@ -79,63 +73,6 @@ function SWEP:BeaconStick()
   if SERVER then
     local ply = self.Owner
     if not IsValid(ply) then return end
-
-    if self.Planted then return end
-
-    local ignore = {ply, self}
-    local spos = ply:GetShootPos()
-    local epos = spos + ply:GetAimVector() * 80
-    local tr = util.TraceLine({start=spos, endpos=epos, filter=ignore, mask=MASK_SOLID})
-
-    if tr.HitWorld then
-      local beacon = ents.Create("ttt_beacon")
-      if IsValid(beacon) then
-        beacon:PointAtEntity(ply)
-
-        local tr_ent = util.TraceEntity({start=spos, endpos=epos, filter=ignore, mask=MASK_SOLID}, beacon)
-
-        if tr_ent.HitWorld then
-
-          local ang = tr_ent.HitNormal:Angle()
-          --ang:RotateAroundAxis(ang:Right(), -90)
-          --ang:RotateAroundAxis(ang:Up(), -180)
-          --ang:RotateAroundAxis(ang:Forward(), 90)
-
-          beacon:SetPos(tr_ent.HitPos + ang:Forward() * 2.5)
-          beacon:SetAngles(ang)
-          beacon:SetOwner(ply)
-          beacon:Spawn()
-
-          local phys = beacon:GetPhysicsObject()
-          if IsValid(phys) then
-            phys:EnableMotion(false)
-          end
-
-          beacon.IsOnWall = true
-
-          self:PlacedBeacon()
-        end
-      end
-    end
-  end
-end
-
-function SWEP:PlacedBeacon()
-  self:TakePrimaryAmmo(1)
-
-  if not self:CanPrimaryAttack() then
-    self:Remove()
-
-    self.Planted = true
-  end
-end
-
-function SWEP:PickupBeacon()
-  if self:Clip1() >= self.Primary.ClipSize then
-    return false
-  else
-    self:SetClip1(self:Clip1() + 1)
-    return true
   end
 end
 
