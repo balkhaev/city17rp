@@ -1,22 +1,3 @@
-/*
- Called at the start, when the loading screen finishes loading all assets.
-
- serverName- Server's name.
- Convar: hostname
- For exmaple: "Garry's Mod Server"
- serverURL- URL for the loading screen.
- Convar: sv_loadingurl
- For example: "http://mywebsite.com/myloadingscreen.html"
- mapName- The name of the map the server is playing.
- For example: "cs_office"
- maxPlayers- Maximum number of players for the server.
- Convar: maxplayers
- steamID- 64-bit, numeric Steam community ID of the client joining.
- For example: 76561198012345678
- gamemode- The gamemode the server is currently playing.
- Convar: gamemode
- For example: "deathrun"
- */
 var elements = {
   servername: document.getElementById('servername'),
   maxplayers: document.getElementById('maxplayers'),
@@ -26,20 +7,14 @@ var elements = {
 elements.loadingStatus = elements.loading.getElementsByClassName('loading-status')[0];
 elements.loadingBar = elements.loading.getElementsByClassName('loading-bar')[0];
 
-var progress = 0;
 var filesTotal = 1;
-var filesNeeded = 1;
 
 function GameDetails( servername, serverurl, mapname, maxplayers, steamid, gamemode ) {
   elements.servername.textContent = servername;
   elements.maxplayers.textContent = maxplayers;
   elements.mapname.textContent = mapname;
 }
-/*
- Called at the start
 
- total- Total number of files the client will have to download.
- */
 function SetFilesTotal( total ) {
   filesTotal = total
 }
@@ -72,4 +47,25 @@ function SetFilesNeeded( needed ) {
 
   elements.loadingStatus = progress + '%';
   elements.loadingBar = (100 - progress) + '%';
+}
+
+var backgrounds = ['bg1.jpg', 'bg2.jpg', 'bg3.jpg'];
+var currentBackgroundIndex = 0;
+setInterval(function() {
+  currentBackgroundIndex = currentBackgroundIndex === backgrounds.length - 1 ? 0 : currentBackgroundIndex + 1;
+  document.body.style.backgroundImage = 'url("backgrounds/'+backgrounds[currentBackgroundIndex]+'")';
+}, 5000)
+
+function animateShow(elem, interId){
+  if(elem.style.opacity === 0){
+    clearInterval(interId);
+  } else {
+    elem.style.opacity -= 0.1;
+  }
+}
+
+function animateOpacity(elem) {
+  var interId = setInterval(function() {
+    animateShow(elem, interId)
+  }, 300)
 }
