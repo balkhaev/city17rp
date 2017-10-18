@@ -102,6 +102,7 @@ end)
 hook.Add( "Think", "ZombieSpawner", function()
   if core.zombie.needSpawn() then
     core.zombie.timer = CurTime() + core.zombie.getTimout()
+
     local zombieSpawns
 
     if core.zombie.isEvent then
@@ -117,7 +118,7 @@ hook.Add( "Think", "ZombieSpawner", function()
         core.zombie.endEvent()
       end
     else
-      if core.zombie.isLimit() then
+      if core.zombie.eventLimit() then
         core.zombie.startEvent()
       end
     end

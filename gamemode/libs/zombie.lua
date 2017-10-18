@@ -27,7 +27,7 @@ function core.zombie.getZombieName()
 end
 
 function core.zombie.needSpawn()
-  return core.zombie.timer < CurTime()
+  return core.zombie.timer < CurTime() and not core.zombie.isLimit()
 end
 
 function core.zombie.getZombieCount()
@@ -36,18 +36,22 @@ function core.zombie.getZombieCount()
 end
 
 function core.zombie.isLimit()
-  return core.zombie.getZombieCount() >= core.config.defaults.zombieLimit
+  return core.zombie.getZombieCount() >= core.config.zombie.maxLimit
+end
+
+function core.zombie.eventLimit()
+  return core.zombie.getZombieCount() >= core.config.zombie.eventLimit
 end
 
 function core.zombie.isMinLimit()
-  return core.zombie.getZombieCount() <= core.config.defaults.minZombieLimit
+  return core.zombie.getZombieCount() <= core.config.zombie.minLimit
 end
 
 function core.zombie.getTimout()
   if core.zombie.isEvent then
-    return 5
+    return core.config.zombie.eventSpawnTime
   else
-    return 10
+    return core.config.zombie.spawnTime
   end
 end
 
