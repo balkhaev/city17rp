@@ -49,31 +49,17 @@ function SWEP:PrimaryAttack()
   self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
 
   if self:CanPrimaryAttack() then
-    self:ShowCard()
+    if SERVER then
+      local ply = self.Owner
+      if not IsValid(ply) then return end
+
+      chat.AddText(Color( 100, 100, 255 ), ply, " показал свою ID карту. \n"..ply:getRoleTitle())
+    end
   end
 end
+
 function SWEP:SecondaryAttack()
-  self:SetNextSecondaryFire( CurTime() + self.Secondary.Delay )
 
-  if self:CanPrimaryAttack() then
-    self:BeaconStick()
-  end
-end
-
-function SWEP:ShowCard()
-  if SERVER then
-    local ply = self.Owner
-    if not IsValid(ply) then return end
-
-    chat.AddText(Color( 100, 100, 255 ), ply, " показал свою ID карту. \n"..ply:getRoleTitle())
-  end
-end
-
-function SWEP:BeaconStick()
-  if SERVER then
-    local ply = self.Owner
-    if not IsValid(ply) then return end
-  end
 end
 
 -- Ammo hackery after getting bought

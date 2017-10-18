@@ -17,7 +17,7 @@ ENT.MaxCost = 10000
 
 function ENT:SetupDataTables()
 
-  self:NetworkVar( "Float", 0, "Cost", { KeyName = "costprice", Edit = { type = "Float", min = self.MinCost, max = self.MaxCost, order = 1 } } )
+  self:NetworkVar( "Float", 0, "Cost" )
 
 end
 
@@ -46,14 +46,6 @@ function ENT:Initialize()
 
   -- We will put this here just in case, even though it should be called from OnBallSizeChanged in any case
   self:RebuildPhysics()
-
-  -- Select a random color for the ball
-  self:SetBallColor( table.Random( {
-    Vector( 1, 0.3, 0.3 ),
-    Vector( 0.3, 1, 0.3 ),
-    Vector( 1, 1, 0.3 ),
-    Vector( 0.2, 0.3, 1 ),
-  } ) )
 
 end
 
@@ -96,7 +88,6 @@ function ENT:Use( activator, caller )
     -- Give the collecting player some free health
     local health = activator:Health()
     activator:SetHealth( health + 5 )
-    activator:SendLua( "achievements.EatBall()" )
 
   end
 

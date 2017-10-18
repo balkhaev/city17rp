@@ -1,7 +1,7 @@
 AddCSLuaFile()
 
 SWEP.PrintName = "ID Card 2"
-SWEP.Author = "Kilburn, robotboy655, MaxOfS2D & Tenrys"
+SWEP.Author = "Narkeba"
 SWEP.Purpose = "Well we sure as hell didn't use guns! We would just wrestle Hunters to the ground with our bare hands! I used to kill ten, twenty a day, just using my fists."
 
 SWEP.Slot = 0
@@ -184,7 +184,6 @@ end
 function SWEP:Think()
 
   local vm = self.Owner:GetViewModel()
-  local curtime = CurTime()
   local idletime = self:GetNextIdle()
 
   if ( idletime > 0 and CurTime() > idletime ) then
