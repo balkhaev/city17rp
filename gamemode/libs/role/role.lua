@@ -1,6 +1,6 @@
-core.role = {}
-core.role.store = {}
-core.role.uniqIndex = 0
+core.role = core.role or {}
+core.role.store = core.role.store or {}
+core.role.uniqIndex = core.role.uniqIndex or 0
 
 function core.role.addRole(name, role)
   local group = core.group.getGroup(role.group)

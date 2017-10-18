@@ -1,6 +1,6 @@
-core.team = {}
-core.team.store = {}
-core.team.uniqIndex = 0
+core.team = core.team or {}
+core.team.store = core.team.store or {}
+core.team.uniqIndex = core.team.uniqIndex or 0
 
 function core.team.addTeam(name, team)
   core.team.uniqIndex = core.team.uniqIndex + 1

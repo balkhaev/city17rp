@@ -13,13 +13,14 @@ function core.init(config)
     Msg("Adding role "..group.title.."\n")
     core.group.addGroup(groupKey, group)
   end
-  Msg("--- Init roles ---\n")
 
+  Msg("--- Init roles ---\n")
   for roleKey, role in pairs(core.config.roles) do
     Msg("Adding role "..role.title.."\n")
     core.role.addRole(roleKey, role)
   end
 
+  Msg("--- Init goods ---\n")
   for goodType, goods in pairs(core.config.goods) do
     for _, good in pairs(goods) do
       Msg("Adding good "..good.title.." with type "..goodType.."\n")

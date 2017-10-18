@@ -1,6 +1,6 @@
-core.group = {}
-core.group.store = {}
-core.group.uniqIndex = 0
+core.group = core.group or {}
+core.group.store = core.group.store or {}
+core.group.uniqIndex = core.group.uniqIndex or 0
 
 function core.group.addGroup(name, group)
   local team = core.team.getTeam(group.team)

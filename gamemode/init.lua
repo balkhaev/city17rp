@@ -45,7 +45,9 @@ include("server/sv_entities.lua")
 include("server/sv_commands.lua")
 include("server/sv_combinedoors.lua")
 
-core.init(core.config)
+function GM:InitPostEntity()
+  core.init(core.config)
+end
 
 function GM:PostGamemodeLoaded()
   timer.Create("hlrp_payday", 300, 0, function()
