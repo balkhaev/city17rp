@@ -158,10 +158,10 @@ function core.role.giveRoleItems(ply, roleName)
   local role = core.role.getRole(roleName)
 
   for _, weaponName in pairs(role.weapons) do
+    local wep = ply:Give(weaponName)
+
     if string.find(weaponName, "cw_") then
-      for i=1,5 do ply:Give(weaponName) end
-    else
-      ply:Give(weaponName)
+      ply:SetAmmo( 90, wep:GetPrimaryAmmoType() )
     end
   end
 end

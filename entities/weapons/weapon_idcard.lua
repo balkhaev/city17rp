@@ -1,97 +1,36 @@
-AddCSLuaFile()
+SWEP.PrintName			= "ID карта" -- This will be shown in the spawn menu, and in the weapon selection menu
+SWEP.Author			= "Narkeba" -- These two options will be shown when you have the weapon highlighted in the weapon selection menu
+SWEP.Instructions		= "ЛКМ что бы показать свою ID карту"
 
-SWEP.HoldType               = "normal"
+SWEP.Spawnable = true
+SWEP.AdminOnly = false
 
-if CLIENT then
-  SWEP.PrintName           = "ID Card"
-  SWEP.Slot                = 1
+SWEP.Primary.ClipSize		= -1
+SWEP.Primary.DefaultClip	= -1
+SWEP.Primary.Automatic		= false
+SWEP.Primary.Ammo		= "none"
 
-  SWEP.ViewModelFlip       = false
-  SWEP.ViewModelFOV        = 10
+SWEP.Secondary.ClipSize		= -1
+SWEP.Secondary.DefaultClip	= -1
+SWEP.Secondary.Automatic	= false
+SWEP.Secondary.Ammo		= "none"
 
-  SWEP.EquipMenuData = {
-    type="Weapon",
-    model="models/props_lab/reciever01b.mdl",
-    desc="Broadcasts a location to everyone.\n\nUse to warn or group innocents."
-  };
+SWEP.Weight			= 5
+SWEP.AutoSwitchTo		= false
+SWEP.AutoSwitchFrom		= false
 
-  SWEP.Icon                = "vgui/ttt/icon_beacon"
-end
+SWEP.Slot			= 1
+SWEP.SlotPos			= 2
+SWEP.DrawAmmo			= false
+SWEP.DrawCrosshair		= true
 
-SWEP.Base                   = "weapon_c17base"
-
-SWEP.ViewModel              = "models/weapons/v_hands.mdl"
-SWEP.WorldModel             = "models/props_lab/reciever01b.mdl"
-
-SWEP.Primary.ClipSize       = 3
-SWEP.Primary.DefaultClip    = 1
-SWEP.Primary.Automatic      = true
-SWEP.Primary.Ammo           = "slam"
-SWEP.Primary.Delay          = 1.0
-
-SWEP.Secondary.ClipSize     = -1
-SWEP.Secondary.DefaultClip  = -1
-SWEP.Secondary.Automatic    = true
-SWEP.Secondary.Ammo         = "none"
-SWEP.Secondary.Delay        = 1.0
-
-SWEP.LimitedStock           = true -- only buyable once
-
-SWEP.Spawnable              = true
-SWEP.AllowDrop              = false
-SWEP.NoSights               = true
-
-function SWEP:OnDrop()
-  self:Remove()
-end
+SWEP.ViewModel			= ""
+SWEP.WorldModel			= ""
 
 function SWEP:PrimaryAttack()
-  self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
+  self.Weapon:SetNextPrimaryFire( CurTime() + 2 )
 
-  if self:CanPrimaryAttack() then
-    if CLIENT then
-      chat.AddText(Color( 100, 100, 255 ), ply, " показал свою ID карту. \n"..ply:getRoleTitle())
-    end
+  if CLIENT then
+    chat.AddText(Color( 100, 100, 255 ), ply, " показал свою ID карту. \n"..ply:getRoleTitle())
   end
-end
-
-function SWEP:SecondaryAttack()
-
-end
-
--- Ammo hackery after getting bought
-function SWEP:WasBought(buyer)
-  self:SetClip1(self:Clip1() + 2)
-end
-
-function SWEP:Reload()
-  return false
-end
-
-function SWEP:OnRemove()
-  if CLIENT and IsValid(self.Owner) and self.Owner == LocalPlayer() and self.Owner:IsTerror() then
-    RunConsoleCommand("lastinv")
-  end
-end
-
-if CLIENT then
-  function SWEP:Initialize()
-    self:AddHUDHelp("Click to place the beacon")
-
-    return self.BaseClass.Initialize(self)
-  end
-end
-
-function SWEP:Deploy()
-  self.Owner:DrawViewModel(false)
-  return true
-end
-
-function SWEP:DrawWorldModel()
-  if not IsValid(self.Owner) then
-    self:DrawModel()
-  end
-end
-
-function SWEP:DrawWorldModelTranslucent()
 end

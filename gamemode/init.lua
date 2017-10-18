@@ -1,4 +1,5 @@
 AddCSLuaFile("shared.lua")
+AddCSLuaFile("player_class/default.lua")
 AddCSLuaFile("sh_player.lua")
 AddCSLuaFile("libs/utils.lua")
 AddCSLuaFile("config/gamemode.lua")
@@ -25,6 +26,7 @@ resource.AddWorkshop("632126111") -- iNPC - Artifical Intelligence Module
 core = core or {}
 
 include("shared.lua")
+include("player_class/default.lua")
 include("sh_player.lua")
 include("config/gamemode.lua")
 include("config/general.lua")
@@ -89,6 +91,8 @@ hook.Add("PlayerNoClip", "DisableNoclip", function( ply )
 end)
 
 hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
+  player_manager.SetPlayerClass( ply, "player_custom" )
+
   local group = ply:getGroup()
 
   if group.spawn and group.spawn ~= "" then

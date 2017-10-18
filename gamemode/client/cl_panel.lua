@@ -14,25 +14,29 @@ function GM:ShowSpare2( ply )
   core.panel.createPanel(ply)
 end
 
+function GM:ShowSpare1( ply )
+  core.panel.createPanel(ply)
+end
+
+function GM:ShowHelp( ply )
+  umsg.Start( "motd", ply )
+  umsg.End()
+  print("asd")
+  core.panel.createPanel(ply)
+end
+
 hook.Add( "OnSpawnMenuOpen", "SpawnMenuOpen", function()
-  print("msg111")
   local ply = LocalPlayer()
 
-  if ply:IsAdmin() then
-    return true
+  if not ply:IsAdmin() then
+    core.panel.createPanel(ply)
+
+    return false
   end
-
-  core.panel.createPanel(LocalPlayer())
-
-  return false
 end )
 
 hook.Add( "OnSpawnMenuClose", "SpawnMenuClose", function()
-  print("msg222")
-
-  if ply:IsAdmin() then
-    return true
+  if not LocalPlayer():IsAdmin() then
+    core.panel.destroyPanel()
   end
-
-  core.panel.destroyPanel()
 end )
