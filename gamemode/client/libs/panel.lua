@@ -230,14 +230,16 @@ function core.panel.createTradeSheet(Sheet, ply)
     local goodWithTypes = net.ReadTable()
 
     for goodType, goods in pairs(goodWithTypes) do
-      local grid = vgui.Create( "DGrid", SheetItem )
-      grid:SetColWide( 76 )
-      grid:SetRowHeight( 76 )
+      local layout = vgui.Create( "DListLayout", SheetItem )
+      layout:SetSize( 100, 100 )
+      layout:SetPos( 0, 0 )
 
       for _, good in pairs(goods) do
-        local SpawnI = vgui.Create( "SpawnIcon", grid ) -- SpawnIcon
+        local panel = vgui.Create("DPanel", layout)
+
+        local SpawnI = vgui.Create( "SpawnIcon", panel )
         SpawnI:SetModel( good.model )
-        SpawnI:SetText( good.title )
+        SpawnI:SetSize(30, 30)
 
         SpawnI.DoClick = function(btn)
           net.Start("traderBuy")
@@ -246,10 +248,15 @@ function core.panel.createTradeSheet(Sheet, ply)
           net.SendToServer()
         end
 
-        grid:AddItem( SpawnI )
+        local label = Label(good.title, panel)
+        label:SetPos(0, 35)
+        local label2 = Label(good.cost, panel)
+        label2:SetPos(10, 35)
+
+        layout:AddItem( panel )
       end
 
-      SheetItem:AddSheet( goodType, grid )
+      SheetItem:AddSheet( goodType, layout )
     end
   end)
 
