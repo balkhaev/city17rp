@@ -22,7 +22,7 @@ resource.AddWorkshop("834188196") -- Over-the-Shoulder Thirdperson
 resource.AddWorkshop("682125090") -- Portable Force Field
 resource.AddWorkshop("632126111") -- iNPC - Artifical Intelligence Module
 
-core = {}
+core = core or {}
 
 include("shared.lua")
 include("sh_player.lua")
