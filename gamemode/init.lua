@@ -60,16 +60,6 @@ function GM:PostGamemodeLoaded()
   end);
 end
 
-hook.Add( "OnSpawnMenuOpen", "SpawnMenuOpen", function()
-  print("msg111")
-
-  return false
-end )
-
-hook.Add( "OnSpawnMenuClose", "SpawnMenuClose", function()
-  print("msg111")
-end )
-
 hook.Add( "PlayerInitialSpawn", "CityInitialSpawn", function(ply)
   if ply:GetPData("role") then
     ply:setRole(ply:GetPData("role"))

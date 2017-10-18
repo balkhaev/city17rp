@@ -10,7 +10,6 @@ hook.Add( "Think", "CallBinding", function()
 
   FirstPressed = !cache
 end )
---]]
 
 hook.Add("PlayerKeyPress","BindMenu",function(ply,key)
   if key == KEY_Q then
@@ -21,3 +20,16 @@ hook.Add("PlayerKeyPress","BindMenu",function(ply,key)
     end
   end
 end)
+--]]
+
+hook.Add( "OnSpawnMenuOpen", "SpawnMenuOpen", function()
+  print("msg111")
+  core.panel.createPanel(LocalPlayer())
+
+  return false
+end )
+
+hook.Add( "OnSpawnMenuClose", "SpawnMenuClose", function()
+  print("msg222")
+  core.panel.destroyPanel()
+end )
