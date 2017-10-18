@@ -38,7 +38,7 @@ function SWEP:PrimaryAttack()
   -- the rate of fire. Here we set it to shoot every 0.5 seconds.
   self.Weapon:SetNextPrimaryFire( CurTime() + 0.5 )
 
-  if SERVER then
+  if CLIENT then
     chat.AddText(Color( 100, 100, 255 ), ply, " показал свою ID карту. \n"..ply:getRoleTitle())
   end
 

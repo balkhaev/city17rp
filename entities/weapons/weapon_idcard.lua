@@ -49,10 +49,7 @@ function SWEP:PrimaryAttack()
   self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
 
   if self:CanPrimaryAttack() then
-    if SERVER then
-      local ply = self.Owner
-      if not IsValid(ply) then return end
-
+    if CLIENT then
       chat.AddText(Color( 100, 100, 255 ), ply, " показал свою ID карту. \n"..ply:getRoleTitle())
     end
   end
