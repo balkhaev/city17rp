@@ -2,9 +2,9 @@ AddCSLuaFile()
 
 DEFINE_BASECLASS( "base_anim" )
 
-ENT.PrintName = "Buyable Item"
+ENT.PrintName = "Ammo Box"
 ENT.Author = "Narkeba"
-ENT.Information = "Base Buyable Item"
+ENT.Information = "Buyable Ammo Box"
 ENT.Category = "Buyable Items"
 
 ENT.Editable = true
@@ -18,7 +18,7 @@ function ENT:Initialize()
   if ( CLIENT ) then return end
 
   -- Use the helibomb model just for the shadow (because it's about the same size)
-  self:SetModel( "models/Combine_Helicopter/helicopter_bomb01.mdl" )
+  self:SetModel( "models/Items/BoxMRounds.mdl" )
 
 end
 

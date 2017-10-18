@@ -20,7 +20,7 @@ end
 
 SWEP.Base                   = "weapon_c17base"
 
-SWEP.ViewModel              = "models/weapons/v_crowbar.mdl"
+SWEP.ViewModel              = "models/weapons/v_hands.mdl"
 SWEP.WorldModel             = "models/props_lab/reciever01b.mdl"
 
 SWEP.Primary.ClipSize       = 3

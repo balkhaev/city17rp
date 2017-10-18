@@ -24,7 +24,7 @@ SWEP.SlotPos			= 2
 SWEP.DrawAmmo			= false
 SWEP.DrawCrosshair		= true
 
-SWEP.ViewModel			= "models/weapons/v_pistol.mdl"
+SWEP.ViewModel			= "models/weapons/v_hands.mdl"
 SWEP.WorldModel			= "models/weapons/w_pistol.mdl"
 
 local ShootSound = Sound( "Metal.SawbladeStick" )
