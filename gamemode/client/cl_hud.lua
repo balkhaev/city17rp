@@ -1,5 +1,6 @@
 local vars = {
   font = "TargetID",
+  text_spacing = 2,
   padding = 10
 };
 
@@ -21,19 +22,21 @@ hook.Add( "HUDPaint", "PaintOurHud", function()
 
   local _, th = core.hud.textSize("TEXT", vars.font);
 
-  local width = 230;        -- calculate width
+  local width = 230;
   local height = 80;
 
-  local x = 35;            -- get x position of element
-  local y = ScrH( ) - height - 120;      -- get y position of element
+  local x = 35;
+  local y = ScrH( ) - height - 120;
 
-  local cx = x + vars.padding;          -- get x and y of contents
+  local cx = x + vars.padding;
   local cy = y + vars.padding;
 
   core.hud.paintPanel( x, y, width, height, colors.background );
 
-  local text = "Money: "..client:GetMoney() .. "$";
-  core.hud.paintText( cx, cy, text, vars.font, colors.text );
+  local by = th + vars.text_spacing;
+
+  core.hud.paintText( cx, cy, "Денег: "..client:GetMoney() .. "$", vars.font, colors.text );
+  core.hud.paintText( cx, cy + by, "Роль: "..client:getRoleTitle(), vars.font, colors.text );
 end);
 
 
