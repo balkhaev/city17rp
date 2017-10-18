@@ -84,6 +84,10 @@ function GM:PlayerLoadout(ply)
   core.role.giveRoleItems(ply, ply:getRoleName())
 end
 
+hook.Add("PlayerNoClip", "DisableNoclip", function( ply )
+  return ply:IsAdmin()
+end)
+
 hook.Add("PlayerSpawn", "SpawnPlayer", function(ply)
   local group = ply:getGroup()
 
