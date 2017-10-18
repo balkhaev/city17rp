@@ -63,3 +63,7 @@ function meta:getPlayerByName(name)
     end
   end
 end
+
+function meta:GetInvItem( x, y )
+  return self.Inv.Backpack[x][y]
+end
