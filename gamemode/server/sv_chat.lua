@@ -9,7 +9,7 @@ function GM:PlayerCanSeePlayersChat(text, teamOnly, p1 , p2)
     return p1:Team() == p2:Team()
   end
 
-  if p1:GetPos():Distance(p2:GetPos()) <= core.config.defaults.chatRadius then
+  if p1:GetPos():Distance(p2:GetPos()) <= core.config.settings.chatRadius then
     if string.sub(text, 1, 3) == "/me" then
       p1:ChatPrint(p2:Nick().." "..string.sub(text, 4))
       return false

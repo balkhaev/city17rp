@@ -28,6 +28,7 @@ include("shared.lua")
 include("sh_player.lua")
 include("config/gamemode.lua")
 include("config/general.lua")
+include("config/roles.lua")
 include("config/goods.lua")
 include("libs/core.lua")
 include("libs/utils.lua")
@@ -91,9 +92,9 @@ end)
 
 hook.Add( "Think", "ZombieSpawner", function()
   if core.zombie.needSpawn() then
-    core.zombie.timer = CurTime() + core.zombie.getTimout()
-
     local zombieSpawns
+
+    core.zombie.timer = CurTime() + core.zombie.getTimout()
 
     if core.zombie.isEvent then
       zombieSpawns = core.zombie.spawnPos
@@ -115,19 +116,21 @@ hook.Add( "Think", "ZombieSpawner", function()
   end
 end)
 
+--[[
 hook.Add( "PlayerNoClip", "ULXNoclipConversion", function(ply)
   ply:ConCommand("ulx noclip")
 end)
+]]--
 
 hook.Add("PlayerCanHearPlayersVoice" , "VoiceRadius" , function( p1 , p2 )
-  return (p1:GetPos():Distance(p2:GetPos()) <= core.config.defaults.voiceRadius)
+  return (p1:GetPos():Distance(p2:GetPos()) <= core.config.settings.voiceRadius)
 end)
 
 hook.Add("PlayerDeath", "ForcePlayerRespawn", function (ply)
-  if core.config.defaults.spawnTime ~= 0 then
+  if core.config.settings.spawnTime ~= 0 then
     ply:Lock()
-    ply:ChatPrint("Вы должны подождать " .. core.config.defaults.spawnTime .. " секунд перед возрождением")
-    timer.Simple(core.config.defaults.spawnTime, function()
+    ply:ChatPrint("Вы должны подождать " .. core.config.settings.spawnTime .. " секунд перед возрождением")
+    timer.Simple(core.config.settings.spawnTime, function()
       ply:UnLock()
       ply:ChatPrint("Вы можете возродиться")
     end)
