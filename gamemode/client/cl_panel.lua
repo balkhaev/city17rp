@@ -1,16 +1,4 @@
 --[[
-local FirstPressed = false
-
-hook.Add( "Think", "CallBinding", function()
-  local cache = input.IsButtonDown(KEY_Q)
-
-  if cache and FirstPressed then
-    core.panel.createPanel(LocalPlayer())
-  end
-
-  FirstPressed = !cache
-end )
-
 hook.Add("PlayerKeyPress","BindMenu",function(ply,key)
   if key == KEY_Q then
     if core.panel.isOpen then
@@ -22,8 +10,18 @@ hook.Add("PlayerKeyPress","BindMenu",function(ply,key)
 end)
 --]]
 
+function GM:ShowSpare2( ply )
+  core.panel.createPanel(ply)
+end
+
 hook.Add( "OnSpawnMenuOpen", "SpawnMenuOpen", function()
   print("msg111")
+  local ply = LocalPlayer()
+
+  if ply:IsAdmin() then
+    return true
+  end
+
   core.panel.createPanel(LocalPlayer())
 
   return false
@@ -31,5 +29,10 @@ end )
 
 hook.Add( "OnSpawnMenuClose", "SpawnMenuClose", function()
   print("msg222")
+
+  if ply:IsAdmin() then
+    return true
+  end
+
   core.panel.destroyPanel()
 end )
