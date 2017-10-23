@@ -7,11 +7,12 @@
 - Сделать motd окошко
 - Доперевести Tab
 - Доработать HUD
-- Доработать экран загрузки
+- Доработать экран загрузки (https://nulledbb.com/thread-Star-Wars-Load-A-Garry-s-Mod-Loading-Screen-LATEST)
 - LOOC, OOC, PM :heavy_check_mark:
 
 # Введения
 
+- В голову смерть, в остальные части тела слип на 3-4 минуты
 - ID Card
 - Расставить CN NPC
 - Система голосований
